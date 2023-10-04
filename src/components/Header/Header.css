@@ -1,4 +1,11 @@
 .header-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     background-color: #000;
     height: 100px;
+}
+
+img{
+    max-width: 80px;
 }

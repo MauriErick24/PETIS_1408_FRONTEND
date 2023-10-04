@@ -11,10 +11,7 @@ body, html {
     min-height: 100vh;
   }
   
-
-  
   .content {
-    /* Estilos para el contenido de la página */
     flex: 1;
     padding: 20px;
   }
