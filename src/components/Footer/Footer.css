@@ -1,5 +1,16 @@
 .footer-container{
-    background-color: blueviolet;
+    display: flex;
+    flex-direction: row;
+    background-color: #000;
     color: white;
     height: 50px;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 7px;
+    padding: 10px;
+}
+
+#nombre-empresa{
+    display: flex;
+    flex-direction: column;
 }

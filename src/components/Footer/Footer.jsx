@@ -5,7 +5,13 @@ class Footer extends Component {
     render(){
         return (
             <div className='footer-container'>
-                <p>PRIME SOFT SOLUTIONS LTDA</p>
+                <div id='nombre-empresa'>
+                    <p>PRIME SOFT SOLUTIONS</p>
+                    <p>All copyright reserved PSS</p>
+                </div>
+                <div id='contacto'>
+                    <a>Contactanos</a>   
+                </div>
                 
             </div>
         )

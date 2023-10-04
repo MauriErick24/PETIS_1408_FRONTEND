@@ -1,21 +1,21 @@
 import './App.css';
-//import Footer from './components/Footer/footer';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 
 function App() {
   return (
-    <div className="App">
-      <header>
+    <div className="app-container">
+      <header className="header">
         <Header />
-        
       </header>
-      <footer>
+
+      <main className="content">
+       
+      </main>
+
+      <footer className="footer">
         <Footer />
       </footer>
-      
-
-
     </div>
   );
 }
