@@ -3,14 +3,29 @@
     flex-direction: row;
     background-color: #000;
     color: white;
-    height: 40px;
+    height: 50px;
     align-items: center;
     justify-content: space-between;
-    font-size: 7px;
     padding: 10px;
 }
 
+#empresa{
+    margin-bottom: 1px;
+    font-size: 20px;
+}
+
+#copyright{
+    margin-top: 2px;
+    font-size: 15px;
+}
+
 #nombre-empresa{
+    color: #d1d0bc;
     display: flex;
     flex-direction: column;
+}
+
+#contacto{
+    padding-right: 10px;
+    color: #d1d0bc;
 }

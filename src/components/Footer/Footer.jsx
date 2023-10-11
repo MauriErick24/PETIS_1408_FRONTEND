@@ -6,8 +6,8 @@ class Footer extends Component {
         return (
             <div className='footer-container'>
                 <div id='nombre-empresa'>
-                    <p>PRIME SOFT SOLUTIONS</p>
-                    <p>All copyright reserved PSS</p>
+                    <p id="empresa">PRIME SOFT SOLUTIONS</p>
+                    <p id="copyright">All copyright reserved PSS</p>
                 </div>
                 <div id='contacto'>
                     <a>Contactanos</a>   
