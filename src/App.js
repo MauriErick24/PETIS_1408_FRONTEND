@@ -3,7 +3,7 @@ import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import ButtonOk from './components/ButtonOk/ButtonOk';
 import ButtonCancel from './components/ButtonCancel/ButtonCancel';
-
+import Modals from './components/Modals/Modals';
 const mostrarOk=()=>{
 console.log("boton ok creado")
 }
@@ -22,9 +22,7 @@ function App() {
       </header>
 
       <main className="content">
-       <ButtonOk name={"CREAR EVENTO"}funcionOnClick={mostrarCrear}/>
-       <ButtonOk name={"ACEPTAR"} funcionOnClick={mostrarOk}/>
-       <ButtonCancel name={"CANCELAR"}funcionOnClick={mostrarCancel}/>
+      <Modals informacionModal={"¿Esta seguro de crear evento?"} visibleCancelar={true}/>
       </main>
 
       <footer className="footer">
