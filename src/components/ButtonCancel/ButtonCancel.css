@@ -4,3 +4,6 @@
     background-color: #d1741e;
     color: #fff;
 }
+.ButtonCancel:hover{
+    cursor: pointer;
+}
