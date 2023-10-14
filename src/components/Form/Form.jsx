@@ -2,6 +2,9 @@ import {Component} from 'react'
 import './Form.css'
 import axios from 'axios'
 import Title from '../Title/Title'
+import ButtonOk from '../ButtonOk/ButtonOk'
+import ButtonCancel from '../ButtonCancel/ButtonCancel'
+
 // { 
 //     "nombre_evento":"evento 2",
 //     "inicio_inscripcion":"2023-10-04",
@@ -53,53 +56,19 @@ class Form extends Component{
 
     }
 
-    changeInput(field, value){
-        switch(field){
-            case "nombre_evento":{
-                this.setState({nombre_evento:value})
-            }
-            break;
-            case "inicio_inscripcion":{
-                this.setState({inicio_inscripcion:value})
-            }
-            break;
-            case "inicio_inscripcion":{
-                this.setState({inicio_inscripcion:value})
-            }
-            break;
-            case "inicio_inscripcion":{
-                this.setState({inicio_inscripcion:value})
-            }
-            break;
-            case "inicio_inscripcion":{
-                this.setState({inicio_inscripcion:value})
-            }
-            break;
-            case "inicio_inscripcion":{
-                this.setState({inicio_inscripcion:value})
-            }
-            break;
-            case "inicio_inscripcion":{
-                this.setState({inicio_inscripcion:value})
-            }
-            break;
-            case "inicio_inscripcion":{
-                this.setState({inicio_inscripcion:value})
-            }
-            break;
-            case "inicio_inscripcion":{
-                this.setState({inicio_inscripcion:value})
-            }
-            break;
-            case "inicio_inscripcion":{
-                this.setState({inicio_inscripcion:value})
-            }
-            break;
-        }
+    changeInput = (e) => {
+       this.setState({[e.target.name]: e.target.value})
     }
 
-    sendData=()=>{
-       
+    sendData= async(e)=>{
+       e.preventDefault();
+
+       try{
+            const response = await axios.post('http://', this.state)
+            console.log('Respuesta del servidor ', response.data)
+       }catch(err){
+        console.log(err)
+       }
     }
 
     render(){
@@ -116,7 +85,12 @@ class Form extends Component{
                                 <table>
                                     <tr>
                                         <td >Nombre de evento:</td>
-                                        <td><input className= "first-field-width"  type="text" id="event-name" name = "event-name"/><br/></td>
+                                        <td><input 
+                                            className= "first-field-width"  
+                                            type="text" 
+                                            id="event-name" 
+                                            name = "nombre_evento"
+                                            onChange={this.changeInput}/><br/></td>
                                     </tr>
                                     <tr>
                                         <td >Tipo de evento :</td>
@@ -135,30 +109,36 @@ class Form extends Component{
                             <div className="date-position " >
                                 <div>
                                     <label for="start" >Fecha inicial de Inscripción:</label><br/>
-                                    <input type="date" id="start" name="trip-start" min="2018-01-01" max="2023-12-31" /><br/>
+                                    <input type="date" id="start" name="inicio_inscripcion" min="2018-01-01" max="2023-12-31" 
+                                        onChange={this.changeInput}/><br/>
                                 </div>
                                 <div>
                                     <label for="start" >Fecha Final de Inscripción:</label><br/>
-                                    <input type="date" id="start" name="trip-start" min="2018-01-01" max="2023-12-31" />
+                                    <input type="date" id="start" name="fin_inscripcion" min="2018-01-01" max="2023-12-31" 
+                                        onChange={this.changeInput}/>
                                 </div>
                             </div>
                             <div>
                                 <label for="organizadores"  >Organizadores :</label>
-                                <input type="text" className="first-field-width" id="organizadores" name="organizadores"/>
+                                <input type="text" className="first-field-width" id="organizadores" name="organizador"
+                                    onChange={this.changeInput}/>
                             </div>
                             <div>
                                 <table>
                                     <tr>
                                         <td>Lugar</td>
-                                        <td><input type="text" className="campo-lugar"/></td>
+                                        <td><input type="text" className="lugar"/></td>
                                         <td>Hora</td>
-                                        <td ><input className="campo-hora" type="time" id="appt" name="appt" min="09:00" max="18:00" required/></td>
+                                        <td ><input className="hora" type="time" id="appt" name="appt" min="09:00" max="18:00" required
+                                            onChange={this.changeInput}/></td>
                                     </tr>
                                     <tr >
                                         <td >Email:</td>
-                                        <td><input  type="text" className="formulario_input"  name="email" id="email" /></td>
+                                        <td><input  type="text" className="formulario_input"  name="email" id="email" 
+                                            onChange={this.changeInput} /></td>
                                         <td >Telefono:</td>
-                                        <td><input type="tel" className="formulario_input" name="telefono" id="telefono" /></td>
+                                        <td><input type="tel" className="formulario_input" name="telefono" id="telefono" 
+                                            onChange={this.changeInput}/></td>
                                     </tr>
                                     
                                 </table>
@@ -166,11 +146,13 @@ class Form extends Component{
                             <div className="container-dsc">
                                 <div className= "box">
                                     <p>Descripción:</p>
-                                    <textarea name="descripcion" rows="8" cols="65"></textarea>
+                                    <textarea name="descripcion" rows="8" cols="65"
+                                        onChange={this.changeInput}></textarea>
                                 </div>
                                 <div className= "box">
                                 <p>Requisitos :</p>
-                                <textarea name="requisitos" rows="8" cols="65"></textarea>
+                                <textarea name="requisitos" rows="8" cols="65"
+                                    onChange={this.changeInput}></textarea>
                                 </div>  
                             </div>
                             
@@ -186,7 +168,7 @@ class Form extends Component{
                         <img src='PETIS_1408_FRONTEND/src/components/Images/imgh.png' alt="imagen de afiche" />
                         <div>
                            
-                            <button id='botonpersonal' >Agregar IMAGEN</button>
+                            <ButtonOk name={"Agregar imagen"}/>
                             <small id='tagsmall'></small>
                         </div>
                     </div>
@@ -194,13 +176,16 @@ class Form extends Component{
                         <h3>Elige tu tipo de participante</h3>
                         <div>
                             <label>
-                                <input type="radio" name="individual" value="individual"/> Individual
+                                <input type="radio" name="individual" value="individual"
+                                    onChange={this.changeInput}/> Individual
                             </label><br/>
                             <label>
-                                <input type="radio" name="Equipo" value="Equipo"/> Equipo
+                                <input type="radio" name="Equipo" value="Equipo"
+                                    onChange={this.changeInput}/> Equipo
                             </label>
                             <h3>Numero de integrante de equipo :</h3>
-                            <input type="number"/>
+                            <input type="number"
+                                onChange={this.changeInput}/>
                         </div>
                     </div>
                 </aside>
@@ -216,9 +201,9 @@ class Form extends Component{
                             <td>Detalle:</td>
                         </tr>
                         <tr>
-                            <td><textarea name="premios" rows="8" cols="55"></textarea></td>
-                            <td><textarea name="reglas" rows="8" cols="58"></textarea></td>
-                            <td><textarea name="detalle" rows="8" cols="55"></textarea></td>
+                            <td><textarea name="premio" rows="8" cols="55" onChange={this.changeInput}></textarea></td>
+                            <td><textarea name="reglas" rows="8" cols="58" onChange={this.changeInput}></textarea></td>
+                            <td><textarea name="detalle" rows="8" cols="55" onChange={this.changeInput}></textarea></td>
                         </tr>
                         <tr>
                             <td>Afiche</td>
@@ -231,25 +216,25 @@ class Form extends Component{
                                     <img src="../Images/imgh.png" alt="imagen de afiche" />
                                     <div>
                                         
-                                        <button id='botonpersonal'>Agregar IMAGEN</button>
+                                        <ButtonOk name={"Agregar imagen"}/>
                                         <small id='tagsmall'></small>
                                     </div>
                                 </div>
                             </td>
                             <td>
-                                <textarea name="contenidos" rows="10" cols="58"></textarea>
+                                <textarea name="contenido" rows="10" cols="58" onChange={this.changeInput}></textarea>
                             </td>
                             <td>
-                                <textarea name="invitados-especiales" rows="10" cols="55"></textarea>
+                                <textarea name="invitado" rows="10" cols="55" onChange={this.changeInput}></textarea>
                             </td>
                         </tr>
                         
                     </table>
                 </div>
             </div>
-            <div>
-                <button>ACEPTAR</button>
-                <button>CANCELAR</button>
+            <div id='action-'> 
+                <ButtonOk name={"ACEPTAR"} funcionOnClick={this.sendData}/>
+                <ButtonCancel name={"CANCELAR"}/>
             </div>
             </div>
         )

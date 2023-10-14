@@ -3,4 +3,8 @@
     border : none;
     background-color: #d1741e;
     color: #fff;
+    padding: 5px;
+}
+.ButtonCancel:hover{
+    cursor: pointer;
 }
