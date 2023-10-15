@@ -4,6 +4,8 @@ import axios from 'axios'
 import Title from '../Title/Title'
 import ButtonOk from '../ButtonOk/ButtonOk'
 import ButtonCancel from '../ButtonCancel/ButtonCancel'
+import Modal from '../Modals/Modals'
+import Imagen from '../Images/imgh.png'
 
 // { 
 //     "nombre_evento":"evento 2",
@@ -50,6 +52,12 @@ class Form extends Component{
             contenido:"",
             invitado:"",
         }
+        this.localStates ={
+            modalVisible: false,
+            modalCreadoVisible: false,
+            modalSalir:false,
+            invalido:false
+        }
 
 
 
@@ -60,16 +68,42 @@ class Form extends Component{
        this.setState({[e.target.name]: e.target.value})
     }
 
-    sendData= async(e)=>{
-       e.preventDefault();
+    sendData= async()=>{
+       //e.preventDefault();
 
        try{
-            const response = await axios.post('http://', this.state)
-            console.log('Respuesta del servidor ', response.data)
+            // const response = await axios.post('http://', this.state)
+            // console.log('Respuesta del servidor ', response.data)
+            this.showModal();
+            this.modalCreado();
        }catch(err){
-        console.log(err)
+        // console.log(err)
        }
     }
+
+    checkDates = (value) => {
+        if(value > this.state.inicio_inscripcion){
+            this.setState(this.localStates = {invalido:false})
+            this.setState({fin_inscripcion: value})
+            
+        }else{
+            this.setState(this.localStates = {invalido:true})
+        }
+    }
+
+    showModal = () => {
+        this.setState(this.localStates = {modalVisible: !this.localStates.modalVisible})
+    }
+
+    modalCreado = () => {
+        this.setState(this.localStates = {modalCreadoVisible: !this.localStates.modalCreadoVisible})
+        
+    }
+
+    showModalSalir = () => {
+        this.setState(this.localStates = {modalSalir: !this.localStates.modalSalir})
+    }
+
 
     render(){
         console.log(this.state)
@@ -115,7 +149,8 @@ class Form extends Component{
                                 <div>
                                     <label for="start" >Fecha Final de Inscripción:</label><br/>
                                     <input type="date" id="start" name="fin_inscripcion" min="2018-01-01" max="2023-12-31" 
-                                        onChange={this.changeInput}/>
+                                        onChange={(e) => this.checkDates(e.target.value)}/>
+                                       {this.localStates.invalido && (<p>invalido</p>)}
                                 </div>
                             </div>
                             <div>
@@ -165,7 +200,7 @@ class Form extends Component{
                 <aside className="aside">
                     <h3 >Imagen del evento</h3>
                     <div >
-                        <img src='PETIS_1408_FRONTEND/src/components/Images/imgh.png' alt="imagen de afiche" />
+                        <img src={Imagen} alt="imagen de afiche" />
                         <div>
                            
                             <ButtonOk name={"Agregar imagen"}/>
@@ -213,7 +248,7 @@ class Form extends Component{
                         <tr>
                             <td >
                                 <div>
-                                    <img src="../Images/imgh.png" alt="imagen de afiche" />
+                                    <img src={Imagen} alt="imagen de afiche" />
                                     <div>
                                         
                                         <ButtonOk name={"Agregar imagen"}/>
@@ -233,9 +268,35 @@ class Form extends Component{
                 </div>
             </div>
             <div id='action-'> 
-                <ButtonOk name={"ACEPTAR"} funcionOnClick={this.sendData}/>
-                <ButtonCancel name={"CANCELAR"}/>
+                <ButtonOk name={"ACEPTAR"} funcionOnClick={this.showModal}/>
+                <ButtonCancel name={"CANCELAR"} funcionOnClick={this.showModalSalir}/>
             </div>
+
+            {this.state.modalVisible && (
+                <div>
+                    <Modal informacionModal={"¿Estas seguro de crear este evento?"}
+                            visibleCancelar={true}
+                            cerrar={this.showModal}
+                            aceptar={this.sendData}/>
+                </div>
+            )}
+            {this.localStates.modalCreadoVisible && (
+                <div>
+                    <Modal informacionModal={"Evento creado correctamente"}
+                            visibleCancelar={false}
+                            aceptar={this.modalCreado}/>
+                </div>
+            )}
+
+            {this.localStates.modalSalir && (
+                <div>
+                    <Modal informacionModal={"¿Desea salir? No se guardaran los cambios"}
+                            visibleCancelar={true}
+                            cerrar={this.showModalSalir}
+                            aceptar={this.showModalSalir}/>
+                </div>
+            )}
+
             </div>
         )
     }
