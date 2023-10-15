@@ -1,0 +1,15 @@
+/* TablaTarjetasComponent.css */
+/* Reset de márgenes y padding para el cuerpo de la página */
+body {
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Estilos para el contenedor de la tabla de tarjetas */
+  .tabla-tarjetas {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* cinco columnas */
+    grid-template-rows: repeat(2, 1fr); /* dos filas */
+    gap: 4px; /* Espacio entre tarjetas */
+    margin: 0px auto; /* Centrar en la página */
+  }

@@ -3,6 +3,7 @@ import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Title from './components/Title/Title';
 import Form from './components/Form/Form';
+import Home from './pages/Home/Home'
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
          
         </div>
         <div id='container'>
-          <Form/>
+          <Home />
         </div>
       </main>
 

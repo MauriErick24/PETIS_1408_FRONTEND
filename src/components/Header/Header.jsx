@@ -10,7 +10,7 @@ class Header extends Component {
                     
                 </div>
                 <div>
-                    <img src={Logo} alt="escudo UMSS"/>
+                    <img id='img-header' src={Logo} alt="escudo UMSS"/>
                 </div>
             </div>
         )
