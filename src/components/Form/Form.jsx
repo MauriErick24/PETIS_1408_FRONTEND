@@ -72,12 +72,12 @@ class Form extends Component{
        //e.preventDefault();
 
        try{
-            // const response = await axios.post('http://', this.state)
-            // console.log('Respuesta del servidor ', response.data)
+            const response = await axios.post('http://127.0.0.1:8000/api/evento', this.state)
+             console.log('Respuesta del servidor ', response.data)
             this.showModal();
             this.modalCreado();
        }catch(err){
-        // console.log(err)
+         console.log(err)
        }
     }
 
@@ -200,7 +200,7 @@ class Form extends Component{
                 <aside className="aside">
                     <h3 >Imagen del evento</h3>
                     <div >
-                        <img src={Imagen} alt="imagen de afiche" />
+                        {/* <img src={Imagen} alt="imagen de afiche" /> */}
                         <div>
                            
                             <ButtonOk name={"Agregar imagen"}/>
@@ -248,7 +248,7 @@ class Form extends Component{
                         <tr>
                             <td >
                                 <div>
-                                    <img src={Imagen} alt="imagen de afiche" />
+                                    {/* <img src={Imagen} alt="imagen de afiche" /> */}
                                     <div>
                                         
                                         <ButtonOk name={"Agregar imagen"}/>

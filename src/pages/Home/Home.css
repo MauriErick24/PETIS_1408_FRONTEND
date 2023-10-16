@@ -13,3 +13,9 @@ body {
     gap: 4px; /* Espacio entre tarjetas */
     margin: 0px auto; /* Centrar en la página */
   }
+
+  @media (max-width: 600px) {
+    .tabla-tarjetas {
+      grid-template-columns: 1fr; /* Una columna en dispositivos pequeños */
+    }
+}

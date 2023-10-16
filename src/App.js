@@ -17,7 +17,7 @@ function App() {
          
         </div>
         <div id='container'>
-          <Home />
+          <Form />
         </div>
       </main>
 
