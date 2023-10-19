@@ -9,6 +9,7 @@ export default Flex;
 
 const Div = styled.div`
   display: flex;
+  max-width: 100%;
   margin-top: ${(props) => props.top || '0'};
   width: ${(props) => props.width || 'auto'};
   flex-wrap: ${(props) => props['flex-wrap'] || 'auto'};
