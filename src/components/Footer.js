@@ -24,7 +24,7 @@ const Div = styled.footer`
   align-items: center;
   background-color: #000;
   color: #D1D0BC;
-  padding:0.4em;
+  padding:1em;
 
   .content-copy{
     h3{
@@ -33,6 +33,7 @@ const Div = styled.footer`
 
     p{
       font-size: 0.375rem;
+      margin-top: 1em;
     }
   }
 

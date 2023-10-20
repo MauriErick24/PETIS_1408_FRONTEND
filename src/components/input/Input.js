@@ -1,19 +1,19 @@
 import styled from 'styled-components'
 import Flex from '../Flex'
 
-const Input = ({ label, name, type, column = false }) => {
+const Input = ({ label, name, type, column = false, disabled = false }) => {
   return (
     <>
       {
-        column ? 
+        column ?
           <Div flex-direction='column' width='100%' gap='0.5em'>
-            <label htmlFor={name}>{ label }</label>
-            <input id={name} name={name} type={type ?? 'text'} />
+            { label && <label htmlFor={name}>{ label }</label> }
+            <input id={name} name={name} type={type ?? 'text'} disabled={disabled} />
           </Div>
             :
           <Div justify-content='space-between' align-items='center' width='100%' gap='2em'>
-            <label htmlFor={name}>{ label }</label>
-            <input id={name} name={name} type={type ?? 'text'} />
+            { label && <label htmlFor={name}>{ label }</label> }
+            <input id={name} name={name} type={type ?? 'text'} disabled={disabled} />
           </Div>
       }
     </>

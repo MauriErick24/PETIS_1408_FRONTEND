@@ -1,12 +1,12 @@
 import styled from 'styled-components'
 import Flex from '../Flex'
 
-const Radio = ({ name, label, ...props }) => {
+const Radio = ({ name, label, onChange, ...props }) => {
   return (
     <RadioStyle {...props}>
       <label className='radio' htmlFor={name}></label>
       <label className='radio-label' htmlFor={name}>{label}</label>
-      <input type='radio' id={name} hidden />
+      <input type='radio' id={name} name={name} onClick={onChange} hidden />
     </RadioStyle>
   )
 }
@@ -31,5 +31,6 @@ const RadioStyle = styled(Flex)`
 
   .radio-label{
     font-size: ${(props) => props['font-size'] || ''};
+    cursor: pointer;
   }
 `

@@ -24,11 +24,12 @@ export default ContentCustom
 
 const Div = styled.div`
   width: 100%;
-  max-width: 1800px;
   margin: auto;
   background-color: #D1D0BC;
   
   .page{
+    margin: auto;
+    width: 1400px;
     padding: 1em 4em;
   }
 `

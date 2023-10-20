@@ -3,7 +3,11 @@ import Flex from '../components/Flex'
 import Evento from '../components/Evento'
 import HeaderArticles from '../components/HeaderArticles'
 
+import { useNavigate } from 'react-router-dom'
+
 const Home = () => {
+
+  const navigate = useNavigate()
 
   const example = {
     type: 'TIPO DE EVENTO',
@@ -16,6 +20,7 @@ const Home = () => {
       <HeaderArticles 
         title='EVENTOS'
         btnTitle='CREAR EVENTO'
+        onClick={() => navigate('/creacion/evento')}
       />
       <Fondo>
         

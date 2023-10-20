@@ -1,11 +1,11 @@
 import styled from 'styled-components'
 import Flex from '../Flex'
 
-const TextArea = ({ label, name }) => {
+const TextArea = ({ label, name, disabled }) => {
   return (
     <Div flex-direction='column' width='100%' gap='0.5em'>
       <label htmlFor={name}>{ label }</label>
-      <textarea id={name} name={name}></textarea>
+      <textarea id={name} name={name} disabled={disabled}></textarea>
     </Div>
   )
 }

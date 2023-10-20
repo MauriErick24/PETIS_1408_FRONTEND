@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const FileInput = ({ onChange, buttonText, name, ...rest }) => {
+const FileInput = ({ onChange, accept, buttonText, name, ...rest }) => {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -13,7 +13,7 @@ const FileInput = ({ onChange, buttonText, name, ...rest }) => {
 
   return (
     <FileInputContainer>
-      <HiddenFileInput id={name} type="file" onChange={handleFileChange} {...rest} />
+      <HiddenFileInput accept={accept} id={name} type="file" onChange={handleFileChange} {...rest} />
       <CustomButton htmlFor={name}>{buttonText}</CustomButton>
     </FileInputContainer>
   );

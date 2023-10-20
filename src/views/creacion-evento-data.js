@@ -10,13 +10,24 @@ import FileInput from '../components/input/InputFile'
 import Radio from '../components/input/Radio'
 import Img from '../assets/images/example-img.jpg'
 
+import { useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
+import InputFilePreview from '../components/input/InputFilePreview'
+
 const CreacionEvento = () => {
+
+  const navigate = useNavigate()
+  const location = useLocation()
+  const { options } = location.state
+
+  const [ showp, setShowp ] = useState(false)
+
   return (
     <>
       <HeaderTitle title='CREACION DE EVENTO'/>
       <BorderContent>
         <Content justify-content='space-between' width='100%' gap='1em'>
-          <Flex flex-direction='column' gap='1.2em' width='100%'>
+          <Flex flex-direction='column' gap='1.2em' width='80%'>
             <Input label='Nombre de evento: *' />
             <Select label='Tipo de evento : *' />
             <Flex justify-content='space-evenly' width='100%' gap='1em'>
@@ -29,95 +40,94 @@ const CreacionEvento = () => {
               </Flex>
             </Flex>
 
-            <Input label='Organizador(es):' />
+            <Input label='Organizador(es):' disabled={!options.organizador} />
 
             <Flex justify-content='space-between' width='100%' gap='1em'>
               <Flex flex-direction='column' gap='1em'>
-                <Input label='Lugar: ' />
-                <Input label='E-mail: ' />
+                <Input label='Lugar: ' disabled={!options.lugar} />
+                <Input label='E-mail: ' disabled={!options.email} />
               </Flex>
               
               <Flex flex-direction='column' gap='1em'>
-                <Input label='Hora: ' type='time' />
-                <Input label='Telefono: ' />
+                <Input label='Hora: ' type='time' disabled={!options.hora} />
+                <Input label='Telefono: ' disabled={!options.telefono} />
               </Flex>
             </Flex>
 
             <Flex justify-content='space-between' width='100%' gap='1em'>
               <Flex width='300px'>
-                <TextArea label='Descripción:' />
+                <TextArea label='Descripción:' disabled={!options.descripcion} />
               </Flex>
               
               <Flex width='300px'>
-                <TextArea label='Requisitos:' />
+                <TextArea label='Requisitos:' disabled={!options.requisitos} />
               </Flex>
             </Flex>
           </Flex>
 
-          <Flex flex-direction='column' gap='1.2em'>
-            <h2 className='title-btn-file'>Imagen del evento</h2>
-            <Flex padding='0.2em 1em'>
-              <img className='img' src={Img} alt='Imagen' />
-            </Flex>
-            <Flex justify-content='center' width='100%'>
-              <FileInput
-                name='file'
-                buttonText='Selecciona una imagen' 
-                onChange={() => console.log('info')}
-              />
-            </Flex>
+          <Flex flex-direction='column' gap='1.2em' width='20%'>
+            <h2 className='title-btn-file center'>Imagen del evento</h2>
+            <InputFilePreview 
+              name='file' 
+              buttonText='Seleccionar una imagen'
+              width='200px'
+              font-size='1.2em'
+            />
 
-            <Flex top='1em' flex-direction='column' width='100%'>
+            <Flex padding='0 1em' top='0.5em' flex-direction='column' width='100%'>
               <h2 className='title-btn-file'>Elige tu tipo de participantes*</h2>
               <Flex flex-direction='column' top='1em' gap='0.5em'>
-                <Radio label='Individual' />
-                <Radio label='Equipo' />
+                <Radio check={!showp} name='participantes' label='Individual' onChange={() => setShowp(!showp)} />
+                <Radio check={showp} name='participantes' label='Equipo' onChange={() => setShowp(!showp)} />
               </Flex>
             </Flex>
 
-            <Flex top='1em' flex-direction='column' width='100%'>
-              <h2 className='title2-btn-file'>Numero de integrantes por equipo</h2>
-              <Flex top='0.1em' width='100px'>
-                <Input type='number' />
-              </Flex>
-            </Flex>
+            {
+              showp && (
+                <Flex padding='0 1em' top='0.2em' flex-direction='column' width='100%'>
+                  <h2 className='title2-btn-file'>Numero de integrantes por equipo</h2>
+                  <Flex top='0.1em' width='100px'>
+                    <Input type='number' />
+                  </Flex>
+                </Flex>
+              )
+            }
           </Flex>
         </Content>
 
-        <Flex gap='1em'>
-          <TextArea label='Premios:' />
-          <TextArea label='Reglas:' />
-          <TextArea label='Detalles:' />
+        <Flex gap='1em' top='1em'>
+          <TextArea label='Premios:' disabled={!options.premios} />
+          <TextArea label='Reglas:' disabled={!options.reglas} />
+          <TextArea label='Detalles:' disabled={!options.detalles} />
         </Flex>
 
         <Flex gap='1em' top='1em'>
-          <Flex flex-direction='column' align-items='center' width='100%' gap='0.5em'>
-            <p>Afiche:</p>
-            <ImgLabel className='img-label' src={Img} alt='Imagen' />
-            <FileInput
-              name='file'
-              buttonText='Selecciona una imagen' 
-              onChange={() => console.log('info')}
-            />
-          </Flex>
-          <TextArea label='Reglas:' />
-          <TextArea label='Detalles:' />
+          {
+            options.afiche && (
+              <Flex flex-direction='column' align-items='center' width='100%' gap='0.5em'>
+                <p>Afiche:</p>
+                <InputFilePreview 
+                  name='file2' 
+                  buttonText='Seleccionar una imagen'
+                  width='200px'
+                  font-size='1.2em'
+                />
+              </Flex>
+            )
+          }
+          <TextArea label='Contenido:' disabled={!options.contenido} />
+          <TextArea label='Invitados Especiales:' disabled={!options.invitados} />
         </Flex>
       </BorderContent>
       <Flex top='1em' justify-content='center' gap='10em'>
-        <Btn>CREAR</Btn>
-        <Btn color='second'>CANCELAR</Btn>
+        <Btn>ACEPTAR</Btn>
+        <Btn onClick={() => navigate('/creacion/evento')} color='second'>CANCELAR</Btn>
       </Flex>
     </>
   )
 }
 
 export default CreacionEvento
-
-const ImgLabel = styled.img`
-  width: 150px;
-  max-width: 100%;
-`
 
 const Content = styled(Flex)`
   display: flex;
@@ -138,13 +148,15 @@ const Content = styled(Flex)`
     width: 100%;
     font-weight: 400;
     font-size: 1.125rem;
-    text-align: center;
   }
 
   .title2-btn-file{
     width: 100%;
     font-weight: 300;
     font-size: 1rem;
+  }
+
+  .center{
     text-align: center;
   }
 `
