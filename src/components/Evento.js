@@ -3,11 +3,14 @@ import styled from 'styled-components'
 // images
 import Img from '../assets/images/img-article.jpeg'
 
+
+
 const Evento = ({ data, onClick }) => {
+
   return(
     <Article>
       <header className='header-article'> 
-        <h3 className='article-component-type'>{data.type}</h3>
+        <h3 className='article-component-type'>{data.tipoEvento}</h3>
         <button onClick={onClick}>x</button>
       </header>
       
@@ -15,8 +18,8 @@ const Evento = ({ data, onClick }) => {
         <img src={Img} alt='imagen' />
       </div>
 
-      <h2 className='article-componente-rest'>{data.name}</h2>
-      <h2 className='article-componente-rest'>{data.date}</h2>
+      <h2 className='article-componente-rest'>{data.nombre_evento}</h2>
+      <h2 className='article-componente-rest'>{data.inicio_inscripcion}</h2>
     </Article>
   )
 }

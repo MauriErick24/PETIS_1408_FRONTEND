@@ -10,9 +10,14 @@ import FileInput from '../components/input/InputFile'
 import Radio from '../components/input/Radio'
 import Img from '../assets/images/example-img.jpg'
 
-import { useState } from 'react'
+import api from '../services/api'
+
+import {useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import InputFilePreview from '../components/input/InputFilePreview'
+
+
+
 
 const CreacionEvento = () => {
 
@@ -22,6 +27,53 @@ const CreacionEvento = () => {
 
   const [ showp, setShowp ] = useState(false)
 
+  const [data, setData] = useState({
+        nombre_evento:"evento 3",
+        inicio_inscripcion:"2023-10-04",
+        fin_inscripcion:"2023-11-21",
+        fin_evento:"2023-12-1",
+        organizador:"jalasoft",
+        imagen:"public/los",
+        lugar:"coña coña",
+        email:"pretencioso@gmail.com",
+        descripcion:"este es un evento",
+        hora:"09:00:00.0000000",
+        telefono:"78327438",
+        requisito:"traer malcriadas",
+        premio:"un whisky",
+        reglas:"no ser gay",
+        detalle:"blba bla bla",
+        afiche:"nose que es un afiche",
+        contenido:"este es el contenido del evento",
+        invitado:"shrek",
+        tipoEvento_id:2
+  })
+
+  const [tipoEvento, setTipoEvento] = useState([
+    {id: 0, tipo_evento: ""},
+  ])
+
+  const [pruebaData, setPruebaData] = useState([
+    { id: 1, tipo_evento: "Competencia" },
+    { id: 2, tipo_evento: "Taller" },
+    { id: 3, tipo_evento: "Reclutamiento" },
+  ]);
+  
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await api.get('/api/tipoEvento');
+        setTipoEvento(response.data);
+      } catch (error) {
+        console.error('Error al obtener los datos:', error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  
+
   return (
     <>
       <HeaderTitle title='CREACION DE EVENTO'/>
@@ -29,7 +81,7 @@ const CreacionEvento = () => {
         <Content justify-content='space-between' width='100%' gap='1em'>
           <Flex flex-direction='column' gap='1.2em' width='80%'>
             <Input label='Nombre de evento: *' />
-            <Select label='Tipo de evento : *' />
+            <Select label='Tipo de evento : *' options={pruebaData}/>
             <Flex justify-content='space-evenly' width='100%' gap='1em'>
               <Flex>
                 <Input type='date' label='Fecha Inicial de inscripción*' column />

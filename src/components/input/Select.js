@@ -1,19 +1,21 @@
 import styled from 'styled-components'
 import Flex from '../Flex'
 
-const Select = ({ label, name }) => {
+const Select = ({ label, name, options }) => {
   return (
     <Div justify-content='space-between' align-items='center' width='100%' gap='2em'>
-      <label htmlFor={name}>{ label }</label>
+      <label htmlFor={name}>{label}</label>
       <select id={name} name={name}>
-        <option>Competencia</option>
-        <option>Taller</option>
-        <option>Entrenamiento</option>
-        <option>Reclutamiento</option>
+        {options.map((op) => (
+          <option key={op.id} value={op.id}>
+            {op.tipo_evento}
+          </option>
+        ))}
       </select>
     </Div>
-  )
-}
+  );
+};
+
 
 export default Select
 
