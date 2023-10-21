@@ -18,59 +18,32 @@ const Home = () => {
   }
 
   const [cardData, setCardData] = useState([
-    { 
-      id: 1,
-      nombre_evento:"evento 1",
-      inicio_inscripcion:"2023-10-04",
-      tipoEvento:"Competencia"
-    },
-    { 
-      id: 2,
-      nombre_evento:"evento 2",
-      inicio_inscripcion:"2023-10-04",
-      tipoEvento:"Competencia"
-    },
-    { 
-      id: 3,
-      nombre_evento:"evento 3",
-      inicio_inscripcion:"2023-10-04",
-      tipoEvento:"Competencia"
-    },
-    { 
-      id_card: 4,
-      nombre_evento:"evento 4",
-      inicio_inscripcion:"2023-10-04",
-      tipoEvento:"Competencia"
-    },
-    { 
-      id: 5,
-      nombre_evento:"evento 5",
-      inicio_inscripcion:"2023-10-04",
-      tipoEvento:"Competencia"
-    },
-    { 
-      id: 7,
-      nombre_evento:"evento 6",
-      inicio_inscripcion:"2023-10-04",
-      tipoEvento:"Competencia"
-    },
+
   ])
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await api.get('/api/evento');
-  //       setCardData(response.data);
-  //     } catch (error) {
-  //       console.error('Error al obtener los datos:', error);
-  //     }
-  //   };
-  //   fetchData();
-  // }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await api.get('/api/evento');
+        setCardData(response.data);
+      } catch (error) {
+        console.error('Error al obtener los datos:', error);
+      }
+    };
+    fetchData();
+  }, []);
 
-  const deleteCard=(cardId)=>{
-      const nuevoArray = cardData.filter((elemento) => elemento.id !== cardId);
-      setCardData(nuevoArray);
+
+  const deleteCard= async(cardId)=>{
+    try {
+      await api.delete(`/api/evento/${cardId}`);
+      setCardData(cardData.filter(elemento => elemento.id !== cardId));
+    } catch (error) {
+      console.error('Error:', error);
+    }
+      // const nuevoArray = cardData.filter((elemento) => elemento.id !== cardId);
+      // setCardData(nuevoArray);
+     
   }
 
   return(

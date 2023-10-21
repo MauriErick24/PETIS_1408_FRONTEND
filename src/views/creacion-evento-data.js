@@ -81,7 +81,7 @@ const CreacionEvento = () => {
         <Content justify-content='space-between' width='100%' gap='1em'>
           <Flex flex-direction='column' gap='1.2em' width='80%'>
             <Input label='Nombre de evento: *' />
-            <Select label='Tipo de evento : *' options={pruebaData}/>
+            <Select label='Tipo de evento : *' options={tipoEvento}/>
             <Flex justify-content='space-evenly' width='100%' gap='1em'>
               <Flex>
                 <Input type='date' label='Fecha Inicial de inscripción*' column />
