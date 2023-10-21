@@ -24,17 +24,23 @@ const Home = () => {
       />
       <Fondo>
         
-        <Flex className='event-content' flex-wrap='wrap' justify-content='space-between' gap='2em'>
-          <Evento data={example} />
-          <Evento data={example} />
-          <Evento data={example} />
-          <Evento data={example} />
-          <Evento data={example} />
-          <Evento data={example} />
-          <Evento data={example} />
-          <Evento data={example} />
-          <Evento data={example} />
-          <Evento data={example} />
+        <Flex className='event-content' flex-wrap='wrap' justify-content='space-evenly' gap='1em'>
+          <Evento data={example} onDelete={() => {}} />
+          <Evento data={example} onDelete={() => {}} />
+          <Evento data={example} onDelete={() => {}} />
+          <Evento data={example} onDelete={() => {}} />
+          <Evento data={example} onDelete={() => {}} />
+          <Evento data={example} onDelete={() => {}} />
+          <Evento data={example} onDelete={() => {}} />
+          <Evento data={example} onDelete={() => {}} />
+          <Evento data={example} onDelete={() => {}} />
+          <Evento data={example} onDelete={() => {}} />
+          <Evento data={example} onDelete={() => {}} />
+          <Evento data={example} onDelete={() => {}} />
+          <Evento data={example} onDelete={() => {}} />
+          <Evento data={example} onDelete={() => {}} />
+          <Evento data={example} onDelete={() => {}} />
+          <Evento data={example} onDelete={() => {}} />
         </Flex>
       </Fondo>
     </>

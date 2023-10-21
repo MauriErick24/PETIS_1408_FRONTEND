@@ -1,30 +1,61 @@
+import { useState } from 'react'
 import styled from 'styled-components'
 
 // images
 import Img from '../assets/images/img-article.jpeg'
+import Confirm from './Confirm'
+import Alert from './Alert'
 
-const Evento = ({ data, onClick }) => {
+const Evento = ({ data, onDelete }) => {
+  const [ show, setShow ] = useState(false)
+  const [ showAcept, setAceptShow ] = useState(false)
+
+  const handleAlert = () => {
+    setShow(!show)
+    onDelete()
+  }
+
   return(
-    <Article>
-      <header className='header-article'> 
-        <h3 className='article-component-type'>{data.type}</h3>
-        <button onClick={onClick}>x</button>
-      </header>
-      
-      <div className='img'>
-        <img src={Img} alt='imagen' />
-      </div>
+    <>
+      <Alert
+        show={showAcept}
+        onAcept={() => {
+          setAceptShow(!showAcept)
+        }}
+        message='Evento eliminado correctamente'
+      />
 
-      <h2 className='article-componente-rest'>{data.name}</h2>
-      <h2 className='article-componente-rest'>{data.date}</h2>
-    </Article>
+      <Confirm
+        message='Esta seguro de eliminar este evento'
+        show={show}
+        onClose={() => setShow(!show)}
+        onAcept={() => {
+          console.log('enviado')
+          setShow(!show)
+          setAceptShow(!showAcept)
+        }}
+      />
+      <Article>
+        <header className='header-article'> 
+          <h3 className='article-component-type'>{data.type}</h3>
+          <button onClick={handleAlert}>x</button>
+        </header>
+        
+        <div className='img'>
+          <img src={Img} alt='imagen' />
+        </div>
+
+        <h2 className='article-componente-rest'>{data.name}</h2>
+        <h2 className='article-componente-rest'>{data.date}</h2>
+      </Article>
+    </>
   )
 }
 
 export default Evento
 
 const Article = styled.article`
-  width: 300px;
+  width: 280px;
   border: solid 0.2em #000;
   border-radius: 2.5em;
   padding-bottom: 2em;
@@ -67,5 +98,7 @@ const Article = styled.article`
 
   .article-componente-rest{
     text-align: center;
+    font-weight: 400;
+    font-size: 0%.8em;
   }
 `

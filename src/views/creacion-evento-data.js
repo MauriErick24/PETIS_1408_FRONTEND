@@ -13,6 +13,8 @@ import Img from '../assets/images/example-img.jpg'
 import { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import InputFilePreview from '../components/input/InputFilePreview'
+import Alert from '../components/Alert'
+import Confirm from '../components/Confirm'
 
 const CreacionEvento = () => {
 
@@ -22,8 +24,55 @@ const CreacionEvento = () => {
 
   const [ showp, setShowp ] = useState(false)
 
+  const [ show, setShow ] = useState({
+    alert1: false,
+    confirm1: false,
+    alert2: false,
+    confirm2: false
+  })
+
   return (
     <>
+      {/* <Alert
+        show={show.alert1}
+        onAcept={() => {
+          setShow((state) => ({...state, alert1: !show.alert1}))
+        }}
+        message='Evento creado correctamente'
+      />
+
+      <Confirm
+        message='¿Esta seguro de crear este evento?'
+        show={show.confirm1}
+        onClose={() => setShow((state) => ({...state, confirm1: !show.confirm1}))}
+        onAcept={() => {
+          setShow((state) => ({...state, confirm1: !show.confirm1}))
+          setShow((state) => ({...state, alert1: !show.alert1}))
+        }}
+      /> */}
+
+
+      {/* cancelar */}
+      <Alert
+        show={show.alert2}
+        onAcept={() => {
+          setShow((state) => ({...state, alert2: !show.alert2}))
+        }}
+        message='Evento creado correctamente'
+      />
+
+      <Confirm
+        title='¿Desea salir?'
+        message='No se guardaran los cambios'
+        show={show.confirm2}
+        onClose={() => setShow((state) => ({...state, confirm2: !show.confirm2}))}
+        onAcept={() => {
+          setShow((state) => ({...state, confirm2: !show.confirm2}))
+          setShow((state) => ({...state, alert2: !show.alert2}))
+          navigate('/creacion/evento')
+        }}
+      />
+
       <HeaderTitle title='CREACION DE EVENTO'/>
       <BorderContent>
         <Content justify-content='space-between' width='100%' gap='1em'>
@@ -106,7 +155,7 @@ const CreacionEvento = () => {
             options.afiche && (
               <Flex flex-direction='column' align-items='center' width='100%' gap='0.5em'>
                 <p>Afiche:</p>
-                <InputFilePreview 
+                <InputFilePreview
                   name='file2' 
                   buttonText='Seleccionar una imagen'
                   width='200px'
@@ -120,8 +169,8 @@ const CreacionEvento = () => {
         </Flex>
       </BorderContent>
       <Flex top='1em' justify-content='center' gap='10em'>
-        <Btn>ACEPTAR</Btn>
-        <Btn onClick={() => navigate('/creacion/evento')} color='second'>CANCELAR</Btn>
+        <Btn onClick={() => setShow((state) => ({...state, confirm1: !show.confirm1}))}>ACEPTAR</Btn>
+        <Btn onClick={() => setShow((state) => ({...state, confirm2: !show.confirm2}))} color='second'>CANCELAR</Btn>
       </Flex>
     </>
   )
