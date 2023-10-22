@@ -8,7 +8,7 @@ import Select from '../components/input/Select'
 import TextArea from '../components/input/TextArea'
 import Radio from '../components/input/Radio'
 
-import { useState } from 'react'
+import { useState, useEffect} from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import InputFilePreview from '../components/input/InputFilePreview'
 import Alert from '../components/Alert'
@@ -19,6 +19,8 @@ import { initialEvento } from '../functions/form'
 import { eventos } from '../functions/validations'
 
 import ErrorMessage from '../components/ErrorMessage'
+
+import api from '../services/api';
 
 
 const CreacionEvento = () => {
@@ -36,13 +38,54 @@ const CreacionEvento = () => {
     confirm2: false
   })
 
+  const [tipoEvento, setTipoEvento] = useState([])
+  const [data, setData] = useState([
+    {
+        nombre_evento:"evento 3",
+        inicio_inscripcion:"2023-10-04",
+        fin_inscripcion:"2023-11-21",
+        fin_evento:"2023-12-1",
+        organizador:"jalasoft",
+        imagen:"public/los",
+        lugar:"coña coña",
+        email:"pretencioso@gmail.com",
+        descripcion:"este es un evento",
+        hora:"09:00:00.0000000",
+        telefono:"78327438",
+        requisito:"traer malcriadas",
+        premio:"un whisky",
+        reglas:"no ser gay",
+        detalle:"blba bla bla",
+        afiche:"nose que es un afiche",
+        contenido:"este es el contenido del evento",
+        invitado:"shrek",
+        tipoEvento_id:2
+    }
+  ])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await api.get('/api/tipoEvento');
+        setTipoEvento(response.data);
+      } catch (error) {
+        console.error('Error fetching tipo evento:', error);
+      }
+    };
+    fetchData();
+  }, []);
+
+
+
   return (
     <>
       <Alert
         show={show.alert1}
         onAcept={() => {
           setShow((state) => ({...state, alert1: !show.alert1}))
+          navigate('/')
         }}
+        
         message='Evento creado correctamente'
       />
 
@@ -80,10 +123,12 @@ const CreacionEvento = () => {
 
       <Formik
         initialValues={initialEvento}
-        validate={eventos}
-        onSubmit={() => {
+        validate={(value) => eventos(value,options)}
+        onSubmit={(values) => {
           setShow((state) => ({...state, confirm1: !show.confirm1}))
-          navigate('/')
+          setData(values)
+          console.log(data)
+          // navigate('/')
         }}
       >
         {({ values, handleSubmit, handleChange, handleBlur, touched, errors }) => (
@@ -94,7 +139,7 @@ const CreacionEvento = () => {
                 <Flex flex-direction='column' gap='1.2em' width='80%'>
 
                   <Input 
-                    label='Nombre de evento: *'
+                    label='Nombre de evento: '
                     name='nombre'
                     value={values.nombre}
                     onChange={handleChange}
@@ -105,7 +150,8 @@ const CreacionEvento = () => {
                     <ErrorMessage>{errors.nombre}</ErrorMessage>
                   )}
 
-                  <Select label='Tipo de evento : *' />
+                  <Select label='Tipo de evento : *' 
+                    onClick={(e) => (console.log(e.target.value))}/>
                   
 
                   <Flex justify-content='space-evenly' width='100%' gap='1em'>

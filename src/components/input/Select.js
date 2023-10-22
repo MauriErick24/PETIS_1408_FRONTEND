@@ -1,15 +1,40 @@
 import styled from 'styled-components'
 import Flex from '../Flex'
 
-const Select = ({ label, name }) => {
+import { useEffect, useState } from 'react'
+import api from '../../services/api'
+
+const Select = ({ label, name, onClick }) => {
+
+  const [tipoEvento, setTipoEvento] = useState([
+    {id: 1, tipo_evento: "Competencia"},
+    {id: 2, tipo_evento: "Taller"},
+    {id: 3, tipo_evento: "Reclutamiento"},
+    {id: 4, tipo_evento: "Otro"},
+  ])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try{
+        const response = await api.get('/api/tipoEvento');
+        setTipoEvento(response.data);
+      }catch(err){
+        console.log("Error: ", err)
+      }
+   };
+   fetchData();
+  }, []);
+  
+
   return (
     <Div justify-content='space-between' align-items='center' width='100%' gap='2em'>
       <label htmlFor={name}>{ label }</label>
-      <select id={name} name={name}>
-        <option>Competencia</option>
-        <option>Taller</option>
-        <option>Entrenamiento</option>
-        <option>Reclutamiento</option>
+      <select id={name} name={name} onClick={onClick}>
+        {tipoEvento.map((item) => (
+          <option key={item.id} value={item.id}>
+            {item.tipo_evento}
+          </option>
+        ))}
       </select>
     </Div>
   )
