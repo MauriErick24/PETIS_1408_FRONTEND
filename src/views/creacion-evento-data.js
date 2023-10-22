@@ -33,7 +33,7 @@ const CreacionEvento = () => {
 
   return (
     <>
-      {/* <Alert
+      <Alert
         show={show.alert1}
         onAcept={() => {
           setShow((state) => ({...state, alert1: !show.alert1}))
@@ -49,7 +49,7 @@ const CreacionEvento = () => {
           setShow((state) => ({...state, confirm1: !show.confirm1}))
           setShow((state) => ({...state, alert1: !show.alert1}))
         }}
-      /> */}
+      />
 
 
       {/* cancelar */}

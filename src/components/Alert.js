@@ -26,7 +26,7 @@ const Content = styled.div`
   border-radius: 0.5em;
   border: solid 0.1em #000;
 
-  position: absolute;
+  position: fixed;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
