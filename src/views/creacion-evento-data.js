@@ -19,7 +19,8 @@ import { initialEvento } from '../functions/form'
 import { eventos } from '../functions/validations'
 
 import ErrorMessage from '../components/ErrorMessage'
-
+import Inputd from '../components/input/Inputd'
+import Inputk from '../components/input/Inputk'
 
 const CreacionEvento = () => {
 
@@ -35,6 +36,10 @@ const CreacionEvento = () => {
     alert2: false,
     confirm2: false
   })
+
+  const RedText = styled.p`
+  color: red;`;
+  
 
   return (
     <>
@@ -95,8 +100,8 @@ const CreacionEvento = () => {
               <Content justify-content='space-between' width='100%' gap='1em'>
                 <Flex flex-direction='column' gap='1.2em' width='80%'>
 
-                  <Input 
-                    label='Nombre de evento: *'
+                  <Inputk 
+                    label='Nombre de evento:'
                     name='nombre'
                     value={values.nombre}
                     onChange={handleChange}
@@ -112,7 +117,7 @@ const CreacionEvento = () => {
 
                   <Flex justify-content='space-evenly' width='100%' gap='1em'>
                     <Flex flex-direction='column'>
-                      <Input
+                      <Inputd
                         name='fecha_inicial'
                         type='date' 
                         label='Fecha Inicial de inscripción*'
@@ -127,7 +132,7 @@ const CreacionEvento = () => {
                     </Flex>
                     
                     <Flex flex-direction='column'>
-                      <Input
+                      <Inputd
                         name='fecha_final'
                         type='date' 
                         label='Fecha final de inscripción*'
@@ -153,28 +158,30 @@ const CreacionEvento = () => {
                   {touched.organizador && errors.organizador && (
                     <ErrorMessage>{errors.organizador}</ErrorMessage>
                   )}
-
-                  <Flex justify-content='space-between' width='100%' gap='1em'>
+                  {/* width='100%' */}
+                  <Flex justify-content='space-between'  gap='1em'>
                     <Flex flex-direction='column' gap='1em'>
-                      <Input
+                      <Inputd
                         name='lugar'
                         label='Lugar: ' 
                         disabled={!options.lugar}
                         value={values.lugar}
                         onChange={handleChange}
                         onBlur={handleBlur}
+                        inputWidth={'380px'}
                       />
                       {touched.lugar && errors.lugar && (
                         <ErrorMessage>{errors.lugar}</ErrorMessage>
                       )}
 
-                      <Input
+                      <Inputd
                         name='email'
                         label='E-mail: ' 
                         disabled={!options.email} 
                         value={values.email}
                         onChange={handleChange}
                         onBlur={handleBlur}
+                        inputWidth={'390px'}
                       />
                       {touched.email && errors.email && (
                         <ErrorMessage>{errors.email}</ErrorMessage>
@@ -182,7 +189,7 @@ const CreacionEvento = () => {
                     </Flex>
                     
                     <Flex flex-direction='column' gap='1em'>
-                      <Input
+                      <Inputd
                         name='hora'
                         label='Hora: ' 
                         type='time' 
@@ -190,18 +197,20 @@ const CreacionEvento = () => {
                         value={values.hora}
                         onChange={handleChange}
                         onBlur={handleBlur}
+                        inputWidth={'250px'}
                       />
                       {touched.hora && errors.hora && (
                         <ErrorMessage>{errors.hora}</ErrorMessage>
                       )}
 
-                      <Input
+                      <Inputd
                         name='telefono'
                         label='Telefono: '
                         disabled={!options.telefono}
                         value={values.telefono}
                         onChange={handleChange}
                         onBlur={handleBlur}
+                        inputWidth={'350px'}
                       />
                       {touched.telefono && errors.telefono && (
                         <ErrorMessage>{errors.telefono}</ErrorMessage>
@@ -210,7 +219,7 @@ const CreacionEvento = () => {
                   </Flex>
 
                   <Flex justify-content='space-between' width='100%' gap='1em'>
-                    <Flex width='300px' flex-direction='column'>
+                    <Flex width='480px' flex-direction='column'>
                       <TextArea
                         name='descripcion'
                         value={values.descripcion}
@@ -218,13 +227,14 @@ const CreacionEvento = () => {
                         onBlur={handleBlur}
                         label='Descripción:' 
                         disabled={!options.descripcion}
+                        inputWidth={'400px'}
                       />
                       {touched.descripcion && errors.descripcion && (
                         <ErrorMessage>{errors.descripcion}</ErrorMessage>
                       )}
                     </Flex>
                     
-                    <Flex width='300px' flex-direction='column'>
+                    <Flex width='480px' flex-direction='column'>
                       <TextArea
                         name='requisitos'
                         value={values.requisitos}
@@ -246,11 +256,11 @@ const CreacionEvento = () => {
                     name='file' 
                     buttonText='Seleccionar una imagen'
                     width='200px'
-                    font-size='1.2em'
+                    font-size='18px'
                   />
 
                   <Flex padding='0 1em' top='0.5em' flex-direction='column' width='100%'>
-                    <h2 className='title-btn-file'>Elige tu tipo de participantes*</h2>
+                    <h2 className='title-btn-file'>Elige tu tipo de participantes <RedText>*</RedText></h2>
                     <Flex flex-direction='column' top='1em' gap='0.5em'>
                       <Radio check={!showp} name='participantes' label='Individual' onChange={() => setShowp(!showp)} />
                       <Radio check={showp} name='participantes' label='Equipo' onChange={() => setShowp(!showp)} />

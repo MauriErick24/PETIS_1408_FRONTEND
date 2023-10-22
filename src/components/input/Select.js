@@ -4,7 +4,17 @@ import Flex from '../Flex'
 const Select = ({ label, name }) => {
   return (
     <Div justify-content='space-between' align-items='center' width='100%' gap='2em'>
-      <label htmlFor={name}>{ label }</label>
+      {/* <label htmlFor={name}>{ label }</label> */}
+      {label && (
+        <label htmlFor={name}>
+          {label.includes('*') ? (
+            <>
+              {label.replace('*', '')}
+              <span className="asterisk">*</span>
+            </>
+          ) : label}
+        </label>
+      )}
       <select id={name} name={name}>
         <option>Competencia</option>
         <option>Taller</option>
@@ -30,5 +40,8 @@ const Div = styled(Flex)`
     display: block;
     font-size: 1.125rem;
     white-space: nowrap;
+  }
+  span.asterisk {
+    color: red; /* Color rojo para el asterisco */
   }
 `

@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import Flex from '../Flex'
 
-const TextArea = ({ label, name, disabled, value, onChange, onBlur }) => {
+const TextArea = ({ label, name, disabled, value, onChange, onBlur}) => {
   return (
     <Div flex-direction='column' width='100%' gap='0.5em'>
       <label htmlFor={name}>{ label }</label>
@@ -12,6 +12,7 @@ const TextArea = ({ label, name, disabled, value, onChange, onBlur }) => {
         value={value}
         onChange={onChange}
         onBlur={onBlur}
+        
       ></textarea>
     </Div>
   )
