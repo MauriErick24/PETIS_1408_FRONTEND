@@ -1,0 +1,22 @@
+export const initialEvento = {
+  nombre: '',
+  tipo: '',
+  thumb: '',
+  equipo: '',
+  fecha_inicial: '',
+  fecha_final: '',
+  organizador: '',
+  lugar: '',
+  hora: '',
+  email: '',
+  telefono: '',
+  descripcion: '',
+  requisitos: '',
+  reglas: '',
+  integrantes: '',
+  detalles: '',
+  afiche: '',
+  premios: '',
+  contenido: '',
+  invitados: ''
+}
