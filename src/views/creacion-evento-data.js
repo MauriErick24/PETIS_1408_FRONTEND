@@ -42,8 +42,10 @@ const CreacionEvento = () => {
         show={show.alert1}
         onAcept={() => {
           setShow((state) => ({...state, alert1: !show.alert1}))
+          navigate('/')
         }}
         message='Evento creado correctamente'
+        
       />
 
       <Confirm
@@ -80,10 +82,10 @@ const CreacionEvento = () => {
 
       <Formik
         initialValues={initialEvento}
-        validate={eventos}
+        validate= {(value)=> eventos(value,options)}
         onSubmit={() => {
           setShow((state) => ({...state, confirm1: !show.confirm1}))
-          navigate('/')
+          /*navigate('/')*/
         }}
       >
         {({ values, handleSubmit, handleChange, handleBlur, touched, errors }) => (
