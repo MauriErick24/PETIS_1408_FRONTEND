@@ -39,7 +39,7 @@ const CreacionEvento = () => {
     confirm2: false
   })
 
-  const [data, setData] = useState([
+  const [data, setData] = useState(
     { 
       nombre_evento:"evento prueba",
       inicio_inscripcion:"2023-10-04",
@@ -61,11 +61,11 @@ const CreacionEvento = () => {
       invitado:"shrek",
       tipoEvento_id:4
 }
-  ])
+  )
 
   const sendData = async() => {
     try{
-      const response = await api.post('/api/evento', {data});
+     // const response = await api.post('/api/evento', data);
       console.log("Post")
     }catch(err){
       console.log("Error: ", err)
@@ -143,32 +143,37 @@ const CreacionEvento = () => {
                   <Inputk 
                     label='Nombre de evento:'
                     name='nombre_evento'
-                    value={values.nombre}
+                    value={values.nombre_evento}
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
 
-                  {touched.nombre && errors.nombre && (
-                    <ErrorMessage>{errors.nombre}</ErrorMessage>
+                  {touched.nombre_evento && errors.nombre_evento && (
+                    <ErrorMessage>{errors.nombre_evento}</ErrorMessage>
                   )}
 
-                  <Select label='Tipo de evento : *' 
-                    onClick={(e) => (console.log(e.target.value))}/>
+                  <Select
+                    label='Tipo de evento : *'
+                    onClick={(e) => {
+                      const selectedValue = e.target.value;
+                      console.log(selectedValue);
+                      values.tipoEvento_id = parseInt(selectedValue);
+                    }}
+                  />
                   
-
                   <Flex justify-content='space-evenly' width='100%' gap='1em'>
                     <Flex flex-direction='column'>
                       <Inputd
                         name='inicio_inscripcion'
                         type='date' 
                         label='Fecha Inicial de inscripción*'
-                        value={values.fecha_inicial}
+                        value={values.inicio_inscripcion}
                         onChange={handleChange}
                         onBlur={handleBlur}
                         column
                       />
-                      {touched.fecha_inicial && errors.fecha_inicial && (
-                        <ErrorMessage>{errors.fecha_inicial}</ErrorMessage>
+                      {touched.inicio_inscripcion && errors.inicio_inscripcion && (
+                        <ErrorMessage>{errors.inicio_inscripcion}</ErrorMessage>
                       )}
                     </Flex>
                     
@@ -177,13 +182,13 @@ const CreacionEvento = () => {
                         name='fin_inscripcion'
                         type='date' 
                         label='Fecha final de inscripción*'
-                        value={values.fecha_final}
+                        value={values.fin_inscripcion}
                         onChange={handleChange}
                         onBlur={handleBlur}
                         column 
                       />
-                      {touched.fecha_final && errors.fecha_final && (
-                        <ErrorMessage>{errors.fecha_final}</ErrorMessage>
+                      {touched.fin_inscripcion && errors.fin_inscripcion && (
+                        <ErrorMessage>{errors.fin_inscripcion}</ErrorMessage>
                       )}
                     </Flex>
                   </Flex>
@@ -278,14 +283,14 @@ const CreacionEvento = () => {
                     <Flex width='480px' flex-direction='column'>
                       <TextArea
                         name='requisito'
-                        value={values.requisitos}
+                        value={values.requisito}
                         label='Requisitos:'
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        disabled={!options.requisitos} 
+                        disabled={!options.requisito} 
                       />
-                      {touched.requisitos && errors.requisitos && (
-                        <ErrorMessage>{errors.requisitos}</ErrorMessage>
+                      {touched.requisito && errors.requisito && (
+                        <ErrorMessage>{errors.requisito}</ErrorMessage>
                       )}
                     </Flex>
                   </Flex>
@@ -334,13 +339,13 @@ const CreacionEvento = () => {
                 <Flex flex-direction='column' width='100%'>
                   <TextArea
                     name='premio'
-                    value={values.premios}
+                    value={values.premio}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    label='Premios:' disabled={!options.premios} 
+                    label='Premios:' disabled={!options.premio} 
                   />
-                  {touched.premios && errors.premios && (
-                    <ErrorMessage>{errors.premios}</ErrorMessage>
+                  {touched.premio && errors.premio && (
+                    <ErrorMessage>{errors.premio}</ErrorMessage>
                   )}
                 </Flex>
 
@@ -362,13 +367,13 @@ const CreacionEvento = () => {
                   <TextArea 
                     name='detalle'
                     label='Detalles:'
-                    value={values.detalles}
+                    value={values.detalle}
                     onChange={handleChange}
                     onBlur={handleBlur} 
-                    disabled={!options.detalles} 
+                    disabled={!options.detalle} 
                   />
-                  {touched.detalles && errors.detalles && (
-                    <ErrorMessage>{errors.detalles}</ErrorMessage>
+                  {touched.detalle && errors.detalle && (
+                    <ErrorMessage>{errors.detalle}</ErrorMessage>
                   )}
                 </Flex>
               </Flex>
@@ -404,14 +409,14 @@ const CreacionEvento = () => {
                 <Flex flex-direction='column' width='100%'>
                   <TextArea
                     name='invitado'
-                    value={values.invitados}
+                    value={values.invitado}
                     label='Invitados Especiales:'
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    disabled={!options.invitados} 
+                    disabled={!options.invitado} 
                   />
-                  {touched.invitados && errors.invitados && (
-                    <ErrorMessage>{errors.invitados}</ErrorMessage>
+                  {touched.invitado && errors.invitado && (
+                    <ErrorMessage>{errors.invitado}</ErrorMessage>
                   )}
                 </Flex>
               </Flex>
