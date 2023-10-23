@@ -3,6 +3,7 @@ import Flex from '../Flex'
 
 const Input = ({ 
     label, 
+    asterisk,
     name, 
     type, 
     value, 
@@ -17,7 +18,7 @@ const Input = ({
       {
         column ?
           <Div flex-direction='column' width='100%' gap='0.5em'>
-            { label && <label htmlFor={name}>{ label }</label> }
+            { label && asterisk && <label htmlFor={name}>{ label }</label> }
             <input 
               onChange={onChange} 
               onBlur={onBlur} 

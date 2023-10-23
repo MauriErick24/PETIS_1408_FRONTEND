@@ -8,7 +8,7 @@ import Select from '../components/input/Select'
 import TextArea from '../components/input/TextArea'
 import Radio from '../components/input/Radio'
 
-import { useState } from 'react'
+import { useState, useEffect} from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import InputFilePreview from '../components/input/InputFilePreview'
 import Alert from '../components/Alert'
@@ -48,7 +48,9 @@ const CreacionEvento = () => {
         onAcept={() => {
           setShow((state) => ({...state, alert1: !show.alert1}))
           navigate('/')
+          navigate('/')
         }}
+        
         message='Evento creado correctamente'
         
       />
@@ -112,7 +114,8 @@ const CreacionEvento = () => {
                     <ErrorMessage>{errors.nombre}</ErrorMessage>
                   )}
 
-                  <Select label='Tipo de evento : *' />
+                  <Select label='Tipo de evento : *' 
+                    onClick={(e) => (console.log(e.target.value))}/>
                   
 
                   <Flex justify-content='space-evenly' width='100%' gap='1em'>

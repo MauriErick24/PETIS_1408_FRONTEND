@@ -1,5 +1,4 @@
 export const eventos = (value, options) => {
-
   const errors = {}
 
   if(!value.nombre){
