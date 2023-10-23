@@ -19,7 +19,8 @@ const Home = () => {
 
   const [cards, setCards] = useState([
     {
-        nombre_evento:"evento 3",
+      id:1,
+      nombre_evento:"evento 3",
         inicio_inscripcion:"2023-10-04",
         fin_inscripcion:"2023-11-21",
         fin_evento:"2023-12-1",
@@ -72,25 +73,10 @@ const Home = () => {
       <Fondo>
         
         <Flex className='event-content' flex-wrap='wrap' justify-content='space-evenly' gap='1em'>
-          {cards.map((evento) => {
-            <Evento data={evento} onDelete={() => {}} />
-          })}
-          {/* <Evento data={example} onDelete={() => {}} />
-          <Evento data={example} onDelete={() => {}} />
-          <Evento data={example} onDelete={() => {}} />
-          <Evento data={example} onDelete={() => {}} />
-          <Evento data={example} onDelete={() => {}} />
-          <Evento data={example} onDelete={() => {}} />
-          <Evento data={example} onDelete={() => {}} />
-          <Evento data={example} onDelete={() => {}} />
-          <Evento data={example} onDelete={() => {}} />
-          <Evento data={example} onDelete={() => {}} />
-          <Evento data={example} onDelete={() => {}} />
-          <Evento data={example} onDelete={() => {}} />
-          <Evento data={example} onDelete={() => {}} />
-          <Evento data={example} onDelete={() => {}} />
-          <Evento data={example} onDelete={() => {}} />
-          <Evento data={example} onDelete={() => {}} /> */}
+          {cards.map((evento) => (
+            <Evento data={evento} onDelete={() => deleteEvento(evento.id)} />
+          ))}
+
         </Flex>
       </Fondo>
     </>
