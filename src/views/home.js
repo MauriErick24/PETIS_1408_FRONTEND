@@ -22,8 +22,8 @@ const Home = () => {
 
   const [cards, setCards] = useState([
     {
-      id:1,
-      nombre_evento:"evento 3",
+        id:1,
+        nombre_evento:"evento 3",
         inicio_inscripcion:"2023-10-04",
         fin_inscripcion:"2023-11-21",
         fin_evento:"2023-12-1",
@@ -59,7 +59,7 @@ const Home = () => {
 
   const deleteEvento = async(idEvento) => {
     try{
-      await api.delete(`/api/evento/${idEvento}`);
+      //await api.delete(`/api/evento/${idEvento}`);
       setCards(cards.filter(evento => evento.id !== idEvento))
 
     }catch(err){

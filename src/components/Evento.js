@@ -37,6 +37,7 @@ const Evento = ({ data, onDelete, showAlert}) => {
           showAlert(true)
         }}
       />
+      
       <Article>
         <header className='header-article'> 
           <h3 className='article-component-rest'>{data.nombreTipo_evento}</h3>

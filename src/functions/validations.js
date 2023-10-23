@@ -1,18 +1,18 @@
 export const eventos = (value, options) => {
   const errors = {}
 
-  if(!value.nombre){
-    errors.nombre = 'El llenado del siguiente campo es obligatorio'
-  }else if (!/^[A-Za-z]+$/.test(value.nombre)) {
-    errors.nombre = 'Ingrese solo texto sin números ni caracteres especiales.'
+  if(!value.nombre_evento){
+    errors.nombre_evento = 'El llenado del siguiente campo es obligatorio'
+  }else if (!/^[A-Za-z]+$/.test(value.nombre_evento)) {
+    errors.nombre_evento = 'Ingrese solo texto sin números ni caracteres especiales.'
   }
 
-  if(!value.fecha_inicial){
-    errors.fecha_inicial = 'El llenado del siguiente campo es obligatorio'
+  if(!value.inicio_inscripcion){
+    errors.inicio_inscripcion = 'El llenado del siguiente campo es obligatorio'
   }
 
-  if(!value.fecha_final){
-    errors.fecha_final = 'El llenado del siguiente campo es obligatorio'
+  if(!value.fin_inscripcion){
+    errors.fin_inscripcion = 'El llenado del siguiente campo es obligatorio'
   }
 
   
@@ -40,24 +40,24 @@ export const eventos = (value, options) => {
     errors.descripcion = 'Ingrese solo texto sin números ni caracteres especiales.'
   }
 
-  if (options.requisitos && !/^[A-Za-z]+$/.test(value.requisitos)) {
-    errors.requisitos = 'Ingrese solo texto sin números ni caracteres especiales.'
+  if (options.requisito && !/^[A-Za-z]+$/.test(value.requisito)) {
+    errors.requisito = 'Ingrese solo texto sin números ni caracteres especiales.'
   }
 
   if (options.integrantes && !/^[0-9]+$/.test(value.integrantes)) {
     errors.integrantes = 'Ingrese solo números en este campo.'
   }
 
-  if (options.premios && !/^[A-Za-z]+$/.test(value.premios)) {
-    errors.premios = 'Ingrese solo texto sin números ni caracteres especiales.'
+  if (options.premio && !/^[A-Za-z]+$/.test(value.premio)) {
+    errors.premio = 'Ingrese solo texto sin números ni caracteres especiales.'
   }
 
   if (options.reglas && !/^[A-Za-z]+$/.test(value.reglas)) {
     errors.reglas = 'Ingrese solo texto sin números ni caracteres especiales.'
   }
 
-  if (options.detalles && !/^[A-Za-z]+$/.test(value.detalles)) {
-    errors.detalles = 'Ingrese solo texto sin números ni caracteres especiales.'
+  if (options.detalle && !/^[A-Za-z]+$/.test(value.detalle)) {
+    errors.detalle = 'Ingrese solo texto sin números ni caracteres especiales.'
   }
 
   if (options.integrantes && !/^[A-Za-z]+$/.test(value.integrantes)) {
@@ -68,8 +68,8 @@ export const eventos = (value, options) => {
     errors.contenido = 'Ingrese solo texto sin números ni caracteres especiales.'
   }
 
-  if (options.invitados && !/^[A-Za-z]+$/.test(value.invitados)) {
-    errors.invitados = 'Ingrese solo texto sin números ni caracteres especiales.'
+  if (options.invitado && !/^[A-Za-z]+$/.test(value.invitado)) {
+    errors.invitado = 'Ingrese solo texto sin números ni caracteres especiales.'
   }
 
   return errors

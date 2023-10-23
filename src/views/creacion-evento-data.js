@@ -22,6 +22,8 @@ import ErrorMessage from '../components/ErrorMessage'
 import Inputd from '../components/input/Inputd'
 import Inputk from '../components/input/Inputk'
 
+import api from '../services/api'
+
 const CreacionEvento = () => {
 
   const navigate = useNavigate()
@@ -36,6 +38,39 @@ const CreacionEvento = () => {
     alert2: false,
     confirm2: false
   })
+
+  const [data, setData] = useState([
+    { 
+      nombre_evento:"evento prueba",
+      inicio_inscripcion:"2023-10-04",
+      fin_inscripcion:"2023-11-21",
+      fin_evento:"2023-12-1",
+      organizador:"jalasoft",
+      imagen:"assests/images/umss-logo.png",
+      lugar:"coña coña",
+      email:"pretencioso@gmail.com",
+      descripcion:"este es un evento",
+      hora:"09:00:00.0000000",
+      telefono:"78327438",
+      requisito:"traer malcriadas",
+      premio:"un whisky",
+      reglas:"no ser gay",
+      detalle:"blba bla bla",
+      afiche:"nose que es un afiche",
+      contenido:"este es el contenido del evento",
+      invitado:"shrek",
+      tipoEvento_id:4
+}
+  ])
+
+  const sendData = async() => {
+    try{
+      const response = await api.post('/api/evento', {data});
+      console.log("Post")
+    }catch(err){
+      console.log("Error: ", err)
+    }
+  }
 
   const RedText = styled.p`
   color: red;`;
@@ -62,9 +97,9 @@ const CreacionEvento = () => {
         onAcept={() => {
           setShow((state) => ({...state, confirm1: !show.confirm1}))
           setShow((state) => ({...state, alert1: !show.alert1}))
+          sendData();
         }}
       />
-
 
       {/* cancelar */}
       <Alert
@@ -90,8 +125,10 @@ const CreacionEvento = () => {
       <Formik
         initialValues={initialEvento}
         validate= {(value)=> eventos(value,options)}
-        onSubmit={() => {
+        onSubmit={(value) => {
           setShow((state) => ({...state, confirm1: !show.confirm1}))
+          setData(value)
+          console.log(data)
           /*navigate('/')*/
         }}
       >
@@ -104,7 +141,7 @@ const CreacionEvento = () => {
 
                   <Inputk 
                     label='Nombre de evento:'
-                    name='nombre'
+                    name='nombre_evento'
                     value={values.nombre}
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -121,7 +158,7 @@ const CreacionEvento = () => {
                   <Flex justify-content='space-evenly' width='100%' gap='1em'>
                     <Flex flex-direction='column'>
                       <Inputd
-                        name='fecha_inicial'
+                        name='inicio_inscripcion'
                         type='date' 
                         label='Fecha Inicial de inscripción*'
                         value={values.fecha_inicial}
@@ -136,7 +173,7 @@ const CreacionEvento = () => {
                     
                     <Flex flex-direction='column'>
                       <Inputd
-                        name='fecha_final'
+                        name='fin_inscripcion'
                         type='date' 
                         label='Fecha final de inscripción*'
                         value={values.fecha_final}
@@ -239,7 +276,7 @@ const CreacionEvento = () => {
                     
                     <Flex width='480px' flex-direction='column'>
                       <TextArea
-                        name='requisitos'
+                        name='requisito'
                         value={values.requisitos}
                         label='Requisitos:'
                         onChange={handleChange}
@@ -295,7 +332,7 @@ const CreacionEvento = () => {
               <Flex gap='1em' top='1em'>
                 <Flex flex-direction='column' width='100%'>
                   <TextArea
-                    name='premios'
+                    name='premio'
                     value={values.premios}
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -322,7 +359,7 @@ const CreacionEvento = () => {
 
                 <Flex flex-direction='column' width='100%'>
                   <TextArea 
-                    name='detalles'
+                    name='detalle'
                     label='Detalles:'
                     value={values.detalles}
                     onChange={handleChange}
@@ -365,7 +402,7 @@ const CreacionEvento = () => {
                 
                 <Flex flex-direction='column' width='100%'>
                   <TextArea
-                    name='invitados'
+                    name='invitado'
                     value={values.invitados}
                     label='Invitados Especiales:'
                     onChange={handleChange}
