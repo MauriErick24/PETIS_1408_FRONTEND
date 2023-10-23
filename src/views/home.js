@@ -7,9 +7,12 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import api from '../services/api'
 
+import Alert from '../components/Alert'
+
 const Home = () => {
 
   const navigate = useNavigate()
+  const [ showAcept, setAceptShow ] = useState(false)
 
   const example = {
     type: 'TIPO DE EVENTO',
@@ -56,8 +59,9 @@ const Home = () => {
 
   const deleteEvento = async(idEvento) => {
     try{
-      await api.delete(`/api/evento/${idEvento}`);
+      //await api.delete(`/api/evento/${idEvento}`);
       setCards(cards.filter(evento => evento.id !== idEvento))
+
     }catch(err){
       console.log("Error: ", err)
     }
@@ -71,13 +75,23 @@ const Home = () => {
         onClick={() => navigate('/creacion/evento')}
       />
       <Fondo>
+
+
         
         <Flex className='event-content' flex-wrap='wrap' justify-content='space-evenly' gap='1em'>
           {cards.map((evento) => (
-            <Evento data={evento} onDelete={() => deleteEvento(evento.id)} />
+            <Evento data={evento} onDelete={() => deleteEvento(evento.id)} showAlert={setAceptShow} />
           ))}
 
         </Flex>
+
+        <Alert
+        show={showAcept}
+        onAcept={() => {
+          setAceptShow(!showAcept)
+        }}
+        message='Evento eliminado correctamente'
+      />
       </Fondo>
     </>
   )

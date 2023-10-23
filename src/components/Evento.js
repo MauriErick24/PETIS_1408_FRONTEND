@@ -6,13 +6,13 @@ import Img from '../assets/images/img-article.jpeg'
 import Confirm from './Confirm'
 import Alert from './Alert'
 
-const Evento = ({ data, onDelete }) => {
+const Evento = ({ data, onDelete, showAlert}) => {
   const [ show, setShow ] = useState(false)
   const [ showAcept, setAceptShow ] = useState(false)
 
   const handleAlert = () => {
     setShow(!show)
-    onDelete()
+    //onDelete()
   }
 
   return(
@@ -32,7 +32,9 @@ const Evento = ({ data, onDelete }) => {
         onAcept={() => {
           console.log('enviado')
           setShow(!show)
+          onDelete()
           setAceptShow(!showAcept)
+          showAlert(true)
         }}
       />
       <Article>
