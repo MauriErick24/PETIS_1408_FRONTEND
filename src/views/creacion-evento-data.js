@@ -97,6 +97,7 @@ const CreacionEvento = () => {
         onAcept={() => {
           setShow((state) => ({...state, confirm1: !show.confirm1}))
           setShow((state) => ({...state, alert1: !show.alert1}))
+          console.log(data)
           sendData();
         }}
       />
@@ -128,7 +129,7 @@ const CreacionEvento = () => {
         onSubmit={(value) => {
           setShow((state) => ({...state, confirm1: !show.confirm1}))
           setData(value)
-          console.log(data)
+          
           /*navigate('/')*/
         }}
       >
