@@ -39,7 +39,7 @@ const Evento = ({ data, onDelete, showAlert}) => {
       />
       <Article>
         <header className='header-article'> 
-          <h3 className='article-component-type'>{data.tipoEvento_id}</h3>
+          <h3 className='article-component-rest'>{data.nombreTipo_evento}</h3>
           <button onClick={handleAlert}>x</button>
         </header>
         

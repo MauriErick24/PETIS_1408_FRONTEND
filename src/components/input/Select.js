@@ -42,7 +42,7 @@ const Select = ({ label, name, onClick }) => {
         
         {tipoEvento.map((evento) => (
           <option key={evento.id} value={evento.id}>
-            {evento.tipo_evento}
+            {evento.nombreTipo_evento}
           </option>
         ))}
       </select>

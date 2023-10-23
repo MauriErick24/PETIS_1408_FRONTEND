@@ -59,7 +59,7 @@ const Home = () => {
 
   const deleteEvento = async(idEvento) => {
     try{
-      //await api.delete(`/api/evento/${idEvento}`);
+      await api.delete(`/api/evento/${idEvento}`);
       setCards(cards.filter(evento => evento.id !== idEvento))
 
     }catch(err){
