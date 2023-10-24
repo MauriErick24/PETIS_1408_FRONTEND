@@ -15,6 +15,9 @@ export const eventos = (value, options) => {
     errors.fin_inscripcion = 'El llenado del siguiente campo es obligatorio'
   }
 
+  if(value.fin_inscripcion<value.inicio_inscripcion){
+    errors.fin_inscripcion = 'La fecha final no puede ser menor a la fecha de inscripcion'
+  }
   
   if (options.organizador && !/^[A-Za-z\s]+$/.test(value.organizador)) {
     errors.organizador = 'Ingrese solo texto sin caracteres especiales.'
@@ -32,6 +35,9 @@ export const eventos = (value, options) => {
     errors.telefono = 'Ingrese un número de teléfono válido de hasta 8 dígitos.'
   }
 
+  // if(options.telefono && !/^[60000000-89999999]$/.test(value.telefono)){
+  //   errors.telefono = 'Ingrese un número de teléfono válido'
+  // }
   // if(options.hora && !/^[0-24]+:[0-60].[0-999999]$/.test(value.hora)){
   //   errors.hora = 'Ingrese una hora válida.'
   // }
