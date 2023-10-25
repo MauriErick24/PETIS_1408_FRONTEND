@@ -1,11 +1,24 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
-import './App.css';
+// components
+import Content from './components/Content'
+
+// views
+import Home from './views/home'
+import CreacionEvento from './views/creacion-evento'
+import CreacionEventoData from './views/creacion-evento-data'
 
 function App() {
   return (
-    <div className="App">
-      Administrador de eventos de programacion
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path='' element={<Content />}>
+          <Route index element={<Home />} />
+          <Route path='creacion/evento' element={<CreacionEvento />} />
+          <Route path='creacion/data' element={<CreacionEventoData />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
