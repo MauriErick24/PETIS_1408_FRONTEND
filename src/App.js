@@ -7,6 +7,7 @@ import Content from './components/Content'
 import Home from './views/home'
 import CreacionEvento from './views/creacion-evento'
 import CreacionEventoData from './views/creacion-evento-data'
+import HomeUser from './views/homeUser'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path='creacion/evento' element={<CreacionEvento />} />
           <Route path='creacion/data' element={<CreacionEventoData />} />
+          <Route path='eventos' element={<HomeUser/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

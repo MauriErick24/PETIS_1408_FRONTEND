@@ -1,14 +1,16 @@
 import { useState } from 'react'
 import styled from 'styled-components'
+import Btn from './Btn'
 
 // images
 import Img from '../assets/images/img-article.jpeg'
 import Confirm from './Confirm'
 import Alert from './Alert'
 
-const Evento = ({ data, onDelete, showAlert}) => {
+const Evento = ({ data, onDelete, showAlert, onClick}) => {
   const [ show, setShow ] = useState(false)
   const [ showAcept, setAceptShow ] = useState(false)
+  const deleteButton = true
 
   const handleAlert = () => {
     setShow(!show)
@@ -41,7 +43,7 @@ const Evento = ({ data, onDelete, showAlert}) => {
       <Article>
         <header className='header-article'> 
           <h3 className='article-component-rest'>{data.nombreTipo_evento}</h3>
-          <button onClick={handleAlert}>x</button>
+          {/* {buttonDelete && <button onClick={handleAlert}>x</button>} */}
         </header>
         
         <div className='img'>
@@ -50,6 +52,10 @@ const Evento = ({ data, onDelete, showAlert}) => {
 
         <h2 className='article-componente-rest'>{data.nombre_evento}</h2>
         <h2 className='article-componente-rest'>{data.inicio_inscripcion}</h2>
+        <div className='detalles-btn'>
+          <br/>
+          <Btn onClick={onClick}>DETALLES</Btn>
+        </div>
       </Article>
     </>
   )
@@ -104,4 +110,10 @@ const Article = styled.article`
     font-weight: 400;
     font-size: 0%.8em;
   }
+
+  .detalles-btn{
+    text-align: center;
+  }
 `
+
+
