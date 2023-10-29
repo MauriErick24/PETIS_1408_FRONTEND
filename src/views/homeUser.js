@@ -15,11 +15,11 @@ const HomeUser =()=>{
         inicio_inscripcion: 'FECHA INICIO EVENTO'
       }
 
-
+/// verificar que se muestran en el espacio correcto
       const types = [
         {id: 1, nombreTipo_evento: 'TODOS'},
         {id: 2, nombreTipo_evento: 'COMPETENCIA'},
-        {id: 3, nombreTipo_evento: 'TALLERES'},
+        {id: 3, nombreTipo_evento: 'TALLER'},
         {id: 4, nombreTipo_evento: 'RECLUTAMIENTO'},
         {id: 5, nombreTipo_evento: 'ENTRENAMIENTO'},
         {id: 6, nombreTipo_evento: 'OTROS'},

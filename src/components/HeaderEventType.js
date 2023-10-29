@@ -1,40 +1,47 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
-// const types = [
-//     {id: 1, nombreTipo_evento: "COMPETENCIA"},
-//     {id: 2, nombreTipo_evento: "TALLERES"},
-//     {id: 3, nombreTipo_evento: "RECLUTAMIENTO"},
-//     {id: 4, nombreTipo_evento: "ENTRENAMIENTO"},
-//     {id: 5, nombreTipo_evento: "OTROS"},
-// ];
+const HeaderEventType = ({ types, onClick }) => {
+  const [selectedTipoEvento, setSelectedTipoEvento] = useState('TODOS');
 
-const HeaderEventType = ({types, onClick}) => {
-   return (
+  const handleButtonClick = (nombreTipoEvento) => {
+    setSelectedTipoEvento(nombreTipoEvento);
+    onClick(nombreTipoEvento);
+  };
+
+  return (
     <Div>
-        {types.map((elemento) => (
-            <Button onClick={()=>{
-                onClick(elemento.nombreTipo_evento); 
-                // console.log(elemento)
-            }}>
-                {elemento.nombreTipo_evento}
-            </Button>    
-        ))}
+      {types.map((elemento) => (
+        <Button
+          key={elemento.id}
+          onClick={() => handleButtonClick(elemento.nombreTipo_evento)}
+          isSelected={selectedTipoEvento === elemento.nombreTipo_evento}
+        >
+          {elemento.nombreTipo_evento}
+        </Button>
+      ))}
     </Div>
-   );
+  );
 };
 
 export default HeaderEventType;
 
 const Div = styled.div`
-    display: flex;
-    border-bottom: solid 0.2em #a6a6a6;
+  display: flex;
+  border-bottom: solid 0.2em #a6a6a6;
 `;
 
 const Button = styled.p`
-    padding-right: 1.5em;
-    font-size: larger;
-    cursor: pointer;
-    text-decoration: none; 
-    color: inherit; 
+  padding-right: 1.5em;
+  font-size: larger;
+  cursor: pointer;
+  text-decoration: none;
+  color: ${(props) => (props.isSelected ? "black" : "inherit")};
+  font-weight: ${(props) => (props.isSelected ? "bold" : "normal")};
+  transition: color 0.3s ease, font-weight 0.3s ease;
+
+  :active {
+    font-weight: bold;
+  }
 `;
