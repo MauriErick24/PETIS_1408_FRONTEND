@@ -1,0 +1,33 @@
+/* Estilos para la barra lateral (clase 'sidebar') */
+.sidebari {
+    width: 28%; /* Ancho de la barra lateral */
+    background-color: #333; /* Color de fondo */
+    color: #fff; /* Color del texto */
+    padding: 20px;
+    position:fixed;
+    top: 0;
+    left:0;
+    height: 100%;
+    overflow-y: auto;
+  }
+  
+  .sidebari h2 {
+    font-size: 1.5rem;
+  }
+  
+  .sidebari ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sidebari li {
+    margin-bottom: 10px;
+  }
+  
+  .sidebari a {
+    text-decoration: none;
+    color: #fff;
+  }
+  
+  /* Estilos adicionales según tus necesidades */
+  
