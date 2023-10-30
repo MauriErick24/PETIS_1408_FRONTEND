@@ -19,4 +19,5 @@ const BtnStyled = styled.button`
   background-color: ${(props) => props.color ? colores[props.color] : '#000'};
   color: white;
   cursor: pointer;
+  font-weight: ${(props) => props['font-weight'] ? props['font-weight'] : '100'};
 `
