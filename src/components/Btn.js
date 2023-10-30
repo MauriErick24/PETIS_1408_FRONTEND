@@ -19,4 +19,5 @@ const BtnStyled = styled.button`
   background-color: ${(props) => props.color ? colores[props.color] : '#000'};
   color: white;
   cursor: pointer;
+  margin-bottom: ${(props) => props['margin-bottom'] ? props['margin-bottom'] : ''};
 `

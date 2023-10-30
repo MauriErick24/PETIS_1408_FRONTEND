@@ -20,4 +20,7 @@ const Div = styled.div`
   align-items: ${(props) => props['align-items'] || 'flex-start'};
   gap: ${(props) => props['gap'] || '0'};
   padding: ${(props) => props['padding'] || '0'};
+  padding-bottom: ${(props) => props['padding-bottom'] || '0'};
+  background: ${(props) => props.background || 'none'};
+  border-radius: ${(props) => props['border-radius'] ? props['border-radius'] : ''};
 `;
