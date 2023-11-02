@@ -11,6 +11,7 @@ import CreacionEvento from './views/creacion-evento'
 import CreacionEventoData from './views/creacion-evento-data'
 import Visualizacionevento from './views/visualizacion-evento'
 import HomeUser from './views/homeUser'
+import VentanaBotones from './views/VentanaBotones'
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
         <Route  path='visualizacion/evento' element={<Layout detail={true}><Visualizacionevento /></Layout>} />
         <Route  path='eventos/detalle/:id' element={<Layout detail={true}><Visualizacionevento /></Layout>} />
         <Route  path='eventos' element={<Layout><HomeUser /></Layout>} />
+        <Route  path='ventana/botones' element={<Layout><VentanaBotones /></Layout>} />
       </Routes> 
     </BrowserRouter>
    
