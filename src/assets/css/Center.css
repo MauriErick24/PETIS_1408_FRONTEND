@@ -1,0 +1,12 @@
+.app-container {
+    display: flex; /* Utiliza Flexbox para alinear elementos horizontalmente */
+  }
+
+.content {
+    flex: 1; /* El contenido principal se expandirá para llenar el espacio restante */
+    background-color: #f2f2f2; /* Color de fondo del contenido principal */
+    padding: 20px;
+    /* Añade márgenes para separar el contenido principal de las barras laterales */
+    /* margin-left: 10px;
+    margin-right: 10px; */
+}

@@ -107,14 +107,14 @@ const HomeUser =()=>{
         <Flex className='event-content' flex-wrap='wrap' justify-content='space-evenly' gap='1em'>
           {filtro === 'TODOS' ? (
             vivo.map((evento) => (
-              <Evento key={evento.id} data={evento} onClick={() => navigate(`/detalle/${evento.id}`)} />
+              <Evento key={evento.id} data={evento} onClick={() => navigate(`/eventos/detalle/${evento.id}`)} />
             ))
           ) : (
             (vivo.filter((evento) => evento.nombreTipo_evento === filtro).length > 0) ? (
               vivo
                 .filter((evento) => evento.nombreTipo_evento === filtro)
                 .map((evento) => (
-                  <Evento key={evento.id} data={evento} onClick={() => navigate(`/detalle/${evento.id}`)} />
+                  <Evento key={evento.id} data={evento} onClick={() => navigate(`/eventos/detalle/${evento.id}`)} />
                 ))
             ) : (
               <p>NO HAY EVENTOS DISPONIBLES PARA ESTE FILTRO.</p>
@@ -122,7 +122,7 @@ const HomeUser =()=>{
           )}
         </Flex>
 
- 
+
         </Fondo>
 
         <H1>EVENTOS FUTUROS</H1>
@@ -131,14 +131,14 @@ const HomeUser =()=>{
         <Flex className='event-content' flex-wrap='wrap' justify-content='space-evenly' gap='1em'>
           {filtro === 'TODOS' ? (
             futuro.map((evento) => (
-              <Evento key={evento.id} data={evento} onClick={() => navigate(`/detalle/${evento.id}`)} />
+              <Evento key={evento.id} data={evento} onClick={() => navigate(`/eventos/detalle/${evento.id}`)} />
             ))
           ) : (
             (futuro.filter((evento) => evento.nombreTipo_evento === filtro).length > 0) ? (
               futuro
                 .filter((evento) => evento.nombreTipo_evento === filtro)
                 .map((evento) => (
-                  <Evento key={evento.id} data={evento} onClick={() => navigate(`/detalle/${evento.id}`)} />
+                  <Evento key={evento.id} data={evento} onClick={() => navigate(`/eventos/detalle/${evento.id}`)} />
                 ))
             ) : (
               <p>NO HAY EVENTOS DISPONIBLES PARA ESTE FILTRO.</p>
@@ -153,14 +153,14 @@ const HomeUser =()=>{
         <Flex className='event-content' flex-wrap='wrap' justify-content='space-evenly' gap='1em'>
           {filtro === 'TODOS' ? (
             pasado.map((evento) => (
-              <Evento key={evento.id} data={evento} onClick={() => navigate(`/detalle/${evento.id}`)} />
+              <Evento key={evento.id} data={evento} onClick={() => navigate(`/eventos/detalle/${evento.id}`)} />
             ))
           ) : (
             (pasado.filter((evento) => evento.nombreTipo_evento === filtro).length > 0) ? (
               pasado
                 .filter((evento) => evento.nombreTipo_evento === filtro)
                 .map((evento) => (
-                  <Evento key={evento.id} data={evento} onClick={() => navigate(`/detalle/${evento.id}`)} />
+                  <Evento key={evento.id} data={evento} onClick={() => navigate(`/eventos/detalle/${evento.id}`)} />
                 ))
             ) : (
               <p>NO HAY EVENTOS DISPONIBLES PARA ESTE FILTRO.</p>

@@ -65,7 +65,7 @@ const CreacionEvento = () => {
 
   const sendData = async() => {
     try{
-     // const response = await api.post('/api/evento', data);
+     const response = await api.post('/api/evento', data);
       console.log("Post")
     }catch(err){
       console.log("Error: ", err)
@@ -390,7 +390,7 @@ const CreacionEvento = () => {
                         label='Requisitos:'
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        disabled={!options.requisito} 
+                        disabled={!options.requisitos} 
                       />
                       {touched.requisito && errors.requisito && (
                         <ErrorMessage>{errors.requisito}</ErrorMessage>
@@ -445,7 +445,7 @@ const CreacionEvento = () => {
                     value={values.premio}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    label='Premios:' disabled={!options.premio} 
+                    label='Premios:' disabled={!options.premios} 
                   />
                   {touched.premio && errors.premio && (
                     <ErrorMessage>{errors.premio}</ErrorMessage>
@@ -473,7 +473,7 @@ const CreacionEvento = () => {
                     value={values.detalle}
                     onChange={handleChange}
                     onBlur={handleBlur} 
-                    disabled={!options.detalle} 
+                    disabled={!options.detalles} 
                   />
                   {touched.detalle && errors.detalle && (
                     <ErrorMessage>{errors.detalle}</ErrorMessage>
@@ -516,7 +516,7 @@ const CreacionEvento = () => {
                     label='Invitados Especiales:'
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    disabled={!options.invitado} 
+                    disabled={!options.invitados} 
                   />
                   {touched.invitado && errors.invitado && (
                     <ErrorMessage>{errors.invitado}</ErrorMessage>

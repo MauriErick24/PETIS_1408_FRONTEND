@@ -21,28 +21,7 @@ const Home = () => {
   }
 
   const [cards, setCards] = useState([
-    {
-        id:1,
-        nombre_evento:"evento 3",
-        inicio_inscripcion:"2023-10-04",
-        fin_inscripcion:"2023-11-21",
-        fin_evento:"2023-12-1",
-        organizador:"jalasoft",
-        imagen:"public/los",
-        lugar:"coña coña",
-        email:"pretencioso@gmail.com",
-        descripcion:"este es un evento",
-        hora:"09:00:00.0000000",
-        telefono:"78327438",
-        requisito:"traer malcriadas",
-        premio:"un whisky",
-        reglas:"no ser gay",
-        detalle:"blba bla bla",
-        afiche:"nose que es un afiche",
-        contenido:"este es el contenido del evento",
-        invitado:"shrek",
-        tipoEvento_id:2
-    }
+    
   ])
   
   useEffect(()=>{
@@ -59,7 +38,7 @@ const Home = () => {
 
   const deleteEvento = async(idEvento) => {
     try{
-      //await api.delete(`/api/evento/${idEvento}`);
+      await api.delete(`/api/evento/${idEvento}`);
       setCards(cards.filter(evento => evento.id !== idEvento))
 
     }catch(err){
