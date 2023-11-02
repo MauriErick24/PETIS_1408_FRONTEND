@@ -6,6 +6,10 @@ import Select from "../components/input/Select";
 import Inputk from "../components/input/Inputk";
 import Inputd from "../components/input/Inputd";
 import Flex from "../components/Flex";
+import Radio from "../components/input/Radio";
+import Input from "../components/input/Input";
+import TextArea from "../components/input/TextArea";
+
 
 const CrearEvento = () => {
     return(
@@ -214,8 +218,56 @@ const CrearEvento = () => {
                                 <ErrorMessage>{errors.telefono}</ErrorMessage>
                             )} */}
                     </Flex>
+                <Flex flex-direction='row'>
+                    <Flex padding='0 1em' top='0.5em' flex-direction='column' width='100%' gap='1em'>
+                        <P>Elige tu tipo de participantes</P>
+                        <Flex flex-direction='column' top='1em' gap='0.5em'>
+                        {/* <Radio check={!showp} name='participantes' label='Individual' onChange={() => setShowp(!showp)} />
+                        <Radio check={showp} name='participantes' label='Equipo' onChange={() => setShowp(!showp)} /> */}
+                        <Radio check={null} name='participantes' label='Individual'  />
+                        <Radio check={null} name='participantes' label='Equipo' />
+                        </Flex>
+                    
+                        {
+                        //showp 
+                        true&&(
+                        <Flex padding='0 1em' top='0.2em' flex-direction='column' width='100%' gap='1em'>
+                            <P >Numero de integrantes por equipo</P>
+                            <Flex top='0.1em' width='100px' flex-direction='column'>
+                            <Input 
+                                type='number'
+                                name='integrantes'
+                                // value={values.integrantes}
+                                // onChange={handleChange}
+                                // onBlur={handleBlur}
+                            />
+                            {/* {touched.integrantes && errors.integrantes && (
+                                <ErrorMessage>{errors.integrantes}</ErrorMessage>
+                            )} */}
+                            </Flex>
+                        </Flex>
+                        )
+                    }
+                    
+                    </Flex>
+                    
 
+                    <Flex flex-direction='column' width='100%'>
+                    <TextArea 
+                        name='detalle'
+                        label='Detalles:'
+                        // value={values.detalle}
+                        // onChange={handleChange}
+                        // onBlur={handleBlur} 
+                        // disabled={!options.detalles} 
+                    />
+                    {/* {touched.detalle && errors.detalle && (
+                        <ErrorMessage>{errors.detalle}</ErrorMessage>
+                    )} */}
+                    </Flex>
+                </Flex>
             </Flex>
+
         </Div>
 
         
@@ -234,4 +286,8 @@ const Asterisk = styled.p`
 const Container = styled.div`
   border: solid 0.2em #000;
   padding: 1em;
+`
+
+const P = styled.p`
+    font-size: 20px;
 `

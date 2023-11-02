@@ -2,6 +2,11 @@ import styled from 'styled-components';
 import Header from '../Header';
 import Footer from '../Footer';
 
+import Btn from '../Btn';
+
+import Flex from '../Flex';
+import Aside from '../Aside';
+
 const Container = styled.div`
   display: flex;
   height: auto;
@@ -35,12 +40,16 @@ function Layout({sidebar, main}) {
       <div className='page'>
         <Container>
           <Sidebar>
-            {sidebar}
+            <Aside/>
           </Sidebar>
           <Content>
             {main}
           </Content>  
         </Container>
+      <Flex justify-content='end' gap='1em'>
+        <Btn>CREAR</Btn>
+        <Btn color='second' >CANCELAR</Btn>
+      </Flex>
       </div>
       <Footer/>
     </Div>
@@ -57,5 +66,6 @@ const Div = styled.div`
     margin: auto;
     width: 100%; 
     padding: 1em 4em;
+   
   }
 `

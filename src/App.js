@@ -16,6 +16,12 @@ import Visualizacionevento from './views/visualizacion-evento'
 import HomeUser from './views/homeUser'
 import VentanaBotones from './views/VentanaBotones'
 
+import Organizador from './views/organizador'
+import Patrocinador from './views/patrocinador'
+import Reglas from './views/reglas'
+import Premios from './views/premios'
+import Invitados from './views/invitados'
+import Afiche from './views/afiche'
 
 function App() {
 
@@ -23,7 +29,18 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout><Home /></Layout>} />
-        <Route path='/crear/evento' element={<LayoutCreacion sidebar={<Aside/>} main={<CrearEvento/>}/>}/>
+        <Route path='/crear/evento' element={<LayoutCreacion main={<CrearEvento/>}/>}/>
+        <Route path='/crear/evento/organizador' element={<LayoutCreacion main={<Organizador/>}/>}/>
+        <Route path='/crear/evento/patrocinadores' element={<LayoutCreacion main={<Patrocinador/>}/>}/>
+        <Route path='/crear/evento/reglas' element={<LayoutCreacion main={<Reglas/>}/>}/>
+        <Route path='/crear/evento/premios' element={<LayoutCreacion main={<Premios/>}/>}/>
+        <Route path='/crear/evento/invitados' element={<LayoutCreacion main={<Invitados/>}/>}/>
+        <Route path='/crear/evento/afiche' element={<LayoutCreacion main={<Afiche/>}/>}/>
+
+
+
+
+
         <Route path='creacion/evento' element={<Layout><CreacionEvento /></Layout>} />
         <Route path='creacion/data' element={<Layout><CreacionEventoData /></Layout>} />
         <Route  path='visualizacion/evento' element={<Layout detail={true}><Visualizacionevento /></Layout>} />
