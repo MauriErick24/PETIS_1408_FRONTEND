@@ -10,11 +10,7 @@ const ContentCustom = () => {
   return(
     <Div>
       <Header />
-
-      <div className='page'>
-        <Outlet />
-      </div>
-
+        
       <Footer />
     </Div>
   )

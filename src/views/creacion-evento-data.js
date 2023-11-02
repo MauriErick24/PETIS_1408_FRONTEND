@@ -162,7 +162,7 @@ const CreacionEvento = () => {
                   />
                   
                   
-                    <Flex justify-content='space-evenly' width='100%' gap='1em'>
+                <Flex justify-content='space-evenly' width='100%' gap='1em'>
                   <Container>
                     <Flex flex-direction = 'column' gap='1em'>
                       <Flex flex-direction = 'row'>

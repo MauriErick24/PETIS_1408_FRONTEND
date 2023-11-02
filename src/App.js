@@ -4,6 +4,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Content from './components/Content'
 import Content2 from './components/Content2'
 import Layout from '../src/components/Layout'
+import LayoutCreacion from '../src/components/Layout/Layout'
+import Aside from './components/Aside'
+import CrearEvento from './views/crear-evento'
 
 // views
 import Home from './views/home'
@@ -13,18 +16,20 @@ import Visualizacionevento from './views/visualizacion-evento'
 import HomeUser from './views/homeUser'
 import VentanaBotones from './views/VentanaBotones'
 
+
 function App() {
 
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout><Home /></Layout>} />
+        <Route path='/crear/evento' element={<LayoutCreacion sidebar={<Aside/>} main={<CrearEvento/>}/>}/>
         <Route path='creacion/evento' element={<Layout><CreacionEvento /></Layout>} />
         <Route path='creacion/data' element={<Layout><CreacionEventoData /></Layout>} />
         <Route  path='visualizacion/evento' element={<Layout detail={true}><Visualizacionevento /></Layout>} />
         <Route  path='eventos/detalle/:id' element={<Layout detail={true}><Visualizacionevento /></Layout>} />
         <Route  path='eventos' element={<Layout><HomeUser /></Layout>} />
-        <Route  path='ventana/botones' element={<Layout><VentanaBotones /></Layout>} />
+        {/* <Route  path='ventana/botones' element={<Layout><VentanaBotones /></Layout>} /> */}
       </Routes> 
     </BrowserRouter>
    
