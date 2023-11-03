@@ -13,6 +13,7 @@ const Div = styled.div`
   margin-top: ${(props) => props.top || '0'};
   margin-left: ${(props) => props.left || '0'};
   margin: ${(props) => props.margin || '0'};
+  margin-bottom: ${(props) => props['margin-bottom'] || '0'};
   width: ${(props) => props.width || 'auto'};
   flex-wrap: ${(props) => props['flex-wrap'] || 'auto'};
   flex-direction: ${(props) => props['flex-direction'] || 'row'};;
