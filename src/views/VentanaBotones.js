@@ -16,8 +16,6 @@ function VentanaBotones() {
         <div>
           {/* Contenido específico del Content para Vista1 */}
           <h3>Contenido Principal de Vista</h3>
-          <p>Texto principal de Vista 1</p>
-          <button>jorge</button>
         </div>
       }
     />
