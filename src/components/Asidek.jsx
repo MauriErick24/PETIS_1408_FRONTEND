@@ -16,7 +16,6 @@ const Sidebar = styled.div`
 `;
 
 const Content = styled.div`
-  
   width: 78%;
   height: 88%;
   background-color: #BDBB96;
