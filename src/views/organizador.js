@@ -12,7 +12,7 @@ function Organizador(){
         <>
             <div>
                 <h2 className="tit-lista-org">LISTA DE ORGANIZADORES</h2> 
-                <SearchBar />
+                <SearchBar label='Nombre del organizador :' />
             </div>
             <div>
                 <Itemorg nombre="JALA SOFT" rep="Mario Caceres" correo= "mcar@gmail.com" telef="4245535"/>

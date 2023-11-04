@@ -21,7 +21,7 @@ const BtnStyled = styled.button`
   cursor: pointer;
   margin-bottom: ${(props) => props['margin-bottom'] ? props['margin-bottom'] : ''};
 
-  
+ &:hover,
   &:focus{
     background-color: #6b6a64;  
   }

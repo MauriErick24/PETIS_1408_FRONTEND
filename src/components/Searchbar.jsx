@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 
-function SearchBar() {
+function SearchBar({label}) {
   const [query, setQuery] = useState(''); // Estado para almacenar la consulta de búsqueda
   const [results, setResults] = useState([]); // Estado para almacenar los resultados de búsqueda
 
@@ -20,7 +20,7 @@ function SearchBar() {
 
   return (
     <div className="search-container">
-      <label>Nombre del Organizador:</label>
+      <label>{label}</label>
       <input
         type="text"
         placeholder="Buscar..."
