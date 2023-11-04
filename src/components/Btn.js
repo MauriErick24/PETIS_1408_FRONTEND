@@ -13,7 +13,7 @@ export default Btn
 
 const BtnStyled = styled.button`
   border: none;
-  font-size: 200%;
+  font-size: 22px;
   padding: 0.4em 1em;
   border-radius: 2em;
   background-color: ${(props) => props.color ? colores[props.color] : '#000'};

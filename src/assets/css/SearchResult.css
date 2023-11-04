@@ -1,0 +1,10 @@
+/* Estilos específicos para los resultados de búsqueda */
+.search-results {
+    position: relative; /* Alinear los resultados con el cuadro de búsqueda */
+    top: 0;
+    left: 0;
+    display: block;
+    max-height: 200px; /* Altura máxima para evitar desbordamientos */
+    overflow-y: auto; /* Barras de desplazamiento vertical si es necesario */
+  }
+  
