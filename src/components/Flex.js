@@ -12,7 +12,7 @@ const Div = styled.div`
   max-width: 100%;
   margin-top: ${(props) => props.top || '0'};
   margin-left: ${(props) => props.left || '0'};
-  margin: ${(props) => props.margin || '0'};
+  margin: ${(props) => props.margin || ''};
   width: ${(props) => props.width || 'auto'};
   flex-wrap: ${(props) => props['flex-wrap'] || 'auto'};
   flex-direction: ${(props) => props['flex-direction'] || 'row'};;
@@ -25,8 +25,10 @@ const Div = styled.div`
   padding-bottom: ${(props) => props['padding-bottom'] || '0'};
   background: ${(props) => props.background || 'none'};
   border-radius: ${(props) => props['border-radius'] ? props['border-radius'] : ''};
+  border: ${(props) => props['border'] ? props['border'] : ''};
   text-align: ${(props) => props['text-align'] ? props['text-align'] : ''};
   position: ${(props) => props.position ? props.position : ''};
+
 `;
 
 
