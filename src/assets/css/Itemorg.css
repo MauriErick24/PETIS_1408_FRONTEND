@@ -1,26 +1,43 @@
-.ul-cont{
+.default{
     background-color:black;
-    list-style: none;
+    /* list-style: none; */
     display:flex;
     border-radius: 9px;
-    width: 89%;
+    /* width: 89%; */
     height: 48px;
-    justify-content: around;
+    /* justify-content: around; */
     align-items:center;
-    margin: auto;
+    /* margin: auto; */
     margin-bottom: 20px;
 }
 
-.ul-cont li {
-    
+.default td {
+
     color: aqua; 
-    font-size: 18px;
-    text-align: center;
+    font-size: 16px;
+    /* text-align: center; */
     margin:auto;
     background-color: black;
 }
 
-li .btn-x{
+.default .one{
+  width: 310px;
+}
+
+.default .two{
+  width: 250px;
+}
+.three{
+  width: 250px;
+}
+.four{
+  width: 200px;
+}
+.five{
+  width: 50px;
+}
+
+td .btn-x{
   color: white;
   font-size: 16px;
   font-family: Arial;
@@ -29,7 +46,7 @@ li .btn-x{
   background-color: orange;
   padding: 5px;
   border-radius: 18%;
-  width: 28px;
+  width: 28px; 
 }
 
 button:hover {

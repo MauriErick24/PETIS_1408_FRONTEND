@@ -17,6 +17,7 @@ import HomeUser from './views/homeUser'
 import VentanaBotones from './views/VentanaBotones'
 
 import Organizador from './views/organizador'
+import Corganizador from './views/corganizador'
 import Patrocinador from './views/patrocinador'
 import Reglas from './views/reglas'
 import Premios from './views/premios'
@@ -31,6 +32,7 @@ function App() {
         <Route path="/" element={<Layout><Home /></Layout>} />
         <Route path='/crear/evento' element={<LayoutCreacion main={<CrearEvento/>}/>}/>
         <Route path='/crear/evento/organizador' element={<LayoutCreacion main={<Organizador/>}/>}/>
+        <Route path='/crear/evento/organizador/corganizador' element={<LayoutCreacion main={<Corganizador/>}/>}/>
         <Route path='/crear/evento/patrocinadores' element={<LayoutCreacion main={<Patrocinador/>}/>}/>
         <Route path='/crear/evento/reglas' element={<LayoutCreacion main={<Reglas/>}/>}/>
         <Route path='/crear/evento/premios' element={<LayoutCreacion main={<Premios/>}/>}/>

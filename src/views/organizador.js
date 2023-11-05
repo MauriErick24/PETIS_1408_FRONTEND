@@ -15,8 +15,8 @@ function Organizador(){
                 <SearchBar />
             </div>
             <div>
-                <Itemorg nombre="JALA SOFT" rep="Mario Caceres" correo= "mcar@gmail.com" telef="4245535"/>
-                <Itemorg nombre="UMSA INFORMATICA" rep="JORGE LOPEZ" correo= "mcar@gmail.com" telef="4245535"/>
+                <Itemorg nombre="Facultad de ciencias sociales" rep="Remberto Lopez" correo= "mcar@gmail.com" telef="4245535"/>
+                <Itemorg nombre="UMSA Carrera de informatica" rep="JORGE LOPEZ" correo= "mcar@gmail.com" telef="4245535"/>
                 <Itemorg nombre="JALA SOFT" rep="Mario Caceres" correo= "mcar@gmail.com" telef="4245535"/>
                 <Itemorg nombre="JALA SOFT" rep="Mario Caceres" correo= "mcar@gmail.com" telef="4245535"/>
                 <Itemorg nombre="JALA SOFT" rep="Mario Caceres" correo= "mcar@gmail.com" telef="4245535"/>
