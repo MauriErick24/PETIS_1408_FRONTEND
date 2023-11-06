@@ -20,3 +20,18 @@ export const initialEvento = {
   contenido: '',
   invitado: ''
 }
+
+export const initialLogin = {
+  usuario: '',
+  password: ''
+}
+
+export const initialRegister = {
+  nombres: '',
+  apellidos: '',
+  email: '',
+  password: '',
+  fecha_nacimiento: '',
+  usuario: '',
+  telefono: ''
+}

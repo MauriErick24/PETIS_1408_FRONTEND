@@ -54,6 +54,7 @@ const Preview = styled.div`
   img{
     max-width: 100%;
     width: ${(props) => props.width || 'auto' };
+    height: ${(props) => props.height || 'auto' };
   }
   label{
     margin-top: 0.6em;

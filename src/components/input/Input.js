@@ -11,7 +11,9 @@ const Input = ({
     disabled = false,
     onChange,
     onBlur,
-    error
+    placeholder,
+    error,
+    style
 }) => {
   return (
     <>
@@ -19,20 +21,24 @@ const Input = ({
         column ?
           <Div flex-direction='column' width='100%' gap='0.5em'>
             { label && asterisk && <label htmlFor={name}>{ label }</label> }
-            <input 
+            <input
+              style={style}
+              placeholder={placeholder ?? ''}
               onChange={onChange} 
               onBlur={onBlur} 
               value={value} 
               id={name} 
               name={name} 
-              type={type ?? 'text'} 
+              type={type ?? 'text'}
               disabled={disabled} 
             />
           </Div>
             :
           <Div justify-content='space-between' align-items='center' width='100%' gap='2em'>
             { label && <label htmlFor={name}>{ label }</label> }
-            <input 
+            <input
+              style={style}
+              placeholder={placeholder ?? ''}
               value={value} 
               id={name} 
               name={name} 

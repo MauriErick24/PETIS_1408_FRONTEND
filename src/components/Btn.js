@@ -5,6 +5,10 @@ const colores = {
   second: '#D1741E'
 }
 
+const sizes = {
+  small: ''
+}
+
 const Btn = ({ onClick, children, type, ...props }) => {
   return <BtnStyled {...props} type={type} onClick={onClick}>{children}</BtnStyled>
 }
