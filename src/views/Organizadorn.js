@@ -3,7 +3,6 @@ import '../assets/css/Organizadorn.css';
 
 const library = [
   { title: "Carrera de Informatica", author: "F. Scott Fitzgerald", year: 1925, publisher: "Charles Scribner's Sons", origin: "EE. UU." },
-  { title: "Carrera de Informatica", author: "F. Scott Fitzgerald", year: 1925, publisher: "Charles Scribner's Sons", origin: "EE. UU." },
   { title: "MEMI", author: "Harper Lee", year: 1960, publisher: "J. B. Lippincott & Co.", origin: "EE. UU." },
   { title: "JALA SOFT", author: "George Orwell", year: 1949, publisher: "Secker & Warburg", origin: "Reino Unido" },
   { title:"UMSA - Informatica",author: "Jorge Ledezma", year:1980, publisher:"Diamond", origin: 'bosnia'},
@@ -59,12 +58,12 @@ function Organizadorn() {
         {filteredLibrary
           .slice((currentPage - 1) * resultsPerPage, currentPage * resultsPerPage)
           .map((book) => (
-            <div key={book.title}>
-              <p>{book.title}</p>
-              <button onClick={() => handleSelectBook(book)}>Seleccionar</button>
-            </div>
+            <li key={book.title} onClick={() => handleSelectBook(book)}>
+               <p>{book.title}</p>
+            </li>
           ))}
       </div>
+
       <div id="pagination">
         {Array.from({ length: totalPages }).map((_, index) => (
           <button key={index + 1} onClick={() => handleGoToPage(index + 1)}>
@@ -86,3 +85,6 @@ function Organizadorn() {
 }
 
 export default Organizadorn;
+
+
+
