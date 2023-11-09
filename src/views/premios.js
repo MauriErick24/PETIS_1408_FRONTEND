@@ -77,7 +77,7 @@ const Premios = () => {
     
       <div>
                 <HeaderTitle title='PREMIOS'/>
-                <h1>Escriba los premios que tendra su evento</h1>
+                <H2>Escriba los premios que tendra su evento</H2>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                 <h2 className="ROW" style={{ marginRight: '10px' }}>AGREGAR PREMIO</h2>
                 <button style={buttonStyle} className="agregar"onClick={addRule}>+</button>
@@ -125,3 +125,9 @@ const Premios = () => {
 
 }
 export default Premios;
+const H2 = styled.h2`
+  text-align: left;
+  font-weight: 500;
+  margin-bottom: 0.6em;
+  margin-top: 2em
+`

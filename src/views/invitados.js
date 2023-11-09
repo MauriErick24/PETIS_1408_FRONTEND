@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import HeaderTitle from '../components/TituloPremio'
-import styled from "styled-components";
-import Input3 from '../components/input/Input3';
-
+import styled from "styled-components"
 
 const Invitados = () => {
   const buttonStyle = {
@@ -76,9 +74,10 @@ return(
 
          <div>
             <div>
-            <h2> NCORPORE LOS REQUERIMIENTOS NECESARIOS DEL EVENTO DE ACUERDO A SU REQUERIMIENTO</h2>
+            <H2> INCORPORE LOS REQUERIMIENTOS NECESARIOS DEL EVENTO DE ACUERDO A SU REQUERIMIENTO</H2>
             <h1> </h1>
             </div>
+
         
 
          <button style = {Boton}onClick={addRule}>AGREGAR REQUISITO</button>
@@ -115,3 +114,11 @@ return(
 
 }
 export default Invitados;
+
+
+const H2 = styled.h2`
+  text-align: left;
+  font-weight: 500;
+  margin-bottom: 0.6em;
+  margin-top: 2em
+`
