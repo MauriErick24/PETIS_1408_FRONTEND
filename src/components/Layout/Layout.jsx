@@ -7,6 +7,11 @@ import Btn from '../Btn';
 import Flex from '../Flex';
 import Aside from '../Aside';
 
+import { useState } from 'react';
+import Organizador from '../../views/organizador';
+import CrearEvento from '../../views/crear-evento';
+import Patrocinador from '../../views/patrocinador';
+
 const Container = styled.div`
   display: flex;
   height: auto;
@@ -33,6 +38,9 @@ const Content = styled.div`
 `;
 
 function Layout({sidebar, main}) {
+  const [showCrearEvento, setShowCrearEvento] = useState(true)
+  const [showOrganizador, setShowOrganizador] = useState(false)
+  
   return (
     
     <Div>
@@ -40,10 +48,29 @@ function Layout({sidebar, main}) {
       <div className='page'>
         <Container>
           <Sidebar>
-            <Aside/>
+            <Aside>
+              <Btn onClick={()=> {
+              
+                  setShowCrearEvento(true)
+                  setShowOrganizador(false)        
+              
+              }} >EVENTO</Btn>
+              <Btn onClick={()=> {
+
+                setShowCrearEvento(false)
+                setShowOrganizador(true)
+              
+              }} >ORGANIZADOR</Btn>
+            </Aside>
           </Sidebar>
           <Content>
-            {main}
+            {/* {main} */}
+            
+            {showCrearEvento && <CrearEvento/>}
+            {showOrganizador && <Organizador/>}
+            {showOrganizador && <Patrocinador/>}
+            
+
           </Content>  
         </Container>
       <Flex justify-content='end' gap='1em'>

@@ -8,6 +8,8 @@ import Flex from '../components/Flex'
 import HeaderDetail from '../components/HeaderDetail';
 import Card from '../components/Card';
 import Btn from '../components/Btn';
+import BubbleContainer from '../components/BubbleContainer';
+import BubbleIcon from '../components/BubbleIcon';
 
 import Imagen from '../assets/images/example-img.jpg';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -17,6 +19,9 @@ import { Navigate } from 'react-router-dom';
 function Visualizacionevento(){
 
     const navigate = useNavigate();
+
+    const [showButtonEditar, setShowButtonEditar] = useState(false)
+    const [showButtonCancelar, setShowButtonCancelar] = useState(false)
     
     const {id} = useParams();
     const [edit, setEdit] = useState(false);
@@ -59,6 +64,20 @@ function Visualizacionevento(){
                     <P>E-mail: {data.email}</P>
                     <P>Telefono: {data.telefono}</P>
                   </Flex>
+
+                  <Flex flex-direction='column' gap='0.1em'>
+                    <P id='auspiciador'>AUSPICIADORES</P>
+                    <BubbleContainer>
+                        <BubbleIcon/>
+                        <BubbleIcon/>
+                        <BubbleIcon/>
+                        <BubbleIcon/>
+                        <BubbleIcon/>
+
+                        
+                    </BubbleContainer>
+                  </Flex>
+
                   
                 </Flex>
                 
@@ -66,37 +85,21 @@ function Visualizacionevento(){
             </Asided>
 
             <Flex flex-direction='column'>
-                <Card data={data} editTextArea={edit}/>
-                <Card data={data} editTextArea={edit}/>
-                <Card data={data} editTextArea={edit}/>
-                <Card data={data} editTextArea={edit}/>
-                <Card data={data} editTextArea={edit}/>
-                <Card data={data} editTextArea={edit}/>
-                <Card data={data} editTextArea={edit}/>
-                <Card data={data} editTextArea={edit}/>
-                <Card data={data} editTextArea={edit}/>
+                <Card title={"DESCRIPCION DE EVENTO"} data={data} editTextArea={edit}/>
+                <Card title={"REQUISITOS DEL EVENTO"}data={data} editTextArea={edit}/>
+                <Card title={"DETALLES"}data={data} editTextArea={edit}/>
+                <Card title={"REGLAS"}data={data} editTextArea={edit}/>
+                <Card title={"PREMIOS"}data={data} editTextArea={edit}/>
+                
             </Flex>
             
             <Asided>
             <Flex flex-direction='column' justify-content='space-between'>
-                    <Btn margin-bottom='10px' onClick={() => navigate('/creacion/data')}>EDITAR</Btn>
-                    <Btn>CANCELAR</Btn>   
+                    {showButtonEditar && <Btn margin-bottom='10px' onClick={() => navigate('/creacion/data')}>EDITAR</Btn>}
+                    {showButtonCancelar && <Btn>CANCELAR</Btn>}   
                 </Flex>
             </Asided>
         </Flex>
-
-
-            {/* <div className='titulo-visualizar'>
-                <h2>NOMBRE DEL EVENTO</h2>
-                <h2>TIPO DEL EVENTO</h2>          
-            </div> */}
-            
-            {/* <div className='app-container'> 
-                    <div className='content'>
-                        Centro
-                    </div>            
-                   <Asided/>
-            </div> */}
         </>
     )
 }
@@ -119,4 +122,9 @@ const P =styled.p`
     color: #000;
     font-size: 17px;
     font-weight: bold;
+
+    &#auspiciador{
+        margin-left:1.1em;
+        font-size: 20px;
+    }
 `

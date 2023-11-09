@@ -24,6 +24,7 @@ const Div = styled.div`
   gap: ${(props) => props['gap'] || '0'};
   padding: ${(props) => props['padding'] || '0'};
   padding-bottom: ${(props) => props['padding-bottom'] || ''};
+  padding-top: ${(props) => props['padding-top'] || ''};
   background: ${(props) => props.background || 'none'};
   border-radius: ${(props) => props['border-radius'] ? props['border-radius'] : ''};
   border: ${(props) => props['border'] ? props['border'] : ''};

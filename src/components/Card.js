@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Flex from "./Flex";
 import { useState } from "react";
 //import TextArea from "./input/TextArea";
-const Card = ({data, editTextArea}) => {
+const Card = ({data, editTextArea, title}) => {
     
     //  const [editTextArea, setEditTextArea] = useState(false);
 
@@ -11,7 +11,7 @@ const Card = ({data, editTextArea}) => {
         <>
             <Div>
                 <Flex flex-display='column' padding-bottom='1em'>
-                    <p id="titulo">{data.titulo}</p>
+                    <p id="titulo">{title}</p>
                 </Flex> 
                 <Flex flex-display='column'>
                     <p>{data.descripcion}</p>

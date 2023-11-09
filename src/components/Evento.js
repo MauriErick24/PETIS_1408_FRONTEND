@@ -67,6 +67,7 @@ const Article = styled.article`
   width: 280px;
   border: solid 0.2em #000;
   border-radius: 2.5em;
+  background-color: #bdbb96;
   padding-bottom: 2em;
 
   .header-article{

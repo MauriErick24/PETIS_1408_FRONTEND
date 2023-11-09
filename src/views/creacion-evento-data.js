@@ -53,7 +53,7 @@ const CreacionEvento = () => {
       hora:"09:00:00.0000000",
       telefono:"78327438",
       requisito:"traer malcriadas",
-      premio:"un whisky",
+      premio:[],
       reglas:"no ser gay",
       detalle:"blba bla bla",
       afiche:"nose que es un afiche",

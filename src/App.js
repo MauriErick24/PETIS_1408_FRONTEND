@@ -26,19 +26,41 @@ import Afiche from './views/afiche'
 import ModalLayout from './components/Modals/ModalCrear'
 
 function App() {
+//   const [data, setData] = useState(
+//     { 
+//       nombre_evento:"evento prueba",
+//       inicio_inscripcion:"2023-10-04",
+//       fin_inscripcion:"2023-11-21",
+//       fin_evento:"2023-12-1",
+//       organizador:"jalasoft",
+//       imagen:"assests/images/umss-logo.png",
+//       lugar:"coña coña",
+//       email:"pretencioso@gmail.com",
+//       descripcion:"este es un evento",
+//       hora:"09:00:00.0000000",
+//       telefono:"78327438",
+//       requisito:"traer malcriadas",
+//       premio:"un whisky",
+//       reglas:"no ser gay",
+//       detalle:"blba bla bla",
+//       afiche:"nose que es un afiche",
+//       contenido:"este es el contenido del evento",
+//       invitado:"shrek",
+//       tipoEvento_id:4
+// }
+//   )
 
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout><Home /></Layout>} />
-        <Route path='/crear/evento' element={<LayoutCreacion main={<CrearEvento/>}/>}/>
+        <Route path='/crear/evento' element={<LayoutCreacion main={<CrearEvento />}/>}/>
         <Route path='/crear/evento/organizador' element={<LayoutCreacion main={<Organizador/>}/>}/>
         <Route path='/crear/evento/patrocinadores' element={<LayoutCreacion main={<Patrocinador/>}/>}/>
         <Route path='/crear/evento/reglas' element={<LayoutCreacion main={<Reglas/>}/>}/>
         <Route path='/crear/evento/premios' element={<LayoutCreacion main={<Premios/>}/>}/>
         <Route path='/crear/evento/invitados' element={<LayoutCreacion main={<Invitados/>}/>}/>
         <Route path='/crear/evento/afiche' element={<LayoutCreacion main={<Afiche/>}/>}/>
-
 
 
 
