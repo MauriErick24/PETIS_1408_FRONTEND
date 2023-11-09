@@ -64,6 +64,7 @@ function Organizadorn() {
           ))}
       </div>
 
+
       <div id="pagination">
         {Array.from({ length: totalPages }).map((_, index) => (
           <button key={index + 1} onClick={() => handleGoToPage(index + 1)}>
