@@ -15,6 +15,9 @@ import Imagen from '../assets/images/example-img.jpg';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
+import { useEffect } from 'react';
+
+import api from '../services/api'
 
 function Visualizacionevento(){
 
@@ -26,7 +29,7 @@ function Visualizacionevento(){
     const {id} = useParams();
     const [edit, setEdit] = useState(false);
 
-    const data={
+    const [data, setData] = useState({
         id: id,
         titulo: "DESCRIPCION DEL EVENTO",
         descripcion:"El Desafío de  ALGORITMOS es un evento de programación competitiva que reúne a mentes brillantes de todo el mundo en una batalla intelectual de habilidades de programación y resolución de problemas. Este evento anual es el punto culminante de la temporada para programadores, ingenieros y entusiastas de la informática, donde se enfrentan en un emocionante torneo de códigos.",
@@ -36,12 +39,32 @@ function Visualizacionevento(){
         finInscripcion: "25/01/2023",
         email: "contacto@domain.com",
         telefono: 68745201,
-    }
+        imagen: 'https://es.community.intersystems.com/sites/default/files/inline/images/ai_welcome_wide_2.jpg',
+        auspiciadores:[
+            {
+                nombreAuspiciador: 'ICPC',
+                imagen: 'https://icpc.global/regionals/abouticpc/foundationlogo.png'
+            },
+            {
+                nombreAuspiciador: 'UMSS',
+                imagen: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Marca_Vertical_Universidad_Mayor_de_San_Sim%C3%B3n_Cochabamba_Bolivia.png/1280px-Marca_Vertical_Universidad_Mayor_de_San_Sim%C3%B3n_Cochabamba_Bolivia.png'
+            },
+            {
+                nombreAuspiciador: 'HACKER CUP',
+                imagen: 'https://images-platform.99static.com/LWy50Ye4pyXRHqli3cODzyN-PlE=/500x500/top/smart/99designs-contests-attachments/6/6107/attachment_6107282'
+            },
+        ]
+    })
 
-    const changeEdit = () => {
-        console.log("boton editar")
-        setEdit(!edit);
-    }
+    useEffect(()=>{
+        const fetchData = async()=>{
+            try{
+                const response = await api.get(`/api/evento/detalle/${id}`) 
+            }catch(err){
+                console.log(err)
+            }
+        }
+    }, []) 
 
     return (
         <>       
@@ -49,7 +72,7 @@ function Visualizacionevento(){
         <Flex justify-content='space-between'>
             <Asided>
                 <Flex flex-direction='column'  text-align='center' gap='2em' align-items = 'center'>
-                    <Img src={Imagen} width="95%"/>
+                    <Img src={data.imagen} width="95%"/>
 
                   <Flex flex-direction='column' text-align='center' align-items = 'center' gap='0.5em'>
                     <P>Duracion del evento</P>
@@ -68,16 +91,11 @@ function Visualizacionevento(){
                   <Flex flex-direction='column' gap='0.1em'>
                     <P id='auspiciador'>AUSPICIADORES</P>
                     <BubbleContainer>
-                        <BubbleIcon/>
-                        <BubbleIcon/>
-                        <BubbleIcon/>
-                        <BubbleIcon/>
-                        <BubbleIcon/>
-
-                        
+                        {data.auspiciadores.map((auspiciador) => (
+                            <BubbleIcon iconName={auspiciador.nombreAuspiciador} imageUrl={auspiciador.imagen}/>
+                        ))}
                     </BubbleContainer>
                   </Flex>
-
                   
                 </Flex>
                 
@@ -85,11 +103,11 @@ function Visualizacionevento(){
             </Asided>
 
             <Flex flex-direction='column'>
-                <Card title={"DESCRIPCION DE EVENTO"} data={data} editTextArea={edit}/>
-                <Card title={"REQUISITOS DEL EVENTO"}data={data} editTextArea={edit}/>
-                <Card title={"DETALLES"}data={data} editTextArea={edit}/>
-                <Card title={"REGLAS"}data={data} editTextArea={edit}/>
-                <Card title={"PREMIOS"}data={data} editTextArea={edit}/>
+                <Card title={"DESCRIPCION DE EVENTO"} data={data} />
+                <Card title={"REQUISITOS DEL EVENTO"} data={data} />
+                <Card title={"DETALLES"} data={data} />
+                <Card title={"REGLAS"} data={data} />
+                <Card title={"PREMIOS"} data={data} />
                 
             </Flex>
             
