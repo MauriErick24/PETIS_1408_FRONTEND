@@ -37,10 +37,35 @@ const Content = styled.div`
   border-radius: 15px;
 `;
 
-function Layout({sidebar, main}) {
+function Layout({updateButton}) {
+  // const [updateButton, setUpdateButton] = useState(updateButton)
+
   const [showCrearEvento, setShowCrearEvento] = useState(true)
   const [showOrganizador, setShowOrganizador] = useState(false)
-  
+
+  const [data, setData] = useState(
+    { 
+      nombre_evento:"evento prueba",
+      inicio_inscripcion:"2023-10-04",
+      fin_inscripcion:"2023-11-21",
+      fin_evento:"2023-12-1",
+      organizador:"jalasoft",
+      imagen:"assests/images/umss-logo.png",
+      lugar:"coña coña",
+      email:"pretencioso@gmail.com",
+      descripcion:"este es un evento",
+      hora:"09:00:00.0000000",
+      telefono:"78327438",
+      requisito:"traer malcriadas",
+      premio:[],
+      reglas:"no ser gay",
+      detalle:"blba bla bla",
+      afiche:"nose que es un afiche",
+      contenido:"este es el contenido del evento",
+      invitado:"shrek",
+      tipoEvento_id:4
+}
+)
   return (
     
     <Div>
@@ -55,6 +80,7 @@ function Layout({sidebar, main}) {
                   setShowOrganizador(false)        
               
               }} >EVENTO</Btn>
+
               <Btn onClick={()=> {
 
                 setShowCrearEvento(false)
@@ -68,13 +94,15 @@ function Layout({sidebar, main}) {
             
             {showCrearEvento && <CrearEvento/>}
             {showOrganizador && <Organizador/>}
-            {showOrganizador && <Patrocinador/>}
+            {/* {showOrganizador && <Patrocinador/>} */}
             
 
           </Content>  
         </Container>
       <Flex justify-content='end' gap='1em'>
-        <Btn>CREAR</Btn>
+        {updateButton && <Btn>GUARDAR</Btn>}
+        {!updateButton && <Btn onClick={()=>console.log(data)}>CREAR</Btn>}
+       
         <Btn color='second' >CANCELAR</Btn>
       </Flex>
       </div>

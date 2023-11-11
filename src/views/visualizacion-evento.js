@@ -23,7 +23,7 @@ function Visualizacionevento(){
 
     const navigate = useNavigate();
 
-    const [showButtonEditar, setShowButtonEditar] = useState(false)
+    const [showButtonEditar, setShowButtonEditar] = useState(true)
     const [showButtonCancelar, setShowButtonCancelar] = useState(false)
     
     const {id} = useParams();
@@ -113,7 +113,7 @@ function Visualizacionevento(){
             
             <Asided>
             <Flex flex-direction='column' justify-content='space-between'>
-                    {showButtonEditar && <Btn margin-bottom='10px' onClick={() => navigate('/creacion/data')}>EDITAR</Btn>}
+                    {showButtonEditar && <Btn margin-bottom='10px' onClick={() => navigate('/crear/evento')}>EDITAR</Btn>}
                     {showButtonCancelar && <Btn>CANCELAR</Btn>}   
                 </Flex>
             </Asided>

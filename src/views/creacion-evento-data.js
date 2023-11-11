@@ -40,27 +40,27 @@ const CreacionEvento = () => {
   })
 
   const [data, setData] = useState(
-    { 
-      nombre_evento:"evento prueba",
-      inicio_inscripcion:"2023-10-04",
-      fin_inscripcion:"2023-11-21",
-      fin_evento:"2023-12-1",
-      organizador:"jalasoft",
-      imagen:"assests/images/umss-logo.png",
-      lugar:"coña coña",
-      email:"pretencioso@gmail.com",
-      descripcion:"este es un evento",
-      hora:"09:00:00.0000000",
-      telefono:"78327438",
-      requisito:"traer malcriadas",
-      premio:[],
-      reglas:"no ser gay",
-      detalle:"blba bla bla",
-      afiche:"nose que es un afiche",
-      contenido:"este es el contenido del evento",
-      invitado:"shrek",
-      tipoEvento_id:4
-}
+//     { 
+//       nombre_evento:"evento prueba",
+//       inicio_inscripcion:"2023-10-04",
+//       fin_inscripcion:"2023-11-21",
+//       fin_evento:"2023-12-1",
+//       organizador:"jalasoft",
+//       imagen:"assests/images/umss-logo.png",
+//       lugar:"coña coña",
+//       email:"pretencioso@gmail.com",
+//       descripcion:"este es un evento",
+//       hora:"09:00:00.0000000",
+//       telefono:"78327438",
+//       requisito:"traer malcriadas",
+//       premio:[],
+//       reglas:"no ser gay",
+//       detalle:"blba bla bla",
+//       afiche:"nose que es un afiche",
+//       contenido:"este es el contenido del evento",
+//       invitado:"shrek",
+//       tipoEvento_id:4
+// }
   )
 
   const sendData = async() => {
