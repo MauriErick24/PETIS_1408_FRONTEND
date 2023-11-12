@@ -6,8 +6,24 @@ import SearchBar from "../components/Searchbar";
 import Itemorg from "../components/Itemorg";
 import Btn from "../components/Btn";
 import Flex from '../components/Flex';
+import { useEffect, useState } from 'react'
+import api from '../services/api'
+
 
 function Organizador(){
+    const [organizador,setOrganizador]=useState([])
+    useEffect(()=>{
+        const fetchData = async () => {
+          try{
+            const response = await api.get('/api/organizadores')
+            setOrganizador(response.data)
+            console.log(response.data)
+          }catch(err){
+            console.log("Error: ", err)
+          }
+        }
+      fetchData();
+      }, []);
     return(
         <>
             <div>
@@ -15,11 +31,19 @@ function Organizador(){
                 <SearchBar />
             </div>
             <div>
-                <Itemorg nombre="Facultad de ciencias sociales" rep="Remberto Lopez" correo= "mcar@gmail.com" telef="4245535"/>
+            {organizador.map((elemento) => (
+              
+                    <Itemorg nombre={elemento.nombre} 
+                    rep={elemento.representante} 
+                    correo={elemento.email} 
+                    telef={elemento.telefono}/>
+                )
+                )}
+                {/* <Itemorg nombre="Facultad de ciencias sociales" rep="Remberto Lopez" correo= "mcar@gmail.com" telef="4245535"/>
                 <Itemorg nombre="UMSA Carrera de informatica" rep="JORGE LOPEZ" correo= "mcar@gmail.com" telef="4245535"/>
                 <Itemorg nombre="JALA SOFT" rep="Mario Caceres" correo= "mcar@gmail.com" telef="4245535"/>
                 <Itemorg nombre="JALA SOFT" rep="Mario Caceres" correo= "mcar@gmail.com" telef="4245535"/>
-                <Itemorg nombre="JALA SOFT" rep="Mario Caceres" correo= "mcar@gmail.com" telef="4245535"/>
+                <Itemorg nombre="JALA SOFT" rep="Mario Caceres" correo= "mcar@gmail.com" telef="4245535"/> */}
             </div>
             <Flex display="flex" justify-content="flex-end"  >
                 <Btn type='submit' font-size="12px" >CREAR ORGANIZADOR</Btn>
