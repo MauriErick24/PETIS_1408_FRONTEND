@@ -150,7 +150,7 @@ const CrearEvento = () => {
                              value={formik.values.hora}
                              onChange={formik.handleChange}
                              onBlur={formik.handleBlur}
-                            inputWidth={'90px'}
+                            inputWidth={'120px'}
                           />
                           
                           {formik.touched.hora && formik.errors.hora ? <div className='error'>{formik.errors.hora}</div>:null} 
@@ -163,7 +163,7 @@ const CrearEvento = () => {
                              value={formik.values.hora}
                              onChange={formik.handleChange}
                              onBlur={formik.handleBlur}
-                            inputWidth={'90px'}
+                            inputWidth={'120px'}
                           />
                           {formik.touched.hora && formik.errors.hora ? <div className='error'>{formik.errors.hora}</div>:null} 
                        </Flex>
@@ -213,7 +213,7 @@ const CrearEvento = () => {
                              value={formik.values.hora}
                              onChange={formik.handleChange}
                              onBlur={formik.handleBlur}
-                            inputWidth={'90px'}
+                            inputWidth={'120px'}
                           />
                           {formik.touched.hora && formik.errors.hora ? <div className='error'>{formik.errors.hora}</div>:null} 
 
@@ -225,7 +225,7 @@ const CrearEvento = () => {
                              value={formik.values.hora}
                              onChange={formik.handleChange}
                              onBlur={formik.handleBlur}
-                            inputWidth={'90px'}
+                            inputWidth={'120px'}
                           />
                           {formik.touched.hora && formik.errors.hora ?<div className='error'>{formik.errors.hora}</div>:null} 
                     </Flex>                 
