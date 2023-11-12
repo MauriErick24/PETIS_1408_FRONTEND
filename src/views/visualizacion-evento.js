@@ -16,6 +16,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import axios from 'axios';
 
 import api from '../services/api'
 
@@ -28,7 +29,8 @@ function Visualizacionevento(){
     
     const {id} = useParams();
     const [edit, setEdit] = useState(false);
-
+    const [evento,setEvento]=useState([]);
+    const [auspiciadores,setAuspiciadores]= useState([]);
     const [data, setData] = useState({
         id: id,
         titulo: "DESCRIPCION DEL EVENTO",
@@ -59,11 +61,15 @@ function Visualizacionevento(){
     useEffect(()=>{
         const fetchData = async()=>{
             try{
-                const response = await api.get(`/api/evento/detalle/${id}`) 
+                const response = await api.get(`api/evento/1`)
+                setAuspiciadores(response.data.auspiciadores);
+                console.log(response.data.auspiciadores);
+                setEvento(response.data);
             }catch(err){
                 console.log(err)
             }
         }
+        fetchData();
     }, []) 
 
     return (
@@ -72,28 +78,28 @@ function Visualizacionevento(){
         <Flex justify-content='space-between'>
             <Asided>
                 <Flex flex-direction='column'  text-align='center' gap='2em' align-items = 'center'>
-                    <Img src={data.imagen} width="95%"/>
+                    <Img src='http://127.0.0.1:8000/storage/auspiciadores/rUr2Lcq5JzFeFiTGSZWWqYAn4y5JrK0o6dcPwDjT.png' width="95%"/>
 
                   <Flex flex-direction='column' text-align='center' align-items = 'center' gap='0.5em'>
                     <P>Duracion del evento</P>
-                    <P>{data.inicioEvento} - {data.finEvento}</P>
+                    <P>{evento.inicio_actividades} - {evento.fin_actividades}</P>
                   </Flex>
                   <Flex flex-direction='column' text-align='center' align-items = 'center' gap='0.5em'>
                     <P>Fecha de inscripciones</P>
-                    <P>{data.inicioInscripcion} - {data.finInscripcion}</P>
+                    <P>{evento.inicio_inscripcion} - {evento.fin_inscripcion}</P>
                   </Flex>
                   <Flex flex-direction='column' text-align='center'  gap='0.5em'>
                     <P>CONTACTOS DEL EVENTO</P>
-                    <P>E-mail: {data.email}</P>
-                    <P>Telefono: {data.telefono}</P>
+                    <P>E-mail: {evento.email}</P>
+                    <P>Telefono: {evento.telefono}</P>
                   </Flex>
 
                   <Flex flex-direction='column' gap='0.1em'>
                     <P id='auspiciador'>AUSPICIADORES</P>
                     <BubbleContainer>
-                        {data.auspiciadores.map((auspiciador) => (
-                            <BubbleIcon iconName={auspiciador.nombreAuspiciador} imageUrl={auspiciador.imagen}/>
-                        ))}
+                        {auspiciadores.map((auspiciador) => ( 
+                            <BubbleIcon iconName={auspiciador.nombre} imageUrl={data.imagen}/>
+                         ))}
                     </BubbleContainer>
                   </Flex>
                   
@@ -103,11 +109,11 @@ function Visualizacionevento(){
             </Asided>
 
             <Flex flex-direction='column'>
-                <Card title={"DESCRIPCION DE EVENTO"} data={data} />
-                <Card title={"REQUISITOS DEL EVENTO"} data={data} />
-                <Card title={"DETALLES"} data={data} />
-                <Card title={"REGLAS"} data={data} />
-                <Card title={"PREMIOS"} data={data} />
+                <Card title={"DESCRIPCION DE EVENTO"} data={evento} />
+                <Card title={"REQUISITOS DEL EVENTO"} data={evento} />
+                <Card title={"DETALLES"} data={evento} />
+                <Card title={"REGLAS"} data={evento} />
+                <Card title={"PREMIOS"} data={evento} />
                 
             </Flex>
             
