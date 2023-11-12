@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import HeaderTitle from '../components/TituloPremio'
 import BorderContent from '../components/BorderContent'
 import styled from "styled-components";
@@ -17,14 +18,32 @@ const Premios = () => {
         fontSize:'25px',
 
     };
+    useEffect(() => {
+      // Recupera los premios  almacenadas en localStorage al cargar la página
+      const storedRules = JSON.parse(localStorage.getItem('premio')) || [];
+      setRules(storedRules);
+    }, []);
+
     const [rules, setRules] = useState([]);
     const [label, setLabel] = useState('');
-  
+    const [errorMessage, setErrorMessage] = useState('');
     const addRule = () => {
-      if (label.trim() !== '') {
-        setRules([...rules, label]);
-        setLabel('');
+      if (label.trim() === '') {
+        setErrorMessage('Por favor, ingrese una etiqueta válida.');
+        return;
       }
+  
+      if (rules.includes(label)) {
+        setErrorMessage('Este premio  ya existe. Intente con una diferente.');
+        return;
+      }
+      const updatedRules = [...rules, label];
+    setRules(updatedRules);
+    setLabel('');
+    setErrorMessage('');
+
+    // Almacena las reglas actualizadas en localStorage
+    localStorage.setItem('premio', JSON.stringify(updatedRules));
     };
   
     const removeRule = (index) => {
@@ -37,7 +56,7 @@ const Premios = () => {
         borderRadius: '30px',    // Bordes redondeados
         padding: '10px 20px',    // Relleno interior
         color: 'black',         // Color del texto
-        fontSize:'20px',
+        fontSize:'25px',
         width:'75%'
 
     };
@@ -98,6 +117,7 @@ const Premios = () => {
           value={label}
           onChange={(e) => setLabel(e.target.value)}
         />
+        {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
         
       </div>
               <ul >
@@ -112,8 +132,8 @@ const Premios = () => {
                      <input label={`Regla ${index + 1}`} value={rule}style={{backgroundColor: 'white',  // Color de fondo rojo
                     borderRadius: '30px',    // Bordes redondeados
                     padding: '5px 20px',
-                    marginTop:'0.8em',    // Relleno interior
-                    color: 'black', width:'70%'}}></input>  
+                    marginTop:'0.1em',    // Relleno interior
+                    color: 'black', width:'70%',fontSize:'25px'}}></input>  
                     
                     <button style={Boton2} onClick={() => removeRule(index)}>X</button>
                   </li>

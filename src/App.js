@@ -24,19 +24,23 @@ import Invitados from './views/invitados'
 import Afiche from './views/afiche'
 
 function App() {
+ 
 
   return (
     <BrowserRouter>
       <Routes>
+          
         <Route path="/" element={<Layout><Home /></Layout>} />
         <Route path='/crear/evento' element={<LayoutCreacion main={<CrearEvento/>}/>}/>
         <Route path='/crear/evento/organizador' element={<LayoutCreacion main={<Organizador/>}/>}/>
         <Route path='/crear/evento/patrocinadores' element={<LayoutCreacion main={<Patrocinador/>}/>}/>
-        <Route path='/crear/evento/reglas' element={<LayoutCreacion main={<Reglas/>}/>}/>
+        <Route path='/crear/evento/reglas' 
+        
+        element={<LayoutCreacion main={<Reglas/>}/>}/>
         <Route path='/crear/evento/premios' element={<LayoutCreacion main={<Premios/>}/>}/>
         <Route path='/crear/evento/invitados' element={<LayoutCreacion main={<Invitados/>}/>}/>
         <Route path='/crear/evento/afiche' element={<LayoutCreacion main={<Afiche/>}/>}/>
-
+      
 
 
 
