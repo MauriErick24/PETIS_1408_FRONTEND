@@ -1,36 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import '../assets/css/Organizadorn.css';
-import api from '../services/api'
-
 
 const library = [
-  { nombre: "Carrera de Informatica", author: "F. Scott Fitzgerald", year: 1925, publisher: "Charles Scribner's Sons", origin: "EE. UU." },
-  { nombre: "MEMI", author: "Harper Lee", year: 1960, publisher: "J. B. Lippincott & Co.", origin: "EE. UU." },
-  { nombre: "JALA SOFT", author: "George Orwell", year: 1949, publisher: "Secker & Warburg", origin: "Reino Unido" },
-  { nombre:"UMSA - Informatica",author: "Jorge Ledezma", year:1980, publisher:"Diamond", origin: 'bosnia'},
-  { nombre:"Univ. Gabriel Rene Moreno",author:"cervantes", year: 1965, publisher: "pinguin", origin: 'Spain'},
-  { nombre:"Ministerio de Educacion",author:"victor hugo", year: 1976,publisher:'mcrgraw', origin:'France'},
-  { nombre:"Embajada suiza",author:"nemilville", year: 1985,publisher:'Dolmen', origin:'USA'},
-  { nombre:"Fundacion Bankia",author:"Cesar Ldzm", year: 1945, publisher:"majos", origin:'Peru'},
-  { nombre:"Cuadros&CIA", author: "maarisabel", year:1965, publisher:"Trico", origin:'Spain'},
-  { nombre:"Alcaldia de CB", author:'Nicolas cano', year:1965, publisher:'Friends', origin:'UK'},
+  { title: "Carrera de Informatica", author: "F. Scott Fitzgerald", year: 1925, publisher: "Charles Scribner's Sons", origin: "EE. UU." },
+  { title: "MEMI", author: "Harper Lee", year: 1960, publisher: "J. B. Lippincott & Co.", origin: "EE. UU." },
+  { title: "JALA SOFT", author: "George Orwell", year: 1949, publisher: "Secker & Warburg", origin: "Reino Unido" },
+  { title:"UMSA - Informatica",author: "Jorge Ledezma", year:1980, publisher:"Diamond", origin: 'bosnia'},
+  { title:"Univ. Gabriel Rene Moreno",author:"cervantes", year: 1965, publisher: "pinguin", origin: 'Spain'},
+  { title:"Ministerio de Educacion",author:"victor hugo", year: 1976,publisher:'mcrgraw', origin:'France'},
+  { title:"Embajada suiza",author:"nemilville", year: 1985,publisher:'Dolmen', origin:'USA'},
+  { title:"Fundacion Bankia",author:"Cesar Ldzm", year: 1945, publisher:"majos", origin:'Peru'},
+  { title:"Cuadros&CIA", author: "maarisabel", year:1965, publisher:"Trico", origin:'Spain'},
+  { title:"Alcaldia de CB", author:'Nicolas cano', year:1965, publisher:'Friends', origin:'UK'},
 ];
 
 function Organizadorn() {
-  const [organizador,setOrganizador]=useState([])
-  useEffect(()=>{
-    const fetchData = async () => {
-      try{
-        const response = await api.get('/api/organizadores')
-        setOrganizador(response.data)
-        console.log(response.data)
-      }catch(err){
-        console.log("Error: ", err)
-      }
-    }
-  fetchData();
-  }, []);
-
   const [searchInput, setSearchInput] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const resultsPerPage = 3;
@@ -45,7 +29,6 @@ function Organizadorn() {
   const handleSelectBook = (book) => {
     if (!selectedBooks.some(selectedBook => selectedBook.title === book.title) && selectedBooks.length < 5) {
       setSelectedBooks([...selectedBooks, book]);
-    //setSelectedBooks([...selectedBooks, book]);
     }
   };
 
@@ -59,8 +42,7 @@ function Organizadorn() {
 
   useEffect(() => {
     const query = searchInput.toLowerCase();
-    const filteredBooks = organizador.filter(book => book.nombre.toLowerCase().startsWith(query));
-    //console.log(organizador);
+    const filteredBooks = library.filter(book => book.title.toLowerCase().startsWith(query));
     setFilteredLibrary(filteredBooks);
     const totalResults = filteredBooks.length;
     setTotalPages(Math.ceil(totalResults / resultsPerPage));
@@ -79,8 +61,8 @@ function Organizadorn() {
         {filteredLibrary
           .slice((currentPage - 1) * resultsPerPage, currentPage * resultsPerPage)
           .map((book) => (
-            <li key={book.nombre} onClick={() => handleSelectBook(book)}>
-               <p>{book.nombre}</p>
+            <li key={book.title} onClick={() => handleSelectBook(book)}>
+               <p>{book.title}</p>
             </li>
           ))}
       </div>
@@ -96,8 +78,8 @@ function Organizadorn() {
       <h2>Organizadores Seleccionados</h2>
       <ul id="selectedBooks">
         {selectedBooks.map((book) => (
-          <li key={book.nombre}>
-            {book.nombre} (Institucion: {book.representante}, Telefono: {book.telefono})
+          <li key={book.title}>
+            {book.title} (Autor: {book.author}, Año: {book.year})
             <button onClick={() => handleRemoveBook(book)} className="delete-button">X</button>
           </li>
         ))}
