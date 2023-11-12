@@ -24,6 +24,7 @@ import Reglas from './views/reglas'
 import Premios from './views/premios'
 import Invitados from './views/invitados'
 import Afiche from './views/afiche'
+import Auspiciador from './views/auspiciador'
 
 import ModalLayout from './components/Modals/ModalCrear'
 
@@ -36,7 +37,7 @@ function App() {
         <Route path='/crear/evento' element={<LayoutCreacion main={<CrearEvento/>}/>}/>
         <Route path='/crear/evento/organizador' element={<LayoutCreacion main={<Organizadorn/>}/>}/> 
         {/* <Route path='/crear/evento/organizador/corganizador' element={<LayoutCreacion main={<Corganizador/>}/>}/> */}
-        <Route path='/crear/evento/patrocinadores' element={<LayoutCreacion main={<Patrocinador/>}/>}/>
+        <Route path='/crear/evento/patrocinadores' element={<LayoutCreacion main={<Auspiciador/>}/>}/>
         <Route path='/crear/evento/reglas' element={<LayoutCreacion main={<Reglas/>}/>}/>
         <Route path='/crear/evento/premios' element={<LayoutCreacion main={<Premios/>}/>}/>
         <Route path='/crear/evento/invitados' element={<LayoutCreacion main={<Invitados/>}/>}/>
