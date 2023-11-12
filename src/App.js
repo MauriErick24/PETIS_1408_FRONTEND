@@ -25,6 +25,8 @@ import Premios from './views/premios'
 import Invitados from './views/invitados'
 import Afiche from './views/afiche'
 
+import ModalLayout from './components/Modals/ModalCrear'
+
 function App() {
 
   return (
@@ -52,6 +54,7 @@ function App() {
         {/* <Route  path='ventana/botones' element={<Layout><VentanaBotones /></Layout>} /> */}
       </Routes> 
     </BrowserRouter>
+
    
   );
   

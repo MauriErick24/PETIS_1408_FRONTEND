@@ -10,7 +10,8 @@ const Inputk = ({
     disabled = false,
     onChange,
     onBlur,
-    error
+    error,
+    justify_content,
 }) => {
   return (
     <>
@@ -30,7 +31,7 @@ const Inputk = ({
             />
           </Div>
             :
-          <Div justify-content='space-between' align-items='center' width='100%' gap='2em'>
+          <Div justify-content={justify_content} align-items='center' width='100%' gap='2em'>
             {/* { label && <label htmlFor={name}>{ label }</label> } */}
             {label && (<label htmlFor={name}>{label}<span style={{ color: 'red' }}>*</span></label>)}
             <input 
@@ -51,8 +52,9 @@ const Inputk = ({
 export default Inputk
 
 const Div = styled(Flex)`
+
   input{
-    width: 100%;
+    width: 72%;
     border-radius: 20em;
     padding: 0.2em 1em;
     border: none;

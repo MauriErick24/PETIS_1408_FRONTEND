@@ -342,6 +342,7 @@ const Asterisk = styled.p`
 const Container = styled.div`
   border: solid 0.2em #000;
   padding: 1em;
+  width: 40%;
 `
 
 const P = styled.p`
