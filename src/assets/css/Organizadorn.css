@@ -4,7 +4,7 @@ body {
   }
   
   button.delete-button{
-    background-color: salmon; /* Cambia el color de fondo a salmon */
+    background-color: #D1741E; /* Cambia el color de fondo a salmon */
     border-radius: 15%; /* Agrega border-radius del 15% para esquinas redondeadas */
     color: #fff; /* Cambia el color de texto a blanco */
     border: none;
