@@ -34,6 +34,11 @@ function App() {
         <Route path="/" element={<Layout><Home /></Layout>} />
        
         <Route path='/crear/evento' element={<LayoutCreacion />}/>
+        <Route path='/editar/evento/:id' element={<LayoutCreacion updateButton={true}/>}/>
+
+
+
+        
        
         <Route path='/crear/evento/organizador' element={<LayoutCreacion main={<Organizador/>}/>}/>
         <Route path='/crear/evento/patrocinadores' element={<LayoutCreacion main={<Patrocinador/>}/>}/>

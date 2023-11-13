@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { useLocation } from 'react-router-dom';
+
 import Header from '../Header';
 import Footer from '../Footer';
 
@@ -11,6 +13,8 @@ import { useState } from 'react';
 import Organizador from '../../views/organizador';
 import CrearEvento from '../../views/crear-evento';
 import Patrocinador from '../../views/patrocinador';
+
+
 
 const Container = styled.div`
   display: flex;
@@ -38,11 +42,17 @@ const Content = styled.div`
 `;
 
 function Layout({updateButton}) {
+
+  const location = useLocation();
+  const { state } = location;
+  
   // const [updateButton, setUpdateButton] = useState(updateButton)
 
   const [showCrearEvento, setShowCrearEvento] = useState(true)
   const [showOrganizador, setShowOrganizador] = useState(false)
 
+  console.log(state);
+ 
   const [data, setData] = useState(
     { 
       nombre_evento:"evento prueba",
@@ -66,6 +76,7 @@ function Layout({updateButton}) {
       tipoEvento_id:4
 }
 )
+
   return (
     
     <Div>

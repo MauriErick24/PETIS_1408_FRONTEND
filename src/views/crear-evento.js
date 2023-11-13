@@ -80,7 +80,7 @@ const CrearEvento = () => {
                             // value={values.hora}
                             // onChange={handleChange}
                             // onBlur={handleBlur}
-                            inputWidth={'90px'}
+                            inputWidth={'120px'}
                           />
                           {/* {touched.hora && errors.hora && (
                             <ErrorMessage>{errors.hora}</ErrorMessage>
@@ -94,7 +94,7 @@ const CrearEvento = () => {
                             // value={values.hora}
                             // onChange={handleChange}
                             // onBlur={handleBlur}
-                            inputWidth={'90px'}
+                            inputWidth={'120px'}
                           />
                           {/* {touched.hora && errors.hora && (
                             <ErrorMessage>{errors.hora}</ErrorMessage>
@@ -151,7 +151,7 @@ const CrearEvento = () => {
                             // value={values.hora}
                             // onChange={handleChange}
                             // onBlur={handleBlur}
-                            inputWidth={'90px'}
+                            inputWidth={'120px'}
                           />
                           {/* {touched.hora && errors.hora && (
                             <ErrorMessage>{errors.hora}</ErrorMessage>
@@ -165,7 +165,7 @@ const CrearEvento = () => {
                             // value={values.hora}
                             // onChange={handleChange}
                             // onBlur={handleBlur}
-                            inputWidth={'90px'}
+                            inputWidth={'120px'}
                           />
                           {/* {touched.hora && errors.hora && (
                             <ErrorMessage>{errors.hora}</ErrorMessage>
