@@ -27,7 +27,7 @@ function Organizadorn() {
   };
 
   const handleSelectBook = (book) => {
-    if (!selectedBooks.some(selectedBook => selectedBook.nombre === book.nombre) && selectedBooks.length < 5) {
+    if (!selectedBooks.some(selectedBook => selectedBook.title === book.title) && selectedBooks.length < 5) {
       setSelectedBooks([...selectedBooks, book]);
     }
   };
