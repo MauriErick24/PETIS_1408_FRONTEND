@@ -10,7 +10,7 @@ const crearPatrocinador =({onClick}) =>{
     return (
         <>
             <Flex justify-content='center' margin-bottom= '2%'>
-                <HeaderTitle title='AUSPICIADORES'/> 
+                <HeaderTitle title='AUSPICIADOR'/> 
               
             </Flex>
 
