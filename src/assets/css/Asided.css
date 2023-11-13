@@ -1,0 +1,33 @@
+/* Estilos para la barra lateral (clase 'sidebar') en el lado derecho */
+.sidebar {
+    width: 25%; /* Ancho de la barra lateral */
+    background-color: #333; /* Color de fondo */
+    color: #fff; /* Color del texto */
+    padding: 20px;
+    position: fixed; /* Fija la barra lateral en el lado derecho */
+    top: 0; /* Alinea la barra lateral en la parte superior */
+    right: 0; /* Alinea la barra lateral en el lado derecho */
+    height: 100%; /* Ocupa toda la altura de la ventana */
+    overflow-y: auto; /* Agrega desplazamiento si el contenido es largo */
+  }
+  
+  .sidebar h2 {
+    font-size: 1.5rem;
+  }
+  
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sidebar li {
+    margin-bottom: 10px;
+  }
+  
+  .sidebar a {
+    text-decoration: none;
+    color: #fff;
+  }
+  
+  /* Estilos adicionales según tus necesidades */
+  
