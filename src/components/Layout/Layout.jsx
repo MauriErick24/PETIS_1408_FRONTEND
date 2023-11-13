@@ -10,7 +10,7 @@ import Flex from '../Flex';
 import Aside from '../Aside';
 
 import { useState } from 'react';
-import Organizador from '../../views/organizador';
+import Organizador from '../../views/Organizadorn';
 import CrearEvento from '../../views/crear-evento';
 import Patrocinador from '../../views/patrocinador';
 
@@ -44,14 +44,14 @@ const Content = styled.div`
 function Layout({updateButton}) {
 
   const location = useLocation();
-  const { state } = location;
+  const { datos } = location.state;
   
   // const [updateButton, setUpdateButton] = useState(updateButton)
 
   const [showCrearEvento, setShowCrearEvento] = useState(true)
   const [showOrganizador, setShowOrganizador] = useState(false)
 
-  console.log(state);
+  console.log(datos);
  
   const [data, setData] = useState(
     { 
@@ -103,7 +103,7 @@ function Layout({updateButton}) {
           <Content>
             {/* {main} */}
             
-            {showCrearEvento && <CrearEvento/>}
+            {showCrearEvento && <CrearEvento />}
             {showOrganizador && <Organizador/>}
             {/* {showOrganizador && <Patrocinador/>} */}
             

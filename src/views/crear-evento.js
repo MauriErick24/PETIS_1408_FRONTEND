@@ -9,11 +9,83 @@ import Flex from "../components/Flex";
 import Radio from "../components/input/Radio";
 import Input from "../components/input/Input";
 import TextArea from "../components/input/TextArea";
+import {useFormik} from "formik";
+
+const initialValues = {
+  nombre_evento: '',
+  inicio_inscripcion: '',
+  fin_inscripcion: '',
+  hora: '',
+  lugar: '',
+  email: '',
+  telefono: '',
+  }
+
+  const onSubmit = values => {
+    alert(JSON.stringify(values, null, 2));
+  }
+
+  const validate = values => {
+    let errors = {}
+    if(!values.nombre_evento){
+        errors.nombre_evento = 'Required'
+    }else if(values.nombre_evento.length < 15){
+        errors.nombre_evento = 'Must be 15 characters or more'
+    }else if(values.nombre_evento.length > 50){
+        errors.nombre_evento = 'Must be 50 characters or less'
+    }else if(!/^[a-zA-Z0-9\s]+$/i.test(values.nombre_evento)){
+        errors.nombre_evento = 'Solo letras y numeros'
+    }
+
+    if(!values.inicio_inscripcion){
+        errors.inicio_inscripcion = 'Required'
+    }
+    if(!values.fin_inscripcion){
+        errors.fin_inscripcion = 'Required'
+    }
+    if(!values.hora){
+        errors.hora = 'Required'
+    }
+    if(!values.lugar){
+        errors.lugar = 'Required'
+    }else if(values.lugar.length < 15){
+        errors.lugar = 'Must be 15 characters or more'
+    }else if(values.lugar.length > 50){
+        errors.lugar = 'Must be 50 characters or less'
+    }else if(!/^[a-zA-Z0-9\s]+$/i.test(values.lugar)){
+        errors.lugar = 'Solo letras y numeros'
+    }
+
+    if(!values.email){
+        errors.email = 'Required'
+    }else if(!/^[a-z0-9._-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(values.email)){
+        errors.email = 'formato invalido para el correo'
+    }
+
+    if(!values.telefono){
+        errors.telefono = 'Required'
+    }else if(!/^[0-9]{10}$/.test(values.telefono)){
+        errors.telefono = 'formato invalido para el telefono'
+    }else if(values.telefono.length < 8){
+        errors.telefono = 'Must be 10 characters or more'
+    }else if(values.telefono.length > 8){
+        errors.telefono = 'Must be 10 characters or less'
+    }
+    
+    return errors
+  }
 
 
 const CrearEvento = () => {
-    return(
+  const formik = useFormik({
+    initialValues,
+    onSubmit, 
+    validate 
+  })
+  return(
         <Div>
+          <form onSubmit={formik.handleSubmit}>
+
             <Flex justify-content='center'>
                 <HeaderTitle title='CREACION DE EVENTO'/> 
             </Flex>
@@ -21,10 +93,11 @@ const CrearEvento = () => {
                 <Inputk 
                     label='Nombre de evento:'
                     name='nombre_evento'
-                    // value={values.nombre_evento}
-                    // onChange={handleChange}
-                    // onBlur={handleBlur}
+                    value={formik.values.nombre_evento}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                     />
+                {formik.touched.nombre_evento && formik.errors.nombre_evento ? <div className='error'>{formik.errors.nombre_evento}</div> : null}    
                 <Select
                     label='Tipo de evento : *'
                     onClick={(e) => {
@@ -45,14 +118,13 @@ const CrearEvento = () => {
                               name='inicio_inscripcion'
                               type='date' 
                               label='Inicia'
-                            //   value={values.inicio_inscripcion}
-                            //   onChange={handleChange}
-                            //   onBlur={handleBlur}
+                               value={formik.values.inicio_inscripcion}
+                               onChange={formik.handleChange}
+                               onBlur={formik.handleBlur}
                             //   column
                             />
-                            {/* {touched.inicio_inscripcion && errors.inicio_inscripcion && (
-                              <ErrorMessage>{errors.inicio_inscripcion}</ErrorMessage>
-                            )} */}
+                            
+                            {formik.touched.inicio_inscripcion && formik.errors.inicio_inscripcion ? <div className='error'> {formik.errors.inicio_inscripcion}</div>:null} 
                           </Flex>
                           
                           <Flex flex-direction='column'>
@@ -60,14 +132,12 @@ const CrearEvento = () => {
                               name='fin_inscripcion'
                               type='date' 
                               label='Fin'
-                            //   value={values.fin_inscripcion}
-                            //   onChange={handleChange}
-                            //   onBlur={handleBlur}
+                               value={formik.values.fin_inscripcion}
+                               onChange={formik.handleChange}
+                               onBlur={formik.handleBlur}
                             //   column 
-                            />
-                            {/* {touched.fin_inscripcion && errors.fin_inscripcion && (
-                              <ErrorMessage>{errors.fin_inscripcion}</ErrorMessage>
-                            )} */}
+                            />                            
+                            {formik.touched.fin_inscripcion && formik.errors.fin_inscripcion ? <div className='error'>{formik.errors.fin_inscripcion}</div>:null} 
                           </Flex>
                       </Flex>
 
@@ -81,10 +151,13 @@ const CrearEvento = () => {
                             // onChange={handleChange}
                             // onBlur={handleBlur}
                             inputWidth={'120px'}
+                             value={formik.values.hora}
+                             onChange={formik.handleChange}
+                             onBlur={formik.handleBlur}
+
                           />
-                          {/* {touched.hora && errors.hora && (
-                            <ErrorMessage>{errors.hora}</ErrorMessage>
-                          )} */}
+                          
+                          {formik.touched.hora && formik.errors.hora ? <div className='error'>{formik.errors.hora}</div>:null} 
 
                           <Inputd
                             name='hora'
@@ -95,16 +168,16 @@ const CrearEvento = () => {
                             // onChange={handleChange}
                             // onBlur={handleBlur}
                             inputWidth={'120px'}
+                             value={formik.values.hora}
+                             onChange={formik.handleChange}
+                             onBlur={formik.handleBlur}
                           />
-                          {/* {touched.hora && errors.hora && (
-                            <ErrorMessage>{errors.hora}</ErrorMessage>
-                          )} */}
+                          {formik.touched.hora && formik.errors.hora ? <div className='error'>{formik.errors.hora}</div>:null} 
                        </Flex>
 
                     </Flex>
                   </Container>
-
-                  
+                 
                   <Container>
                     <Flex flex-direction ='column' gap='1em'>
                     <Flex flex-direction = 'row'>
@@ -116,14 +189,12 @@ const CrearEvento = () => {
                               name='inicio_inscripcion'
                               type='date' 
                               label='Inicia'
-                            //   value={values.inicio_inscripcion}
-                            //   onChange={handleChange}
-                            //   onBlur={handleBlur}
-                            //   column
+                               value={formik.values.inicio_inscripcion}
+                               onChange={formik.handleChange}
+                               onBlur={formik.handleBlur}
+                               //column
                             />
-                            {/* {touched.inicio_inscripcion && errors.inicio_inscripcion && (
-                              <ErrorMessage>{errors.inicio_inscripcion}</ErrorMessage>
-                            )} */}
+                            {formik.touched.inicio_inscripcion && formik.errors.inicio_inscripcion ? <div className='error'>{formik.errors.inicio_inscripcion}</div>:null} 
                           </Flex>
                           
                           <Flex flex-direction='column' >
@@ -131,14 +202,12 @@ const CrearEvento = () => {
                               name='fin_inscripcion'
                               type='date' 
                               label='Fin'
-                            //   value={values.fin_inscripcion}
-                            //   onChange={handleChange}
-                            //   onBlur={handleBlur}
+                               value={formik.values.fin_inscripcion}
+                               onChange={formik.handleChange}
+                               onBlur={formik.handleBlur}
                             //   column 
                             />
-                            {/* {touched.fin_inscripcion && errors.fin_inscripcion && (
-                              <ErrorMessage>{errors.fin_inscripcion}</ErrorMessage>
-                            )} */}
+                            {formik.touched.fin_inscripcion && formik.errors.fin_inscripcion ? <div className='error'>{formik.errors.fin_inscripcion}</div>:null} 
                           </Flex>
                       </Flex>
 
@@ -147,15 +216,12 @@ const CrearEvento = () => {
                             name='hora'
                             label='Hora: ' 
                             type='time' 
-                            // disabled={!options.hora}
-                            // value={values.hora}
-                            // onChange={handleChange}
-                            // onBlur={handleBlur}
                             inputWidth={'120px'}
+                             value={formik.values.hora}
+                             onChange={formik.handleChange}
+                             onBlur={formik.handleBlur}
                           />
-                          {/* {touched.hora && errors.hora && (
-                            <ErrorMessage>{errors.hora}</ErrorMessage>
-                          )} */}
+                          {formik.touched.hora && formik.errors.hora ? <div className='error'>{formik.errors.hora}</div>:null} 
 
                           <Inputd
                             name='hora'
@@ -166,10 +232,12 @@ const CrearEvento = () => {
                             // onChange={handleChange}
                             // onBlur={handleBlur}
                             inputWidth={'120px'}
+                             value={formik.values.hora}
+                             onChange={formik.handleChange}
+                             onBlur={formik.handleBlur}
+
                           />
-                          {/* {touched.hora && errors.hora && (
-                            <ErrorMessage>{errors.hora}</ErrorMessage>
-                          )} */}
+                          {formik.touched.hora && formik.errors.hora ?<div className='error'>{formik.errors.hora}</div>:null} 
                     </Flex>                 
                     </Flex>
                     </Container>
@@ -180,15 +248,12 @@ const CrearEvento = () => {
                             name='lugar'
                             label='Lugar: ' 
                             // disabled={!options.lugar}
-                            // value={values.lugar}
-                            // onChange={handleChange}
-                            // onBlur={handleBlur}
+                             value={formik.values.lugar}
+                             onChange={formik.handleChange}
+                             onBlur={formik.handleBlur}
                             inputWidth={'100%'}
                         />
-                      {/* {touched.lugar && errors.lugar && (
-                        <ErrorMessage>{errors.lugar}</ErrorMessage>
-                      )} */}
-
+                      {formik.touched.lugar && formik.errors.lugar ? <div className='error'>{formik.errors.lugar}</div>:null} 
                     </Flex>
                     <Flex flex-direction='row' gap='1em'>
                         
@@ -196,27 +261,23 @@ const CrearEvento = () => {
                                 name='email'
                                 label='E-mail: ' 
                                 // disabled={!options.email} 
-                                // value={values.email}
-                                // onChange={handleChange}
-                                // onBlur={handleBlur}
+                                 value={formik.values.email}
+                                 onChange={formik.handleChange}
+                                 onBlur={formik.handleBlur}
                                 inputWidth={'100%'}
                             />
-                        {/* {touched.email && errors.email && (
-                            <ErrorMessage>{errors.email}</ErrorMessage>
-                        )} */}
+                        {formik.touched.email && formik.errors.email ?<div className='error'>{formik.errors.email}</div>:null} 
                         
                         <Inputd
                             name='telefono'
                             label='Telefono: '
                          // disabled={!options.telefono}
-                         // value={values.telefono}
-                         // onChange={handleChange}
-                         // onBlur={handleBlur}
+                          value={formik.values.telefono}
+                          onChange={formik.handleChange}
+                          onBlur={formik.handleBlur}
                             inputWidth={'100%'}
                         />
-                        {/* {touched.telefono && errors.telefono && (
-                                <ErrorMessage>{errors.telefono}</ErrorMessage>
-                            )} */}
+                        {formik.touched.telefono && formik.errors.telefono ? <div className='error'>{formik.errors.telefono}</div>:null}
                     </Flex>
                 <Flex flex-direction='row'>
                     <Flex padding='0 1em' top='0.5em' flex-direction='column' width='100%' gap='1em'>
@@ -267,10 +328,10 @@ const CrearEvento = () => {
                     </Flex>
                 </Flex>
             </Flex>
+          </form>
 
         </Div>
 
-        
     )
 }
 
@@ -279,6 +340,10 @@ export default CrearEvento;
 const Div = styled.div`
     width: 100%;
     gap=1em;
+    .error{
+      color:red;
+      font-size: 14px;
+    }
 `
 const Asterisk = styled.p`
   color:red;

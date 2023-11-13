@@ -2,7 +2,7 @@ import React from "react";
 import Flex from "./Flex";
 import Btn from "./Btn";
 import { Navigate, useNavigate } from "react-router-dom";
-import Organizador from "../views/organizador";
+import Organizador from "../views/Organizadorn";
 
 const  Aside = ({children}) => {
     const navigate = useNavigate();

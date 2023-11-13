@@ -1,0 +1,74 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
+  
+  button.delete-button{
+    background-color: salmon; /* Cambia el color de fondo a salmon */
+    border-radius: 15%; /* Agrega border-radius del 15% para esquinas redondeadas */
+    color: #fff; /* Cambia el color de texto a blanco */
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  /* Estilo para el botón "X" al pasar el cursor sobre él */
+  button.delete-button:hover {
+    background-color: darkred; /* Cambia el color de fondo al pasar el cursor */
+  }  
+  
+  
+  h1 {
+    color: #333;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  li {
+    margin: 5px 0; /* Ajusta el espacio entre elementos verticalmente */
+    padding: 10px;
+    background-color: #f4f4f4;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    display: flex; /* Permite alinear elementos horizontalmente */
+    justify-content: space-between; /* Distribuye el espacio uniformemente */
+    align-items: center; /* Centra verticalmente los elementos en la lista */
+  }
+  
+  button {
+    background-color: black;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  #selectedBooks {
+    background-color: #f0f0f0;
+    padding: 10px;
+  }
+  
+  #pagination {
+    margin-top: 10px;
+  }
+  
+  #pagination button {
+    margin: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  #pagination button:hover {
+    background-color: #ccc;
+  }
+  
+  #pagination button.active {
+    background-color: #333; /* Color de fondo para la página actual */
+    
+    color: #fff; /* Color de texto para la página actual */
+  }
+  

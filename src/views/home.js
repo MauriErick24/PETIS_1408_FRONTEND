@@ -51,7 +51,7 @@ const Home = () => {
       <HeaderArticles 
         title='EVENTOS'
         btnTitle='CREAR EVENTO'
-        onClick={() => navigate('/crear/evento')}
+        onClick={() => navigate('/crear/evento', {state: {datos: null}})}
       />
       <Fondo>
 
