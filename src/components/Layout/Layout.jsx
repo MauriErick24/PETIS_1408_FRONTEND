@@ -101,7 +101,7 @@ function Layout({updateButton}) {
             </Btn>
             
             <Btn onClick={() => handleButtonClick(false, false, true)}>
-              PATROCINADOR
+              AUSPICIADOR
             </Btn>
             </Aside>
           </Sidebar>
