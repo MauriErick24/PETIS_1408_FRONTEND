@@ -47,6 +47,7 @@ const removeRule = (index) => {
   const updatedRules = [...rules];
   updatedRules.splice(index, 1);
   setRules(updatedRules);
+  localStorage.setItem('requisito', JSON.stringify(updatedRules));
 };
 const inputStyle = {
     backgroundColor: 'white',  // Color de fondo rojo

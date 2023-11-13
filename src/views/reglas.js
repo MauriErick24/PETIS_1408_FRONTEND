@@ -24,6 +24,8 @@ const Reglas = () => {
       const storedRules = JSON.parse(localStorage.getItem('rules')) || [];
       setRules(storedRules);
     }, []);
+ 
+
     const addRule = () => {
       if (label.trim() === '') {
         setErrorMessage('Por favor, ingrese una etiqueta válida.');
@@ -34,19 +36,23 @@ const Reglas = () => {
         setErrorMessage('Esta regla ya existe. Intente con una diferente.');
         return;
       }
-      const updatedRules = [...rules, label];
-    setRules(updatedRules);
-    setLabel('');
-    setErrorMessage('');
 
-    // Almacena las reglas actualizadas en localStorage
-    localStorage.setItem('rules', JSON.stringify(updatedRules));
+      const updatedRules = [...rules, label];
+      setRules(updatedRules);
+      setLabel('');
+      setErrorMessage('');
+       // Almacena las reglas actualizadas en localStorag
+       localStorage.setItem('rules', JSON.stringify(updatedRules));
+
     };
   
+  
     const removeRule = (index) => {
-      const updatedRules = [...rules];
-      updatedRules.splice(index, 1);
-      setRules(updatedRules);
+      const updatedRules2 = [...rules];
+      updatedRules2.splice(index, 1);
+      setRules(updatedRules2);
+      localStorage.setItem('rules', JSON.stringify(updatedRules2));
+      
     };
     const inputStyle = {
         backgroundColor: 'white',  // Color de fondo rojo
