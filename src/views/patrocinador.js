@@ -10,7 +10,7 @@ import api from '../services/api'
 import '../assets/css/Organizadorn.css';
 import Image from '../assets/images/example-img.jpg'
 
-const Patrocinador = () => {
+const Patrocinador = ({onClick}) => {
     const [organizador,setOrganizador]=useState([
         {
             nombrepatrocinador:'coca cola'
@@ -124,8 +124,8 @@ const Patrocinador = () => {
                     </Itemgen>
                 ))}
             </Flex>  */}
-            <Flex justify-content='end'>
-               <Btn>CREAR AUSPICIADOR</Btn>
+            <Flex justify-content='end'margin='15px'>
+               <Btn onClick={onClick}>CREAR AUSPICIADOR</Btn>
             </Flex>        
         </>
     )

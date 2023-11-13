@@ -3,17 +3,15 @@ import Patrocinador from "./patrocinador";
 import { useState } from "react";
 import CrearPatrocinador from "./crear-auspiciador";
 const Auspiciador =() => {
-    const [showAuspiciador,setshowAuspiciador]=useState(
-       false
-    )
+    const [showAuspiciador,setShowAuspiciador]=useState(true)
     return ( 
         <>
         {
-            showAuspiciador && (<Patrocinador/>)
+            showAuspiciador && (<Patrocinador onClick={() => setShowAuspiciador(false)}/>)
 
         }
         {
-            !showAuspiciador && (<CrearPatrocinador/>)
+            !showAuspiciador && (<CrearPatrocinador onClick={() => setShowAuspiciador(true)}/>)
 
         }
         </>
