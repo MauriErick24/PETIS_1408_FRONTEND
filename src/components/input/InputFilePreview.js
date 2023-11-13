@@ -48,7 +48,7 @@ export default InputFilePreview
 
 const Preview = styled.div`
   display: flex;
-  width: 100%;
+  width: ${(props) => props.widthDiv || '100%' };
   flex-direction: column;
   align-items: center;
   img{

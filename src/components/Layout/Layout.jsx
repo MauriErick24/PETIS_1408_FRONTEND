@@ -12,7 +12,7 @@ import Aside from '../Aside';
 import { useState } from 'react';
 import Organizador from '../../views/Organizadorn';
 import CrearEvento from '../../views/crear-evento';
-import Patrocinador from '../../views/patrocinador';
+import Auspiciador from '../../views/auspiciador';
 
 
 
@@ -50,6 +50,7 @@ function Layout({updateButton}) {
 
   const [showCrearEvento, setShowCrearEvento] = useState(true)
   const [showOrganizador, setShowOrganizador] = useState(false)
+  const [showAuspiciador, setShowAuspiciador] = useState(false)
 
   console.log(datos);
  
@@ -77,27 +78,31 @@ function Layout({updateButton}) {
 }
 )
 
+    const handleButtonClick = (evento, organizador, auspiciador) => {
+      setShowCrearEvento(evento);
+      setShowOrganizador(organizador);
+      setShowAuspiciador(auspiciador);
+    };
+
   return (
-    
+     
     <Div>
       <Header/>
       <div className='page'>
         <Container>
           <Sidebar>
             <Aside>
-              <Btn onClick={()=> {
-              
-                  setShowCrearEvento(true)
-                  setShowOrganizador(false)        
-              
-              }} >EVENTO</Btn>
-
-              <Btn onClick={()=> {
-
-                setShowCrearEvento(false)
-                setShowOrganizador(true)
-              
-              }} >ORGANIZADOR</Btn>
+            <Btn onClick={() => handleButtonClick(true, false, false)}>
+              EVENTO
+            </Btn>
+            
+            <Btn onClick={() => handleButtonClick(false, true, false)}>
+              ORGANIZADOR
+            </Btn>
+            
+            <Btn onClick={() => handleButtonClick(false, false, true)}>
+              PATROCINADOR
+            </Btn>
             </Aside>
           </Sidebar>
           <Content>
@@ -105,7 +110,7 @@ function Layout({updateButton}) {
             
             {showCrearEvento && <CrearEvento />}
             {showOrganizador && <Organizador/>}
-            {/* {showOrganizador && <Patrocinador/>} */}
+           {showAuspiciador && <Auspiciador/>} 
             
 
           </Content>  

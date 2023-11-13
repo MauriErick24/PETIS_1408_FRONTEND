@@ -20,11 +20,12 @@ import HomeUser from './views/homeUser'
 // import Organizador from './views/organizador';
 //import Organizadorn from './views/Organizadorn'
 // import Corganizador from './views/corganizador'; 
-//import Patrocinador from './views/patrocinador'
-//import Reglas from './views/reglas'
-//import Premios from './views/premios'
-//import Invitados from './views/invitados'
-//import Afiche from './views/afiche'
+import Patrocinador from './views/patrocinador'
+import Reglas from './views/reglas'
+import Premios from './views/premios'
+import Invitados from './views/invitados'
+import Afiche from './views/afiche'
+import Auspiciador from './views/auspiciador'
 
 //import ModalLayout from './components/Modals/ModalCrear'
 

@@ -43,7 +43,10 @@ function Organizadorn() {
   };
 
   const handleSelectBook = (book) => {
-    setSelectedBooks([...selectedBooks, book]);
+    if (!selectedBooks.some(selectedBook => selectedBook.nombre === book.nombre) && selectedBooks.length < 5) {
+      setSelectedBooks([...selectedBooks, book]);
+    //setSelectedBooks([...selectedBooks, book]);
+    }
   };
 
   const handleRemoveBook = (book) => {
@@ -65,11 +68,12 @@ function Organizadorn() {
 
   return (
     <div>
+      <h2>Lista de Organizadores</h2>
       <input
         type="text"
         value={searchInput}
         onChange={handleSearchInput}
-        placeholder="Buscar libros por título..."
+        placeholder="Buscar organizador..."
       />
       <div id="results">
         {filteredLibrary
@@ -89,7 +93,7 @@ function Organizadorn() {
           </button>
         ))}
       </div>
-      <h2>Libros Seleccionados</h2>
+      <h2>Organizadores Seleccionados</h2>
       <ul id="selectedBooks">
         {selectedBooks.map((book) => (
           <li key={book.nombre}>
@@ -103,6 +107,3 @@ function Organizadorn() {
 }
 
 export default Organizadorn;
-
-
-
