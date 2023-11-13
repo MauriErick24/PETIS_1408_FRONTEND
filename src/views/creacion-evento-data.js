@@ -40,27 +40,27 @@ const CreacionEvento = () => {
   })
 
   const [data, setData] = useState(
-    { 
-      nombre_evento:"evento prueba",
-      inicio_inscripcion:"2023-10-04",
-      fin_inscripcion:"2023-11-21",
-      fin_evento:"2023-12-1",
-      organizador:"jalasoft",
-      imagen:"assests/images/umss-logo.png",
-      lugar:"coña coña",
-      email:"pretencioso@gmail.com",
-      descripcion:"este es un evento",
-      hora:"09:00:00.0000000",
-      telefono:"78327438",
-      requisito:"traer malcriadas",
-      premio:"un whisky",
-      reglas:"no ser gay",
-      detalle:"blba bla bla",
-      afiche:"nose que es un afiche",
-      contenido:"este es el contenido del evento",
-      invitado:"shrek",
-      tipoEvento_id:4
-}
+//     { 
+//       nombre_evento:"evento prueba",
+//       inicio_inscripcion:"2023-10-04",
+//       fin_inscripcion:"2023-11-21",
+//       fin_evento:"2023-12-1",
+//       organizador:"jalasoft",
+//       imagen:"assests/images/umss-logo.png",
+//       lugar:"coña coña",
+//       email:"pretencioso@gmail.com",
+//       descripcion:"este es un evento",
+//       hora:"09:00:00.0000000",
+//       telefono:"78327438",
+//       requisito:"traer malcriadas",
+//       premio:[],
+//       reglas:"no ser gay",
+//       detalle:"blba bla bla",
+//       afiche:"nose que es un afiche",
+//       contenido:"este es el contenido del evento",
+//       invitado:"shrek",
+//       tipoEvento_id:4
+// }
   )
 
   const sendData = async() => {
@@ -134,7 +134,7 @@ const CreacionEvento = () => {
         }}
       >
         {({ values, handleSubmit, handleChange, handleBlur, touched, errors }) => (
-          <form onSubmit={handleSubmit}>
+          <form >
             <HeaderTitle title='CREACION DE EVENTO'/>
             <BorderContent>
               <Content justify-content='space-between' width='100%' gap='1em'>
@@ -161,49 +161,164 @@ const CreacionEvento = () => {
                     }}
                   />
                   
-                  <Flex justify-content='space-evenly' width='100%' gap='1em'>
-                    <Flex flex-direction='column'>
-                      <Inputd
-                        name='inicio_inscripcion'
-                        type='date' 
-                        label='Fecha Inicial de inscripción*'
-                        value={values.inicio_inscripcion}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        column
-                      />
-                      {touched.inicio_inscripcion && errors.inicio_inscripcion && (
-                        <ErrorMessage>{errors.inicio_inscripcion}</ErrorMessage>
-                      )}
-                    </Flex>
-                    
-                    <Flex flex-direction='column'>
-                      <Inputd
-                        name='fin_inscripcion'
-                        type='date' 
-                        label='Fecha final de inscripción*'
-                        value={values.fin_inscripcion}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        column 
-                      />
-                      {touched.fin_inscripcion && errors.fin_inscripcion && (
-                        <ErrorMessage>{errors.fin_inscripcion}</ErrorMessage>
-                      )}
-                    </Flex>
-                  </Flex>
+                  
+                <Flex justify-content='space-evenly' width='100%' gap='1em'>
+                  <Container>
+                    <Flex flex-direction = 'column' gap='1em'>
+                      <Flex flex-direction = 'row'>
+                        <p>Evento</p><Asterisk>*</Asterisk>
+                      </Flex>
+                      <Flex gap = '1em'>
+                        <Flex flex-direction='column'>
+                            <Inputd
+                              name='inicio_inscripcion'
+                              type='date' 
+                              label='Inicia'
+                              value={values.inicio_inscripcion}
+                              onChange={handleChange}
+                              onBlur={handleBlur}
+                              column
+                            />
+                            {touched.inicio_inscripcion && errors.inicio_inscripcion && (
+                              <ErrorMessage>{errors.inicio_inscripcion}</ErrorMessage>
+                            )}
+                          </Flex>
+                          
+                          <Flex flex-direction='column'>
+                            <Inputd
+                              name='fin_inscripcion'
+                              type='date' 
+                              label='Fin'
+                              value={values.fin_inscripcion}
+                              onChange={handleChange}
+                              onBlur={handleBlur}
+                              column 
+                            />
+                            {touched.fin_inscripcion && errors.fin_inscripcion && (
+                              <ErrorMessage>{errors.fin_inscripcion}</ErrorMessage>
+                            )}
+                          </Flex>
+                      </Flex>
 
-                  <Input 
-                    name='organizador'
-                    label='Organizador(es):'
-                    disabled={!options.organizador}
-                    value={values.organizador}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                  />
-                  {touched.organizador && errors.organizador && (
-                    <ErrorMessage>{errors.organizador}</ErrorMessage>
-                  )}
+                       <Flex flex-direction='row' gap='0.5em'>
+                        <Inputd
+                            name='hora'
+                            label='Hora: ' 
+                            type='time' 
+                            disabled={!options.hora}
+                            value={values.hora}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            inputWidth={'90px'}
+                          />
+                          {touched.hora && errors.hora && (
+                            <ErrorMessage>{errors.hora}</ErrorMessage>
+                          )}
+
+                          <Inputd
+                            name='hora'
+                            label='Hora: ' 
+                            type='time' 
+                            disabled={!options.hora}
+                            value={values.hora}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            inputWidth={'90px'}
+                          />
+                          {touched.hora && errors.hora && (
+                            <ErrorMessage>{errors.hora}</ErrorMessage>
+                          )}
+                       </Flex>
+
+                    </Flex>
+                  </Container>
+
+                  
+                  <Container>
+                    <Flex flex-direction ='column' gap='1em'>
+                    <Flex flex-direction = 'row'>
+                        <p>Inscripción</p><Asterisk>*</Asterisk>
+                      </Flex>
+                      <Flex gap='1em'>
+                        <Flex flex-direction='column'>
+                            <Inputd
+                              name='inicio_inscripcion'
+                              type='date' 
+                              label='Inicia'
+                              value={values.inicio_inscripcion}
+                              onChange={handleChange}
+                              onBlur={handleBlur}
+                              column
+                            />
+                            {touched.inicio_inscripcion && errors.inicio_inscripcion && (
+                              <ErrorMessage>{errors.inicio_inscripcion}</ErrorMessage>
+                            )}
+                          </Flex>
+                          
+                          <Flex flex-direction='column' >
+                            <Inputd
+                              name='fin_inscripcion'
+                              type='date' 
+                              label='Fin'
+                              value={values.fin_inscripcion}
+                              onChange={handleChange}
+                              onBlur={handleBlur}
+                              column 
+                            />
+                            {touched.fin_inscripcion && errors.fin_inscripcion && (
+                              <ErrorMessage>{errors.fin_inscripcion}</ErrorMessage>
+                            )}
+                          </Flex>
+                      </Flex>
+
+                      <Flex flex-direction='row' gap='0.5em'>
+                        <Inputd
+                            name='hora'
+                            label='Hora: ' 
+                            type='time' 
+                            disabled={!options.hora}
+                            value={values.hora}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            inputWidth={'90px'}
+                          />
+                          {touched.hora && errors.hora && (
+                            <ErrorMessage>{errors.hora}</ErrorMessage>
+                          )}
+
+                          <Inputd
+                            name='hora'
+                            label='Hora: ' 
+                            type='time' 
+                            disabled={!options.hora}
+                            value={values.hora}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            inputWidth={'90px'}
+                          />
+                          {touched.hora && errors.hora && (
+                            <ErrorMessage>{errors.hora}</ErrorMessage>
+                          )}
+                       </Flex>
+
+                      </Flex>
+                     </Container>
+                    </Flex>
+                  <Flex flex-direction='row' width='100%' align-items='center' gap='0.5em'>
+                    <Input 
+                      name='organizador'
+                      label='Organizador(es):'
+                      disabled={!options.organizador}
+                      value={values.organizador}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    />
+                    <Btn type='button' font-weight='bold'
+                      onClick={()=>console.log("Agregando organizador")}>+</Btn>
+                    {touched.organizador && errors.organizador && (
+                      <ErrorMessage>{errors.organizador}</ErrorMessage>
+                    )}
+                  </Flex>
                   {/* width='100%' */}
                   <Flex justify-content='space-between'  gap='1em'>
                     <Flex flex-direction='column' gap='1em'>
@@ -235,19 +350,7 @@ const CreacionEvento = () => {
                     </Flex>
                     
                     <Flex flex-direction='column' gap='1em'>
-                      <Inputd
-                        name='hora'
-                        label='Hora: ' 
-                        type='time' 
-                        disabled={!options.hora}
-                        value={values.hora}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        inputWidth={'250px'}
-                      />
-                      {touched.hora && errors.hora && (
-                        <ErrorMessage>{errors.hora}</ErrorMessage>
-                      )}
+                      
 
                       <Inputd
                         name='telefono'
@@ -422,8 +525,11 @@ const CreacionEvento = () => {
               </Flex>
             </BorderContent>
             <Flex top='1em' justify-content='center' gap='10em'>
-              <Btn type='submit'>ACEPTAR</Btn>
-              <Btn onClick={() => setShow((state) => ({...state, confirm2: !show.confirm2}))} color='second'>CANCELAR</Btn>
+              <Btn type='submit' onClick={handleSubmit}>ACEPTAR</Btn>
+              <Btn type='button' onClick={() => {
+                setShow((state) => ({...state, confirm2: !show.confirm2}))
+                
+                }} color='second'>CANCELAR</Btn>
             </Flex>
           </form>
         )}
@@ -464,4 +570,11 @@ const Content = styled(Flex)`
   .center{
     text-align: center;
   }
+`
+const Asterisk = styled.p`
+  color:red;
+`
+const Container = styled.div`
+  border: solid 0.2em #000;
+  padding: 1em;
 `

@@ -8,9 +8,12 @@ const Flex = ({ children, className, ...props }) => {
 export default Flex;
 
 const Div = styled.div`
-  display: flex;
+  display: ${(props) => props.display || 'flex'} ;
   max-width: 100%;
   margin-top: ${(props) => props.top || '0'};
+  margin-left: ${(props) => props.left || '0'};
+  margin: ${(props) => props.margin || ''};
+  margin-bottom: ${(props) => props['margin-bottom'] || '0'};
   width: ${(props) => props.width || 'auto'};
   flex-wrap: ${(props) => props['flex-wrap'] || 'auto'};
   flex-direction: ${(props) => props['flex-direction'] || 'row'};;
@@ -20,4 +23,14 @@ const Div = styled.div`
   align-items: ${(props) => props['align-items'] || 'flex-start'};
   gap: ${(props) => props['gap'] || '0'};
   padding: ${(props) => props['padding'] || '0'};
+  padding-bottom: ${(props) => props['padding-bottom'] || ''};
+  padding-top: ${(props) => props['padding-top'] || ''};
+  background: ${(props) => props.background || 'none'};
+  border-radius: ${(props) => props['border-radius'] ? props['border-radius'] : ''};
+  border: ${(props) => props['border'] ? props['border'] : ''};
+  text-align: ${(props) => props['text-align'] ? props['text-align'] : ''};
+  position: ${(props) => props.position ? props.position : ''};
+
 `;
+
+
