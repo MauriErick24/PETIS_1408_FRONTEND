@@ -46,7 +46,7 @@ function Layout({updateButton}) {
 
   // const navigate = useNavigate();
   const location = useLocation();
-  const { datos } = location.state;
+  const { datos } = location.state || {};
   
   // const [updateButton, setUpdateButton] = useState(updateButton)
 
