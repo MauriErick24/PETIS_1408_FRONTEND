@@ -44,7 +44,7 @@ const Content = styled.div`
 function Layout({updateButton}) {
 
   const location = useLocation();
-  const { datos } = location.state;
+  const { datos } = location.state || {};
   
   // const [updateButton, setUpdateButton] = useState(updateButton)
 
