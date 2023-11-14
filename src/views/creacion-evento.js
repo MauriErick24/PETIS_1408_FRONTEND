@@ -151,7 +151,8 @@ const CreacionEvento = () => {
       </BorderContent>
       <Flex top='1em' justify-content='center' gap='10em'>
         <Btn onClick={() => navigate('/creacion/data', { state: {options} })} >CREAR</Btn>
-        <Btn onClick={() => navigate('/')} color='second'>CANCELAR</Btn>
+        <Btn onClick={() => navigate('/crear/evento')} color='second'>CANCELAR</Btn>
+        
       </Flex>
     </>
   )

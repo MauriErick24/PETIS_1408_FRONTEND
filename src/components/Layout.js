@@ -3,48 +3,35 @@ import styled from 'styled-components';
 import Header from './Header';
 import Footer from './Footer';
 
-function Layout({ children, detail}) {
-  if(!detail){
-    return (
-        <Div>
-            <Header />
-      
-            <div className='page'>
-              {children}
-            </div>
-      
-            <Footer />
-          </Div>
-      );
-  }else{
-    return (
-        <Div2>
-            <Header />
-      
-            <div className='page'>
-              {children}
-            </div>
-      
-            <Footer />
-          </Div2>
-      );
-  }
+function Layout({ children, detail }) {
+  return (
+    <Container>
+      <Header />
+
+      <ContentContainer className={detail ? 'detail' : ''}>
+        {children}
+      </ContentContainer>
+
+      <Footer />
+    </Container>
+  );
 }
 
 export default Layout;
 
-const Div = styled.div`
-  width: 100%;
-  margin: auto;
-  background-color: #D1D0BC;
-  
-  .page{
-    margin: auto;
-    width: 1400px;
-    padding: 1em 4em;
-  }
-`
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+`;
 
-const Div2 = styled.div`
+const ContentContainer = styled.div`
+  flex: 1;
   background-color: #D1D0BC;
-`
+  padding: 1em 4em;
+
+  &.detail {
+    width: 1400px;
+    margin: auto;
+  }
+`;

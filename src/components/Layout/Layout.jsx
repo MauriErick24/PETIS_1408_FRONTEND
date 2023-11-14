@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 import Header from '../Header';
 import Footer from '../Footer';
@@ -13,7 +14,9 @@ import { useState } from 'react';
 import Organizador from '../../views/Organizadorn';
 import CrearEvento from '../../views/crear-evento';
 import Auspiciador from '../../views/auspiciador';
-
+import Reglas from '../../views/reglas';
+import Premios from '../../views/premios';
+import Requisitos from '../../views/requisitos'
 
 
 const Container = styled.div`
@@ -35,7 +38,7 @@ const Sidebar = styled.div`
 const Content = styled.div`
   
   width: 78%;
-  height: 88%;
+  height: 655px;
   background-color: #BDBB96;
   padding: 20px;
   border-radius: 15px;
@@ -43,14 +46,18 @@ const Content = styled.div`
 
 function Layout({updateButton}) {
 
+  // const navigate = useNavigate();
   const location = useLocation();
-  const { datos } = location.state;
+  const { datos } = location.state || {};
   
   // const [updateButton, setUpdateButton] = useState(updateButton)
 
   const [showCrearEvento, setShowCrearEvento] = useState(true)
   const [showOrganizador, setShowOrganizador] = useState(false)
   const [showAuspiciador, setShowAuspiciador] = useState(false)
+  const [showReglas, setShowReglas] = useState(false)
+  const [showPremios, setShowPremios] = useState(false)
+  const [showRequisitos, setShowRequisitos] = useState(false)
 
   console.log(datos);
  
@@ -78,10 +85,13 @@ function Layout({updateButton}) {
 }
 )
 
-    const handleButtonClick = (evento, organizador, auspiciador) => {
+    const handleButtonClick = (evento, organizador, auspiciador, reglas, premios, requisitos) => {
       setShowCrearEvento(evento);
       setShowOrganizador(organizador);
       setShowAuspiciador(auspiciador);
+      setShowReglas(reglas);
+      setShowPremios(premios);
+      setShowRequisitos(requisitos);
     };
 
   return (
@@ -92,16 +102,28 @@ function Layout({updateButton}) {
         <Container>
           <Sidebar>
             <Aside>
-            <Btn onClick={() => handleButtonClick(true, false, false)}>
+            <Btn onClick={() => handleButtonClick(true, false, false, false, false, false)}>
               EVENTO
             </Btn>
             
-            <Btn onClick={() => handleButtonClick(false, true, false)}>
+            <Btn onClick={() => handleButtonClick(false, true, false , false, false, false)}>
               ORGANIZADOR
             </Btn>
             
-            <Btn onClick={() => handleButtonClick(false, false, true)}>
+            <Btn onClick={() => handleButtonClick(false, false, true, false, false, false)}>
               AUSPICIADOR
+            </Btn>
+
+            <Btn onClick={() => handleButtonClick(false, false, false, true, false, false)}>
+              REGLAS
+            </Btn>
+
+            <Btn onClick={() => handleButtonClick(false, false, false, false, true, false)}>
+              PREMIOS
+            </Btn>
+
+            <Btn onClick={() => handleButtonClick(false, false, false, false, false, true)}>
+              REQUISITOS
             </Btn>
             </Aside>
           </Sidebar>
@@ -110,7 +132,10 @@ function Layout({updateButton}) {
             
             {showCrearEvento && <CrearEvento />}
             {showOrganizador && <Organizador/>}
-           {showAuspiciador && <Auspiciador/>} 
+            {showAuspiciador && <Auspiciador/>} 
+            {showReglas && <Reglas/>} 
+            {showPremios && <Premios/>} 
+            {showRequisitos && <Requisitos/>} 
             
 
           </Content>  
@@ -119,7 +144,8 @@ function Layout({updateButton}) {
         {updateButton && <Btn>GUARDAR</Btn>}
         {!updateButton && <Btn onClick={()=>console.log(data)}>CREAR</Btn>}
        
-        <Btn color='second' >CANCELAR</Btn>
+        <Btn color='second' >CANCELAR</Btn> 
+        {/* <Btn onClick={() => navigate('/eventos')} color='second'>CANCELAR</Btn>  */}
       </Flex>
       </div>
       <Footer/>

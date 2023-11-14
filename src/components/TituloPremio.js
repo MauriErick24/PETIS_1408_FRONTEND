@@ -13,10 +13,12 @@ export default HeaderTitle
 
 const Div = styled(Flex)`
   h2{
+    
     background-color: #000;
     color: white;
-    padding: 0.3em 0.8em;
+    font-size: 30px;
+    padding: 0.5em 2.5em;
     font-weight: 400;
-    margin-bottom: 15px;
+    
   }
 `
