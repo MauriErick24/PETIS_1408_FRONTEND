@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import '../assets/css/Organizadorn.css';
+import HeaderTitle from "../components/HeaderTitle";
 import api from '../services/api'
 
 
 const library = [
-  { nombre: "Carrera de Informatica", author: "F. Scott Fitzgerald", year: 1925, publisher: "Charles Scribner's Sons", origin: "EE. UU." },
-  { nombre: "MEMI", author: "Harper Lee", year: 1960, publisher: "J. B. Lippincott & Co.", origin: "EE. UU." },
-  { nombre: "JALA SOFT", author: "George Orwell", year: 1949, publisher: "Secker & Warburg", origin: "Reino Unido" },
-  { nombre:"UMSA - Informatica",author: "Jorge Ledezma", year:1980, publisher:"Diamond", origin: 'bosnia'},
-  { nombre:"Univ. Gabriel Rene Moreno",author:"cervantes", year: 1965, publisher: "pinguin", origin: 'Spain'},
-  { nombre:"Ministerio de Educacion",author:"victor hugo", year: 1976,publisher:'mcrgraw', origin:'France'},
+  // { nombre: "Carrera de Informatica", author: "F. Scott Fitzgerald", year: 1925, publisher: "Charles Scribner's Sons", origin: "EE. UU." },
+  // { nombre: "MEMI", author: "Harper Lee", year: 1960, publisher: "J. B. Lippincott & Co.", origin: "EE. UU." },
+  // { nombre: "JALA SOFT", author: "George Orwell", year: 1949, publisher: "Secker & Warburg", origin: "Reino Unido" },
+  // { nombre:"UMSA - Informatica",author: "Jorge Ledezma", year:1980, publisher:"Diamond", origin: 'bosnia'},
+  // { nombre:"Univ. Gabriel Rene Moreno",author:"cervantes", year: 1965, publisher: "pinguin", origin: 'Spain'},
+  // { nombre:"Ministerio de Educacion",author:"victor hugo", year: 1976,publisher:'mcrgraw', origin:'France'},
   // { nombre:"Embajada suiza",author:"nemilville", year: 1985,publisher:'Dolmen', origin:'USA'},
   // { nombre:"Fundacion Bankia",author:"Cesar Ldzm", year: 1945, publisher:"majos", origin:'Peru'},
   // { nombre:"Cuadros&CIA", author: "maarisabel", year:1965, publisher:"Trico", origin:'Spain'},
@@ -70,7 +71,7 @@ function Organizadorn({data, formik}) {
 
   return (
     <div>
-      <h2>Lista de Organizadores</h2>
+      <HeaderTitle title='LISTA DE ORGANIZADORES'/> 
       <input
         type="text"
         value={searchInput}

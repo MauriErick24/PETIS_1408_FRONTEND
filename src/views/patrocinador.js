@@ -26,14 +26,14 @@ const Patrocinador = ({onClick, data}) => {
   fetchData();
   }, []);
     const datos=[
-        {
-            nombre:'coca cola'
-        },
-          {
-            nombre:'Lab Tech'
-        },  {
-            nombre:'UMSS'
-        }
+        // {
+        //     nombre:'coca cola'
+        // },
+        //   {
+        //     nombre:'Lab Tech'
+        // },  {
+        //     nombre:'UMSS'
+        // }
      ]
             const [searchInput, setSearchInput] = useState('');
         const [currentPage, setCurrentPage] = useState(1);
