@@ -5,12 +5,14 @@ import Btn from './Btn'
 // images
 import Img from '../assets/images/img-article.jpeg'
 import Confirm from './Confirm'
+import { useNavigate } from 'react-router-dom'
 import Alert from './Alert'
 
 const Evento = ({ data, onDelete, showAlert, onClick}) => {
   const [ show, setShow ] = useState(false)
   const [ showAcept, setAceptShow ] = useState(false)
   const deleteButton = true
+  const navigate = useNavigate()
 
   const handleAlert = () => {
     setShow(!show)
@@ -47,14 +49,14 @@ const Evento = ({ data, onDelete, showAlert, onClick}) => {
         </header>
         
         <div className='img'>
-          <img src={Img} alt='imagen' />
+          <img src={data.imagen} alt='imagen' />
         </div>
 
         <h2 className='article-componente-rest'>{data.nombre_evento}</h2>
         <h2 className='article-componente-rest'>{data.inicio_inscripcion}</h2>
         <div className='detalles-btn'>
           <br/>
-          <Btn onClick={onClick}>DETALLES</Btn>
+          <Btn onClick={() => navigate(`eventos/detalle/${data.id}`)}>DETALLES</Btn>
         </div>
       </Article>
     </>

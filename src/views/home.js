@@ -54,9 +54,6 @@ const Home = () => {
         onClick={() => navigate('/crear/evento', {state: {datos: null}})}
       />
       <Fondo>
-
-
-        
         <Flex className='event-content' flex-wrap='wrap' justify-content='space-evenly' gap='1em'>
           {cards.map((evento) => (
             <Evento data={evento} onDelete={() => deleteEvento(evento.id)} showAlert={setAceptShow} />

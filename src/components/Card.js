@@ -14,7 +14,7 @@ const Card = ({data, editTextArea, title}) => {
                     <p id="titulo">{title}</p>
                 </Flex> 
                 <Flex flex-display='column'>
-                    <p>{data.descripcion}</p>
+                    <p>{data}</p>
                     {/* <TextArea disabled={editTextArea}>{data.descripcion}</TextArea> */}
                 </Flex>    
             </Div>

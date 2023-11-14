@@ -4,8 +4,21 @@ import HeaderTitle from "../components/HeaderTitle";
 import Inputk from "../components/input/Inputk";
 import InputFilePreview from "../components/input/InputFilePreview";
 import Btn from "../components/Btn";
-const crearPatrocinador =({onClick}) =>{
+import api from '../services/api';
+import { useState } from "react";
 
+const CrearPatrocinador =({onClick}) =>{
+
+    const [data,setData]=useState();
+
+    const sendData = async() => {
+        try{
+         const response = await api.post('/api/evento', data);
+          console.log("Post")
+        }catch(err){
+          console.log("Error: ", err)
+        }
+      }
 
     return (
         <>
@@ -77,4 +90,4 @@ const crearPatrocinador =({onClick}) =>{
     )
 }
 
-export default crearPatrocinador
+export default CrearPatrocinador
