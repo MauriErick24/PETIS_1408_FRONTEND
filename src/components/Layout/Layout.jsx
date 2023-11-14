@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
+import { useFormik } from 'formik';
 // import { useNavigate } from 'react-router-dom';
 
 import Header from '../Header';
@@ -17,6 +18,7 @@ import Auspiciador from '../../views/auspiciador';
 import Reglas from '../../views/reglas';
 import Premios from '../../views/premios';
 import Requisitos from '../../views/requisitos'
+
 
 
 const Container = styled.div`
@@ -62,28 +64,65 @@ function Layout({updateButton}) {
   console.log(datos);
  
   const [data, setData] = useState(
-    { 
-      nombre_evento:"evento prueba",
-      inicio_inscripcion:"2023-10-04",
-      fin_inscripcion:"2023-11-21",
-      fin_evento:"2023-12-1",
-      organizador:"jalasoft",
-      imagen:"assests/images/umss-logo.png",
-      lugar:"coña coña",
-      email:"pretencioso@gmail.com",
-      descripcion:"este es un evento",
-      hora:"09:00:00.0000000",
-      telefono:"78327438",
-      requisito:"traer malcriadas",
-      premio:[],
-      reglas:"no ser gay",
-      detalle:"blba bla bla",
-      afiche:"nose que es un afiche",
-      contenido:"este es el contenido del evento",
-      invitado:"shrek",
-      tipoEvento_id:4
+    {    
+    nombre_evento:"eveentos 153",
+    inicio_inscripcion:"2021-01-10",
+    fin_inscripcion:"2024-11-21",
+    inicio_actividades:"2024-11-21",
+    fin_actividades:"2022-11-20",
+    inicio_premiacion:"2024-12-1",
+    fin_evento:"2023-12-1",
+    imagen:"assests/images/umss-logo.png",
+    lugar:"coña coña",
+    email:"pretencioso@gmail.com",
+    descripcion:"este es un evento",
+    hora_inicio_inscripcion:"09:00:00.0000000",
+    hora_fin_inscripcion:"09:00:00.0000000",
+    hora_inicio_actividades:"09:00:00.0000000",
+    hora_fin_actividades:"09:00:00.0000000",
+    telefono:"78327438",
+    reglas:"no ser gay",
+    detalle:"blba bla bla",
+    contenido:"este es el contenido del evento",
+    invitado:"shrek",
+    estado_evento:"EN VIVO",
+    organizadores:[
+      { nombre: "Carrera de Informatica", author: "F. Scott Fitzgerald", year: 1925, publisher: "Charles Scribner's Sons", origin: "EE. UU." },
+      { nombre: "MEMI", author: "Harper Lee", year: 1960, publisher: "J. B. Lippincott & Co.", origin: "EE. UU." },
+      { nombre: "JALA SOFT", author: "George Orwell", year: 1949, publisher: "Secker & Warburg", origin: "Reino Unido" },
+      { nombre:"UMSA - Informatica",author: "Jorge Ledezma", year:1980, publisher:"Diamond", origin: 'bosnia'},
+      { nombre:"Univ. Gabriel Rene Moreno",author:"cervantes", year: 1965, publisher: "pinguin", origin: 'Spain'},
+     
+    ],
+    auspiciadores:[
+      { nombre:"Embajada suiza",author:"nemilville", year: 1985,publisher:'Dolmen', origin:'USA'},
+      { nombre:"Fundacion Bankia",author:"Cesar Ldzm", year: 1945, publisher:"majos", origin:'Peru'},
+      { nombre:"Cuadros&CIA", author: "maarisabel", year:1965, publisher:"Trico", origin:'Spain'},
+      { nombre:"Alcaldia de CB", author:'Nicolas cano', year:1965, publisher:'Friends', origin:'UK'},
+    ]
 }
 )
+
+    const formik = useFormik({
+      initialValues: data,
+      onSubmit: (values) => {
+        // Lógica de envío del formulario
+        console.log(values);
+      },
+      validate: (values) => {
+        // Lógica de validación del formulario
+        const errors = {};
+
+        // Validaciones personalizadas
+
+        return errors;
+      },
+    });
+
+
+const handleActualizarEvento = (nuevosDatos) => {
+  setData({ ...data, ...nuevosDatos });
+};
 
     const handleButtonClick = (evento, organizador, auspiciador, reglas, premios, requisitos) => {
       setShowCrearEvento(evento);
@@ -130,18 +169,18 @@ function Layout({updateButton}) {
           <Content>
             {/* {main} */}
             
-            {showCrearEvento && <CrearEvento />}
-            {showOrganizador && <Organizador/>}
-            {showAuspiciador && <Auspiciador/>} 
-            {showReglas && <Reglas/>} 
-            {showPremios && <Premios/>} 
-            {showRequisitos && <Requisitos/>} 
+            {showCrearEvento && <CrearEvento data={data} formik={formik}/>}
+            {showOrganizador && <Organizador data={data.organizadores} formik={formik}/>}
+            {showAuspiciador && <Auspiciador data={data.auspiciadores} onUpdateEvento={handleActualizarEvento}/>} 
+            {showReglas && <Reglas data={data} onUpdateEvento={handleActualizarEvento}/>} 
+            {showPremios && <Premios data={data} onUpdateEvento={handleActualizarEvento}/>} 
+            {showRequisitos && <Requisitos data={data} onUpdateEvento={handleActualizarEvento}/>} 
             
 
           </Content>  
         </Container>
       <Flex justify-content='end' gap='1em'>
-        {updateButton && <Btn>GUARDAR</Btn>}
+        {updateButton && <Btn type='submit'>GUARDAR</Btn>}
         {!updateButton && <Btn onClick={()=>console.log(data)}>CREAR</Btn>}
        
         <Btn color='second' >CANCELAR</Btn> 

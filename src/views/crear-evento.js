@@ -76,12 +76,8 @@ const initialValues = {
   }
 
 
-const CrearEvento = () => {
-  const formik = useFormik({
-    initialValues,
-    onSubmit, 
-    validate 
-  })
+const CrearEvento = ({data, formik}) => {
+
   return(
         <Div>
           <form onSubmit={formik.handleSubmit}>
@@ -118,7 +114,7 @@ const CrearEvento = () => {
                               name='inicio_inscripcion'
                               type='date' 
                               label='Inicia'
-                              inputWidth={'110px'}
+                              inputWidth={'150px'}
                                value={formik.values.inicio_inscripcion}
                                onChange={formik.handleChange}
                                onBlur={formik.handleBlur}
@@ -133,7 +129,7 @@ const CrearEvento = () => {
                               name='fin_inscripcion'
                               type='date' 
                               label='Fin'
-                              inputWidth={'110px'}
+                              inputWidth={'150px'}
                                value={formik.values.fin_inscripcion}
                                onChange={formik.handleChange}
                                onBlur={formik.handleBlur}
@@ -149,11 +145,11 @@ const CrearEvento = () => {
                             label='Hora: ' 
                             type='time' 
                             // disabled={!options.hora}
-                            // value={values.hora}
+                             value={formik.values.horaInicioEvento}
                             // onChange={handleChange}
                             // onBlur={handleBlur}
-                            inputWidth={'100px'}
-                             value={formik.values.hora}
+                            inputWidth={'120px'}
+                            // value={formik.values.hora}
                              onChange={formik.handleChange}
                              onBlur={formik.handleBlur}
                           />
@@ -168,8 +164,8 @@ const CrearEvento = () => {
                             // value={values.hora}
                             // onChange={handleChange}
                             // onBlur={handleBlur}
-                            inputWidth={'100px'}
-                             value={formik.values.hora}
+                            inputWidth={'150px'}
+                             value={formik.values.horaFinEvento}
                              onChange={formik.handleChange}
                              onBlur={formik.handleBlur}
                           />
@@ -190,7 +186,7 @@ const CrearEvento = () => {
                               name='inicio_inscripcion'
                               type='date' 
                               label='Inicia'
-                              inputWidth={'110px'}
+                              inputWidth={'150px'}
                                value={formik.values.inicio_inscripcion}
                                onChange={formik.handleChange}
                                onBlur={formik.handleBlur}
@@ -203,7 +199,7 @@ const CrearEvento = () => {
                             <Inputd
                               name='fin_inscripcion'
                               type='date'
-                              inputWidth={'110px'} 
+                              inputWidth={'150px'} 
                               label='Fin'
                                value={formik.values.fin_inscripcion}
                                onChange={formik.handleChange}
@@ -219,9 +215,9 @@ const CrearEvento = () => {
                             name='hora'
                             label='Hora: ' 
                             type='time' 
-                            inputWidth={'100px'}
+                            inputWidth={'120px'}
                             //120
-                             value={formik.values.hora}
+                             value={formik.values.horaInicioInscripcion}
                              onChange={formik.handleChange}
                              onBlur={formik.handleBlur}
                           />
@@ -235,8 +231,8 @@ const CrearEvento = () => {
                             // value={values.hora}
                             // onChange={handleChange}
                             // onBlur={handleBlur}
-                            inputWidth={'100px'}
-                             value={formik.values.hora}
+                            inputWidth={'120px'}
+                             value={formik.values.horaFinInscripcion}
                              onChange={formik.handleChange}
                              onBlur={formik.handleBlur}
 
@@ -321,8 +317,8 @@ const CrearEvento = () => {
                     <TextArea 
                         name='detalle'
                         label='Detalles:'
-                        // value={values.detalle}
-                        // onChange={handleChange}
+                         value={formik.values.detalle}
+                        onChange={formik.handleChange}
                         // onBlur={handleBlur} 
                         // disabled={!options.detalles} 
                     />

@@ -10,17 +10,9 @@ import api from '../services/api'
 import '../assets/css/Organizadorn.css';
 import Image from '../assets/images/example-img.jpg'
 
-const Patrocinador = ({onClick}) => {
-    const [organizador,setOrganizador]=useState([
-        {
-            nombrepatrocinador:'coca cola'
-        },
-          {
-            nombrepatrocinador:'Lab Tech'
-        },  {
-            nombrepatrocinador:'UMSS'
-        }
-    ])
+const Patrocinador = ({onClick, data}) => {
+    const [organizador,setOrganizador]=useState(data)
+
   useEffect(()=>{
     const fetchData = async () => {
       try{
@@ -35,12 +27,12 @@ const Patrocinador = ({onClick}) => {
   }, []);
     const datos=[
         {
-            nombrepatrocinador:'coca cola'
+            nombre:'coca cola'
         },
           {
-            nombrepatrocinador:'Lab Tech'
+            nombre:'Lab Tech'
         },  {
-            nombrepatrocinador:'UMSS'
+            nombre:'UMSS'
         }
      ]
             const [searchInput, setSearchInput] = useState('');
@@ -55,7 +47,7 @@ const Patrocinador = ({onClick}) => {
         };
 
         const handleSelectBook = (book) => {
-            if (!selectedBooks.some(selectedBook => selectedBook.nombrepatrocinador === book.nombrepatrocinador) && selectedBooks.length < 5) {
+            if (!selectedBooks.some(selectedBook => selectedBook.nombre === book.nombre) && selectedBooks.length < 5) {
             setSelectedBooks([...selectedBooks, book]);
             //setSelectedBooks([...selectedBooks, book]);
             }
@@ -71,7 +63,7 @@ const Patrocinador = ({onClick}) => {
 
         useEffect(() => {
             const query = searchInput.toLowerCase();
-            const filteredBooks = organizador.filter(book => book.nombrepatrocinador.toLowerCase().startsWith(query));
+            const filteredBooks = organizador.filter(book => book.nombre.toLowerCase().startsWith(query));
             //console.log(organizador);
             setFilteredLibrary(filteredBooks);
             const totalResults = filteredBooks.length;
@@ -94,8 +86,8 @@ const Patrocinador = ({onClick}) => {
                     {filteredLibrary
                     .slice((currentPage - 1) * resultsPerPage, currentPage * resultsPerPage)
                     .map((book) => (
-                        <li key={book.nombrepatrocinador} onClick={() => handleSelectBook(book)}>
-                        <p>{book.nombrepatrocinador}</p>
+                        <li key={book.nombre} onClick={() => handleSelectBook(book)}>
+                        <p>{book.nombre}</p>
                         </li>
                     ))}
                 </div>
@@ -111,8 +103,8 @@ const Patrocinador = ({onClick}) => {
                     <h2>Auspiciadores Seleccionados</h2>
                     <ul id="selectedBooks">
                         {selectedBooks.map((book) => (
-                        <li key={book.nombrepatrocinador}>
-                            {book.nombrepatrocinador} <Img src={Image}/>
+                        <li key={book.nombre}>
+                            {book.nombre} <Img src={Image}/>
                             <button onClick={() => handleRemoveBook(book)} className="delete-button">X</button>
                         </li>
                         ))}

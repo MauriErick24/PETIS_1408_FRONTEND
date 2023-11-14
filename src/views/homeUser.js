@@ -5,6 +5,7 @@ import HeaderEventType from "../components/HeaderEventType";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import HeaderArticles from '../components/HeaderArticles';
+import Btn from "../components/Btn";
 
 const HomeUser =()=>{
     const navigate = useNavigate();
@@ -102,13 +103,12 @@ const HomeUser =()=>{
         <>
           
         <HeaderEventType types={types} onClick={changeFiltro}/>
-        <div>
-          {/* <H1>EVENTOS EN VIVO</H1>  */}
-          <HeaderArticles 
-            title='EVENTOS EN VIVO'
-            btnTitle='CREAR EVENTO'
-            onClick={() => navigate('/crear/evento', {state: {datos: null}})}/>
-        </div>  
+        <Flex top='1%' align-items='center' justify-content='space-between'>
+          
+          <H1>EVENTOS EN VIVO</H1> 
+          <Btn onClick={() => navigate('/crear/evento', {state: {datos: null}})}>CREAR EVENTO</Btn>
+        
+        </Flex>  
           
         <Div className="barra"/>
         <Fondo>
