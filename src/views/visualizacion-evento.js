@@ -10,6 +10,8 @@ import Card from '../components/Card';
 import Btn from '../components/Btn';
 import BubbleContainer from '../components/BubbleContainer';
 import BubbleIcon from '../components/BubbleIcon';
+import Input from '../components/input/Input';
+import Inputd from '../components/input/Inputd';
 
 import Imagen from '../assets/images/example-img.jpg';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -25,6 +27,8 @@ function Visualizacionevento(){
 
     const [showButtonEditar, setShowButtonEditar] = useState(true)
     const [showButtonCancelar, setShowButtonCancelar] = useState(false)
+    const [taskButton, setTaskButton] = useState(true)
+    
     
     const {id} = useParams();
     const [edit, setEdit] = useState(false);
@@ -75,6 +79,81 @@ function Visualizacionevento(){
                 ]
     })
 
+
+
+
+    const [tasks, setTasks] = useState([]);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [taskInput, setTaskInput] = useState('');
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
+  
+    const openModal = () => {
+      setIsModalOpen(true);
+    };
+  
+    const closeModal = () => {
+      setIsModalOpen(false);
+      setTaskInput('');
+      setStartDate('');
+      setEndDate('');
+    };
+  
+    const addTask = () => {
+      if (taskInput.trim() === '') {
+        alert('Por favor, ingrese una tarea.');
+        return;
+      }
+  
+      if (startDate > endDate) {
+        alert('La fecha de inicio debe ser anterior o igual a la fecha de fin.');
+        return;
+      }
+  
+      const newTask = {
+        id: new Date().getTime(), // Agregamos un ID único para cada tarea
+        task: taskInput,
+        startDate,
+        endDate,
+      };
+  
+      setTasks((prevTasks) => [...prevTasks, newTask]);
+      closeModal();
+    };
+  
+    const deleteTask = (taskId) => {
+      const updatedTasks = tasks.filter((task) => task.id !== taskId);
+      setTasks(updatedTasks);
+    };
+  
+
+
+    // const [data, setData] = useState({
+    //     id: id,
+    //     titulo: "DESCRIPCION DEL EVENTO",
+    //     descripcion:"El Desafío de  ALGORITMOS es un evento de programación competitiva que reúne a mentes brillantes de todo el mundo en una batalla intelectual de habilidades de programación y resolución de problemas. Este evento anual es el punto culminante de la temporada para programadores, ingenieros y entusiastas de la informática, donde se enfrentan en un emocionante torneo de códigos.",
+    //     inicioEvento: "17/01/2023",
+    //     finEvento: "15/02/2023",
+    //     inicioInscripcion: "20/01/2023",
+    //     finInscripcion: "25/01/2023",
+    //     email: "contacto@domain.com",
+    //     telefono: 68745201,
+    //     imagen: 'https://es.community.intersystems.com/sites/default/files/inline/images/ai_welcome_wide_2.jpg',
+    //     auspiciadores:[
+    //         {
+    //             nombreAuspiciador: 'ICPC',
+    //             imagen: 'https://icpc.global/regionals/abouticpc/foundationlogo.png'
+    //         },
+    //         {
+    //             nombreAuspiciador: 'UMSS',
+    //             imagen: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Marca_Vertical_Universidad_Mayor_de_San_Sim%C3%B3n_Cochabamba_Bolivia.png/1280px-Marca_Vertical_Universidad_Mayor_de_San_Sim%C3%B3n_Cochabamba_Bolivia.png'
+    //         },
+    //         {
+    //             nombreAuspiciador: 'HACKER CUP',
+    //             imagen: 'https://images-platform.99static.com/LWy50Ye4pyXRHqli3cODzyN-PlE=/500x500/top/smart/99designs-contests-attachments/6/6107/attachment_6107282'
+    //         },
+    //     ]
+    // })
 
     useEffect(()=>{
         const fetchData = async()=>{
@@ -136,12 +215,75 @@ function Visualizacionevento(){
             </Flex>
             
             <Asided>
-            <Flex flex-direction='column' justify-content='space-between'>
+                <Flex flex-direction='column' justify-content='space-between'>
                     {showButtonEditar && <Btn margin-bottom='10px' onClick={() => navigate(`/editar/evento/${id}`, {state: {datos: data}})}>EDITAR</Btn>}
                     {showButtonCancelar && <Btn>CANCELAR</Btn>}   
                 </Flex>
+                <Flex flex-direction='column' align-items='center' gap='1em'>
+                    <P>Lista de Tareas</P>
+                    {taskButton && <Btn onClick={openModal}>AGREGAR TAREA</Btn>}
+                    {isModalOpen && (
+                        <Modal>
+                          <Flex flex-direction='column' gap='1em' justify-content='center' align-items='center'>
+                                <h2>Agregar Tarea</h2>
+                                <Flex gap='5%'>
+                                    <P>Tarea: </P>
+                                    <Input 
+                                        type='text'
+                                        name='tarea'
+                                        //    label='Tarea:'
+                                        value={taskInput} 
+                                        onChange={(e) => setTaskInput(e.target.value)}
+                                        // onBlur={handleBlur}
+                                    />
+                                </Flex>
+
+                                <Flex gap='5%'>
+                                    <P>Fecha de Inicio:</P>
+                                    <Inputd
+                                        name='fecha_inicio'
+                                        type='date' 
+                                        // label='Fecha de Inicio:'
+                                        value={startDate} 
+                                        onChange={(e) => setStartDate(e.target.value)}                           
+                                    />
+                                </Flex>
+
+                                <Flex gap='5%' >
+                                    <P>Fecha de Fin:</P>
+                                        
+                                    <Inputd
+                                        name='fecha_fin'
+                                        type='date' 
+                                        //label='Fecha de Fin:'
+                                        value={endDate} 
+                                        onChange={(e) => setEndDate(e.target.value)}
+                                    />
+                                </Flex>
+
+                                
+                                <Flex gap='1em'>
+                                    <Btn onClick={addTask}>ACEPTAR</Btn>
+                                    <Btn color='second' onClick={closeModal}>CANCELAR</Btn>
+                                </Flex>
+                          </Flex>
+                        </Modal>
+                    )}
+                    <ul>
+                        {tasks.map((task) => (
+                        <li key={task.id}>           
+                            <Flex text-align='center' align-items='center' gap='1em'>
+                                <P>{task.task} </P> 
+                                <P>{task.startDate} - {task.endDate}</P>
+                                <Btn color='second' onClick={() => deleteTask(task.id)}>x</Btn>
+                            </Flex>
+                        </li>
+                        ))}
+                    </ul>
+                </Flex>
             </Asided>
         </Flex>
+        
         </>
     )
 }
@@ -169,4 +311,15 @@ const P =styled.p`
         margin-left:1.1em;
         font-size: 20px;
     }
+`
+const Modal = styled.div`
+    position: fixed;
+    width:fit-content;
+    height:fit-content;
+    left: 35%;
+    top: 35%;
+    background-color: #bfba8a ;
+    padding: 2%;
+    border-radius:10%;
+    border: solid 2px #000;
 `

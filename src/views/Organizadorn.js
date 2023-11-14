@@ -10,14 +10,16 @@ const library = [
   { nombre:"UMSA - Informatica",author: "Jorge Ledezma", year:1980, publisher:"Diamond", origin: 'bosnia'},
   { nombre:"Univ. Gabriel Rene Moreno",author:"cervantes", year: 1965, publisher: "pinguin", origin: 'Spain'},
   { nombre:"Ministerio de Educacion",author:"victor hugo", year: 1976,publisher:'mcrgraw', origin:'France'},
-  { nombre:"Embajada suiza",author:"nemilville", year: 1985,publisher:'Dolmen', origin:'USA'},
-  { nombre:"Fundacion Bankia",author:"Cesar Ldzm", year: 1945, publisher:"majos", origin:'Peru'},
-  { nombre:"Cuadros&CIA", author: "maarisabel", year:1965, publisher:"Trico", origin:'Spain'},
-  { nombre:"Alcaldia de CB", author:'Nicolas cano', year:1965, publisher:'Friends', origin:'UK'},
+  // { nombre:"Embajada suiza",author:"nemilville", year: 1985,publisher:'Dolmen', origin:'USA'},
+  // { nombre:"Fundacion Bankia",author:"Cesar Ldzm", year: 1945, publisher:"majos", origin:'Peru'},
+  // { nombre:"Cuadros&CIA", author: "maarisabel", year:1965, publisher:"Trico", origin:'Spain'},
+  // { nombre:"Alcaldia de CB", author:'Nicolas cano', year:1965, publisher:'Friends', origin:'UK'},
 ];
 
-function Organizadorn() {
-  const [organizador,setOrganizador]=useState([])
+function Organizadorn({data, formik}) {
+
+  const [organizador,setOrganizador]=useState(library)
+
   useEffect(()=>{
     const fetchData = async () => {
       try{
@@ -96,7 +98,7 @@ function Organizadorn() {
       <h2>Organizadores Seleccionados</h2>
       <ul id="selectedBooks">
         {selectedBooks.map((book) => (
-          <li key={book.nombre}>
+          <li key={book.nombre} >
             {book.nombre} (Institucion: {book.representante}, Telefono: {book.telefono})
             <button onClick={() => handleRemoveBook(book)} className="delete-button">X</button>
           </li>

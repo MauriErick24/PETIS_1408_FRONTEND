@@ -1,24 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import Flex from "../components/Flex";
 import HeaderTitle from "../components/HeaderTitle";
 import Inputk from "../components/input/Inputk";
 import InputFilePreview from "../components/input/InputFilePreview";
 import Btn from "../components/Btn";
-import api from '../services/api';
-import { useState } from "react";
-
 const CrearPatrocinador =({onClick}) =>{
-
-    const [data,setData]=useState();
-
-    const sendData = async() => {
-        try{
-         const response = await api.post('/api/evento', data);
-          console.log("Post")
-        }catch(err){
-          console.log("Error: ", err)
+    const [auspiciadorDatos, setAuspiciadorDatos] = useState(
+        {
+            nombreAuspiciador: '',
+            empresaAuspiciador:'',
+            emailAuspiciador: '',
+            telefonoAuspiciador: '',
+            direccionAuspiciador: '',
         }
-      }
+    )
+
+        
+    const handleChange = (name, value) => {
+        setAuspiciadorDatos((prevAuspiciadorDatos) => ({
+        ...prevAuspiciadorDatos,
+        [name]: value,
+        }));
+    };
+
+    const sendData = () =>{
+        console.log(auspiciadorDatos)
+        onClick()
+    }
 
     return (
         <>
@@ -31,42 +39,42 @@ const CrearPatrocinador =({onClick}) =>{
                 <Flex  flex-direction="column">
                     <Inputk 
                             label='Nombre de auspiciador:'
-                            name='nombre_auspiciador'
+                            name='nombreAuspiciador'
                             justify_content='end'
                             // value={values.nombre_evento}
-                            // onChange={handleChange}
+                            onChange={(e) => handleChange(e.target.name, e.target.value)}
                             // onBlur={handleBlur}
                         />
                     <Inputk 
                             label='Empresa u Organización:'
-                            name='nombre_auspiciador'
+                            name='empresaAuspiciador'
                             justify_content='end'
                             // value={values.nombre_evento}
-                            // onChange={handleChange}
+                            onChange={(e) => handleChange(e.target.name, e.target.value)}
                             // onBlur={handleBlur}
                         />
                     <Inputk 
                             label='E-mail:'
-                            name='Email_auspiciador'
+                            name='emailAuspiciador'
                             justify_content='end'
                             // value={values.nombre_evento}
-                            // onChange={handleChange}
+                            onChange={(e) => handleChange(e.target.name, e.target.value)}
                             // onBlur={handleBlur}
                         />
                     <Inputk 
                             label='Teléfono:'
-                            name='telefono_auspiciador'
+                            name='telefonoAuspiciador'
                             justify_content='end'
                             // value={values.nombre_evento}
-                            // onChange={handleChange}
+                            onChange={(e) => handleChange(e.target.name, e.target.value)}
                             // onBlur={handleBlur}
                         />
                     <Inputk 
                             label='Dirección'
-                            name='direccion_auspiciador'
+                            name='direccionAuspiciador'
                             justify_content='end'
                             // value={values.nombre_evento}
-                            // onChange={handleChange}
+                            onChange={(e) => handleChange(e.target.name, e.target.value)}
                             // onBlur={handleBlur}
                         />                     
                 </Flex>
@@ -83,7 +91,7 @@ const CrearPatrocinador =({onClick}) =>{
             {/* </Flex> */}
 
                  <Flex justify-content='end' gap='1em'>
-                    <Btn>CREAR AUSPICIADOR</Btn>
+                    <Btn onClick={sendData}>CREAR AUSPICIADOR</Btn>
                     <Btn color='second' onClick={onClick}>VOLVER</Btn>
                  </Flex>
         </>

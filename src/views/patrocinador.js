@@ -10,17 +10,9 @@ import api from '../services/api'
 import '../assets/css/Organizadorn.css';
 import Image from '../assets/images/example-img.jpg'
 
-const Patrocinador = ({onClick}) => {
-    const [organizador,setOrganizador]=useState([
-        // {
-        //     nombre:'coca cola'
-        // },
-        //   {
-        //     nombre:'Lab Tech'
-        // },  {
-        //     nombre:'UMSS'
-        // }
-    ])
+const Patrocinador = ({onClick, data}) => {
+    const [organizador,setOrganizador]=useState(data)
+
   useEffect(()=>{
     const fetchData = async () => {
       try{

@@ -1,10 +1,10 @@
 import Flex from './Flex'
 import styled from 'styled-components'
 
-const HeaderArticles = ({ title, btnTitle, onClick }) => {
+const HeaderArticles = ({ title, btnTitle, onClick, showTitle}) => {
   return (
     <Div justify-content='space-between'>
-      <div className='header-articles-title'>{title}</div>  
+      {!showTitle && <div className='header-articles-title'>{title}</div>  }
       {/* <div>{title}</div> */}
       <button onClick={onClick}>{btnTitle}</button>
     </Div>
