@@ -27,7 +27,7 @@ function Visualizacionevento(){
 
     const [showButtonEditar, setShowButtonEditar] = useState(false)
     const [showButtonCancelar, setShowButtonCancelar] = useState(false)
-    const [taskButton, setTaskButton] = useState(false)
+    const [taskButton, setTaskButton] = useState(true)
     
     
     const {id} = useParams();
@@ -258,8 +258,8 @@ function Visualizacionevento(){
 
                                 
                                 <Flex gap='1em'>
-                                    <Btn onClick={addTask}>Aceptar</Btn>
-                                    <Btn color='second' onClick={closeModal}>Cancelar</Btn>
+                                    <Btn onClick={addTask}>ACEPTAR</Btn>
+                                    <Btn color='second' onClick={closeModal}>CANCELAR</Btn>
                                 </Flex>
                           </Flex>
                         </Modal>
