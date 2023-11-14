@@ -23,17 +23,19 @@ import HomeUser from './views/homeUser'
 import Patrocinador from './views/patrocinador'
 import Reglas from './views/reglas'
 import Premios from './views/premios'
-import Invitados from './views/invitados'
+//import Invitados from './views/requisitos'
 import Afiche from './views/afiche'
 import Auspiciador from './views/auspiciador'
 
 //import ModalLayout from './components/Modals/ModalCrear'
 
 function App() {
+ 
 
   return (
     <BrowserRouter>
       <Routes>
+          
         <Route path="/" element={<Layout><Home /></Layout>} />
        
         <Route path='/crear/evento' element={<LayoutCreacion />}/>
@@ -47,11 +49,13 @@ function App() {
         {/* <Route path='/crear/evento/organizador/corganizador' element={<LayoutCreacion main={<Corganizador/>}/>}/> */}
         
         {/* <Route path='/crear/evento/patrocinadores' element={<LayoutCreacion main={<Patrocinador/>}/>}/>
-        <Route path='/crear/evento/reglas' element={<LayoutCreacion main={<Reglas/>}/>}/>
+        <Route path='/crear/evento/reglas' 
+        
+        element={<LayoutCreacion main={<Reglas/>}/>}/>
         <Route path='/crear/evento/premios' element={<LayoutCreacion main={<Premios/>}/>}/>
         <Route path='/crear/evento/invitados' element={<LayoutCreacion main={<Invitados/>}/>}/>
         <Route path='/crear/evento/afiche' element={<LayoutCreacion main={<Afiche/>}/>}/>   */}
-
+      
 
 
 
