@@ -17,5 +17,6 @@ const Div = styled(Flex)`
     color: white;
     padding: 0.3em 0.8em;
     font-weight: 400;
+    margin-bottom: 15px;
   }
 `

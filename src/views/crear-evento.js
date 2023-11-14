@@ -85,11 +85,10 @@ const CrearEvento = () => {
   return(
         <Div>
           <form onSubmit={formik.handleSubmit}>
-
-            <Flex justify-content='center'>
-                <HeaderTitle title='CREACION DE EVENTO'/> 
+            <Flex justify-content='center' >
+                <HeaderTitle title='CREACION DE EVENTO' /> 
             </Flex>
-            <Flex margin='1%' flex-direction='column' gap='1em'  align-items='none'>
+            <Flex margin='0' flex-direction='column' gap='1em'  align-items='none'>
                 <Inputk 
                     label='Nombre de evento:'
                     name='nombre_evento'
@@ -106,7 +105,8 @@ const CrearEvento = () => {
                 //   values.tipoEvento_id = parseInt(selectedValue);
                      }}
                 />
-                <Flex justify-content='space-evenly' width='100%' gap='1em'>
+                <Flex justify-content='space-between' width='100%' gap='1em'>
+                  {/* 'space-evenly' */}
                   <Container>
                     <Flex flex-direction = 'column' gap='1em'>
                       <Flex flex-direction = 'row'>
@@ -118,6 +118,7 @@ const CrearEvento = () => {
                               name='inicio_inscripcion'
                               type='date' 
                               label='Inicia'
+                              inputWidth={'110px'}
                                value={formik.values.inicio_inscripcion}
                                onChange={formik.handleChange}
                                onBlur={formik.handleBlur}
@@ -132,6 +133,7 @@ const CrearEvento = () => {
                               name='fin_inscripcion'
                               type='date' 
                               label='Fin'
+                              inputWidth={'110px'}
                                value={formik.values.fin_inscripcion}
                                onChange={formik.handleChange}
                                onBlur={formik.handleBlur}
@@ -150,11 +152,10 @@ const CrearEvento = () => {
                             // value={values.hora}
                             // onChange={handleChange}
                             // onBlur={handleBlur}
-                            inputWidth={'120px'}
+                            inputWidth={'100px'}
                              value={formik.values.hora}
                              onChange={formik.handleChange}
                              onBlur={formik.handleBlur}
-
                           />
                           
                           {formik.touched.hora && formik.errors.hora ? <div className='error'>{formik.errors.hora}</div>:null} 
@@ -167,7 +168,7 @@ const CrearEvento = () => {
                             // value={values.hora}
                             // onChange={handleChange}
                             // onBlur={handleBlur}
-                            inputWidth={'120px'}
+                            inputWidth={'100px'}
                              value={formik.values.hora}
                              onChange={formik.handleChange}
                              onBlur={formik.handleBlur}
@@ -180,7 +181,7 @@ const CrearEvento = () => {
                  
                   <Container>
                     <Flex flex-direction ='column' gap='1em'>
-                    <Flex flex-direction = 'row'>
+                    <Flex flex-direction = 'row' >
                         <p>Inscripción</p><Asterisk>*</Asterisk>
                       </Flex>
                       <Flex gap='1em'>
@@ -189,6 +190,7 @@ const CrearEvento = () => {
                               name='inicio_inscripcion'
                               type='date' 
                               label='Inicia'
+                              inputWidth={'110px'}
                                value={formik.values.inicio_inscripcion}
                                onChange={formik.handleChange}
                                onBlur={formik.handleBlur}
@@ -200,7 +202,8 @@ const CrearEvento = () => {
                           <Flex flex-direction='column' >
                             <Inputd
                               name='fin_inscripcion'
-                              type='date' 
+                              type='date'
+                              inputWidth={'110px'} 
                               label='Fin'
                                value={formik.values.fin_inscripcion}
                                onChange={formik.handleChange}
@@ -216,7 +219,8 @@ const CrearEvento = () => {
                             name='hora'
                             label='Hora: ' 
                             type='time' 
-                            inputWidth={'120px'}
+                            inputWidth={'100px'}
+                            //120
                              value={formik.values.hora}
                              onChange={formik.handleChange}
                              onBlur={formik.handleBlur}
@@ -231,7 +235,7 @@ const CrearEvento = () => {
                             // value={values.hora}
                             // onChange={handleChange}
                             // onBlur={handleBlur}
-                            inputWidth={'120px'}
+                            inputWidth={'100px'}
                              value={formik.values.hora}
                              onChange={formik.handleChange}
                              onBlur={formik.handleBlur}
