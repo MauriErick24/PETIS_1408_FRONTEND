@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 import Header from '../Header';
 import Footer from '../Footer';
@@ -37,7 +38,7 @@ const Sidebar = styled.div`
 const Content = styled.div`
   
   width: 78%;
-  height: 88%;
+  height: 655px;
   background-color: #BDBB96;
   padding: 20px;
   border-radius: 15px;
@@ -45,6 +46,7 @@ const Content = styled.div`
 
 function Layout({updateButton}) {
 
+  // const navigate = useNavigate();
   const location = useLocation();
   const { datos } = location.state || {};
   
@@ -142,7 +144,8 @@ function Layout({updateButton}) {
         {updateButton && <Btn>GUARDAR</Btn>}
         {!updateButton && <Btn onClick={()=>console.log(data)}>CREAR</Btn>}
        
-        <Btn color='second' >CANCELAR</Btn>
+        <Btn color='second' >CANCELAR</Btn> 
+        {/* <Btn onClick={() => navigate('/eventos')} color='second'>CANCELAR</Btn>  */}
       </Flex>
       </div>
       <Footer/>
