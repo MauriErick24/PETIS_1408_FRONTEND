@@ -87,10 +87,58 @@ const Premios = () => {
     };
 
     return(
-        <>
-            Vista premios
-        </>
-    )
+      <>
+          
+         
+  
+    <div>
+              <HeaderTitle title='PREMIOS'/>
+              <H2>Escriba los premios que tendra su evento</H2>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+              <h2 className="ROW" style={{ marginRight: '10px' }}>AGREGAR PREMIO</h2>
+              <button style={buttonStyle} className="agregar"onClick={addRule}>+</button>
+              
+              </div>
+
+           <div>
+              <div>
+              <h1> </h1>
+              <h1> </h1>
+              </div>
+          
+
+           
+      <input  style={inputStyle} className="Input"
+        type="text"
+        placeholder={'Ingrese los premios que desee'}
+        value={label}
+        onChange={(e) => setLabel(e.target.value)}
+      />
+      {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+      
+    </div>
+            <ul >
+              
+                   {rules.map((rule, index) => (
+                      
+                  <li  style={{display: 'flex', alignItems: 'center', justifyContent: 'center',  // Color de fondo rojo
+                  borderRadius: '30px',    // Bordes redondeados
+                  padding: '5px 20px',
+                  marginTop:'0.8em',    // Relleno interior
+                  color: 'black'}} key={index}>
+                   <input label={`Regla ${index + 1}`} value={rule}style={{backgroundColor: 'white',  // Color de fondo rojo
+                  borderRadius: '30px',    // Bordes redondeados
+                  padding: '5px 20px',
+                  marginTop:'0.1em',    // Relleno interior
+                  color: 'black', width:'70%',fontSize:'25px'}}></input>  
+                  
+                  <button style={Boton2} onClick={() => removeRule(index)}>X</button>
+                </li>
+               ))}
+           </ul>
+    </div>
+      </>
+  )
 }
 export default Premios;
 const H2 = styled.h2`
