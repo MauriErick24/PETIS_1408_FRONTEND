@@ -1,16 +1,19 @@
 // libs
 import styled from 'styled-components'
 import { FaRegUser, FaEllipsisVertical } from 'react-icons/fa6'
+import { useNavigate } from 'react-router-dom'
 
 const SessionBtn = ({ onClick }) => {
 
+  const navigate = useNavigate()
+
   return(
-    <UseIcon onClick={onClick}>
+    <UseIcon>
       <div className='icons'>
-        <FaEllipsisVertical className='icon-menu' />
+        <FaEllipsisVertical onClick={() => navigate('/perfil')} className='icon-menu' />
         <FaRegUser className='icon-user' />
       </div>
-      <p>INICIAR SESION</p>
+      <p onClick={onClick}>INICIAR SESION</p>
     </UseIcon>
   )
 }

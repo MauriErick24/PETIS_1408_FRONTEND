@@ -28,6 +28,8 @@ const Content = styled.div`
   justify-content: center;
   align-items: center;
   background-color: rgba(0,0,0, .86);
+  top: 0;
+  left: 0;
   z-index: 3;
 `
 

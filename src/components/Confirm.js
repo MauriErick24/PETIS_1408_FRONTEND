@@ -7,8 +7,8 @@ const Confirm = ({ title, message, onClose, onAcept, ...props }) => {
       {title && <h2 className='title'>{title}</h2>}
       {message && <p className='message'>{message}</p>}
       <div className='btn-content'>
-        <Btn onClick={onAcept}>Aceptar</Btn>
-        <Btn onClick={onClose} color='second'>Cancelar</Btn>
+        <Btn type='button' onClick={onAcept}>Aceptar</Btn>
+        <Btn type='button' onClick={onClose} color='second'>Cancelar</Btn>
       </div>
     </Content>
   )
@@ -24,7 +24,7 @@ const Content = styled.div`
   align-items: center;
   gap: 1em;
   background-color: #D1D0BC;
-  z-index: 3;
+  z-index: 4;
   border-radius: 0.5em;
   border: solid 0.1em #000;
 

@@ -12,7 +12,7 @@ import Btn from '../Btn'
 import InputFilePreview from '../input/InputFilePreview'
 import Confirm from '../Confirm'
 
-const PopRegister = ({ pop, setPop, onClick }) => {
+const PopRegisterEdit = ({ pop, setPop, onClick }) => {
 
   const [ confirm, setConfirm ] = useState(false)
   
@@ -142,7 +142,7 @@ const PopRegister = ({ pop, setPop, onClick }) => {
   )
 }
 
-export default PopRegister
+export default PopRegisterEdit
 
 const BtnCustom = styled(Btn)`
   font-size: 18px;

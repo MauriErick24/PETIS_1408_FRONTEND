@@ -13,6 +13,7 @@ const Home = () => {
 
   const navigate = useNavigate()
   const [ showAcept, setAceptShow ] = useState(false)
+  const [ welcome, setWelcome ] = useState(true)
 
   const example = {
     type: 'TIPO DE EVENTO',
@@ -48,6 +49,13 @@ const Home = () => {
 
   return(
     <>
+      
+      <Alert
+        show={welcome}
+        message='Bienvenido al sistema'
+        onAcept={() => setWelcome(!welcome)}
+      />
+
       <HeaderArticles 
         title='EVENTOS'
         btnTitle='CREAR EVENTO'
@@ -55,8 +63,6 @@ const Home = () => {
       />
       <Fondo>
 
-
-        
         <Flex className='event-content' flex-wrap='wrap' justify-content='space-evenly' gap='1em'>
           {cards.map((evento) => (
             <Evento data={evento} onDelete={() => deleteEvento(evento.id)} showAlert={setAceptShow} />

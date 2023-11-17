@@ -10,25 +10,38 @@ import SessionBtn from './SessionBtn'
 import PopSession from './popcontent/PopSession'
 import PopRegister from './popcontent/PopRegister'
 
-
 const Header = () => {
 
-  const [ popSession, setPopSession ] = useState(false)
-  const [ popRegister, setPopRegister ] = useState(false)
+  const [ pop, setPop ] = useState({
+    register: false,
+    session: false
+  }) 
+
+  const changePop = (key) => {
+    setPop((state) => ({
+      ...state,
+      [key]: !state[key]
+    }))
+  }
 
   return(
     <>
-      <PopRegister pop={popRegister} setPop={setPopRegister} />
+      <PopRegister 
+        pop={pop.register} 
+        setPop={() => changePop('register')} 
+      />
+
       <PopSession
-        pop={popSession}
-        setPop={setPopSession}
+        pop={pop.session}
+        setPop={() => changePop('session')}
         onClick={() => {
-          setPopRegister(!popRegister)
-          setPopSession(!popSession)
+          changePop('register')
+          changePop('session')
         }}
       />
+
       <HeaderStyle>
-        <SessionBtn onClick={() => setPopSession(!popSession)} />
+        <SessionBtn onClick={() => changePop('session')} />
 
         <div className='logo'>
           <img src={Logo} alt='Logo UMSS'/>

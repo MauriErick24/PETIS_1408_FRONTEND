@@ -24,6 +24,8 @@ const Content = styled.div`
   background-color: rgba(0,0,0, 0.86);
   justify-content: center;
   align-items: center;
+  top: 0;
+  left: 0;
 
   .content-message{
     width: 500px;

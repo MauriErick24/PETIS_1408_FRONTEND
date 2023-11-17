@@ -129,8 +129,6 @@ const CreacionEvento = () => {
         onSubmit={(value) => {
           setShow((state) => ({...state, confirm1: !show.confirm1}))
           setData(value)
-          
-          /*navigate('/')*/
         }}
       >
         {({ values, handleSubmit, handleChange, handleBlur, touched, errors }) => (
