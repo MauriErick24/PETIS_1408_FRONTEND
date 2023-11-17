@@ -34,7 +34,7 @@ function Visualizacionevento(){
     const [edit, setEdit] = useState(false);
 
     const [auspiciadores,setAuspiciador]=useState({});
-    const [data, setData] = useState({
+    const [data2, setData2] = useState({
         // id: 2,
         // nombre_evento: "eveentos 110",
         // inicio_inscripcion: "2023-10-04",
@@ -128,32 +128,35 @@ function Visualizacionevento(){
   
 
 
-    // const [data, setData] = useState({
-    //     id: id,
-    //     titulo: "DESCRIPCION DEL EVENTO",
-    //     descripcion:"El Desafío de  ALGORITMOS es un evento de programación competitiva que reúne a mentes brillantes de todo el mundo en una batalla intelectual de habilidades de programación y resolución de problemas. Este evento anual es el punto culminante de la temporada para programadores, ingenieros y entusiastas de la informática, donde se enfrentan en un emocionante torneo de códigos.",
-    //     inicioEvento: "17/01/2023",
-    //     finEvento: "15/02/2023",
-    //     inicioInscripcion: "20/01/2023",
-    //     finInscripcion: "25/01/2023",
-    //     email: "contacto@domain.com",
-    //     telefono: 68745201,
-    //     imagen: 'https://es.community.intersystems.com/sites/default/files/inline/images/ai_welcome_wide_2.jpg',
-    //     auspiciadores:[
-    //         {
-    //             nombreAuspiciador: 'ICPC',
-    //             imagen: 'https://icpc.global/regionals/abouticpc/foundationlogo.png'
-    //         },
-    //         {
-    //             nombreAuspiciador: 'UMSS',
-    //             imagen: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Marca_Vertical_Universidad_Mayor_de_San_Sim%C3%B3n_Cochabamba_Bolivia.png/1280px-Marca_Vertical_Universidad_Mayor_de_San_Sim%C3%B3n_Cochabamba_Bolivia.png'
-    //         },
-    //         {
-    //             nombreAuspiciador: 'HACKER CUP',
-    //             imagen: 'https://images-platform.99static.com/LWy50Ye4pyXRHqli3cODzyN-PlE=/500x500/top/smart/99designs-contests-attachments/6/6107/attachment_6107282'
-    //         },
-    //     ]
-    // })
+    const [data, setData] = useState({
+        id: id,
+        titulo: "DESCRIPCION DEL EVENTO",
+        descripcion:"El Desafío de  ALGORITMOS es un evento de programación competitiva que reúne a mentes brillantes de todo el mundo en una batalla intelectual de habilidades de programación y resolución de problemas. Este evento anual es el punto culminante de la temporada para programadores, ingenieros y entusiastas de la informática, donde se enfrentan en un emocionante torneo de códigos.",
+        inicioEvento: "17/01/2023",
+        finEvento: "15/02/2023",
+        inicioInscripcion: "20/01/2023",
+        finInscripcion: "25/01/2023",
+        email: "contacto@domain.com",
+        telefono: 68745201,
+        imagen: 'https://es.community.intersystems.com/sites/default/files/inline/images/ai_welcome_wide_2.jpg',
+        auspiciadores:[
+            {
+                nombre: 'ICPC',
+                imagen: 'https://icpc.global/regionals/abouticpc/foundationlogo.png'
+            },
+            {
+                nombre: 'UMSS',
+                imagen: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Marca_Vertical_Universidad_Mayor_de_San_Sim%C3%B3n_Cochabamba_Bolivia.png/1280px-Marca_Vertical_Universidad_Mayor_de_San_Sim%C3%B3n_Cochabamba_Bolivia.png'
+            },
+            {
+                nombre: 'HACKER CUP',
+                imagen: 'https://images-platform.99static.com/LWy50Ye4pyXRHqli3cODzyN-PlE=/500x500/top/smart/99designs-contests-attachments/6/6107/attachment_6107282'
+            },
+        ],
+        requisitos:[],
+        premios:[],
+        reglas:[]
+    })
 
     useEffect(()=>{
         const fetchData = async()=>{
@@ -171,7 +174,7 @@ function Visualizacionevento(){
 
     return (
         <>       
-        <HeaderDetail nombreEvento={`${data.nombre_evento} ${data.id}`} tipoEvento="COMPETENCIA"/>
+        <HeaderDetail nombreEvento={`${data.nombre_evento} ID:${data.id}`} tipoEvento="COMPETENCIA"/>
         <Flex justify-content='space-between'>
             <Asided>
                 <Flex flex-direction='column'  text-align='center' gap='2em' align-items = 'center'>
@@ -207,10 +210,31 @@ function Visualizacionevento(){
 
             <Flex flex-direction='column'>
                 <Card title={"DESCRIPCION DE EVENTO"} data={data.descripcion} />
-                {/* <Card title={"REQUISITOS DEL EVENTO"} data={data.requisitos} /> */}
+                <Card title={"REQUISITOS DEL EVENTO"}>
+                    {console.log(data.requisitos)}
+                    <ul>
+                     {data.requisitos.map((requisito) => (
+                        <li>{requisito.nombre}</li>
+                        ))}
+                    </ul>
+                </Card>
                 <Card title={"DETALLES"} data={data.detalle} />
-                {/* <Card title={"REGLAS"} data={data.reglas} /> */}
-                {/* <Card title={"PREMIOS"} data={data.premios} /> */}
+                {/* <Card title={"REGLAS"}>
+                    {console.log(data.requisitos)}
+                    <ul>
+                     {data.reglas.map((requisito) => (
+                        <li>{requisito.nombre}</li>
+                        ))}
+                    </ul>
+                </Card> */}
+                <Card title={"PREMIOS"}>
+                    {console.log(data.requisitos)}
+                    <ul>
+                     {data.premios.map((requisito) => (
+                        <li>{requisito.nombre}</li>
+                        ))}
+                    </ul>
+                </Card>
                 
             </Flex>
             

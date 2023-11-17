@@ -1,19 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Flex from "../components/Flex";
 import HeaderTitle from "../components/HeaderTitle";
 import Inputk from "../components/input/Inputk";
 import InputFilePreview from "../components/input/InputFilePreview";
 import Btn from "../components/Btn";
+import api from '../services/api'
+
 const CrearPatrocinador =({onClick}) =>{
     const [auspiciadorDatos, setAuspiciadorDatos] = useState(
         {
-            nombreAuspiciador: '',
-            empresaAuspiciador:'',
-            emailAuspiciador: '',
-            telefonoAuspiciador: '',
-            direccionAuspiciador: '',
+            nombre: '',
+            empresa:'',
+            email: '',
+            telefono: '',
+            direccion: '',
+            logo: 'logo.jpg',
         }
     )
+
+    
+    const sendData = async() => {
+        console.log(auspiciadorDatos)
+        onClick()
+        try{
+        const response = await api.post('/api/auspiciadores', auspiciadorDatos);
+        console.log("Post")
+        }catch(err){
+        console.log("Error: ", err)
+        }
+    }
 
         
     const handleChange = (name, value) => {
@@ -22,11 +37,11 @@ const CrearPatrocinador =({onClick}) =>{
         [name]: value,
         }));
     };
-
-    const sendData = () =>{
-        console.log(auspiciadorDatos)
-        onClick()
-    }
+    
+    // const sendData = () =>{
+    //     console.log(auspiciadorDatos)
+    //     onClick()
+    // }
 
     return (
         <>
@@ -39,7 +54,7 @@ const CrearPatrocinador =({onClick}) =>{
                 <Flex  flex-direction="column">
                     <Inputk 
                             label='Nombre de auspiciador:'
-                            name='nombreAuspiciador'
+                            name='nombre'
                             justify_content='end'
                             // value={values.nombre_evento}
                             onChange={(e) => handleChange(e.target.name, e.target.value)}
@@ -47,7 +62,7 @@ const CrearPatrocinador =({onClick}) =>{
                         />
                     <Inputk 
                             label='Empresa u Organización:'
-                            name='empresaAuspiciador'
+                            name='empresa'
                             justify_content='end'
                             // value={values.nombre_evento}
                             onChange={(e) => handleChange(e.target.name, e.target.value)}
@@ -55,7 +70,7 @@ const CrearPatrocinador =({onClick}) =>{
                         />
                     <Inputk 
                             label='E-mail:'
-                            name='emailAuspiciador'
+                            name='email'
                             justify_content='end'
                             // value={values.nombre_evento}
                             onChange={(e) => handleChange(e.target.name, e.target.value)}
@@ -63,7 +78,7 @@ const CrearPatrocinador =({onClick}) =>{
                         />
                     <Inputk 
                             label='Teléfono:'
-                            name='telefonoAuspiciador'
+                            name='telefono'
                             justify_content='end'
                             // value={values.nombre_evento}
                             onChange={(e) => handleChange(e.target.name, e.target.value)}
@@ -71,7 +86,7 @@ const CrearPatrocinador =({onClick}) =>{
                         />
                     <Inputk 
                             label='Dirección'
-                            name='direccionAuspiciador'
+                            name='direccion'
                             justify_content='end'
                             // value={values.nombre_evento}
                             onChange={(e) => handleChange(e.target.name, e.target.value)}

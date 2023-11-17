@@ -106,8 +106,8 @@ const HomeUser =()=>{
         <Flex top='1%' align-items='center' justify-content='space-between'>
           
           <H1>EVENTOS EN VIVO</H1> 
-          <Btn onClick={() => navigate('/crear/evento', {state: {datos: null}})}>CREAR EVENTO</Btn>
-        
+          {/* <Btn onClick={() => navigate('/crear/evento', {state: {datos: null}})}>CREAR EVENTO</Btn>
+         */}
         </Flex>  
           
         <Div className="barra"/>
