@@ -5,6 +5,7 @@ import { useFormik } from 'formik';
 
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import CrearAuspiciador from '../views/crear-auspiciador'
 
 import Btn from '../components/Btn';
 
@@ -15,6 +16,7 @@ import { useState } from 'react';
 
 import EditarEvento from './editar-evento';
 import EliminarEvento from './eliminar-evento';
+import CascadeList from '../components/CascadeList';
 
 
 const GestionEvento = () => {
@@ -23,6 +25,10 @@ const GestionEvento = () => {
     const [showEditar, setShowEditar] = useState(false)
     const [showEliminar, setShowEliminar] = useState(false)
     const [showCrear, setShowCrear] = useState(false)
+    const [showCrearAuspiciador, setCrearAuspiciador] = useState(false)
+    const [showCrearActividades, setCrearActividades] = useState(false)
+
+    const [showCascade, setShowCascade] = useState(false)
     
     const handleClick = (editar, eliminar, crear) => {
         setShowEditar(editar);
@@ -37,6 +43,11 @@ const GestionEvento = () => {
         crearButton : true,
     })
 
+    const handleCascade = (auspiciador, actividades) => {
+      setCrearAuspiciador(auspiciador)
+      setCrearActividades(actividades)
+    }
+
     return (
      
         <Div>
@@ -49,23 +60,41 @@ const GestionEvento = () => {
                 <Btn onClick={()=>navigate('/crear/evento')}>NUEVO EVENTO</Btn>
                }
                { showButtons.editarButton && 
-                <Btn onClick={()=> 
+                <Btn onClick={()=> {
                     handleClick(true, false, false)
+                    handleCascade(false, false)
+                }
                 }
                 >EDITAR</Btn>
                 }
 
                 { showButtons.eliminarButton && 
-                <Btn onClick={()=> 
-                    handleClick(false,true, false)
+                <Btn onClick={()=> {
+                  handleClick(false, true, false)
+                  handleCascade(false, false)
+              }
                 }>ELIMINAR</Btn>
                 }
                 
 
                 { showButtons.crearButton &&
-                <Btn onClick={()=> 
-                    handleClick(false, false, true)
+                <Btn onClick={()=> {
+                  
+                  setShowCascade(!showCascade)
+              }
                 }>CREAR</Btn>
+                }
+
+                { showCascade && (
+                  <CascadeList>
+                    <Option onClick={()=>{
+                      handleCascade(true,false)
+                      handleClick(false,false,false)
+                      }}>AUSPICIADORES</Option>
+                    <Option>ACTIVIDADES</Option>
+                  </CascadeList>
+                )
+                    
                 }
 
                 </Aside>
@@ -74,7 +103,8 @@ const GestionEvento = () => {
                 {/* {main} */}
                 {showEditar && (<EditarEvento showEditar={showEditar} />)}
                 {showEliminar && (<EliminarEvento showEliminar={showEliminar} />)}
-    
+                {showCrearAuspiciador && (<CrearAuspiciador/>)}
+
               </Content>  
             </Container>
           <Flex justify-content='end' gap='1em'>
@@ -91,6 +121,14 @@ const GestionEvento = () => {
     }
     
     export default GestionEvento;
+    const Option = styled.button`
+      width: 100%;
+      font-size: 17px;
+      &:hover,
+      &:focus{
+        background-color: #6b6a64;  
+      }
+    `
 
     const Div = styled.div`
       width: 100%;

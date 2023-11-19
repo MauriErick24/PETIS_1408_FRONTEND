@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import '../assets/css/Crud.css'; 
 //import 'bootstrap/dist/css/bootstrap.min.css';
 //import { Table, Button, Pagination, PaginationItem, PaginationLink } from 'reactstrap';
@@ -9,6 +9,9 @@ import styled from "styled-components";
 import Btn from "../components/Btn";
 import HeaderTitle from "../components/HeaderTitle";
 import Flex from "../components/Flex";
+import Spinner from '../components/Spinner'
+import api from '../services/api'
+import axios from 'axios'
 
 const EditarEvento = ({showEditar, showEliminar}) => {
     const data = [
@@ -24,6 +27,26 @@ const EditarEvento = ({showEditar, showEliminar}) => {
         {id:10,Personaje: 'Ichigo', Anime: 'Bleach',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Blue Navy'},
         {id:11,Personaje: 'Gon', Anime: 'Hunter x Hunter',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Blue Navy'}
     ];
+
+    const [data2, setData] = useState({});
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+           // const response = await api.get('');
+            //setData(response.data);
+          } catch (error) {
+            console.error('Error fetching data:', error);
+          } finally {
+            setLoading(false); 
+          }
+        };
+      
+        fetchData();
+      }, []); 
+      
+
 
     const itemsPerPage = 5;
     const [currentPage, setCurrentPage] = useState(1);
@@ -45,12 +68,17 @@ const EditarEvento = ({showEditar, showEliminar}) => {
 
     const handleSearch = (event) => {
         setSearchTerm(event.target.value);
-        setCurrentPage(1); // Resetear la página al cambiar el término de búsqueda
+        setCurrentPage(1); 
     };
 
     return (
         <>
-             <Flex justify-content='center' >
+            {loading ? (
+                <Spinner/>
+                ) : (
+                    <>
+                    
+                    <Flex justify-content='center' >
                 <HeaderTitle title='EDITAR EVENTOS' /> 
             </Flex>
 
@@ -100,16 +128,21 @@ const EditarEvento = ({showEditar, showEliminar}) => {
                         ))}
                     </tbody>
                 </table>
-                <div className="pagination mt-3">
-                    <button disabled={currentPage === 1} onClick={() => handleClick(currentPage - 1)}>&lt;</button>
+                <Flex className="pagination mt-3" align-items='center' gap='0.4em'>
+                    <Btn disabled={currentPage === 1} onClick={() => handleClick(currentPage - 1)}>&lt;</Btn>
                     {[...Array(totalPages)].map((_, i) => (
-                        <button key={i} className={i + 1 === currentPage ? "active" : ""} onClick={() => handleClick(i + 1)}>
+                        <Btn key={i} className={i + 1 === currentPage ? "active" : ""} onClick={() => handleClick(i + 1)}>
                             {i + 1}
-                        </button>
+                        </Btn>
                     ))}
-                    <button disabled={currentPage === totalPages} onClick={() => handleClick(currentPage + 1)}>&gt;</button>
-                </div>
+                    <Btn disabled={currentPage === totalPages} onClick={() => handleClick(currentPage + 1)}>&gt;</Btn>
+                </Flex>
             </div>
+                    
+                    </>
+                )}
+        
+          
             
         </>
     );
