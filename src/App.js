@@ -26,6 +26,7 @@ import Premios from './views/premios'
 //import Invitados from './views/requisitos'
 import Afiche from './views/afiche'
 import Auspiciador from './views/auspiciador'
+import GestionEvento from './views/gestion-evento'
 
 //import ModalLayout from './components/Modals/ModalCrear'
 
@@ -39,6 +40,8 @@ function App() {
         <Route path="/" element={<Layout><Home /></Layout>} />
        
         <Route path='/crear/evento' element={<LayoutCreacion />}/>
+        <Route path='/gestionar-eventos' element={<GestionEvento />}/>
+        <Route path='/editar-eventos' element={<GestionEvento />}/>
         <Route path='/editar/evento/:id' element={<LayoutCreacion updateButton={true}/>}/>
 
 

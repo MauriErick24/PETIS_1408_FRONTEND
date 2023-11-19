@@ -50,8 +50,8 @@ const Home = () => {
     <>
       <HeaderArticles 
         title='EVENTOS'
-        btnTitle='CREAR EVENTO'
-        onClick={() => navigate('/crear/evento', {state: {datos: null}})}
+        btnTitle='GESTIONAR EVENTOS'
+        onClick={() => navigate('/gestionar-eventos', {state: {datos: null}})}
       />
       <Fondo>
         <Flex className='event-content' flex-wrap='wrap' justify-content='space-evenly' gap='1em'>

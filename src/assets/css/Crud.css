@@ -1,0 +1,51 @@
+.pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    justify-content: center;
+  }
+  
+  .pagination button {
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    color: #333;
+    padding: 8px 16px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .pagination button:hover {
+    background-color: #ddd;
+  }
+
+  .crud-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+ 
+  table {
+    width: 80%; /* Puedes ajustar este valor según tus necesidades */
+    margin-bottom: 20px;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
+  
+
+
+  .pagination button.active {
+    background-color: #4caf50;
+    color: white;
+  }
+  
