@@ -9,12 +9,16 @@ import styled from "styled-components";
 import Btn from "../components/Btn";
 import HeaderTitle from "../components/HeaderTitle";
 import Flex from "../components/Flex";
+import Confirm from "../components/Confirm";
+import Alert from "../components/Alert";
+
+
 import Spinner from '../components/Spinner'
 import api from '../services/api'
 import axios from 'axios'
 
 const EliminarEvento = ({showEditar, showEliminar}) => {
-    const data = [
+    const [data, setData] = useState([
         {id:1,Personaje: 'Naruto jorge ledezma ', Anime: 'Naruto jorge ledezma',Telefono: 1234456887, email: 'jorge@mail.com', Address: 'Calle 1',AddresFavorite:'Blue Navy'},
         {id:2,Personaje: 'Goku', Anime: 'Dragon Ball',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'red'},
         {id:3,Personaje: 'Luffy', Anime: 'One Piece',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Aqua'},
@@ -26,11 +30,15 @@ const EliminarEvento = ({showEditar, showEliminar}) => {
         {id:9,Personaje: 'Seiya', Anime: 'Caballeros del Zodiaco',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Blue Navy'},
         {id:10,Personaje: 'Ichigo', Anime: 'Bleach',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Blue Navy'},
         {id:11,Personaje: 'Gon', Anime: 'Hunter x Hunter',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Blue Navy'}
-    ];
+    ]);
 
 
-    const [data2, setData] = useState({});
+    // const [data2, setData2] = useState({});
+    const [showConfirm, setConfirm] = useState(false)
+    const [showAlert, setAlert] = useState(false)
     const [loading, setLoading] = useState(true);
+
+    const [idToDelete, setIdToDelete] = useState(null)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -46,8 +54,22 @@ const EliminarEvento = ({showEditar, showEliminar}) => {
       
         fetchData();
       }, []); 
-      
 
+    
+      
+    const deleteElement = async(idToDelete) => {
+        try {
+            //const response = await axios.delete(`/${idToDelete}`)
+            setData(data.filter(item => item.id !== idToDelete));
+            setAlert(true)
+        } catch (error) {
+            console.log(error)
+            setIdToDelete(null)
+            alert("Sucedio un error inesperado al borrar el elemento")
+            setConfirm(false)
+        }
+        // setData(data.filter(item => item.id !== idToDelete));
+    }
 
     const itemsPerPage = 5;
     const [currentPage, setCurrentPage] = useState(1);
@@ -79,9 +101,34 @@ const EliminarEvento = ({showEditar, showEliminar}) => {
                 ) : (
                     <>
                     
-                    <Flex justify-content='center' >
+            <Flex justify-content='center' flex-direction='column' align-items='center' text-align='center'>
                 <HeaderTitle title='ELIMINAR EVENTOS' /> 
+                <P>*Todos los eventos que sean eliminados no se podran recuperar</P>
             </Flex>
+
+            <Confirm
+                title='¿ESTA SEGURO QUE DESEA BORRAR?'
+                message='Esta accion no se puede revertir'
+                show={showConfirm}
+                onClose={() => {
+                    setConfirm(false)
+                    setIdToDelete(null)
+                    }}
+                onAcept={() => {
+                    deleteElement(idToDelete)
+                    setIdToDelete(null)
+                    setConfirm(false)
+                 }}
+            />
+
+            <Alert
+                show={showAlert}
+                onAcept={() => {
+                    setAlert(false)
+                    
+                }}
+                message="Se ha borrado el evento"
+            />
 
             <div className="crud-container text-center" >
                 <input
@@ -119,7 +166,10 @@ const EliminarEvento = ({showEditar, showEliminar}) => {
                                     </Btn>)}
 
                                     
-                                    {showEliminar && (<Btn color="second" style={{ fontSize: '1rem', padding: '0.375rem 0.75rem', width: '50px',marginRight: '5px' }}>
+                                    {showEliminar && (<Btn onClick={()=> {
+                                            setConfirm(true)
+                                            setIdToDelete(elemento.id)
+                                        }}color="second" style={{ fontSize: '1rem', padding: '0.375rem 0.75rem', width: '50px',marginRight: '5px' }}>
                                         <FontAwesomeIcon icon={faTrashCan} />
                                     </Btn>)}
                                     
@@ -129,6 +179,7 @@ const EliminarEvento = ({showEditar, showEliminar}) => {
                         ))}
                     </tbody>
                 </table>
+
                 <Flex className="pagination mt-3" align-items='center' gap='0.4em'>
                     <Btn disabled={currentPage === 1} onClick={() => handleClick(currentPage - 1)}>&lt;</Btn>
                     {[...Array(totalPages)].map((_, i) => (
@@ -150,4 +201,7 @@ const EliminarEvento = ({showEditar, showEliminar}) => {
 }
 export default EliminarEvento;
 
-const Button = styled.button``
+const P = styled.p`
+    color:red;
+    font-size:25px;
+`

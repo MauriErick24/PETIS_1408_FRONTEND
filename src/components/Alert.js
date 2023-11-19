@@ -6,7 +6,7 @@ const Alert = ({ message, onAcept, ...props }) => {
     <Content {...props}>
       {message && <p className='message'>{message}</p>}
       <div className='btn-content'>
-        <Btn onClick={onAcept}>Aceptar</Btn>
+        <Btn onClick={onAcept}>ACEPTAR</Btn>
       </div>
     </Content>
   )

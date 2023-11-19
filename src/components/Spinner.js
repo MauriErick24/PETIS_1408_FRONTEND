@@ -21,7 +21,7 @@ const Spinner = styled.div`
 const MiComponenteConSpinner = () => {
   return (
     <div>
-      <h1>Mi Contenido</h1>
+      <h1>Cargando...</h1>
       <Spinner />
     </div>
   );

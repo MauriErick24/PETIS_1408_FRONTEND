@@ -123,7 +123,7 @@ const GestionEvento = () => {
     export default GestionEvento;
     const Option = styled.button`
       width: 100%;
-      font-size: 17px;
+      fontSize: 17px;
       &:hover,
       &:focus{
         background-color: #6b6a64;  
