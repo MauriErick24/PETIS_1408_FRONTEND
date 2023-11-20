@@ -18,19 +18,13 @@ import api from '../services/api'
 import axios from 'axios'
 
 const EliminarEvento = ({showEditar, showEliminar}) => {
-    const [data, setData] = useState([
-        {id:1,Titulo: 'Naruto jorge ledezma ', Anime: 'Naruto jorge ledezma',Telefono: 1234456887, email: 'jorge@mail.com', Address: 'Calle 1',AddresFavorite:'Blue Navy'},
-        {id:2,Titulo: 'Goku', Anime: 'Dragon Ball',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'red'},
-        {id:3,Titulo: 'Luffy', Anime: 'One Piece',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Aqua'},
-        {id:4,Titulo: 'Tanjiro', Anime: 'Kimetsu no Yaiba',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'salmon'},
-        {id:5,Titulo: 'Eren', Anime: 'Shingeki no Kyojin',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Pink'},
-        {id:6,Titulo: 'Kenshin', Anime: 'Rurouni Kenshin',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Blue Navy'},
-        {id:7,Titulo: 'Edward', Anime: 'Full Metal Alchemist',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Blue Navy'},
-        {id:8,Titulo: 'Yusuke', Anime: 'Yu Yu Hakusho',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Blue Navy'},
-        {id:9,Titulo: 'Seiya', Anime: 'Caballeros del Zodiaco',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Blue Navy'},
-        {id:10,Titulo: 'Ichigo', Anime: 'Bleach',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Blue Navy'},
-        {id:11,Titulo: 'Gon', Anime: 'Hunter x Hunter',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Blue Navy'}
-    ]);
+    const [data, setData] = useState([{
+        id:1,
+        nombre_evento:"",
+        tipo_evento:{
+            nombreTipo_evento:""
+        }
+    }]);
 
 
     // const [data2, setData2] = useState({});
@@ -43,8 +37,8 @@ const EliminarEvento = ({showEditar, showEliminar}) => {
     useEffect(() => {
         const fetchData = async () => {
           try {
-           // const response = await api.get('');
-            //setData(response.data);
+           const response = await api.get('api/evento');
+            setData(response.data);
           } catch (error) {
             console.error('Error fetching data:', error);
           } finally {
@@ -59,7 +53,7 @@ const EliminarEvento = ({showEditar, showEliminar}) => {
       
     const deleteElement = async(idToDelete) => {
         try {
-            const response = await axios.delete(`/${idToDelete}`)
+            const response = await api.delete(`api/evento/${idToDelete}`)
             setData(data.filter(item => item.id !== idToDelete));
             setAlert(true)
         } catch (error) {
@@ -79,7 +73,7 @@ const EliminarEvento = ({showEditar, showEliminar}) => {
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
     const filteredData = data.filter(elemento =>
-        elemento.Titulo.toLowerCase().startsWith(searchTerm.toLowerCase())
+        elemento.nombre_evento.toLowerCase().startsWith(searchTerm.toLowerCase())
     );
 
     const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
@@ -154,8 +148,8 @@ const EliminarEvento = ({showEditar, showEliminar}) => {
                         {currentItems.map((elemento) => (
                             <tr key={elemento.id}>
                                 <td>{elemento.id}</td>
-                                <td>{elemento.Titulo}</td>
-                                <td>{elemento.Anime}</td>
+                                <td>{elemento.nombre_evento}</td>
+                                <td>{elemento.tipo_evento.nombreTipo_evento}</td>
                                 {/* <td>{elemento.Telefono}</td>
                                 <td>{elemento.email}</td>
                                 <td>{elemento.AddresFavorite}</td> */}
