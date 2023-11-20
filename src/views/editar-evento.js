@@ -13,19 +13,23 @@ import Spinner from '../components/Spinner'
 import api from '../services/api'
 import axios from 'axios'
 
+import {useNavigate } from "react-router-dom";
+
 const EditarEvento = ({showEditar, showEliminar}) => {
+    const navigate = useNavigate()
+
     const data = [
-        {id:1,Personaje: 'Naruto jorge ledezma ', Anime: 'Naruto jorge ledezma',Telefono: 1234456887, email: 'jorge@mail.com', Address: 'Calle 1',AddresFavorite:'Blue Navy'},
-        {id:2,Personaje: 'Goku', Anime: 'Dragon Ball',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'red'},
-        {id:3,Personaje: 'Luffy', Anime: 'One Piece',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Aqua'},
-        {id:4,Personaje: 'Tanjiro', Anime: 'Kimetsu no Yaiba',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'salmon'},
-        {id:5,Personaje: 'Eren', Anime: 'Shingeki no Kyojin',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Pink'},
-        {id:6,Personaje: 'Kenshin', Anime: 'Rurouni Kenshin',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Blue Navy'},
-        {id:7,Personaje: 'Edward', Anime: 'Full Metal Alchemist',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Blue Navy'},
-        {id:8,Personaje: 'Yusuke', Anime: 'Yu Yu Hakusho',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Blue Navy'},
-        {id:9,Personaje: 'Seiya', Anime: 'Caballeros del Zodiaco',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Blue Navy'},
-        {id:10,Personaje: 'Ichigo', Anime: 'Bleach',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Blue Navy'},
-        {id:11,Personaje: 'Gon', Anime: 'Hunter x Hunter',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Blue Navy'}
+        {id:1,Titulo: 'Naruto jorge ledezma ', Tipo: 'Naruto jorge ledezma',Telefono: 1234456887, email: 'jorge@mail.com', Address: 'Calle 1',AddresFavorite:'Blue Navy'},
+        {id:2,Titulo: 'Goku', Tipo: 'Dragon Ball',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'red'},
+        {id:3,Titulo: 'Luffy', Tipo: 'One Piece',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Aqua'},
+        {id:4,Titulo: 'Tanjiro', Tipo: 'Kimetsu no Yaiba',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'salmon'},
+        {id:5,Titulo: 'Eren', Tipo: 'Shingeki no Kyojin',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Pink'},
+        {id:6,Titulo: 'Kenshin', Tipo: 'Rurouni Kenshin',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Blue Navy'},
+        {id:7,Titulo: 'Edward', Tipo: 'Full Metal Alchemist',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Blue Navy'},
+        {id:8,Titulo: 'Yusuke', Tipo: 'Yu Yu Hakusho',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Blue Navy'},
+        {id:9,Titulo: 'Seiya', Tipo: 'Caballeros del Zodiaco',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Blue Navy'},
+        {id:10,Titulo: 'Ichigo', Tipo: 'Bleach',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Blue Navy'},
+        {id:11,Titulo: 'Gon', Tipo: 'Hunter x Hunter',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Blue Navy'}
     ];
 
     const [data2, setData] = useState({});
@@ -56,7 +60,7 @@ const EditarEvento = ({showEditar, showEliminar}) => {
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
     const filteredData = data.filter(elemento =>
-        elemento.Personaje.toLowerCase().startsWith(searchTerm.toLowerCase())
+        elemento.Titulo.toLowerCase().startsWith(searchTerm.toLowerCase())
     );
 
     const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
@@ -93,11 +97,11 @@ const EditarEvento = ({showEditar, showEliminar}) => {
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Personaje</th>
-                            <th>Anime</th>
-                            <th>Telefono</th>
+                            <th>Titulo</th>
+                            <th>Tipo</th>
+                            {/* <th>Telefono</th>
                             <th>Email</th>
-                            <th>Address</th>
+                            <th>Address</th> */}
                             <th>Acciones</th>
                             
                         </tr>
@@ -106,14 +110,14 @@ const EditarEvento = ({showEditar, showEliminar}) => {
                         {currentItems.map((elemento) => (
                             <tr key={elemento.id}>
                                 <td>{elemento.id}</td>
-                                <td>{elemento.Personaje}</td>
-                                <td>{elemento.Anime}</td>
-                                <td>{elemento.Telefono}</td>
+                                <td>{elemento.Titulo}</td>
+                                <td>{elemento.Tipo}</td>
+                                {/* <td>{elemento.Telefono}</td>
                                 <td>{elemento.email}</td>
-                                <td>{elemento.AddresFavorite}</td>
+                                <td>{elemento.AddresFavorite}</td> */}
                                 <td>
                                     
-                                    {showEditar && (<Btn color="primary" style={{ fontSize: '1rem', padding: '0.375rem 0.75rem', width: '50px',marginRight: '5px' }}>
+                                    {showEditar && (<Btn  color="primary" style={{ fontSize: '1rem', padding: '0.375rem 0.75rem', width: '50px',marginRight: '5px' }}>
                                         <FontAwesomeIcon icon={faPenToSquare} />
                                     </Btn>)}
 

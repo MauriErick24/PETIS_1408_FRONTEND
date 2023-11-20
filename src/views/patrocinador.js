@@ -116,9 +116,9 @@ const Patrocinador = ({onClick, data}) => {
                     </Itemgen>
                 ))}
             </Flex>  */}
-            <Flex justify-content='end'margin='15px'>
+            {/* <Flex justify-content='end'margin='15px'>
                <Btn onClick={onClick}>CREAR AUSPICIADOR</Btn>
-            </Flex>        
+            </Flex>         */}
         </>
     )
 }

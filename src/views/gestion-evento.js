@@ -17,14 +17,17 @@ import { useState } from 'react';
 import EditarEvento from './editar-evento';
 import EliminarEvento from './eliminar-evento';
 import CascadeList from '../components/CascadeList';
+import WarningPage from './warning-page';
+import CrearActividades from './crear-actividades';
 
 
 const GestionEvento = () => {
     const navigate = useNavigate();
 
+    const [showCrear, setShowCrear] = useState(false)
     const [showEditar, setShowEditar] = useState(false)
     const [showEliminar, setShowEliminar] = useState(false)
-    const [showCrear, setShowCrear] = useState(false)
+    
     const [showCrearAuspiciador, setCrearAuspiciador] = useState(false)
     const [showCrearActividades, setCrearActividades] = useState(false)
 
@@ -91,7 +94,12 @@ const GestionEvento = () => {
                       handleCascade(true,false)
                       handleClick(false,false,false)
                       }}>AUSPICIADORES</Option>
-                    <Option>ACTIVIDADES</Option>
+
+                    {/* <Option onClick={()=>{
+                      handleCascade(false,true)
+                      handleClick(false,false,false)
+                      }}>ACTIVIDADES</Option> */}
+
                   </CascadeList>
                 )
                     
@@ -103,7 +111,9 @@ const GestionEvento = () => {
                 {/* {main} */}
                 {showEditar && (<EditarEvento showEditar={showEditar} />)}
                 {showEliminar && (<EliminarEvento showEliminar={showEliminar} />)}
+                {/* {showEliminar && (<WarningPage/>)} */}
                 {showCrearAuspiciador && (<CrearAuspiciador/>)}
+                {showCrearActividades && (<CrearActividades/>)}
 
               </Content>  
             </Container>

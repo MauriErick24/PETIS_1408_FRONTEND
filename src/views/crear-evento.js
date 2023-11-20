@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import HeaderTitle from "../components/HeaderTitle";
@@ -76,7 +76,10 @@ const initialValues = {
   }
 
 
+
 const CrearEvento = ({data, formik}) => {
+
+  const [showp, setShowp] = useState(false)
 
   return(
         <Div>
@@ -283,15 +286,15 @@ const CrearEvento = ({data, formik}) => {
                     <Flex padding='0 1em' top='0.5em' flex-direction='column' width='100%' gap='1em'>
                         <P>Elige tu tipo de participantes</P>
                         <Flex flex-direction='column' top='1em' gap='0.5em'>
-                        {/* <Radio check={!showp} name='participantes' label='Individual' onChange={() => setShowp(!showp)} />
-                        <Radio check={showp} name='participantes' label='Equipo' onChange={() => setShowp(!showp)} /> */}
-                        <Radio check={null} name='participantes' label='Individual'  />
-                        <Radio check={null} name='participantes' label='Equipo' />
+                        <Radio check={!showp} name='participantes' label='Individual' onChange={() => setShowp(!showp)} />
+                        <Radio check={showp} name='participantes' label='Equipo' onChange={() => setShowp(!showp)} />
+                        {/* <Radio check={null} name='participantes' label='Individual'  />
+                        <Radio check={null} name='participantes' label='Equipo' /> */}
                         </Flex>
                     
                         {
                         //showp 
-                        true&&(
+                        showp&&(
                         <Flex padding='0 1em' top='0.2em' flex-direction='column' width='100%' gap='1em'>
                             <P >Numero de integrantes por equipo</P>
                             <Flex top='0.1em' width='100px' flex-direction='column'>

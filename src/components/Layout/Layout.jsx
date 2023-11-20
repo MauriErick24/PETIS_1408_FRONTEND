@@ -18,7 +18,7 @@ import Auspiciador from '../../views/auspiciador';
 import Reglas from '../../views/reglas';
 import Premios from '../../views/premios';
 import Requisitos from '../../views/requisitos'
-
+import CrearActividades from '../../views/crear-actividades';
 
 
 const Container = styled.div`
@@ -60,6 +60,7 @@ function Layout({updateButton}) {
   const [showReglas, setShowReglas] = useState(false)
   const [showPremios, setShowPremios] = useState(false)
   const [showRequisitos, setShowRequisitos] = useState(false)
+  const [showActividades, setShowActividades] = useState(false)
 
   console.log(datos);
  
@@ -124,13 +125,14 @@ const handleActualizarEvento = (nuevosDatos) => {
   setData({ ...data, ...nuevosDatos });
 };
 
-    const handleButtonClick = (evento, organizador, auspiciador, reglas, premios, requisitos) => {
+    const handleButtonClick = (evento, organizador, auspiciador, reglas, premios, requisitos,actividades) => {
       setShowCrearEvento(evento);
       setShowOrganizador(organizador);
       setShowAuspiciador(auspiciador);
       setShowReglas(reglas);
       setShowPremios(premios);
       setShowRequisitos(requisitos);
+      setShowActividades(actividades);
     };
 
   return (
@@ -141,29 +143,34 @@ const handleActualizarEvento = (nuevosDatos) => {
         <Container>
           <Sidebar>
             <Aside>
-            <Btn onClick={() => handleButtonClick(true, false, false, false, false, false)}>
+            <Btn onClick={() => handleButtonClick(true, false, false, false, false,false,  false)}>
               EVENTO
             </Btn>
             
-            <Btn onClick={() => handleButtonClick(false, true, false , false, false, false)}>
+            {/* <Btn onClick={() => handleButtonClick(false, true, false , false, false, false, false)}>
               ORGANIZADOR
-            </Btn>
+            </Btn> */}
             
-            <Btn onClick={() => handleButtonClick(false, false, true, false, false, false)}>
+            <Btn onClick={() => handleButtonClick(false, false, true, false, false, false, false)}>
               AUSPICIADOR
             </Btn>
 
-            <Btn onClick={() => handleButtonClick(false, false, false, true, false, false)}>
+            {/* <Btn onClick={() => handleButtonClick(false, false, false, true, false,false,  false)}>
               REGLAS
-            </Btn>
+            </Btn> */}
 
-            <Btn onClick={() => handleButtonClick(false, false, false, false, true, false)}>
+            {/* <Btn onClick={() => handleButtonClick(false, false, false, false, true, false, false)}>
               PREMIOS
+            </Btn> */}
+
+            {/* <Btn onClick={() => handleButtonClick(false, false, false, false, false,false,  true)}>
+              REQUISITOS
+            </Btn> */}
+
+            <Btn onClick={() => handleButtonClick(false, false, false, false, false,false, true)}>
+              ACTIVIDADES
             </Btn>
 
-            <Btn onClick={() => handleButtonClick(false, false, false, false, false, true)}>
-              REQUISITOS
-            </Btn>
             </Aside>
           </Sidebar>
           <Content>
@@ -175,6 +182,7 @@ const handleActualizarEvento = (nuevosDatos) => {
             {showReglas && <Reglas data={data} onUpdateEvento={handleActualizarEvento}/>} 
             {showPremios && <Premios data={data} onUpdateEvento={handleActualizarEvento}/>} 
             {showRequisitos && <Requisitos data={data} onUpdateEvento={handleActualizarEvento}/>} 
+            {showActividades && <CrearActividades/>}
             
 
           </Content>  

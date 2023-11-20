@@ -19,17 +19,17 @@ import axios from 'axios'
 
 const EliminarEvento = ({showEditar, showEliminar}) => {
     const [data, setData] = useState([
-        {id:1,Personaje: 'Naruto jorge ledezma ', Anime: 'Naruto jorge ledezma',Telefono: 1234456887, email: 'jorge@mail.com', Address: 'Calle 1',AddresFavorite:'Blue Navy'},
-        {id:2,Personaje: 'Goku', Anime: 'Dragon Ball',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'red'},
-        {id:3,Personaje: 'Luffy', Anime: 'One Piece',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Aqua'},
-        {id:4,Personaje: 'Tanjiro', Anime: 'Kimetsu no Yaiba',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'salmon'},
-        {id:5,Personaje: 'Eren', Anime: 'Shingeki no Kyojin',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Pink'},
-        {id:6,Personaje: 'Kenshin', Anime: 'Rurouni Kenshin',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Blue Navy'},
-        {id:7,Personaje: 'Edward', Anime: 'Full Metal Alchemist',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Blue Navy'},
-        {id:8,Personaje: 'Yusuke', Anime: 'Yu Yu Hakusho',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Blue Navy'},
-        {id:9,Personaje: 'Seiya', Anime: 'Caballeros del Zodiaco',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Blue Navy'},
-        {id:10,Personaje: 'Ichigo', Anime: 'Bleach',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Blue Navy'},
-        {id:11,Personaje: 'Gon', Anime: 'Hunter x Hunter',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Blue Navy'}
+        {id:1,Titulo: 'Naruto jorge ledezma ', Anime: 'Naruto jorge ledezma',Telefono: 1234456887, email: 'jorge@mail.com', Address: 'Calle 1',AddresFavorite:'Blue Navy'},
+        {id:2,Titulo: 'Goku', Anime: 'Dragon Ball',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'red'},
+        {id:3,Titulo: 'Luffy', Anime: 'One Piece',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Aqua'},
+        {id:4,Titulo: 'Tanjiro', Anime: 'Kimetsu no Yaiba',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'salmon'},
+        {id:5,Titulo: 'Eren', Anime: 'Shingeki no Kyojin',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Pink'},
+        {id:6,Titulo: 'Kenshin', Anime: 'Rurouni Kenshin',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Blue Navy'},
+        {id:7,Titulo: 'Edward', Anime: 'Full Metal Alchemist',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Blue Navy'},
+        {id:8,Titulo: 'Yusuke', Anime: 'Yu Yu Hakusho',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Blue Navy'},
+        {id:9,Titulo: 'Seiya', Anime: 'Caballeros del Zodiaco',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Blue Navy'},
+        {id:10,Titulo: 'Ichigo', Anime: 'Bleach',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Blue Navy'},
+        {id:11,Titulo: 'Gon', Anime: 'Hunter x Hunter',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Blue Navy'}
     ]);
 
 
@@ -59,7 +59,7 @@ const EliminarEvento = ({showEditar, showEliminar}) => {
       
     const deleteElement = async(idToDelete) => {
         try {
-            //const response = await axios.delete(`/${idToDelete}`)
+            const response = await axios.delete(`/${idToDelete}`)
             setData(data.filter(item => item.id !== idToDelete));
             setAlert(true)
         } catch (error) {
@@ -79,7 +79,7 @@ const EliminarEvento = ({showEditar, showEliminar}) => {
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
     const filteredData = data.filter(elemento =>
-        elemento.Personaje.toLowerCase().startsWith(searchTerm.toLowerCase())
+        elemento.Titulo.toLowerCase().startsWith(searchTerm.toLowerCase())
     );
 
     const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
@@ -103,7 +103,7 @@ const EliminarEvento = ({showEditar, showEliminar}) => {
                     
             <Flex justify-content='center' flex-direction='column' align-items='center' text-align='center'>
                 <HeaderTitle title='ELIMINAR EVENTOS' /> 
-                <P>*Todos los eventos que sean eliminados no se podran recuperar</P>
+                {/* <P>*Todos los eventos que sean eliminados no se podran recuperar</P> */}
             </Flex>
 
             <Confirm
@@ -141,11 +141,11 @@ const EliminarEvento = ({showEditar, showEliminar}) => {
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Personaje</th>
-                            <th>Anime</th>
-                            <th>Telefono</th>
+                            <th>Titulo</th>
+                            <th>Tipo</th>
+                            {/* <th>Telefono</th>
                             <th>Email</th>
-                            <th>Address</th>
+                            <th>Address</th> */}
                             <th>Acciones</th>
                             
                         </tr>
@@ -154,11 +154,11 @@ const EliminarEvento = ({showEditar, showEliminar}) => {
                         {currentItems.map((elemento) => (
                             <tr key={elemento.id}>
                                 <td>{elemento.id}</td>
-                                <td>{elemento.Personaje}</td>
+                                <td>{elemento.Titulo}</td>
                                 <td>{elemento.Anime}</td>
-                                <td>{elemento.Telefono}</td>
+                                {/* <td>{elemento.Telefono}</td>
                                 <td>{elemento.email}</td>
-                                <td>{elemento.AddresFavorite}</td>
+                                <td>{elemento.AddresFavorite}</td> */}
                                 <td>
                                     
                                     {showEditar && (<Btn color="primary" style={{ fontSize: '1rem', padding: '0.375rem 0.75rem', width: '50px',marginRight: '5px' }}>

@@ -10,10 +10,10 @@ const Auspiciador =({data}) => {
             showAuspiciador && (<Patrocinador data={data} onClick={() => setShowAuspiciador(false)}/>)
 
         }
-        {
+        {/* {
             !showAuspiciador && (<CrearPatrocinador data={data} onClick={() => setShowAuspiciador(true)}/>)
 
-        }
+        } */}
         </>
 
     )
