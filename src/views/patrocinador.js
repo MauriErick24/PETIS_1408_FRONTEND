@@ -10,21 +10,33 @@ import api from '../services/api'
 import '../assets/css/Organizadorn.css';
 import Image from '../assets/images/example-img.jpg'
 
-const Patrocinador = ({onClick, data}) => {
-    const [organizador,setOrganizador]=useState(data)
+import Spinner from '../components/Spinner'
 
-  useEffect(()=>{
-    const fetchData = async () => {
-      try{
-        const response = await api.get('/api/auspiciadores')
-        setOrganizador(response.data)
-        //console.log(response.data)
-      }catch(err){
-        console.log("Error: ", err)
-      }
-    }
-  fetchData();
-  }, []);
+const Patrocinador = ({onClick}) => {
+    const [organizador,setOrganizador]=useState([
+        {id:1, nombre:''},
+    ])
+  const [loading, setLoading] = useState(true);
+
+
+  useEffect(() => {
+      const fetchData = async () => {
+        try {
+         const response = await api.get('/api/auspiciadores');
+         setOrganizador(response.data);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        } finally {
+          setLoading(false); 
+        }
+      };
+    
+      fetchData();
+    }, []); 
+
+
+
+
     const datos=[
         // {
         //     nombre:'coca cola'
@@ -35,7 +47,7 @@ const Patrocinador = ({onClick, data}) => {
         //     nombre:'UMSS'
         // }
      ]
-            const [searchInput, setSearchInput] = useState('');
+        const [searchInput, setSearchInput] = useState('');
         const [currentPage, setCurrentPage] = useState(1);
         const resultsPerPage = 3;
         const [selectedBooks, setSelectedBooks] = useState([]);
@@ -72,7 +84,12 @@ const Patrocinador = ({onClick, data}) => {
 
     return(
         <>
-            <Flex justify-content='center' margin-bottom= '2%'>
+           {loading ? (
+            <Spinner/>
+           ):
+           (
+            <>
+                 <Flex justify-content='center' margin-bottom= '2%'>
                 <HeaderTitle title='AUSPICIADORES'/> 
               
             </Flex>
@@ -119,6 +136,9 @@ const Patrocinador = ({onClick, data}) => {
             {/* <Flex justify-content='end'margin='15px'>
                <Btn onClick={onClick}>CREAR AUSPICIADOR</Btn>
             </Flex>         */}
+            </>
+           )
+           }
         </>
     )
 }
