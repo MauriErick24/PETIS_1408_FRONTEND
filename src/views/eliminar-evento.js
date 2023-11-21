@@ -18,6 +18,7 @@ import api from '../services/api'
 import axios from 'axios'
 
 const EliminarEvento = ({showEditar, showEliminar}) => {
+    
     const [data, setData] = useState([{
         id:1,
         nombre_evento:"",

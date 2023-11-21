@@ -19,34 +19,11 @@ import Reglas from '../../views/reglas';
 import Premios from '../../views/premios';
 import Requisitos from '../../views/requisitos'
 import CrearActividades from '../../views/crear-actividades';
+import Afiche from '../../views/afiche'
 
 
-const Container = styled.div`
-  display: flex;
-  height: auto;
-  justify-content: space-between;
-  margin: 1%;
-`;
 
-const Sidebar = styled.div`
-  width: 20%;
-  height: auto;
-  background-color: #BDBB96;
-  padding: 20px;
-  border-right:12px;
-  border-radius:15px;
-`;
-
-const Content = styled.div`
-  
-  width: 78%;
-  height: 655px;
-  background-color: #BDBB96;
-  padding: 20px;
-  border-radius: 15px;
-`;
-
-function Layout({updateButton}) {
+function Layout({updateButton,  main}) {
 
   // const navigate = useNavigate();
   const location = useLocation();
@@ -61,6 +38,7 @@ function Layout({updateButton}) {
   const [showPremios, setShowPremios] = useState(false)
   const [showRequisitos, setShowRequisitos] = useState(false)
   const [showActividades, setShowActividades] = useState(false)
+  const [showAfiche, setShowAfiche] = useState(false)
 
   console.log(datos);
  
@@ -125,7 +103,7 @@ const handleActualizarEvento = (nuevosDatos) => {
   setData({ ...data, ...nuevosDatos });
 };
 
-    const handleButtonClick = (evento, organizador, auspiciador, reglas, premios, requisitos,actividades) => {
+    const handleButtonClick = (evento, organizador, auspiciador, reglas, premios, requisitos,actividades, afiche) => {
       setShowCrearEvento(evento);
       setShowOrganizador(organizador);
       setShowAuspiciador(auspiciador);
@@ -133,6 +111,7 @@ const handleActualizarEvento = (nuevosDatos) => {
       setShowPremios(premios);
       setShowRequisitos(requisitos);
       setShowActividades(actividades);
+      setShowAfiche(afiche);
     };
 
   return (
@@ -153,6 +132,10 @@ const handleActualizarEvento = (nuevosDatos) => {
             
             <Btn onClick={() => handleButtonClick(false, false, true, false, false, false, false)}>
               AUSPICIADOR
+            </Btn>
+
+            <Btn onClick={() => handleButtonClick(false, false, false, false, false, false, false, true)}>
+              AFICHE
             </Btn>
 
             {/* <Btn onClick={() => handleButtonClick(false, false, false, true, false,false,  false)}>
@@ -183,15 +166,16 @@ const handleActualizarEvento = (nuevosDatos) => {
             {showPremios && <Premios data={data} onUpdateEvento={handleActualizarEvento}/>} 
             {showRequisitos && <Requisitos data={data} onUpdateEvento={handleActualizarEvento}/>} 
             {showActividades && <CrearActividades/>}
+            {showAfiche && <Afiche/>}
             
 
           </Content>  
         </Container>
       <Flex justify-content='end' gap='1em'>
-        {updateButton && <Btn type='submit'>GUARDAR</Btn>}
+        {/* {updateButton && <Btn type='submit'>GUARDAR</Btn>}
         {!updateButton && <Btn onClick={()=>console.log(data)}>CREAR</Btn>}
        
-        <Btn color='second' >CANCELAR</Btn> 
+        <Btn color='second' >CANCELAR</Btn>  */}
         {/* <Btn onClick={() => navigate('/eventos')} color='second'>CANCELAR</Btn>  */}
       </Flex>
       </div>
@@ -203,6 +187,7 @@ const handleActualizarEvento = (nuevosDatos) => {
 export default Layout;
 const Div = styled.div`
   width: 100%;
+ // min-height: 100vh;
   // margin: auto;
   background-color: #D1D0BC;
   
@@ -213,3 +198,28 @@ const Div = styled.div`
    
   }
 `
+const Container = styled.div`
+  display: flex;
+  height: auto;
+  justify-content: space-between;
+  margin: 1%;
+`;
+
+const Sidebar = styled.div`
+  width: 20%;
+  height: auto;
+  background-color: #BDBB96;
+  padding: 20px;
+  border-right:12px;
+  border-radius:15px;
+`;
+
+const Content = styled.div`
+  
+  width: 78%;
+  //height: 83vh;
+  min-height: 100vh;
+  background-color: #BDBB96;
+  padding: 20px;
+  border-radius: 15px;
+`;

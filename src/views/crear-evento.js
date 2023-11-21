@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
+import api from '../services/api'
+
 import HeaderTitle from "../components/HeaderTitle";
 import Select from "../components/input/Select";
 import Inputk from "../components/input/Inputk";
@@ -9,6 +11,8 @@ import Flex from "../components/Flex";
 import Radio from "../components/input/Radio";
 import Input from "../components/input/Input";
 import TextArea from "../components/input/TextArea";
+import Btn from "../components/Btn";
+import Alert from "../components/Alert";
 import {useFormik} from "formik";
 
 const initialValues = {
@@ -25,64 +29,110 @@ const initialValues = {
     alert(JSON.stringify(values, null, 2));
   }
 
+
   const validate = values => {
     let errors = {}
     if(!values.nombre_evento){
-        errors.nombre_evento = 'Required'
+        errors.nombre_evento = 'Requerido'
     }else if(values.nombre_evento.length < 15){
-        errors.nombre_evento = 'Must be 15 characters or more'
+        errors.nombre_evento = 'Debe contener 15 caracteres o mas'
     }else if(values.nombre_evento.length > 50){
-        errors.nombre_evento = 'Must be 50 characters or less'
+        errors.nombre_evento = 'Debe contener 50 caracteres o menos'
     }else if(!/^[a-zA-Z0-9\s]+$/i.test(values.nombre_evento)){
         errors.nombre_evento = 'Solo letras y numeros'
     }
 
     if(!values.inicio_inscripcion){
-        errors.inicio_inscripcion = 'Required'
+        errors.inicio_inscripcion = 'Requerido'
     }
     if(!values.fin_inscripcion){
-        errors.fin_inscripcion = 'Required'
+        errors.fin_inscripcion = 'Requerido'
     }
     if(!values.hora){
-        errors.hora = 'Required'
+        errors.hora = 'Requerido'
     }
     if(!values.lugar){
-        errors.lugar = 'Required'
+        errors.lugar = 'Requerido'
     }else if(values.lugar.length < 15){
-        errors.lugar = 'Must be 15 characters or more'
+        errors.lugar = 'Debe contener 15 caracteres o mas'
     }else if(values.lugar.length > 50){
-        errors.lugar = 'Must be 50 characters or less'
+        errors.lugar = 'Debe contener 50 caracteres o menos'
     }else if(!/^[a-zA-Z0-9\s]+$/i.test(values.lugar)){
         errors.lugar = 'Solo letras y numeros'
     }
 
     if(!values.email){
-        errors.email = 'Required'
+        errors.email = 'Requerido'
     }else if(!/^[a-z0-9._-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(values.email)){
         errors.email = 'formato invalido para el correo'
     }
 
     if(!values.telefono){
-        errors.telefono = 'Required'
-    }else if(!/^[0-9]{10}$/.test(values.telefono)){
-        errors.telefono = 'formato invalido para el telefono'
-    }else if(values.telefono.length < 8){
-        errors.telefono = 'Must be 10 characters or more'
+        errors.telefono = 'Requerido'
+    }
+    // else if(!/^[0-9]{10}$/.test(values.telefono)){
+    //     errors.telefono = 'formato invalido para el telefono'
+    // }
+    else if(values.telefono.length < 8){
+        errors.telefono = 'Por lo menos debe contener 8 numeros'
     }else if(values.telefono.length > 8){
-        errors.telefono = 'Must be 10 characters or less'
+        errors.telefono = 'Debe contener menos numeros'
     }
     
     return errors
   }
 
 
+  
 
-const CrearEvento = ({data, formik}) => {
+
+const CrearEvento = ({data}) => {
+
+
+
+  const formik = useFormik({
+    initialValues: initialValues,
+    onSubmit: (values) => {
+      sendData(values);
+      console.log(values);
+    },
+    validate: validate,
+  });
+
+
+  const [showAlertSuccesful,setShowAlertSuccesful] = useState(false)
+  const [showAlertFail,setShowAlertFail] = useState(false)
 
   const [showp, setShowp] = useState(false)
 
+
+  const sendData = async(values) =>{
+    try {
+     const response = await api.post('/evento', values)
+      setShowAlertSuccesful(true)
+    } catch (error) {
+      setShowAlertFail(true)
+      console.log(error)
+
+    }
+  }
+
+
   return(
         <Div>
+
+          <Alert message="Se ha guardado correctamente"
+                 onAcept={()=>setShowAlertSuccesful(false)}
+                 show={showAlertSuccesful}
+          />
+
+          <Alert message="Sucedio un error inesperado al guardar"
+                 onAcept={()=>setShowAlertFail(false)}
+                 show={showAlertFail}
+          />
+          
+
+
           <form onSubmit={formik.handleSubmit}>
             <Flex justify-content='center' >
                 <HeaderTitle title='CREACION DE EVENTO' /> 
@@ -331,6 +381,10 @@ const CrearEvento = ({data, formik}) => {
                     </Flex>
                 </Flex>
             </Flex>
+
+          <Flex justify-content='center' top='2em'>
+            <Btn type='submit'>GUARDAR</Btn>
+          </Flex>
           </form>
 
         </Div>
@@ -342,6 +396,7 @@ export default CrearEvento;
 
 const Div = styled.div`
     width: 100%;
+    height: fit-content;
     gap=1em;
     .error{
       color:red;

@@ -13,7 +13,7 @@ import Image from '../assets/images/example-img.jpg'
 import Spinner from '../components/Spinner'
 
 const Patrocinador = ({onClick}) => {
-    const [organizador,setOrganizador]=useState([
+    const [organizador,setOrganizador]= useState([
         {id:1, nombre:''},
     ])
   const [loading, setLoading] = useState(true);
@@ -86,10 +86,11 @@ const Patrocinador = ({onClick}) => {
         <>
            {loading ? (
             <Spinner/>
-           ):
+           )
+           :
            (
             <>
-                 <Flex justify-content='center' margin-bottom= '2%'>
+            <Flex justify-content='center' margin-bottom= '2%'>
                 <HeaderTitle title='AUSPICIADORES'/> 
               
             </Flex>
