@@ -1,0 +1,68 @@
+/* En un archivo App.css o estilos.css */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px; 
+  }
+  
+  #album {
+    white-space: nowrap;
+    font-size: 0;
+    width: 750px;
+    overflow-x: auto;
+    margin: auto;
+    border: 5px solid #ccc;
+    border-radius: 15px;
+  }
+  
+  .afiche {
+    display: inline-block;
+    max-width: 200px;
+    margin-right: 10px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  h1 {
+    text-align: center;
+    background-color: black;
+    color: white;
+    width: 420px;
+    /* margin: 15px auto; */
+    margin: auto;
+    margin-top: 15px;
+    font-size: 15px;
+  }
+  
+  h3 {
+    text-align: left; 
+    margin: auto;
+    border: 1px solid black;
+    width: 659px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
+  
+  #titulos {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+  }
+  
+  #titulos li {
+    display: inline-block;
+    margin: 5px;
+    border: 2px solid navy;
+  }
+  
+  #titulos li a {
+    cursor: pointer;
+    margin-left: 10px;
+    background-color: #D1741E;
+    color: white;
+    font-weight: bold;
+    padding: 2.5px;
+    text-decoration: none;
+  }
+  

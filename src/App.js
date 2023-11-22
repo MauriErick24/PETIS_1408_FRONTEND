@@ -67,6 +67,8 @@ function App() {
         <Route  path='visualizacion/evento' element={<Layout detail={true}><Visualizacionevento /></Layout>} />
         <Route  path='eventos/detalle/:id' element={<Layout detail={true}><Visualizacionevento /></Layout>} />
         <Route  path='eventos' element={<Layout><HomeUser /></Layout>} />
+        <Route  path='agregar/afiche' element={<Layout><Afiche /></Layout>} />
+        
         {/* <Route  path='ventana/botones' element={<Layout><VentanaBotones /></Layout>} /> */}
       </Routes> 
     </BrowserRouter>
