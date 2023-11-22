@@ -159,6 +159,7 @@ const CrearEvento = ({eventCreated, idEvento}) => {
                 />
                 <Flex justify-content='space-between' width='100%' gap='1em'>
                   {/* 'space-evenly' */}
+                  
                   <Container>
                     <Flex flex-direction = 'column' gap='1em'>
                       <Flex flex-direction = 'row'>
@@ -322,7 +323,7 @@ const CrearEvento = ({eventCreated, idEvento}) => {
                                  onBlur={formik.handleBlur}
                                 inputWidth={'100%'}
                             />
-                        {formik.touched.email && formik.errors.email ?<div className='error'>{formik.errors.email}</div>:null} 
+                        {formik.touched.email && formik.errors.email ? <div className='error'>{formik.errors.email}</div>:null} 
                         
                         <Inputd
                             name='telefono'
@@ -335,6 +336,7 @@ const CrearEvento = ({eventCreated, idEvento}) => {
                         />
                         {formik.touched.telefono && formik.errors.telefono ? <div className='error'>{formik.errors.telefono}</div>:null}
                     </Flex>
+                    
                 <Flex flex-direction='row'>
                     <Flex padding='0 1em' top='0.5em' flex-direction='column' width='100%' gap='1em'>
                         <P>Elige tu tipo de participantes</P>
@@ -412,7 +414,6 @@ const Asterisk = styled.p`
 const Container = styled.div`
   border: solid 0.2em #000;
   padding: 1em;
-  width: 40%;
 `
 
 const P = styled.p`

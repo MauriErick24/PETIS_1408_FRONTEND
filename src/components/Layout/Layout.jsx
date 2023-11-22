@@ -195,8 +195,9 @@ const handleActualizarEvento = (nuevosDatos) => {
 }
 
 export default Layout;
+
 const Div = styled.div`
-  width: 100%;
+  //width: 100%;
  // min-height: 100vh;
   // margin: auto;
   background-color: #D1D0BC;
@@ -211,12 +212,13 @@ const Div = styled.div`
 const Container = styled.div`
   display: flex;
   height: auto;
-  justify-content: space-between;
+  justify-content: flex-start;
   margin: 1%;
+  gap:2em;
 `;
 
 const Sidebar = styled.div`
-  width: 20%;
+  min-width: 20vh;
   height: auto;
   background-color: #BDBB96;
   padding: 20px;
@@ -225,10 +227,9 @@ const Sidebar = styled.div`
 `;
 
 const Content = styled.div`
-  
-  width: 78%;
+  min-width: 100vh;
   //height: 83vh;
-  min-height: 100vh;
+  min-height: fit-content;
   background-color: #BDBB96;
   padding: 20px;
   border-radius: 15px;
