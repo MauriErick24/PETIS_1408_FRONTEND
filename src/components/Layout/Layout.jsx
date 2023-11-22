@@ -218,7 +218,7 @@ const Container = styled.div`
 `;
 
 const Sidebar = styled.div`
-  min-width: 20vh;
+  min-width: 20%;
   height: auto;
   background-color: #BDBB96;
   padding: 20px;
@@ -227,7 +227,7 @@ const Sidebar = styled.div`
 `;
 
 const Content = styled.div`
-  min-width: 100vh;
+  min-width: 80%;
   //height: 83vh;
   min-height: fit-content;
   background-color: #BDBB96;
