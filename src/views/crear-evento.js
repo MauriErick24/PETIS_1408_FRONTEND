@@ -86,7 +86,7 @@ const initialValues = {
   
 
 
-const CrearEvento = ({data}) => {
+const CrearEvento = ({eventCreated, idEvento}) => {
 
 
 
@@ -108,8 +108,12 @@ const CrearEvento = ({data}) => {
 
   const sendData = async(values) =>{
     try {
-     const response = await api.post('/evento', values)
+      ///// ESTE EVENTO DEBE DEVOLVER EL ID DEL EVENTO AL HACER EL POST
+     const response = await api.post('/evento', values) 
       setShowAlertSuccesful(true)
+      idEvento(response.data.id);
+      //idEvento(234)
+      
     } catch (error) {
       setShowAlertFail(true)
       console.log(error)
@@ -117,12 +121,11 @@ const CrearEvento = ({data}) => {
     }
   }
 
-
   return(
         <Div>
 
           <Alert message="Se ha guardado correctamente"
-                 onAcept={()=>setShowAlertSuccesful(false)}
+                 onAcept={()=>{setShowAlertSuccesful(false); eventCreated(true)}}
                  show={showAlertSuccesful}
           />
 

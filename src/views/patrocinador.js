@@ -12,18 +12,22 @@ import Image from '../assets/images/example-img.jpg'
 
 import Spinner from '../components/Spinner'
 
-const Patrocinador = ({onClick}) => {
+const Patrocinador = ({idEvento}) => {
     const [organizador,setOrganizador]= useState([
-        {id:1, nombre:''},
+        {id:1, nombre:'coca cola'},
+        {id:2, nombre:'san simon'},
+        {id:3, nombre:'umss'},
     ])
+
   const [loading, setLoading] = useState(true);
+
 
 
   useEffect(() => {
       const fetchData = async () => {
         try {
-         const response = await api.get('/api/auspiciadores');
-         setOrganizador(response.data);
+         //const response = await api.get('/api/auspiciadores');
+         //setOrganizador(response.data);
         } catch (error) {
           console.error('Error fetching data:', error);
         } finally {
@@ -47,10 +51,12 @@ const Patrocinador = ({onClick}) => {
         //     nombre:'UMSS'
         // }
      ]
+
         const [searchInput, setSearchInput] = useState('');
         const [currentPage, setCurrentPage] = useState(1);
         const resultsPerPage = 3;
         const [selectedBooks, setSelectedBooks] = useState([]);
+
         const [filteredLibrary, setFilteredLibrary] = useState([]);
         const [totalPages, setTotalPages] = useState(0);
 
@@ -81,6 +87,18 @@ const Patrocinador = ({onClick}) => {
             const totalResults = filteredBooks.length;
             setTotalPages(Math.ceil(totalResults / resultsPerPage));
         }, [searchInput, currentPage]);
+
+        const sendData = () => {
+            let selectedAuspiciador = []
+            let dataToSend = {}
+
+            selectedBooks.map((element) => (
+                selectedAuspiciador.push(element.id)
+            ))
+
+            dataToSend = {idEvento, selectedAuspiciador}
+            console.log(dataToSend)
+        }
 
     return(
         <>
@@ -127,16 +145,9 @@ const Patrocinador = ({onClick}) => {
                         </li>
                         ))}
                     </ul>
-            {/* <Flex  justify-content='center'flex-direction='column'gap='6px'align-items='center' padding='5px'>
-                {datos.map((patrocinador)=>(
-                    <Itemgen showImage={true}>
-                        <p>{patrocinador.nombre}</p>
-                    </Itemgen>
-                ))}
-            </Flex>  */}
-            {/* <Flex justify-content='end'margin='15px'>
-               <Btn onClick={onClick}>CREAR AUSPICIADOR</Btn>
-            </Flex>         */}
+                <Flex justify-content='center' top='2em'>
+                    <Btn onClick={()=>sendData()}>ACEPTAR</Btn>
+                </Flex>
             </>
            )
            }

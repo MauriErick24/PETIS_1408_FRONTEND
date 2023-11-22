@@ -31,6 +31,8 @@ function Layout({updateButton,  main}) {
   
   // const [updateButton, setUpdateButton] = useState(updateButton)
 
+  const [isEventCreated, setIsEventCreated] = useState(false)
+
   const [showCrearEvento, setShowCrearEvento] = useState(true)
   const [showOrganizador, setShowOrganizador] = useState(false)
   const [showAuspiciador, setShowAuspiciador] = useState(false)
@@ -40,7 +42,9 @@ function Layout({updateButton,  main}) {
   const [showActividades, setShowActividades] = useState(false)
   const [showAfiche, setShowAfiche] = useState(false)
 
-  console.log(datos);
+  // console.log(datos);
+
+  const [idEventoCreado, setIdEventoCreado] = useState(null)
  
   const [data, setData] = useState(
     {    
@@ -122,11 +126,15 @@ const handleActualizarEvento = (nuevosDatos) => {
         <Container>
           <Sidebar>
             <Aside>
+
             <Btn onClick={() => handleButtonClick(true, false, false, false, false,false,  false)}>
               EVENTO
             </Btn>
-            
-            {/* <Btn onClick={() => handleButtonClick(false, true, false , false, false, false, false)}>
+
+          { isEventCreated &&
+           ( 
+          <>
+              {/* <Btn onClick={() => handleButtonClick(false, true, false , false, false, false, false)}>
               ORGANIZADOR
             </Btn> */}
             
@@ -152,16 +160,18 @@ const handleActualizarEvento = (nuevosDatos) => {
 
             <Btn onClick={() => handleButtonClick(false, false, false, false, false,false, true)}>
               ACTIVIDADES
-            </Btn>
-
+            </Btn>  
+          </>  
+          )
+          }
             </Aside>
           </Sidebar>
           <Content>
             {/* {main} */}
             
-            {showCrearEvento && <CrearEvento data={data} formik={formik}/>}
+            {showCrearEvento && <CrearEvento eventCreated={setIsEventCreated} idEvento={setIdEventoCreado}/>}
             {showOrganizador && <Organizador data={data.organizadores} formik={formik}/>}
-            {showAuspiciador && <Auspiciador data={data.auspiciadores} onUpdateEvento={handleActualizarEvento}/>} 
+            {showAuspiciador && <Auspiciador idEvento={idEventoCreado}/>} 
             {showReglas && <Reglas data={data} onUpdateEvento={handleActualizarEvento}/>} 
             {showPremios && <Premios data={data} onUpdateEvento={handleActualizarEvento}/>} 
             {showRequisitos && <Requisitos data={data} onUpdateEvento={handleActualizarEvento}/>} 
