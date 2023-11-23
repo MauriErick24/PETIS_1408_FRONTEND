@@ -6,9 +6,14 @@ import imagen3 from '../assets/images/3.png';
 import imagen4 from '../assets/images/4.png';
 import imagen5 from '../assets/images/5.png';
 import imagen6 from '../assets/images/6.png';
+import { useEffect } from 'react';
+import api from '../services/api'
 
 const Afiche = () => {
-  const imagenes = [
+  const [imagenes,setImagenes]=useState([
+
+  ])
+  const imagen = [
     { id: 1, ruta:imagen1, titulo: 'blue logo' },
     { id: 2, ruta:imagen2, titulo: 'Título 2' },
     { id: 3, ruta:imagen3, titulo: 'Título 3' },
@@ -16,6 +21,19 @@ const Afiche = () => {
     { id: 5, ruta:imagen5, titulo: 'Título 5' },
     { id: 6, ruta:imagen6, titulo: 'Título 6' }
   ];
+
+  useEffect(()=>{
+    const fetchData = async () => {
+      try{
+        const response = await api.get('/api/afiches')
+        setImagenes(response.data)    
+        console.log(response.data)
+      }catch(err){
+        console.log("Error: ", err)
+      }
+    }
+  fetchData();
+  }, []);
 
   const [imagenesSeleccionadas, setImagenesSeleccionadas] = useState([]);
 
@@ -40,8 +58,8 @@ const Afiche = () => {
         {/* Renderizar imágenes desde el arreglo */}
         {imagenes.map((imagen) => (
           <div className="afiche" key={imagen.id} onClick={() => seleccionarImagen(imagen)}>
-            <img src={imagen.ruta} alt={`Imagen ${imagen.id}`} style={{ maxWidth: '100%', height: 'auto' }} />
-            <p>{imagen.titulo}</p>
+            <img src={imagen.imagen} alt={`Imagen ${imagen.id}`} style={{ maxWidth: '100%', height: 'auto' }} />
+            <p>{imagen.nombre}</p>
           </div>
         ))}
       </div>
@@ -52,7 +70,7 @@ const Afiche = () => {
           {/* Renderizar imágenes seleccionadas */}
           {imagenesSeleccionadas.map((imagen, index) => (
             <li key={index}>
-              {imagen.titulo}
+              {imagen.nombre}
               <a href="#" onClick={() => eliminarImagen(imagen)}>
                 x
               </a>
