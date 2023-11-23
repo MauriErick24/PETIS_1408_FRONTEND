@@ -17,8 +17,16 @@ import {useFormik} from "formik";
 
 const initialValues = {
   nombre_evento: '',
+
   inicio_inscripcion: '',
   fin_inscripcion: '',
+  hora_inicio_inscripcion:'',
+  hora_fin_inscripcion:'',
+  inicio_actividades:'',
+  fin_actividades:'',
+  hora_inicio_actividades:'',
+  hora_fin_actividades:'',
+
   hora: '',
   lugar: '',
   email: '',
@@ -48,9 +56,9 @@ const initialValues = {
     if(!values.fin_inscripcion){
         errors.fin_inscripcion = 'Requerido'
     }
-    if(!values.hora){
-        errors.hora = 'Requerido'
-    }
+    // if(!values.hora){
+    //     errors.hora = 'Requerido'
+    // }
     if(!values.lugar){
         errors.lugar = 'Requerido'
     }else if(values.lugar.length < 15){
@@ -109,9 +117,9 @@ const CrearEvento = ({eventCreated, idEvento}) => {
   const sendData = async(values) =>{
     try {
       ///// ESTE EVENTO DEBE DEVOLVER EL ID DEL EVENTO AL HACER EL POST
-     const response = await api.post('/evento', values) 
+    // const response = await api.post('/evento', values) 
       setShowAlertSuccesful(true)
-      idEvento(response.data.id);
+    //  idEvento(response.data.id);
       //idEvento(234)
       
     } catch (error) {
@@ -168,11 +176,11 @@ const CrearEvento = ({eventCreated, idEvento}) => {
                       <Flex gap = '1em'>
                         <Flex flex-direction='column'>
                             <Inputd
-                              name='inicio_inscripcion'
+                              name='inicio_actividades'
                               type='date' 
                               label='Inicia'
                               inputWidth={'150px'}
-                               value={formik.values.inicio_inscripcion}
+                               value={formik.values.inicio_actividades}
                                onChange={formik.handleChange}
                                onBlur={formik.handleBlur}
                             //   column
@@ -183,11 +191,11 @@ const CrearEvento = ({eventCreated, idEvento}) => {
                           
                           <Flex flex-direction='column'>
                             <Inputd
-                              name='fin_inscripcion'
+                              name='fin_actividades'
                               type='date' 
                               label='Fin'
                               inputWidth={'150px'}
-                               value={formik.values.fin_inscripcion}
+                               value={formik.values.fin_actividades}
                                onChange={formik.handleChange}
                                onBlur={formik.handleBlur}
                             //   column 
@@ -198,11 +206,11 @@ const CrearEvento = ({eventCreated, idEvento}) => {
 
                        <Flex flex-direction='row' gap='0.5em'>
                         <Inputd
-                            name='hora'
+                            name='hora_inicio_actividades'
                             label='Hora: ' 
                             type='time' 
                             // disabled={!options.hora}
-                             value={formik.values.horaInicioEvento}
+                             value={formik.values.hora_inicio_actividades}
                             // onChange={handleChange}
                             // onBlur={handleBlur}
                             inputWidth={'120px'}
@@ -214,7 +222,7 @@ const CrearEvento = ({eventCreated, idEvento}) => {
                           {formik.touched.hora && formik.errors.hora ? <div className='error'>{formik.errors.hora}</div>:null} 
 
                           <Inputd
-                            name='hora'
+                            name='hora_fin_actividades'
                             label='Hora: ' 
                             type='time' 
                             // disabled={!options.hora}
@@ -222,7 +230,7 @@ const CrearEvento = ({eventCreated, idEvento}) => {
                             // onChange={handleChange}
                             // onBlur={handleBlur}
                             inputWidth={'150px'}
-                             value={formik.values.horaFinEvento}
+                             value={formik.values.hora_fin_actividades}
                              onChange={formik.handleChange}
                              onBlur={formik.handleBlur}
                           />
@@ -269,19 +277,19 @@ const CrearEvento = ({eventCreated, idEvento}) => {
 
                     <Flex flex-direction='row' gap='0.5em'>
                         <Inputd
-                            name='hora'
+                            name='hora_inicio_inscripcion'
                             label='Hora: ' 
                             type='time' 
                             inputWidth={'120px'}
                             //120
-                             value={formik.values.horaInicioInscripcion}
+                             value={formik.values.hora_inicio_inscripcion}
                              onChange={formik.handleChange}
                              onBlur={formik.handleBlur}
                           />
                           {formik.touched.hora && formik.errors.hora ? <div className='error'>{formik.errors.hora}</div>:null} 
 
                           <Inputd
-                            name='hora'
+                            name='hora_fin_inscripcion'
                             label='Hora: ' 
                             type='time' 
                             // disabled={!options.hora}
@@ -289,7 +297,7 @@ const CrearEvento = ({eventCreated, idEvento}) => {
                             // onChange={handleChange}
                             // onBlur={handleBlur}
                             inputWidth={'120px'}
-                             value={formik.values.horaFinInscripcion}
+                             value={formik.values.hora_fin_inscripcion}
                              onChange={formik.handleChange}
                              onBlur={formik.handleBlur}
 

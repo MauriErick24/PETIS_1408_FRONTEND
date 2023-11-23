@@ -4,10 +4,17 @@ import styled from "styled-components";
 
 const CascadeList = ({children}) => {
     return(
-        <Flex flex-direction='column' gap='0.1em'>
-            {children}
-        </Flex>
+       <Div>
+             <Flex flex-direction='column' gap='0.5em'  border-radius='2em'>
+                {children}
+             </Flex>
+       </Div>
     )
 }
 
 export default CascadeList
+
+const Div = styled.div`
+    border-radius=2em;
+    backgound-color:#545454;
+`

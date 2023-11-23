@@ -81,29 +81,33 @@ const GestionEvento = () => {
                 
 
                 { showButtons.crearButton &&
-                <Btn onClick={()=> {
-                  
-                  setShowCascade(!showCascade)
-              }
-                }>CREAR</Btn>
-                }
 
-                { showCascade && (
-                  <CascadeList>
-                    <Option onClick={()=>{
-                      handleCascade(true,false)
-                      handleClick(false,false,false)
-                      }}>AUSPICIADORES</Option>
-
-                    {/* <Option onClick={()=>{
-                      handleCascade(false,true)
-                      handleClick(false,false,false)
-                      }}>ACTIVIDADES</Option> */}
-
-                  </CascadeList>
-                )
+                  // <Btn onClick={()=> {
                     
+                  //   setShowCascade(!showCascade)
+                  // }
+                  // }>CREAR</Btn>
+
+                  <ButtonCascade onClick={()=>setShowCascade(!showCascade)}>
+                      <p>CREAR</p>
+                      { showCascade && (
+                          <CascadeList>
+                            <Option onClick={()=>{
+                              handleCascade(true,false)
+                              handleClick(false,false,false)
+                              }}>AUSPICIADORES</Option>
+                            <Option onClick={()=>{
+                              handleCascade(false,true)
+                              handleClick(false,false,false)
+                              }}>ACTIVIDADES</Option>
+                          </CascadeList>
+                        )  
+                  }
+                  </ButtonCascade>
+                 
                 }
+
+                
 
                 </Aside>
               </Sidebar>
@@ -133,7 +137,10 @@ const GestionEvento = () => {
     export default GestionEvento;
     const Option = styled.button`
       width: 100%;
-      fontSize: 17px;
+      font-size: 22px;
+      border-radius: 2em;
+      background-color:#545444;
+
       &:hover,
       &:focus{
         background-color: #6b6a64;  
@@ -176,6 +183,21 @@ const Content = styled.div`
   padding: 20px;
   border-radius: 15px;
 `;
+
+const ButtonCascade = styled.div`
+     background-color: #000; 
+     border-radius: 2em;
+    
+     &:hover {
+      //background-color: #6b6a64;
+      cursor:pointer;
+    }
+     p{
+      color:#fff;
+      font-size: 22px;
+      padding: 0.4em 1em; 
+     }
+`
 
 
 
