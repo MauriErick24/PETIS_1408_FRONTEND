@@ -131,7 +131,8 @@ const handleActualizarEvento = (nuevosDatos) => {
               EVENTO
             </Btn>
 
-          { isEventCreated &&
+            {/* { isEventCreated && */}
+          { true &&
            ( 
           <>
               {/* <Btn onClick={() => handleButtonClick(false, true, false , false, false, false, false)}>

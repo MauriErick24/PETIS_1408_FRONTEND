@@ -336,10 +336,11 @@ const CrearEvento = ({eventCreated, idEvento}) => {
                         <Inputd
                             name='telefono'
                             label='Telefono: '
+                            type='number'
                          // disabled={!options.telefono}
-                          value={formik.values.telefono}
-                          onChange={formik.handleChange}
-                          onBlur={formik.handleBlur}
+                            value={formik.values.telefono}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
                             inputWidth={'100%'}
                         />
                         {formik.touched.telefono && formik.errors.telefono ? <div className='error'>{formik.errors.telefono}</div>:null}
