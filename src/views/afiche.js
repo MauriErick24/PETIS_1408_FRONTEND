@@ -8,6 +8,9 @@ import imagen5 from '../assets/images/5.png';
 import imagen6 from '../assets/images/6.png';
 import { useEffect } from 'react';
 import api from '../services/api'
+import Flex from "../components/Flex";
+import Btn from "../components/Btn";
+import HeaderTitle from "../components/HeaderTitle";
 
 const Afiche = () => {
   const [imagenes,setImagenes]=useState([
@@ -51,8 +54,9 @@ const Afiche = () => {
 
   return (
     <div>
-      <h1>Agregar Afiches</h1>
-      <h3>Evento : </h3>
+      <HeaderTitle title='AGREGAR AFICHES'/>
+      {/* <h1>Agregar Afiches</h1> */}
+      {/* <h3>Evento : </h3> */}
 
       <div id="album">
         {/* Renderizar imágenes desde el arreglo */}
@@ -64,7 +68,8 @@ const Afiche = () => {
         ))}
       </div>
 
-      <h1>Afiches Seleccionados</h1>
+      {/* <h1>Afiches Seleccionados</h1> */}
+      <HeaderTitle title='AFICHES SELECCIONADOS:'/>
       <div>
         <ul id="titulos">
           {/* Renderizar imágenes seleccionadas */}
@@ -78,6 +83,10 @@ const Afiche = () => {
           ))}
         </ul>
       </div>
+      <Flex justify-content='center' top='2em' gap='1em'>
+        <Btn type='submit'>GUARDAR</Btn>
+      
+      </Flex>
     </div>
   );
 };

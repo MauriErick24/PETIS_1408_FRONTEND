@@ -199,7 +199,7 @@ export default Layout;
 
 const Div = styled.div`
   //width: 100%;
- // min-height: 100vh;
+  min-height: 100vh;
   // margin: auto;
   background-color: #D1D0BC;
   
@@ -212,7 +212,7 @@ const Div = styled.div`
 `
 const Container = styled.div`
   display: flex;
-  height: auto;
+  height: 100vh;
   justify-content: flex-start;
   margin: 1%;
   gap:2em;

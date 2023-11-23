@@ -14,6 +14,7 @@ import TextArea from "../components/input/TextArea";
 import Btn from "../components/Btn";
 import Alert from "../components/Alert";
 import {useFormik} from "formik";
+import { useNavigate } from "react-router-dom";
 
 const initialValues = {
   nombre_evento: '',
@@ -96,7 +97,7 @@ const initialValues = {
 
 const CrearEvento = ({eventCreated, idEvento}) => {
 
-
+  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: initialValues,
@@ -396,8 +397,9 @@ const CrearEvento = ({eventCreated, idEvento}) => {
                 </Flex>
             </Flex>
 
-          <Flex justify-content='center' top='2em'>
+          <Flex justify-content='center' top='2em' gap='1em'>
             <Btn type='submit'>GUARDAR</Btn>
+            <Btn color = 'second' onClick={()=> navigate('/gestionar-eventos') }>CANCELAR</Btn>
           </Flex>
           </form>
 
