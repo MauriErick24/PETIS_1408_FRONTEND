@@ -20,6 +20,7 @@ import CascadeList from '../components/CascadeList';
 import WarningPage from './warning-page';
 import CrearActividades from './crear-actividades';
 import Corganizador from './corganizador';//jledezma crear organizador 23/11/23
+import landing from '../assets/images/img-umss.jpg'; //jledezma landing 24/11/23
 
 const GestionEvento = () => {
     const navigate = useNavigate();
@@ -27,6 +28,7 @@ const GestionEvento = () => {
     const [showCrear, setShowCrear] = useState(false)
     const [showEditar, setShowEditar] = useState(false)
     const [showEliminar, setShowEliminar] = useState(false)
+    const [showImg,setShowImg] = useState(true) //jledzma landing 24/11/23
     
     const [showCrearAuspiciador, setCrearAuspiciador] = useState(false)
     const [showCrearActividades, setCrearActividades] = useState(false)
@@ -34,13 +36,15 @@ const GestionEvento = () => {
 
     const [showCascade, setShowCascade] = useState(false)
     
-    const handleClick = (editar, eliminar, crear) => {
+    const handleClick = (editar, eliminar, crear,landing) => {
+        setShowImg(landing);
         setShowEditar(editar);
         setShowEliminar(eliminar);
         setShowCrear(crear);
     }
     
     const [showButtons, setShowButtons] = useState({
+        landing: true,      
         nuevoEventoButton: true,
         editarButton: true,
         eliminarButton: true,
@@ -118,7 +122,11 @@ const GestionEvento = () => {
                 </Aside>
               </Sidebar>
               <Content>
+                
                 {/* {main} */}
+                {showImg && (
+                  <img src={landing} alt="landing" width="100%" height="100%"/>
+                )}
                 {showEditar && (<EditarEvento showEditar={showEditar} />)}
                 {showEliminar && (<EliminarEvento showEliminar={showEliminar} />)}
                 {/* {showEliminar && (<WarningPage/>)} */}
