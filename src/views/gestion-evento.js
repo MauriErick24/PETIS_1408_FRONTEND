@@ -105,9 +105,7 @@ const GestionEvento = () => {
                   }
                   </ButtonCascade>
                  
-                }
-
-                
+                }    
 
                 </Aside>
               </Sidebar>

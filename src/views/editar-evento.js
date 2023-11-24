@@ -88,6 +88,10 @@ const EditarEvento = ({showEditar, showEliminar}) => {
         setCurrentPage(1); 
     };
 
+    const handleEditar = (idEvento) => {
+        navigate(`/editar/evento/${idEvento}`,{state:{datos:true}})
+    }
+
     return (
         <>
             {loading ? (
@@ -102,7 +106,7 @@ const EditarEvento = ({showEditar, showEliminar}) => {
             <div className="crud-container text-center" >
                 <input
                     type="text"
-                    placeholder="Buscar por personaje"
+                    placeholder="Buscar por evento"
                     value={searchTerm}
                     onChange={handleSearch}
                 />
@@ -130,7 +134,7 @@ const EditarEvento = ({showEditar, showEliminar}) => {
                                 <td>{elemento.AddresFavorite}</td> */}
                                 <td>
                                     
-                                    {showEditar && (<Btn  color="primary" style={{ fontSize: '1rem', padding: '0.375rem 0.75rem', width: '50px',marginRight: '5px' }}>
+                                    {showEditar && (<Btn onClick={() => handleEditar(elemento.id)}  color="primary" style={{ fontSize: '1rem', padding: '0.375rem 0.75rem', width: '50px',marginRight: '5px' }}>
                                         <FontAwesomeIcon icon={faPenToSquare} />
                                     </Btn>)}
 

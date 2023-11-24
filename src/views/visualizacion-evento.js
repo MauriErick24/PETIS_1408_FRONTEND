@@ -28,6 +28,7 @@ function Visualizacionevento(){
     const [showButtonEditar, setShowButtonEditar] = useState(true)
     const [showButtonCancelar, setShowButtonCancelar] = useState(false)
     const [taskButton, setTaskButton] = useState(true)
+    const [inscripcionButton, setInscripcionButton] = useState(true)
     
     
     const {id} = useParams();
@@ -99,6 +100,10 @@ function Visualizacionevento(){
       setEndDate('');
     };
   
+    const handleInscribirse = () => {
+        console.log("Se ha precionado el boton inscribirse")
+    }
+
     const addTask = () => {
       if (taskInput.trim() === '') {
         alert('Por favor, ingrese una tarea.');
@@ -199,8 +204,9 @@ function Visualizacionevento(){
                         ))}
                     </BubbleContainer>
                   </Flex>
-                
+                  <Btn onClick={()=>handleInscribirse()}>INSCRIBIRSE</Btn>
                 </Flex>
+
                 
                   
             </Asided>
@@ -215,72 +221,7 @@ function Visualizacionevento(){
             </Flex>
             
             <Asided>
-                <Flex flex-direction='column' justify-content='space-between'>
-                    {showButtonEditar && <Btn margin-bottom='10px' onClick={() => navigate(`/editar/evento/${id}`, {state: {datos: data}})}>EDITAR</Btn>}
-                    {showButtonCancelar && <Btn>CANCELAR</Btn>}   
-                </Flex>
-                <Flex flex-direction='column' align-items='center' gap='1em'>
-                    <P>Lista de Tareas</P>
-                    {taskButton && <Btn onClick={openModal}>AGREGAR TAREA</Btn>}
-                    {isModalOpen && (
-                        <Modal>
-                          <Flex flex-direction='column' gap='1em' justify-content='center' align-items='center'>
-                                <h2>Agregar Tarea</h2>
-                                <Flex gap='5%'>
-                                    <P>Tarea: </P>
-                                    <Input 
-                                        type='text'
-                                        name='tarea'
-                                        //    label='Tarea:'
-                                        value={taskInput} 
-                                        onChange={(e) => setTaskInput(e.target.value)}
-                                        // onBlur={handleBlur}
-                                    />
-                                </Flex>
-
-                                <Flex gap='5%'>
-                                    <P>Fecha de Inicio:</P>
-                                    <Inputd
-                                        name='fecha_inicio'
-                                        type='date' 
-                                        // label='Fecha de Inicio:'
-                                        value={startDate} 
-                                        onChange={(e) => setStartDate(e.target.value)}                           
-                                    />
-                                </Flex>
-
-                                <Flex gap='5%' >
-                                    <P>Fecha de Fin:</P>
-                                        
-                                    <Inputd
-                                        name='fecha_fin'
-                                        type='date' 
-                                        //label='Fecha de Fin:'
-                                        value={endDate} 
-                                        onChange={(e) => setEndDate(e.target.value)}
-                                    />
-                                </Flex>
-
-                                
-                                <Flex gap='1em'>
-                                    <Btn onClick={addTask}>ACEPTAR</Btn>
-                                    <Btn color='second' onClick={closeModal}>CANCELAR</Btn>
-                                </Flex>
-                          </Flex>
-                        </Modal>
-                    )}
-                    <ul>
-                        {tasks.map((task) => (
-                        <li key={task.id}>           
-                            <Flex text-align='center' align-items='center' gap='1em'>
-                                <P>{task.task} </P> 
-                                <P>{task.startDate} - {task.endDate}</P>
-                                <Btn color='second' onClick={() => deleteTask(task.id)}>x</Btn>
-                            </Flex>
-                        </li>
-                        ))}
-                    </ul>
-                </Flex>
+               <P>Comunicados</P>
             </Asided>
         </Flex>
         
