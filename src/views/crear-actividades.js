@@ -58,7 +58,7 @@ const CrearActividades =() => {
   
 
     return(
-        <>
+        <>    <div>
                 <Flex flex-direction='column' align-items='center' gap='1em'>
                     <HeaderTitle title='ACTIVIDADES'/>
                       </Flex>
@@ -111,7 +111,7 @@ const CrearActividades =() => {
                                    </div> 
                                   
                                
-                                   < Btn  style={{marginTop:'25px' }}onClick={addTask} >ACEPTAR</Btn>
+                                  
                         
                                 </div> 
                      
@@ -136,7 +136,8 @@ const CrearActividades =() => {
                         </li>
                         ))}
                     </ul>
-                
+                    </div>
+                    < Btn  style={{marginTop:'25px' }}>ACEPTAR</Btn>
         </>
     )
 }
