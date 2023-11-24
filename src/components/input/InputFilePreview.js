@@ -1,25 +1,38 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import FileInput from './InputFile'
 import Img from '../../assets/images/example-img.jpg'
 import styled from 'styled-components';
 
-const InputFilePreview = ({ name, buttonText, ...props }) => {
+//* import { AuspiciadorContext } from '../../context/CrearAuspiciadorContextProvider';
+
+const InputFilePreview = ({ name, buttonText, context, ...props}) => {
+  
+  //* const {auspiciadorDatos, handleChange, setAuspiciadorDatos} = useContext(AuspiciadorContext);
+  
+ //* const {auspiciadorDatos, handleChange, setAuspiciadorDatos} = useContext(context);
+  
+ const {data, handleChange, setData} = useContext(context);
+
   const [selectedImage, setSelectedImage] = useState(null)
 
   const handleImageChange = (e) => {
-    const file = e.target.files[0]
+    const file = e.target.files[0];
     if (file) {
-      const reader = new FileReader()
-
+      const reader = new FileReader();
+  
       reader.onload = (e) => {
-        setSelectedImage(e.target.result)
+        setSelectedImage(e.target.result);
       };
-
-      reader.readAsDataURL(file)
+  
+      reader.readAsDataURL(file);
+  
+      setData({ ...data, imagen: file });
     } else {
-      setSelectedImage(null)
+      setSelectedImage(null);
+      setData({ ...data, imagen: null });
     }
-  }
+  };
+  
 
   return (
     <Preview {...props}>      

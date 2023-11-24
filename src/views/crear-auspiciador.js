@@ -1,38 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Flex from "../components/Flex";
 import HeaderTitle from "../components/HeaderTitle";
 import Inputk from "../components/input/Inputk";
 import InputFilePreview from "../components/input/InputFilePreview";
 import Btn from "../components/Btn";
 import { async } from "q";
+import { AuspiciadorContext } from "../context/CrearAuspiciadorContextProvider";
+
 import api from '../services/api'
-const CrearPatrocinador =({onClick}) =>{
-    const [auspiciadorDatos, setAuspiciadorDatos] = useState(
-        {
-            nombre: '',
-            empresa:'',
-            email: '',
-            telefono: '',
-            direccion: '',
-        }
-    )
 
-        
-    const handleChange = (name, value) => {
-        setAuspiciadorDatos((prevAuspiciadorDatos) => ({
-        ...prevAuspiciadorDatos,
-        [name]: value,
-        }));
-    };
 
-    const sendData = async() =>{
-        try{
-            const response = await api.post('/api/auspiciadores', auspiciadorDatos);
-             console.log("Post")
-           }catch(err){
-             console.log("Error: ", err)
-           }
-    }
+const CrearAuspiciador =({onClick}) =>{
+
+    const {auspiciadorDatos, handleChange, setAuspiciadorDatos, sendData} = useContext(AuspiciadorContext)    
 
     return (
         <>
@@ -92,6 +72,7 @@ const CrearPatrocinador =({onClick}) =>{
                         width='200px'
                         widthDiv='auto'
                         font-size='18px'
+                        context = {AuspiciadorContext}
                     />
                 </Flex>  
             {/* </Flex> */}
@@ -104,4 +85,4 @@ const CrearPatrocinador =({onClick}) =>{
     )
 }
 
-export default CrearPatrocinador
+export default CrearAuspiciador

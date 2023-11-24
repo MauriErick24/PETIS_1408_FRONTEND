@@ -174,12 +174,12 @@ const handleActualizarEvento = (nuevosDatos) => {
             
             {showOrganizador && <Organizador data={data.organizadores} />}
 
-            
             {showAuspiciador && <Auspiciador idEvento={idEventoCreado}/>} 
             {showReglas && <Reglas data={data} onUpdateEvento={handleActualizarEvento}/>} 
             {showPremios && <Premios data={data} onUpdateEvento={handleActualizarEvento}/>} 
             {showRequisitos && <Requisitos data={data} onUpdateEvento={handleActualizarEvento}/>} 
             {showActividades && <CrearActividades/>}
+            
             {showAfiche && <Afiche/>}
             
 

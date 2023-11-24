@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../assets/css/Afiche.css';
-import imagen1 from '../assets/images/1.png';
+import Imagen1 from '../assets/images/1.png';
 import imagen2 from '../assets/images/2.png';
 import imagen3 from '../assets/images/3.png';
 import imagen4 from '../assets/images/4.png';
@@ -13,11 +13,11 @@ import Btn from "../components/Btn";
 import HeaderTitle from "../components/HeaderTitle";
 
 const Afiche = () => {
-  const [imagenes,setImagenes]=useState([
+  const [imagene,setImagenes]=useState([
 
   ])
-  const imagen = [
-    { id: 1, ruta:imagen1, titulo: 'blue logo' },
+  const imagenes = [
+    { id: 1, ruta:Imagen1, titulo: 'blue logo' },
     { id: 2, ruta:imagen2, titulo: 'Título 2' },
     { id: 3, ruta:imagen3, titulo: 'Título 3' },
     { id: 4, ruta:imagen4, titulo: 'Título 4' },
@@ -55,14 +55,12 @@ const Afiche = () => {
   return (
     <div>
       <HeaderTitle title='AGREGAR AFICHES'/>
-      {/* <h1>Agregar Afiches</h1> */}
-      {/* <h3>Evento : </h3> */}
 
       <div id="album">
         {/* Renderizar imágenes desde el arreglo */}
         {imagenes.map((imagen) => (
           <div className="afiche" key={imagen.id} onClick={() => seleccionarImagen(imagen)}>
-            <img src={imagen.imagen} alt={`Imagen ${imagen.id}`} style={{ maxWidth: '80%', height: 'auto' }} />
+            <img src={imagen.ruta} alt={`Imagen ${imagen.id}`} style={{ maxWidth: '80%', height: 'auto' }} />
             <p>{imagen.nombre}</p>
           </div>
         ))}
@@ -75,7 +73,7 @@ const Afiche = () => {
           {/* Renderizar imágenes seleccionadas */}
           {imagenesSeleccionadas.map((imagen, index) => (
             <li key={index}>
-              {imagen.nombre}
+              {imagen.titulo}
               <a href="#" onClick={() => eliminarImagen(imagen)}>
                 x
               </a>

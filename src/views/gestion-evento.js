@@ -20,6 +20,7 @@ import CascadeList from '../components/CascadeList';
 import WarningPage from './warning-page';
 import CrearActividades from './crear-actividades';
 import Corganizador from './corganizador';//jledezma crear organizador 23/11/23
+import { CrearAuspiciadorContextProvider } from '../context/CrearAuspiciadorContextProvider';
 
 const GestionEvento = () => {
     const navigate = useNavigate();
@@ -119,8 +120,12 @@ const GestionEvento = () => {
                 {/* {main} */}
                 {showEditar && (<EditarEvento showEditar={showEditar} />)}
                 {showEliminar && (<EliminarEvento showEliminar={showEliminar} />)}
-                {/* {showEliminar && (<WarningPage/>)} */}
-                {showCrearAuspiciador && (<CrearAuspiciador/>)}
+                {/* {showEliminar && (<WarningPage/>)} */}                
+                {showCrearAuspiciador && (
+                   <CrearAuspiciadorContextProvider>
+                      <CrearAuspiciador/>
+                   </CrearAuspiciadorContextProvider> 
+                  )}
                 {showCrearActividades && (<CrearActividades/>)}
                 {showCrearOrganizador && (<Corganizador />)}
 
