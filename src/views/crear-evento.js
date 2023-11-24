@@ -120,13 +120,13 @@ const CrearEvento = ({eventCreated, idEvento}) => {
       ///// ESTE EVENTO DEBE DEVOLVER EL ID DEL EVENTO AL HACER EL POST
     // const response = await api.post('/evento', values) 
       setShowAlertSuccesful(true)
-<<<<<<< HEAD
+// HEAD
      // idEvento(response.data.id);
       ///idEvento(234)
-=======
+//=======
     //  idEvento(response.data.id);
       //idEvento(234)
->>>>>>> develop
+//>>>>>>> develop
       
     } catch (error) {
       setShowAlertFail(true)
