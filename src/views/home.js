@@ -8,12 +8,15 @@ import { useNavigate } from 'react-router-dom'
 import api from '../services/api'
 
 import Alert from '../components/Alert'
+import useLocalStorage from '../hook/useLocalStorage'
 
 const Home = () => {
 
   const navigate = useNavigate()
   const [ showAcept, setAceptShow ] = useState(false)
-  const [ welcome, setWelcome ] = useState(true)
+  const { value } = useLocalStorage('welcome')
+
+  console.log(value)
 
   const example = {
     type: 'TIPO DE EVENTO',
@@ -49,13 +52,6 @@ const Home = () => {
 
   return(
     <>
-      
-      <Alert
-        show={welcome}
-        message='Bienvenido al sistema'
-        onAcept={() => setWelcome(!welcome)}
-      />
-
       <HeaderArticles 
         title='EVENTOS'
         btnTitle='CREAR EVENTO'

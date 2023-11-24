@@ -26,5 +26,6 @@ export const RegisterSchema = Yup.object().shape({
                   /^[0-9]{7,8}$/,
                   'Número de teléfono no válido'
                 )
-                .required(requerido)
+                .required(requerido),
+  imagen: Yup.mixed().required('Selecciona una imagen')
 })

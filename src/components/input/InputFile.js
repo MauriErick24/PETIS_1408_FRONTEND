@@ -1,34 +1,37 @@
-import React from 'react'
-import styled from 'styled-components'
+// FileInput.js
+import React from 'react';
+import { useField } from 'formik';
+import styled from 'styled-components';
 
-const FileInput = ({ onChange, accept, buttonText, name, ...rest }) => {
+const InputFile = ({ label, ...props }) => {
+  const [field, , helpers] = useField(props);
+
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      // Puedes realizar cualquier lógica adicional con el archivo aquí
       console.log('Nombre del archivo seleccionado:', file.name);
+      helpers.setValue(file);
     }
-    onChange(e);
   };
 
   return (
     <FileInputContainer>
-      <HiddenFileInput accept={accept} id={name} type="file" onChange={handleFileChange} {...rest} />
-      <CustomButton htmlFor={name}>{buttonText}</CustomButton>
+      <HiddenFileInput id={field.name} type="file" onChange={handleFileChange} {...props} />
+      <CustomButton htmlFor={field.name}>{label}</CustomButton>
     </FileInputContainer>
   );
 };
 
 const FileInputContainer = styled.div`
   position: relative;
-`
+`;
 
 const HiddenFileInput = styled.input`
   position: absolute;
   width: 0;
   height: 0;
   overflow: hidden;
-`
+`;
 
 const CustomButton = styled.label`
   background-color: black;
@@ -37,6 +40,6 @@ const CustomButton = styled.label`
   border-radius: 2em;
   cursor: pointer;
   display: inline-block;
-`
+`;
 
-export default FileInput;
+export default InputFile;

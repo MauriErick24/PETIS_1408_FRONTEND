@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import Btn from '../components/Btn'
 import Flex from '../components/Flex'
@@ -10,9 +10,16 @@ import { useNavigate } from 'react-router-dom'
 import Confirm from '../components/Confirm'
 import Alert from '../components/Alert'
 
+import { useAuth } from '../hook/useAuth'
+import axios from 'axios'
+import { api } from '../env'
+
 const Perfil = () => {
 
   const navigate = useNavigate()
+  const { token, logout } = useAuth()
+  const [ user, setUser ] = useState({})
+
   const [ pop, setPop ] = useState({
     register: false,
     eliminar: false,
@@ -24,6 +31,23 @@ const Perfil = () => {
       ...state,
       [key]: !state[key]
     }))
+  }
+
+  useEffect(() => {
+    getUser(token)
+  }, [token])
+
+  const getUser = async(token) => {
+    try {
+      const response = await axios.get(`${api}/showUser`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      setUser(response.data.usuario)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
@@ -47,6 +71,7 @@ const Perfil = () => {
         }}
       />
       <PopRegisterEdit
+        user={user}
         pop={pop.register} 
         setPop={() => changePop('register')} 
       />
@@ -55,7 +80,7 @@ const Perfil = () => {
           <h2>CONFIGURAR</h2>
 
           <Flex flex-direction='column' gap='10px'>
-            <Btn>Cuenta</Btn>
+            <Btn onClick={logout}>Cerrar sesion</Btn>
             <Btn>Equipos</Btn>
           </Flex>
         </Flex>
@@ -63,22 +88,22 @@ const Perfil = () => {
         <BorderContent flex-direction='column' gap='20px' top='70px'>
           <div className='item'>
             <label className='item-label'>nombre: </label>
-            <span className='item-value'>JORGE LEDEZMA ZEBALLOS</span>
+            <span className='item-value'>{user?.nombres} {user?.apellidos}</span>
           </div>
 
           <div className='item'>
             <label className='item-label'>email: </label>
-            <span className='item-value'>jledezmaze@yahoo.com</span>
+            <span className='item-value'>{user?.email}</span>
           </div>
 
           <div className='item'>
             <label className='item-label'>Telefono: </label>
-            <span className='item-value'>591 72285963</span>
+            <span className='item-value'>{user?.telefono}</span>
           </div>
 
           <div className='item'>
-            <label className='item-label'>Fecha de Alta: </label>
-            <span className='item-value'>05/05/2023</span>
+            <label className='item-label'>Fecha de nacimiento: </label>
+            <span className='item-value'>{user?.fecha_nacimiento}</span>
           </div>
 
           <Flex width='100%' justify-content='space-between' top='10px'>
@@ -89,8 +114,13 @@ const Perfil = () => {
 
         <Flex>
           <Imagen flex-direction='column' align-items='center' gap='10px'>
-            <div className='img'></div>
-            <span>nombre de usuario</span>
+            <div
+              className='img'
+              style={{
+                backgroundImage: `url(${user?.imagen})`
+              }}
+            ></div>
+            <span>{user?.email}</span>
           </Imagen>
           <IoClose size={40} onClick={() => navigate(-1)} style={{cursor: 'pointer'}} />
         </Flex>
@@ -124,7 +154,6 @@ const Imagen = styled(Flex)`
   padding: 20px;
 
   .img{
-    background-image: url('https://images.unsplash.com/photo-1682687220591-cfd91ab5c1b5?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
     background-size: cover;
     background-position: center center;
     width: 100px;

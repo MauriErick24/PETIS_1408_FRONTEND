@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { useAuth } from './hook/useAuth'
 
 // components
 import Content from './components/Content'
@@ -10,15 +11,28 @@ import CreacionEventoData from './views/creacion-evento-data'
 import Perfil from './views/perfil'
 
 function App() {
+
+  const { token } = useAuth()
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='' element={<Content />}>
-          <Route index element={<Home />} />
-          <Route path='creacion/evento' element={<CreacionEvento />} />
-          <Route path='creacion/data' element={<CreacionEventoData />} />
-          <Route path='perfil' element={<Perfil />} />
-        </Route>
+        {
+            token ?
+              // usuario logueado con token
+              <Route path='' element={<Content />}>
+                <Route index element={<Home />} />
+                <Route path='creacion/evento' element={<CreacionEvento />} />
+                <Route path='creacion/data' element={<CreacionEventoData />} />
+                <Route path='perfil' element={<Perfil />} />
+              </Route>
+              :
+              // sin token
+              <Route path='' element={<Content />}>
+                <Route index element={<Home />} />
+              </Route>
+        }
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </BrowserRouter>
   );

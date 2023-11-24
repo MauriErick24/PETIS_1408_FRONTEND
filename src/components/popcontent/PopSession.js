@@ -1,9 +1,12 @@
+import axios from 'axios'
+import { api } from '../../env'
 import { useState } from 'react'
 import { Formik } from 'formik'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { LoginSchema } from '../../functions/validate.yup'
 import { initialLogin } from '../../functions/form'
+import { useAuth } from '../../hook/useAuth'
 
 // components
 import Pop from '../Pop'
@@ -14,11 +17,29 @@ import Alert from '../Alert'
 
 const PopSession = ({ pop, setPop, onClick }) => {
 
-  const [show, setShow] = useState(false) 
+  const [show, setShow] = useState(false)
+  const [message, setMessage] = useState('')
+  const { login } = useAuth()
 
-  const onSubmit = (values) => {
-    // datos para backend
-    console.log('datos enviados', values)
+  const onSubmit = async (values) => {
+    try {
+      const response = await axios.post(`${api}/login`, {
+        email: values.usuario,
+        password: values.password
+      })
+
+      if(response.data){
+        if(response.data.status === 200){
+          login(response.data.token)
+          setShow(!show)
+          setMessage(`${values.usuario}, Bienvenido al sistema`)
+        }
+      }
+    } catch (error) {
+      // console.log(error)
+      setShow(!show)
+      setMessage('Correo o contraseña incorrecta, intentelo nuevamente')
+    }
     setPop(!pop)
     setShow(!show)
   }
@@ -27,9 +48,10 @@ const PopSession = ({ pop, setPop, onClick }) => {
     <>
       <Alert
         show={show}
-        message='No se reconoce al usuario la contraseña, revise los campos.'
+        message={message}
         onAcept={() => setShow(!show)}
       />
+
       <Pop
         setState={setPop}
         state={pop}

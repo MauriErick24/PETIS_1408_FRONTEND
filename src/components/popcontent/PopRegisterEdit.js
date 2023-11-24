@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Formik } from 'formik'
 import styled from 'styled-components'
 import { initialRegister } from '../../functions/form'
 import { RegisterSchema } from '../../functions/validate.yup'
+import { toBlob, toFile } from '../../functions/blob'
 
 // components
 import Pop from '../Pop'
@@ -12,9 +13,10 @@ import Btn from '../Btn'
 import InputFilePreview from '../input/InputFilePreview'
 import Confirm from '../Confirm'
 
-const PopRegisterEdit = ({ pop, setPop, onClick }) => {
+const PopRegisterEdit = ({ pop, setPop, user, onClick }) => {
 
   const [ confirm, setConfirm ] = useState(false)
+  const [ form, setForm ] = useState(initialRegister)
   
   const onSubmit = (values) => {
     console.log(values)
@@ -26,6 +28,22 @@ const PopRegisterEdit = ({ pop, setPop, onClick }) => {
     submitForm()
   }
 
+  useEffect(() => {
+    toBlob(user.imagen)
+      .then(blob => {
+        const arr = user?.imagen?.split('/')
+        if(arr){
+          const pos = Number(arr?.length) ?? 1
+          const fileName = arr[pos - 1]
+          const file = toFile(blob, fileName)
+          setForm({
+            ...user,
+            imagen: file
+          })
+        }
+      })
+  }, [user])
+
   return(
     <>
       <Pop
@@ -33,14 +51,14 @@ const PopRegisterEdit = ({ pop, setPop, onClick }) => {
         setState={setPop}
         width='900px'
       >
-        <h2>REGISTRO DE USUARIO</h2>
+        <h2>MODIFICAR USUARIO</h2>
         <Formik
-          initialValues={initialRegister}
+          initialValues={form}
           validationSchema={RegisterSchema}
           onSubmit={onSubmit}
         >
           {
-            (({ handleSubmit, errors, submitForm }) => (
+            (({ handleSubmit, errors, values, submitForm }) => (
               <form onSubmit={handleSubmit}>
                 <Confirm
                   show={confirm}
@@ -55,6 +73,7 @@ const PopRegisterEdit = ({ pop, setPop, onClick }) => {
                       label='Nombres'
                       placeholder='Ingresa tu nombre'
                       error={errors.nombres}
+                      value={values.nombres}
                       column
                       asterisk
                     />
@@ -64,6 +83,7 @@ const PopRegisterEdit = ({ pop, setPop, onClick }) => {
                       label='Apellidos'
                       placeholder='Ingresa tu apellido'
                       error={errors.apellidos}
+                      value={values.apellidos}
                       column
                       asterisk
                     />
@@ -73,19 +93,21 @@ const PopRegisterEdit = ({ pop, setPop, onClick }) => {
                       label='Correo electrónico'
                       placeholder='Ingresa tu correo'
                       error={errors.email}
+                      value={values.email}
                       column
                       asterisk
                     />
 
-                    <InputField
+                    {/* <InputField
                       name='password'
                       type='password'
                       label='Contraseña'
                       placeholder='Ingresa tu contraseña'
                       error={errors.password}
+                      value={values.password}
                       column
                       asterisk
-                    />
+                    /> */}
                   </Flex>
 
                   <Flex flex-direction='column' gap='20px'>
@@ -94,6 +116,7 @@ const PopRegisterEdit = ({ pop, setPop, onClick }) => {
                       type='date'
                       label='Fecha de nacimiento'
                       error={errors.fecha_nacimiento}
+                      value={values.fecha_nacimiento}
                       column
                       asterisk
                     />
@@ -103,6 +126,7 @@ const PopRegisterEdit = ({ pop, setPop, onClick }) => {
                       label='Nombre de Usuario'
                       placeholder='Ingresa tu usuario'
                       error={errors.usuario}
+                      value={values.usuario}
                       column
                       asterisk
                     />
@@ -113,6 +137,7 @@ const PopRegisterEdit = ({ pop, setPop, onClick }) => {
                       label='Telefono'
                       placeholder='Ingresa tu telefono'
                       error={errors.telefono}
+                      value={values.telefono}
                       column
                       asterisk
                     />
@@ -128,6 +153,7 @@ const PopRegisterEdit = ({ pop, setPop, onClick }) => {
                       width='100px'
                       height='100px'
                       name='imagen'
+                      label='Editar imagen'
                       buttonText='Insertar Imagen'
                     />
                   </Flex>

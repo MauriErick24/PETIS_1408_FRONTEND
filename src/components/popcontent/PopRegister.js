@@ -1,3 +1,4 @@
+import { api } from '../../env'
 import { useState } from 'react'
 import { Formik } from 'formik'
 import styled from 'styled-components'
@@ -11,13 +12,23 @@ import InputField from '../input/InputField'
 import Btn from '../Btn'
 import InputFilePreview from '../input/InputFilePreview'
 import Confirm from '../Confirm'
+import axios from 'axios'
 
 const PopRegister = ({ pop, setPop, onClick }) => {
 
   const [ confirm, setConfirm ] = useState(false)
   
-  const onSubmit = (values) => {
-    console.log(values)
+  const onSubmit = async (values) => {
+    const formData = new FormData()
+    Object.keys(values).forEach((item) => {
+      formData.append(item, values[item])
+    })
+
+    try {
+      await axios.post(`${api}/register`, formData)
+    } catch (error) {
+      console.log(error)
+    }
     setPop(!pop)
   }
 
@@ -124,11 +135,11 @@ const PopRegister = ({ pop, setPop, onClick }) => {
                   </Flex>
 
                   <Flex>
-                    <InputFilePreview
-                      width='100px'
-                      height='100px'
-                      name='imagen'
-                      buttonText='Insertar Imagen'
+                    <InputFilePreview 
+                      name="imagen"
+                      label="Selecciona una imagen"
+                      width='150px'
+                      height='150px'
                     />
                   </Flex>
                 </Flex>

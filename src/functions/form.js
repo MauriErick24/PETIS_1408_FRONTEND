@@ -31,6 +31,7 @@ export const initialRegister = {
   apellidos: '',
   email: '',
   password: '',
+  imagen: '',
   fecha_nacimiento: '',
   usuario: '',
   telefono: ''
