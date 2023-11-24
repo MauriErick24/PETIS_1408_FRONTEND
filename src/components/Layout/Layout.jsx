@@ -20,12 +20,12 @@ import Premios from '../../views/premios';
 import Requisitos from '../../views/requisitos'
 import CrearActividades from '../../views/crear-actividades';
 import Afiche from '../../views/afiche'
-
+import { useNavigate } from 'react-router-dom';
 
 
 function Layout({updateButton,  main}) {
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const location = useLocation();
   const { datos } = location.state || {};
   
@@ -186,6 +186,8 @@ const handleActualizarEvento = (nuevosDatos) => {
           </Content>  
         </Container>
       <Flex justify-content='end' gap='1em'>
+            <Btn color='second' onClick={()=>navigate('/gestionar-eventos')}>ATRAS</Btn> 
+
         {/* {updateButton && <Btn type='submit'>GUARDAR</Btn>}
         {!updateButton && <Btn onClick={()=>console.log(data)}>CREAR</Btn>}
        
