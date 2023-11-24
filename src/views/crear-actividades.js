@@ -121,7 +121,7 @@ const CrearActividades =() => {
                         <li key={task.id} style={{backgroundColor: 'white',  // Color de fondo rojo
                            // Bordes redondeados
                         padding: '5px 20px',
-                        marginTop:'0.8em',
+                        marginTop:'git 0.8em',
                         border: '3px solid black',    // Relleno interior
                         color: 'black', width:'70%' 
                         ,
