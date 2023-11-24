@@ -151,9 +151,9 @@ const handleActualizarEvento = (nuevosDatos) => {
               REGLAS
             </Btn> */}
 
-            {/* <Btn onClick={() => handleButtonClick(false, false, false, false, true, false, false)}>
+            <Btn onClick={() => handleButtonClick(false, false, false, false, true, false, false)}>
               PREMIOS
-            </Btn> */}
+            </Btn> 
 
             {/* <Btn onClick={() => handleButtonClick(false, false, false, false, false,false,  true)}>
               REQUISITOS

@@ -3,6 +3,9 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import HeaderTitle from '../components/TituloPremio'
 import BorderContent from '../components/BorderContent'
 import styled from "styled-components";
+import Flex from "../components/Flex";
+import Btn from "../components/Btn";
+
 
 const Premios = () => {
     const buttonStyle = {
@@ -136,7 +139,13 @@ const Premios = () => {
                 </li>
                ))}
            </ul>
+
     </div>
+    <Flex justify-content='center' top='2em' gap='1em'>
+            <Btn type='submit'>GUARDAR</Btn>
+            {/* <Btn color = 'second' onClick={()=> navigate('/gestionar-eventos') }>CANCELAR</Btn> */}
+    </Flex>
+
       </>
   )
 }
