@@ -96,9 +96,9 @@ const CrearPatrocinador =({onClick}) =>{
                 </Flex>  
             {/* </Flex> */}
 
-                 <Flex justify-content='end' gap='1em'>
-                    <Btn onClick={sendData}>CREAR AUSPICIADOR</Btn>
-                    <Btn color='second' onClick={onClick}>VOLVER</Btn>
+                 <Flex justify-content='center' gap='1em'>
+                    <Btn onClick={sendData}>GUARDAR</Btn>
+                    {/* <Btn color='second' onClick={onClick}>VOLVER</Btn> */}
                  </Flex>
         </>
     )
