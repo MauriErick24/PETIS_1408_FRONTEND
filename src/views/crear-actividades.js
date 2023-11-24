@@ -6,10 +6,8 @@ import Input from "../components/input/Input";
 import Inputd from "../components/input/Inputd";
 import HeaderTitle from "../components/HeaderTitle";
 
-const P = styled.p``
-const Modal = styled.div`
-    width=100%;
-`
+
+
 
 const CrearActividades =() => {
 
@@ -60,67 +58,86 @@ const CrearActividades =() => {
   
 
     return(
-        <>
+        <>    <div>
                 <Flex flex-direction='column' align-items='center' gap='1em'>
-                    <HeaderTitle title='CREAR ACTIVIDADES'/>
+                    <HeaderTitle title='ACTIVIDADES'/>
+                      </Flex>
                     { (
-                     <Flex gap='2em' text-align='center' align-items='center'>
-                        <Modal>
-                          <Flex flex-direction='column' gap='1em' justify-content='center' align-items='center'>
+                      
+                     <div width = '80%' >                       
+                          
                                 
-                                <h2>Agregar Tarea</h2>
-                                <Flex gap='5%'>
-                                    <P>Tarea: </P>
-                                    <Input 
+                                <h2 style={{display: 'flex', marginLeft:'10%'}}>INDIQUE LA ACTIVIDAD</h2>
+                           
+                                    <div style={{display: 'flex', alignItems: 'center', width:'70%',flexDirection:'column', marginLeft:'10%'}}>
+                                       <Input 
                                         type='text'
                                         name='tarea'
+                                        width='50%'
                                         //    label='Tarea:'
                                         value={taskInput} 
                                         onChange={(e) => setTaskInput(e.target.value)}
                                         // onBlur={handleBlur}
                                     />
-                                </Flex>
+                                    </div>
+                                   
+                                
 
-                                <Flex gap='5%'>
-                                    <P>Fecha de Inicio:</P>
-                                    <Inputd
+                                   <div style={{display: 'flex', alignItems: 'center',width:'50%',justifycontent: 'space-between', marginLeft:'10%'}}>
+                                    <p>Fecha de Inicio:</p>
+                                      <Inputd
                                         name='fecha_inicio'
                                         type='date' 
+                                        width='25%'
+                                        marginRight= '5%'
                                         // label='Fecha de Inicio:'
                                         value={startDate} 
                                         onChange={(e) => setStartDate(e.target.value)}                           
                                     />
-                                </Flex>
-
-                                <Flex gap='5%' >
-                                    <P>Fecha de Fin:</P>
-                                        
+                                      <p>Fecha de Fin:</p>
                                     <Inputd
                                         name='fecha_fin'
                                         type='date' 
+                                        width='25%'
+                                        marginRight= '5%'
                                         //label='Fecha de Fin:'
                                         value={endDate} 
                                         onChange={(e) => setEndDate(e.target.value)}
+                                        
                                     />
-                                </Flex>
-
-                          </Flex>
-                        </Modal>
-                        <Btn onClick={addTask}>AGREGAR</Btn>
-                     </Flex>
+                                     <div style={{display: 'flex' ,marginTop:'0.1em',marginLeft: '10%' }}>
+                                      < Btn onClick={addTask} >AGREGAR</Btn>
+                                      </div>
+                                   </div> 
+                                  
+                               
+                                  
+                        
+                                </div> 
+                     
                     )}
-                    <ul>
+                    <ul style={{display: 'flex', alignItems: 'center', flexDirection:'column'}} >
                         {tasks.map((task) => (
-                        <li key={task.id}>           
-                            <Flex text-align='center' align-items='center' gap='1em'>
-                                <P>{task.task} </P> 
-                                <P>{task.startDate} - {task.endDate}</P>
+                        <li key={task.id} style={{backgroundColor: 'white',  // Color de fondo rojo
+                           // Bordes redondeados
+                        padding: '5px 20px',
+                        marginTop:'git 0.8em',
+                        border: '3px solid black',    // Relleno interior
+                        color: 'black', width:'70%' 
+                        ,
+                        }}>           
+                            
+                                <p  >{task.task} </p> 
+                                <p >{task.startDate} - {task.endDate}</p>
+                              
+                
                                 <Btn color='second' onClick={() => deleteTask(task.id)}>x</Btn>
-                            </Flex>
+                            
                         </li>
                         ))}
                     </ul>
-                </Flex>
+                    </div>
+                    < Btn  style={{marginTop:'25px' }}>ACEPTAR</Btn>
         </>
     )
 }
