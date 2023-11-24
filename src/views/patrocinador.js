@@ -146,7 +146,7 @@ const Patrocinador = ({idEvento}) => {
                         ))}
                     </ul>
                 <Flex justify-content='center' top='2em'>
-                    <Btn onClick={()=>sendData()}>ACEPTAR</Btn>
+                    <Btn onClick={()=>sendData()}>GUARDAR</Btn>
                 </Flex>
             </>
            )
