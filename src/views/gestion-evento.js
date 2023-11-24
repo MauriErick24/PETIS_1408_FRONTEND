@@ -19,7 +19,7 @@ import EliminarEvento from './eliminar-evento';
 import CascadeList from '../components/CascadeList';
 import WarningPage from './warning-page';
 import CrearActividades from './crear-actividades';
-
+import Corganizador from './corganizador';//jledezma crear organizador 23/11/23
 
 const GestionEvento = () => {
     const navigate = useNavigate();
@@ -30,6 +30,7 @@ const GestionEvento = () => {
     
     const [showCrearAuspiciador, setCrearAuspiciador] = useState(false)
     const [showCrearActividades, setCrearActividades] = useState(false)
+    const [showCrearOrganizador, setCrearOrganizador] = useState(false) //jledzma crear organizador 23/11/23
 
     const [showCascade, setShowCascade] = useState(false)
     
@@ -46,9 +47,10 @@ const GestionEvento = () => {
         crearButton : true,
     })
 
-    const handleCascade = (auspiciador, actividades) => {
+    const handleCascade = (auspiciador, actividades, organizador) => {
       setCrearAuspiciador(auspiciador)
       setCrearActividades(actividades)
+      setCrearOrganizador(organizador) //jledezma crear organizador 23/11/23
     }
 
     return (
@@ -93,13 +95,17 @@ const GestionEvento = () => {
                       { showCascade && (
                           <CascadeList>
                             <Option onClick={()=>{
-                              handleCascade(true,false)
+                              handleCascade(true,false,false)
                               handleClick(false,false,false)
                               }}>AUSPICIADORES</Option>
                             <Option onClick={()=>{
-                              handleCascade(false,true)
+                              handleCascade(false,true,false)
                               handleClick(false,false,false)
                               }}>ACTIVIDADES</Option>
+                            <Option onClick={()=>{
+                              handleCascade(false,false,true)
+                              handleClick(false,false,false)
+                              }}>ORGANIZADOR</Option>  
                           </CascadeList>
                         )  
                   }
@@ -118,6 +124,7 @@ const GestionEvento = () => {
                 {/* {showEliminar && (<WarningPage/>)} */}
                 {showCrearAuspiciador && (<CrearAuspiciador/>)}
                 {showCrearActividades && (<CrearActividades/>)}
+                {showCrearOrganizador && (<Corganizador />)}
 
               </Content>  
             </Container>
@@ -136,11 +143,12 @@ const GestionEvento = () => {
     
     export default GestionEvento;
     const Option = styled.button`
-      width: 100%;
-      font-size: 22px;
+      width: 70%;
+      
+      margin-right: 1em;
       border-radius: 2em;
       background-color:#545444;
-
+      margin-bottom: 0.5em;
       &:hover,
       &:focus{
         background-color: #6b6a64;  
@@ -187,7 +195,7 @@ const Content = styled.div`
 const ButtonCascade = styled.div`
      background-color: #000; 
      border-radius: 2em;
-    
+      align-items: right;
      &:hover {
       //background-color: #6b6a64;
       cursor:pointer;

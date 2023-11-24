@@ -5,7 +5,7 @@ import styled from "styled-components";
 const CascadeList = ({children}) => {
     return(
        <Div>
-             <Flex flex-direction='column' gap='0.5em'  border-radius='2em'>
+             <Flex flex-direction='column' align-items='flex-end' gap='0.5em'  border-radius='2em'> {/*jlz*/} 
                 {children}
              </Flex>
        </Div>

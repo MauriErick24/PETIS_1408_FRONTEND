@@ -62,7 +62,7 @@ const Afiche = () => {
         {/* Renderizar imágenes desde el arreglo */}
         {imagenes.map((imagen) => (
           <div className="afiche" key={imagen.id} onClick={() => seleccionarImagen(imagen)}>
-            <img src={imagen.imagen} alt={`Imagen ${imagen.id}`} style={{ maxWidth: '100%', height: 'auto' }} />
+            <img src={imagen.imagen} alt={`Imagen ${imagen.id}`} style={{ maxWidth: '80%', height: 'auto' }} />
             <p>{imagen.nombre}</p>
           </div>
         ))}
