@@ -102,10 +102,7 @@ const GestionEvento = () => {
                               handleCascade(true,false,false)
                               handleClick(false,false,false)
                               }}>AUSPICIADORES</Option>
-                            <Option onClick={()=>{
-                              handleCascade(false,true,false)
-                              handleClick(false,false,false)
-                              }}>ACTIVIDADES</Option>
+                            
                             <Option onClick={()=>{
                               handleCascade(false,false,true)
                               handleClick(false,false,false)

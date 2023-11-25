@@ -174,7 +174,7 @@ const handleActualizarEvento = (nuevosDatos) => {
             {showOrganizador && <Organizador data={data.organizadores} formik={formik}/>}
             {showAuspiciador && <Auspiciador idEvento={idEventoCreado}/>} 
             {showReglas && <Reglas data={data} onUpdateEvento={handleActualizarEvento}/>} 
-            {showPremios && <Premios data={data} onUpdateEvento={handleActualizarEvento}/>} 
+            {showPremios && <Premios idEvento={idEventoCreado} data={data} onUpdateEvento={handleActualizarEvento}/>} 
             {showRequisitos && <Requisitos data={data} onUpdateEvento={handleActualizarEvento}/>} 
             {showActividades && <CrearActividades/>}
             {showAfiche && <Afiche/>}
