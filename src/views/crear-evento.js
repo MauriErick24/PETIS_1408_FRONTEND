@@ -117,16 +117,12 @@ const CrearEvento = ({eventCreated, idEvento}) => {
 
   const sendData = async(values) =>{
     try {
-      ///// ESTE EVENTO DEBE DEVOLVER EL ID DEL EVENTO AL HACER EL POST
+    //! ESTE EVENTO DEBE DEVOLVER EL ID DEL EVENTO AL HACER EL POST
     // const response = await api.post('/evento', values) 
       setShowAlertSuccesful(true)
-// HEAD
-     // idEvento(response.data.id);
-      ///idEvento(234)
-//=======
     //  idEvento(response.data.id);
-      //idEvento(234)
-//>>>>>>> develop
+    //idEvento(234)
+
       
     } catch (error) {
       setShowAlertFail(true)

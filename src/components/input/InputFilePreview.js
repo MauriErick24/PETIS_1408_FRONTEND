@@ -3,7 +3,7 @@ import FileInput from './InputFile'
 import Img from '../../assets/images/example-img.jpg'
 import styled from 'styled-components';
 
-const InputFilePreview = ({ name, buttonText, ...props }) => {
+const InputFilePreview = ({ name, buttonText, onChange, ...props }) => {
   const [selectedImage, setSelectedImage] = useState(null)
 
   const handleImageChange = (e) => {
@@ -13,11 +13,13 @@ const InputFilePreview = ({ name, buttonText, ...props }) => {
 
       reader.onload = (e) => {
         setSelectedImage(e.target.result)
+        onChange({ target: { name, value: file } });
       };
 
       reader.readAsDataURL(file)
     } else {
       setSelectedImage(null)
+      onChange({ target: { name, value: null } });
     }
   }
 

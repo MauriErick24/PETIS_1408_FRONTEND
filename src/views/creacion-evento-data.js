@@ -134,7 +134,7 @@ const CreacionEvento = () => {
         }}
       >
         {({ values, handleSubmit, handleChange, handleBlur, touched, errors }) => (
-          <form >
+          <form>
             <HeaderTitle title='CREACION DE EVENTO'/>
             <BorderContent>
               <Content justify-content='space-between' width='100%' gap='1em'>
