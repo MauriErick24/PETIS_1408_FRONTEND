@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import styled from "styled-components";
 import Flex from "../components/Flex";
 import Btn from "../components/Btn";
@@ -6,11 +6,13 @@ import Input from "../components/input/Input";
 import Inputd from "../components/input/Inputd";
 import HeaderTitle from "../components/HeaderTitle";
 
+import api from '../services/api'
 
 
+const CrearActividades =({idEvento}) => {
 
-const CrearActividades =() => {
 
+    const [showAlertError ,setShowAlertError] = useState(false)
     
     const [tasks, setTasks] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -41,10 +43,10 @@ const CrearActividades =() => {
       }
   
       const newTask = {
-        id: new Date().getTime(), // Agregamos un ID único para cada tarea
+        //id: new Date().getTime(), // Agregamos un ID único para cada tarea
         task: taskInput,
-        startDate,
-        endDate,
+        inicio: startDate,
+        fin:endDate,
       };
   
       setTasks((prevTasks) => [...prevTasks, newTask]);
@@ -56,6 +58,37 @@ const CrearActividades =() => {
       setTasks(updatedTasks);
     };
   
+
+    useEffect(()=>{
+      console.log(idEvento)
+      if(idEvento){
+        const fetchData = async () => {
+          try {
+            console.log(idEvento)
+            const response = await api.get(`/api/actividades/${idEvento}`)
+            setTasks(response.data)
+          } catch (error) {
+            console.log(error)
+            setTasks([])
+          }
+        }
+        fetchData();
+      }
+    },[])
+
+    const sendData = async() =>  {
+      if(tasks.length != 0){
+        try {
+          const response = await api.post('/api/actividades', tasks)
+          console.log(response.data) 
+        } catch (error) {
+          console.log(error)
+        }
+      }else{
+        setShowAlertError(true)
+      }
+    }
+
 
     return(
         <>    <div>
@@ -117,7 +150,7 @@ const CrearActividades =() => {
                      
                     )}
                     <ul style={{display: 'flex', alignItems: 'center', flexDirection:'column'}} >
-                        {tasks.map((task) => (
+                        {(tasks.map((task) => (
                         <li key={task.id} style={{backgroundColor: 'white',  // Color de fondo rojo
                            // Bordes redondeados
                         padding: '5px 20px',
@@ -134,10 +167,10 @@ const CrearActividades =() => {
                                 <Btn color='second' onClick={() => deleteTask(task.id)}>x</Btn>
                             
                         </li>
-                        ))}
+                        )))}
                     </ul>
                     </div>
-                    < Btn  style={{marginTop:'25px' }}>ACEPTAR</Btn>
+                    < Btn onClick={()=>console.log(tasks)}  style={{marginTop:'25px' }}>ACEPTAR</Btn>
         </>
     )
 }

@@ -63,6 +63,7 @@ const EditarEvento = ({showEditar, showEliminar}) => {
         fetchData();
       }, []); 
       
+      
 
 
     const itemsPerPage = 5;
@@ -130,7 +131,7 @@ const EditarEvento = ({showEditar, showEliminar}) => {
                                 <td>{elemento.AddresFavorite}</td> */}
                                 <td>
                                     
-                                    {showEditar && (<Btn  color="primary" style={{ fontSize: '1rem', padding: '0.375rem 0.75rem', width: '50px',marginRight: '5px' }}>
+                                    {showEditar && (<Btn onClick={() => navigate(`/editar/evento/${elemento.id}`)}  color="primary" style={{ fontSize: '1rem', padding: '0.375rem 0.75rem', width: '50px',marginRight: '5px' }}>
                                         <FontAwesomeIcon icon={faPenToSquare} />
                                     </Btn>)}
 

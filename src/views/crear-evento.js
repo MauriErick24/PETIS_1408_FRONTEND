@@ -18,7 +18,7 @@ import { useNavigate } from "react-router-dom";
 
 const initialValues = {
   nombre_evento: '',
-
+  tipoEvento_id: 1,
   inicio_inscripcion: '',
   fin_inscripcion: '',
   hora_inicio_inscripcion:'',
@@ -92,18 +92,16 @@ const initialValues = {
   }
 
 
-  
-
-
-const CrearEvento = ({eventCreated, idEvento}) => {
+const CrearEvento = ({data, eventCreated, idEvento}) => {
 
   const navigate = useNavigate();
+   //console.log(data)
 
   const formik = useFormik({
-    initialValues: initialValues,
+    initialValues: data ? data : initialValues,
     onSubmit: (values) => {
       sendData(values);
-      console.log(values);
+      //console.log(values);
     },
     validate: validate,
   });
@@ -116,14 +114,14 @@ const CrearEvento = ({eventCreated, idEvento}) => {
 
 
   const sendData = async(values) =>{
+    console.log(values)
     try {
     //! ESTE EVENTO DEBE DEVOLVER EL ID DEL EVENTO AL HACER EL POST
-    // const response = await api.post('/evento', values) 
+      const response = await api.post('/api/evento', values) 
       setShowAlertSuccesful(true)
-    //  idEvento(response.data.id);
+      idEvento(response.data.id);
     //idEvento(234)
-
-      
+    console.log(values)
     } catch (error) {
       setShowAlertFail(true)
       console.log(error)
@@ -160,16 +158,17 @@ const CrearEvento = ({eventCreated, idEvento}) => {
                     />
                 {formik.touched.nombre_evento && formik.errors.nombre_evento ? <div className='error'>{formik.errors.nombre_evento}</div> : null}    
                 <Select
+                    name='tipoEvento_id'
                     label='Tipo de evento : *'
                     onClick={(e) => {
-                //   const selectedValue = e.target.value;
-                //   console.log(selectedValue);
-                //   values.tipoEvento_id = parseInt(selectedValue);
+                      const selectedValue = e.target.value;
+                      console.log(selectedValue);
+                      formik.values.tipoEvento_id = parseInt(selectedValue);
                      }}
                 />
                 <Flex justify-content='space-between' width='100%' gap='1em'>
                   {/* 'space-evenly' */}
-                  
+                
                   <Container>
                     <Flex flex-direction = 'column' gap='1em'>
                       <Flex flex-direction = 'row'>

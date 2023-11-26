@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { useFormik } from 'formik';
 // import { useNavigate } from 'react-router-dom';
 
@@ -11,7 +11,7 @@ import Btn from '../Btn';
 import Flex from '../Flex';
 import Aside from '../Aside';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Organizador from '../../views/Organizadorn';
 import CrearEvento from '../../views/crear-evento';
 import Auspiciador from '../../views/auspiciador';
@@ -22,12 +22,16 @@ import CrearActividades from '../../views/crear-actividades';
 import Afiche from '../../views/afiche'
 import { useNavigate } from 'react-router-dom';
 
+import api from '../../services/api'
 
-function Layout({updateButton,  main}) {
+
+function Layout({updateEvento,  main}) {
+
 
   const navigate = useNavigate();
   const location = useLocation();
   const { datos } = location.state || {};
+  const {id} = useParams
   
   // const [updateButton, setUpdateButton] = useState(updateButton)
 
@@ -49,20 +53,22 @@ function Layout({updateButton,  main}) {
   const [data, setData] = useState(
     {    
     nombre_evento:"eveentos 153",
+    imagen:"assests/images/umss-logo.png",
+    lugar:"coña coña",
+    email:"pretencioso@gmail.com",
+    tipoEvento_id: 1,
     inicio_inscripcion:"2021-01-10",
     fin_inscripcion:"2024-11-21",
     inicio_actividades:"2024-11-21",
     fin_actividades:"2022-11-20",
     inicio_premiacion:"2024-12-1",
     fin_evento:"2023-12-1",
-    imagen:"assests/images/umss-logo.png",
-    lugar:"coña coña",
-    email:"pretencioso@gmail.com",
     descripcion:"este es un evento",
-    hora_inicio_inscripcion:"09:00:00.0000000",
-    hora_fin_inscripcion:"09:00:00.0000000",
-    hora_inicio_actividades:"09:00:00.0000000",
-    hora_fin_actividades:"09:00:00.0000000",
+    hora_inicio_inscripcion:"15:30",
+    hora_fin_inscripcion:"15:30",
+    hora_inicio_actividades:"15:30",
+    hora_fin_actividades:"15:30",
+
     telefono:"78327438",
     reglas:"no ser gay",
     detalle:"blba bla bla",
@@ -85,6 +91,20 @@ function Layout({updateButton,  main}) {
     ]
 }
 )
+
+
+  useEffect(()=>{
+    const fetchData = async () => {
+      try {
+        const response = await api.get(`/api/evento/${id}`)
+        setData(response.data)
+        console.log(data);
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  },[])
+    
 
     const formik = useFormik({
       initialValues: data,
@@ -170,13 +190,22 @@ const handleActualizarEvento = (nuevosDatos) => {
           <Content>
             {/* {main} */}
             
-            {showCrearEvento && <CrearEvento eventCreated={setIsEventCreated} idEvento={setIdEventoCreado}/>}
+
+            {showCrearEvento && 
+              <>
+                {updateEvento ? 
+                (<CrearEvento data={data} eventCreated={setIsEventCreated} idEvento={setIdEventoCreado}/>) 
+                :
+                (<CrearEvento eventCreated={setIsEventCreated} idEvento={setIdEventoCreado}/>)  
+              }
+              </>
+            }
             {showOrganizador && <Organizador data={data.organizadores} formik={formik}/>}
             {showAuspiciador && <Auspiciador idEvento={idEventoCreado}/>} 
-            {showReglas && <Reglas data={data} onUpdateEvento={handleActualizarEvento}/>} 
+            {showReglas && <Reglas idEvento={idEventoCreado} data={data} onUpdateEvento={handleActualizarEvento}/>} 
             {showPremios && <Premios idEvento={idEventoCreado} data={data} onUpdateEvento={handleActualizarEvento}/>} 
-            {showRequisitos && <Requisitos data={data} onUpdateEvento={handleActualizarEvento}/>} 
-            {showActividades && <CrearActividades/>}
+            {showRequisitos && <Requisitos idEvento={idEventoCreado} data={data} onUpdateEvento={handleActualizarEvento}/>} 
+            {showActividades && <CrearActividades idEvento={2}/>}
             {showAfiche && <Afiche/>}
             
 

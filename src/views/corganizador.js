@@ -8,7 +8,7 @@ import Alert from "../components/Alert";
 import api from '../services/api'
 
 const initialValues = {
-    organizador: '',
+    nombre: '',
     representante: '',
     Email: '',
     Telefono: '',
@@ -18,14 +18,14 @@ const initialValues = {
 
 const validate = values => {
     let errors = {}
-    if(!values.organizador){
-        errors.organizador = 'Required'
-    }else if(values.organizador.length < 10){
-        errors.organizador = 'Must be 10 characters or more'
-    }else if(values.organizador.length > 50){
-        errors.organizador = 'Must be 50 characters or less'
-    }else if(!/^[a-zA-Z\s]+$/i.test(values.organizador)){
-        errors.organizador = 'Must be only letters'
+    if(!values.nombre){
+        errors.nombre = 'Required'
+    }else if(values.nombre.length < 10){
+        errors.nombre = 'Must be 10 characters or more'
+    }else if(values.nombre.length > 50){
+        errors.nombre = 'Must be 50 characters or less'
+    }else if(!/^[a-zA-Z\s]+$/i.test(values.nombre)){
+        errors.nombre = 'Must be only letters'
     }
 
     if(!values.Email){
@@ -76,7 +76,7 @@ function Corganizador(){
 
     const sendData = async(values) => {
         try {
-            const response = await api.post('/api/organizadores', values)
+            //const response = await api.post('/api/organizadores', values)
             setShowAlert(true)
         } catch (error) {
             console.log(error)
@@ -120,13 +120,13 @@ function Corganizador(){
                     <Div className = "cajita">
                         <label class="one" for="organizador">Nombre de organizador : </label>
                         <input type="text" 
-                        name="organizador" 
-                        id="organizador"
+                        name="nombre" 
+                        id="nombre"
                         onChange={formik.handleChange} 
                         onBlur={formik.handleBlur}
-                        value={formik.values.organizador}
+                        value={formik.values.nombre}
                         />
-                        {formik.touched.organizador && formik.errors.organizador ? <div className="error">{formik.errors.organizador}</div> : null}
+                        {formik.touched.nombre && formik.errors.nombre ? <div className="error">{formik.errors.nombre}</div> : null}
                     </Div>
                     
                     <Div className = "cajita">
@@ -159,7 +159,7 @@ function Corganizador(){
                         {formik.touched.organizador && formik.errors.Direccion ? <div className="error">{formik.errors.Direccion}</div> : null}
                     </Div>
                     <Flex justify-content='center' gap="3em">
-                        <Btn >AGREGAR</Btn>
+                        <Btn type="submit">AGREGAR</Btn>
                         {/* <Btn color='second'>CANCELAR</Btn> */}
                     </Flex>
                 </Div>

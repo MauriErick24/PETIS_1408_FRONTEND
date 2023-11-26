@@ -7,7 +7,8 @@ import Flex from "../components/Flex";
 import Btn from "../components/Btn";
 
 
-const Premios = () => {
+const Premios = ({idEvento}) => {
+
     const buttonStyle = {
         backgroundColor: '#000',  // Color de fondo rojo
         borderRadius: '30px',    // Bordes redondeados
@@ -122,7 +123,7 @@ const Premios = () => {
     </div>
             <ul >
               
-                   {rules.map((rule, index) => (
+                {rules.map((rule, index) => (
                       
                   <li  style={{display: 'flex', alignItems: 'center', justifyContent: 'center',  // Color de fondo rojo
                   borderRadius: '30px',    // Bordes redondeados
@@ -130,10 +131,10 @@ const Premios = () => {
                   marginTop:'0.8em',    // Relleno interior
                   color: 'black'}} key={index}>
                    <input label={`Regla ${index + 1}`} value={rule}style={{backgroundColor: 'white',  // Color de fondo rojo
-                  borderRadius: '30px',    // Bordes redondeados
-                  padding: '5px 20px',
-                  marginTop:'0.1em',    // Relleno interior
-                  color: 'black', width:'70%',fontSize:'25px'}}></input>  
+                      borderRadius: '30px',    // Bordes redondeados
+                      padding: '5px 20px',
+                      marginTop:'0.1em',    // Relleno interior
+                      color: 'black', width:'70%',fontSize:'25px'}}></input>  
                   
                   <button style={Boton2} onClick={() => removeRule(index)}>X</button>
                 </li>
