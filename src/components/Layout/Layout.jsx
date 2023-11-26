@@ -103,6 +103,7 @@ function Layout({updateEvento,  main}) {
         console.log(error)
       }
     }
+    fetchData();
   },[])
     
 

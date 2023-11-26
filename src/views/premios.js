@@ -5,6 +5,7 @@ import BorderContent from '../components/BorderContent'
 import styled from "styled-components";
 import Flex from "../components/Flex";
 import Btn from "../components/Btn";
+import api from '../services/api'
 
 
 const Premios = ({idEvento}) => {
@@ -27,6 +28,7 @@ const Premios = ({idEvento}) => {
     const [rules, setRules] = useState([]);
     const [label, setLabel] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+
     const addRule = () => {
       if (label.trim() === '') {
         setErrorMessage('Por favor, ingrese una etiqueta válida.');
@@ -38,7 +40,7 @@ const Premios = ({idEvento}) => {
         return;
       }
       const updatedRules = [...rules, label];
-      setRules(updatedRules);
+      setRules({...rules}, updatedRules);
       setLabel('');
       setErrorMessage('');
 
@@ -90,10 +92,19 @@ const Premios = ({idEvento}) => {
         margin: '0.4em'
     };
 
+    const sendData = async() =>{
+      console.log(rules)
+      try {
+        const response = await api.post('/api/premios', rules)
+        console.log(response.data)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
     return(
       <>
           
-         
   
     <div>
               <HeaderTitle title='PREMIOS'/>
@@ -143,7 +154,7 @@ const Premios = ({idEvento}) => {
 
     </div>
     <Flex justify-content='center' top='2em' gap='1em'>
-            <Btn type='submit'>GUARDAR</Btn>
+            <Btn type='submit' onClick={()=> sendData()}>GUARDAR</Btn>
             {/* <Btn color = 'second' onClick={()=> navigate('/gestionar-eventos') }>CANCELAR</Btn> */}
     </Flex>
 
