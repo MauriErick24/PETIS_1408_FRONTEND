@@ -26,8 +26,9 @@ const Patrocinador = ({idEvento}) => {
   useEffect(() => {
       const fetchData = async () => {
         try {
-         //const response = await api.get('/api/auspiciadores');
-         //setOrganizador(response.data);
+         const response = await api.get('/api/auspiciadores');
+         setOrganizador(response.data);
+         console.log(response.data)
         } catch (error) {
           console.error('Error fetching data:', error);
         } finally {

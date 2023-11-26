@@ -5,7 +5,7 @@ import BorderContent from '../components/BorderContent'
 import styled from "styled-components";
 import Flex from "../components/Flex";
 import Btn from "../components/Btn";
-
+import api from '../services/api'
 
 const Premios = () => {
     const buttonStyle = {
@@ -16,6 +16,16 @@ const Premios = () => {
         fontSize:'25px',
 
     };
+
+    const sendData=async(values)=>{
+      try {
+        const response=await api.post('/api/premios',values)
+        console.log(response.data)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
     useEffect(() => {
       // Recupera los premios  almacenadas en localStorage al cargar la página
       const storedRules2 = JSON.parse(localStorage.getItem('premio')) || [];
@@ -142,7 +152,7 @@ const Premios = () => {
 
     </div>
     <Flex justify-content='center' top='2em' gap='1em'>
-            <Btn type='submit'>GUARDAR</Btn>
+            <Btn type='submit'onClick={()=>sendData()}>GUARDAR</Btn>
             {/* <Btn color = 'second' onClick={()=> navigate('/gestionar-eventos') }>CANCELAR</Btn> */}
     </Flex>
 

@@ -38,6 +38,7 @@ const Afiche = () => {
   fetchData();
   }, []);
 
+
   const [imagenesSeleccionadas, setImagenesSeleccionadas] = useState([]);
 
   const seleccionarImagen = (imagen) => {
