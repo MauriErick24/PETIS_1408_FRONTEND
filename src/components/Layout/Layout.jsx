@@ -22,6 +22,8 @@ import CrearActividades from '../../views/crear-actividades';
 import Afiche from '../../views/afiche'
 import { useNavigate } from 'react-router-dom';
 
+import Spinner from "../Spinner"
+
 import api from '../../services/api'
 
 
@@ -29,10 +31,10 @@ function Layout({updateEvento,  main}) {
 
 
   const navigate = useNavigate();
-  const location = useLocation();
-  const { datos } = location.state || {};
+  // const location = useLocation();
+  // const { datos } = location.state || {};
   const {id} = useParams()
-  
+
   // const [updateButton, setUpdateButton] = useState(updateButton)
 
   const [isEventCreated, setIsEventCreated] = useState(false)
@@ -46,12 +48,30 @@ function Layout({updateEvento,  main}) {
   const [showActividades, setShowActividades] = useState(false)
   const [showAfiche, setShowAfiche] = useState(false)
 
+  const [loading, setLoading] = useState(true);
+
   // console.log(datos);
 
   const [idEventoCreado, setIdEventoCreado] = useState(null)
  
-  const [data, setData] = useState(
+  const [data2, setData2] = useState(
     {    
+    // nombre_evento:"eveentos 153",
+    // imagen:"assests/images/umss-logo.png",
+    // lugar:"coña coña",
+    // email:"pretencioso@gmail.com",
+    // tipoEvento_id: 1,
+    // inicio_inscripcion:"2021-01-10",
+    // fin_inscripcion:"2024-11-21",
+    // inicio_actividades:"2024-11-21",
+    // fin_actividades:"2022-11-20",
+    // inicio_premiacion:"2024-12-1",
+    // fin_evento:"2023-12-1",
+    // descripcion:"este es un evento",
+    // hora_inicio_inscripcion:"15:30",
+    // hora_fin_inscripcion:"15:30",
+    // hora_inicio_actividades:"15:30",
+    // hora_fin_actividades:"15:30",
     // nombre_evento:"eveentos 153",
     // imagen:"assests/images/umss-logo.png",
     // lugar:"coña coña",
@@ -75,14 +95,14 @@ function Layout({updateEvento,  main}) {
     // contenido:"este es el contenido del evento",
     // invitado:"shrek",
     // estado_evento:"EN VIVO",
-    // organizadores:[
-    //   { nombre: "Carrera de Informatica", author: "F. Scott Fitzgerald", year: 1925, publisher: "Charles Scribner's Sons", origin: "EE. UU." },
-    //   { nombre: "MEMI", author: "Harper Lee", year: 1960, publisher: "J. B. Lippincott & Co.", origin: "EE. UU." },
-    //   { nombre: "JALA SOFT", author: "George Orwell", year: 1949, publisher: "Secker & Warburg", origin: "Reino Unido" },
-    //   { nombre:"UMSA - Informatica",author: "Jorge Ledezma", year:1980, publisher:"Diamond", origin: 'bosnia'},
-    //   { nombre:"Univ. Gabriel Rene Moreno",author:"cervantes", year: 1965, publisher: "pinguin", origin: 'Spain'},
+    organizadores:[
+      // { nombre: "Carrera de Informatica", author: "F. Scott Fitzgerald", year: 1925, publisher: "Charles Scribner's Sons", origin: "EE. UU." },
+      // { nombre: "MEMI", author: "Harper Lee", year: 1960, publisher: "J. B. Lippincott & Co.", origin: "EE. UU." },
+      // { nombre: "JALA SOFT", author: "George Orwell", year: 1949, publisher: "Secker & Warburg", origin: "Reino Unido" },
+      // { nombre:"UMSA - Informatica",author: "Jorge Ledezma", year:1980, publisher:"Diamond", origin: 'bosnia'},
+      // { nombre:"Univ. Gabriel Rene Moreno",author:"cervantes", year: 1965, publisher: "pinguin", origin: 'Spain'},
      
-    // ],
+     ],
     // auspiciadores:[
     //   // { nombre:"Embajada suiza",author:"nemilville", year: 1985,publisher:'Dolmen', origin:'USA'},
     //   // { nombre:"Fundacion Bankia",author:"Cesar Ldzm", year: 1945, publisher:"majos", origin:'Peru'},
@@ -92,15 +112,23 @@ function Layout({updateEvento,  main}) {
 }
 )
 
+const [data, setData] = useState()
+
 
   useEffect(()=>{
     const fetchData = async () => {
       try {
+          
+        console.log("este es el id ", id)
         const response = await api.get(`/api/evento/${id}`)
+       // console.log(response.data)
         setData(response.data)
+        //console.log("DATOS ",data);
         console.log(response.data);
       } catch (error) {
         console.log(error)
+      }finally{
+        setLoading(false)
       }
     }
     fetchData();
@@ -144,7 +172,13 @@ const handleActualizarEvento = (nuevosDatos) => {
     <Div>
       <Header/>
       <div className='page'>
-        <Container>
+        {loading ? 
+        (<Spinner/>)
+            :
+        ( 
+          
+          <Container>
+            {console.log("Datos dentro del container ",data)}
           <Sidebar>
             <Aside>
 
@@ -212,6 +246,8 @@ const handleActualizarEvento = (nuevosDatos) => {
 
           </Content>  
         </Container>
+        )
+        }
       <Flex justify-content='end' gap='1em'>
             <Btn color='second' onClick={()=>navigate('/gestionar-eventos')}>ATRAS</Btn> 
 

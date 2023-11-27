@@ -28,12 +28,14 @@ function Visualizacionevento(){
     const [showButtonEditar, setShowButtonEditar] = useState(true)
     const [showButtonCancelar, setShowButtonCancelar] = useState(false)
     const [taskButton, setTaskButton] = useState(true)
+    const [showComunicados, setShowComunicados] = useState(false)
     
     
     const {id} = useParams();
     const [edit, setEdit] = useState(false);
 
     const [auspiciadores,setAuspiciador]=useState({});
+    
     const [data, setData] = useState({
         // id: 2,
         // nombre_evento: "eveentos 110",
@@ -62,7 +64,15 @@ function Visualizacionevento(){
         //     id: 4,
         //     nombreTipo_evento: "Reclutamiento"
         // },
-        // premios: [],
+        premios: [],
+        actividades: [
+          {
+            id:1,
+            nombre: "El día de mañana se habilitara las inscripciones del dicho evento ",
+            fecha_inicio: "2024-06-12",
+            fecha_fin: "2024-06-30"
+          },
+        ],
         auspiciadores:[
                     {
                         nombre: 'ICPC',
@@ -206,18 +216,53 @@ function Visualizacionevento(){
             </Asided>
 
             <Flex flex-direction='column'>
-                <Card title={"DESCRIPCION DE EVENTO"} data={data.descripcion} />
+                {/* <Card title={"DESCRIPCION DE EVENTO"} data={data.descripcion} /> */}
                 {/* <Card title={"REQUISITOS DEL EVENTO"} data={data.requisitos} /> */}
                 <Card title={"DETALLES"} data={data.detalle} />
                 {/* <Card title={"REGLAS"} data={data.reglas} /> */}
-                {/* <Card title={"PREMIOS"} data={data.premios} /> */}
+                <Card title={"PREMIOS"}>
+                  <ul>
+                    {data.premios.map((premio) => (
+                      <>
+                        <li>{premio.nombre}</li> 
+                      </>
+                    ))}
+                    </ul>
+                </Card>
                 
             </Flex>
             
             <Asided>
-                <Flex flex-direction='column' justify-content='space-between'>
-                    {showButtonEditar && <Btn margin-bottom='10px' onClick={() => navigate(`/editar/evento/${id}`, {state: {datos: data}})}>EDITAR</Btn>}
-                    {showButtonCancelar && <Btn>CANCELAR</Btn>}   
+                <Flex flex-direction='column' justify-content='space-between' gap="1em">
+                    <Btn onClick={()=> (setShowComunicados(!showComunicados))}>COMUNICADOS</Btn> 
+                    {showComunicados && (
+                      <Container>
+                        {console.log("asdfasdfasdf",data)}
+                        {data.actividades.map((actividad) => (
+                         <>
+                           <Hr/>
+                           <Paragraph>
+                              <Flex flex-direction="column" gap="1em" align-items="auto">
+                               <p> {actividad.nombre}</p>
+                                <Flex gap="1em" justify-content="center">
+                                  <p>{actividad.fecha_inicio}  </p>
+                                  <p> {actividad.fecha_fin}</p>
+                                </Flex>
+                              </Flex>
+                           </Paragraph>
+                         </>  
+                        ))}
+
+                        {/* <Hr/>
+                        <Paragraph>El día de mañana se habilitara las inscripciones del dicho evento </Paragraph>
+                        <Hr/>
+                        <Paragraph>El día de mañana se habilitara las inscripciones del dicho evento </Paragraph>
+                        <Hr/>
+                        <Paragraph>El día de mañana se habilitara las inscripciones del dicho evento </Paragraph>
+                        <Hr/>
+                        <Paragraph>El día de mañana se habilitara las inscripciones del dicho evento </Paragraph> */}
+                      </Container>
+                    )}
                 </Flex>
                 
             </Asided>
@@ -228,6 +273,28 @@ function Visualizacionevento(){
 }
 
 export default Visualizacionevento
+
+const Paragraph = styled.div`
+  padding-top: 5%;
+  color: #000;
+  p{
+    font-size: 16px;
+  }
+  
+`
+
+const Hr = styled.hr`
+  border: solid 2px #787370;
+`
+
+const Container = styled.div`
+  padding: 3%;
+  border: solid 5px #000;
+  border-radius: 10px;
+  width: 100%;
+  border-top: 5%;
+  background-color: #EFEDD6;
+  `
 
 const Div = styled.div`
     .p{

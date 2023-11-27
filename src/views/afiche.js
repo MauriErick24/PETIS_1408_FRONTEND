@@ -12,7 +12,7 @@ import Flex from "../components/Flex";
 import Btn from "../components/Btn";
 import HeaderTitle from "../components/HeaderTitle";
 
-const Afiche = () => {
+const Afiche = (idEvento) => {
   const [imagenes,setImagenes]=useState([
 
   ])
@@ -30,14 +30,32 @@ const Afiche = () => {
       try{
         const response = await api.get('/api/afiches')
         setImagenes(response.data)    
-        console.log(response.data)
+        //console.log(response.data)
       }catch(err){
         console.log("Error: ", err)
       }
     }
   fetchData();
   }, []);
-     
+
+  const sendData =async()=>
+  {
+    let selectedAuspiciador = []
+            let dataToSend = {}
+
+            imagenesSeleccionadas.map((element) => (
+                selectedAuspiciador.push(element.id)
+            ))
+    dataToSend={idEvento,selectedAuspiciador}
+    try {
+      console.log(dataToSend)
+      const response=await api.post('/api/afiches',dataToSend)
+      //console.log(dataToSend)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   const [imagenesSeleccionadas, setImagenesSeleccionadas] = useState([]);
 
   const seleccionarImagen = (imagen) => {
@@ -84,7 +102,7 @@ const Afiche = () => {
         </ul>
       </div>
       <Flex justify-content='center' top='2em' gap='1em'>
-        <Btn type='submit'>GUARDAR</Btn>
+        <Btn type='submit'onClick={()=>sendData()}>GUARDAR</Btn>
       
       </Flex>
     </div>

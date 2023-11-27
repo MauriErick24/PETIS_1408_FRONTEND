@@ -16,7 +16,7 @@ import Alert from "../components/Alert";
 import {useFormik} from "formik";
 import { useNavigate } from "react-router-dom";
 
-const initialValues = {
+let initialValues = {
   nombre_evento: '',
   tipoEvento_id: 1,
   inicio_inscripcion: '',
@@ -43,7 +43,7 @@ const initialValues = {
     let errors = {}
     if(!values.nombre_evento){
         errors.nombre_evento = 'Requerido'
-    }else if(values.nombre_evento.length < 15){
+    }else if(values.nombre_evento.length < 2){
         errors.nombre_evento = 'Debe contener 15 caracteres o mas'
     }else if(values.nombre_evento.length > 50){
         errors.nombre_evento = 'Debe contener 50 caracteres o menos'
@@ -62,7 +62,7 @@ const initialValues = {
     // }
     if(!values.lugar){
         errors.lugar = 'Requerido'
-    }else if(values.lugar.length < 15){
+    }else if(values.lugar.length < 3){
         errors.lugar = 'Debe contener 15 caracteres o mas'
     }else if(values.lugar.length > 50){
         errors.lugar = 'Debe contener 50 caracteres o menos'
@@ -95,12 +95,47 @@ const initialValues = {
 const CrearEvento = ({data, eventCreated, idEvento}) => {
 
   const navigate = useNavigate();
+<<<<<<< HEAD
    console.log(data)
+=======
+  //console.log("data dentro del evento ",data)
+
+  const initialValuesChecker = () => {
+    //console.log("Data en el checker " ,data)
+    if(data != null){
+      initialValues = data 
+    }else{
+      initialValues = {
+        nombre_evento: '',
+        tipoEvento_id: 1,
+        inicio_inscripcion: '',
+        fin_inscripcion: '',
+        hora_inicio_inscripcion:'',
+        hora_fin_inscripcion:'',
+        inicio_actividades:'',
+        fin_actividades:'',
+        hora_inicio_actividades:'',
+        hora_fin_actividades:'',
+      
+        hora: '',
+        lugar: '',
+        email: '',
+        telefono: '',
+        }
+    }
+
+    return initialValues
+  }
+>>>>>>> A/premios
 
   const formik = useFormik({
-    initialValues: data ? data : initialValues,
+    initialValues:initialValuesChecker(),
     onSubmit: (values) => {
-      sendData(values);
+      if(data != null){
+        updateData(values)
+      }else{
+        sendData(values);
+      }
       //console.log(values);
     },
     validate: validate,
@@ -125,14 +160,29 @@ const CrearEvento = ({data, eventCreated, idEvento}) => {
     } catch (error) {
       setShowAlertFail(true)
       console.log(error)
-
     }
   }
 
+<<<<<<< HEAD
   return(
     
         <Div>
             {console.log({data})}
+=======
+  const updateData = async (values) => {
+    console.log(values)
+    try {
+      const response = await api.put(`/api/evento/${data.id}`,values)
+      console.log(response.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+
+  return(
+        <Div>    
+>>>>>>> A/premios
           <Alert message="Se ha guardado correctamente"
                  onAcept={()=>{setShowAlertSuccesful(false); eventCreated(true)}}
                  show={showAlertSuccesful}
@@ -144,8 +194,8 @@ const CrearEvento = ({data, eventCreated, idEvento}) => {
           />
           
 
-
           <form onSubmit={formik.handleSubmit}>
+          {console.log("initial values ", formik.initialValues)}
             <Flex justify-content='center' >
                 <HeaderTitle title='CREACION DE EVENTO' /> 
             </Flex>
