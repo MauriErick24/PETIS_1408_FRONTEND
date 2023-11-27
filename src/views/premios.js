@@ -25,7 +25,7 @@ const Premios = ({idEvento}) => {
     }, []);
 
     
-    const [rules, setRules] = useState([]);
+    const [rules, setRules] = useState([{}]);
     const [label, setLabel] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
@@ -39,7 +39,7 @@ const Premios = ({idEvento}) => {
         setErrorMessage('Este premio  ya existe. Intente con una diferente.');
         return;
       }
-      const updatedRules = [...rules, label];
+      const updatedRules = [...rules, {nombre:label}];
       setRules({...rules}, updatedRules);
       setLabel('');
       setErrorMessage('');
@@ -133,7 +133,7 @@ const Premios = ({idEvento}) => {
       
     </div>
             <ul >
-              
+                {console.log("tules",rules)}
                 {rules.map((rule, index) => (
                       
                   <li  style={{display: 'flex', alignItems: 'center', justifyContent: 'center',  // Color de fondo rojo
