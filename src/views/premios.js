@@ -18,11 +18,6 @@ const Premios = ({idEvento}) => {
         fontSize:'25px',
 
     };
-    useEffect(() => {
-      // Recupera los premios  almacenadas en localStorage al cargar la página
-      //const storedRules2 = JSON.parse(localStorage.getItem('premio')) || [];
-      //setRules(storedRules2);
-    }, []);
 
     
     const [rules, setRules] = useState([]);
