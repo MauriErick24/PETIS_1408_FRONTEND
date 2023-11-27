@@ -20,7 +20,7 @@ const Premios = ({idEvento}) => {
     };
 
     
-    const [rules, setRules] = useState([{}]);
+    const [rules, setRules] = useState([]);
     const [label, setLabel] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
@@ -35,14 +35,9 @@ const Premios = ({idEvento}) => {
         setErrorMessage('Este premio ya existe. Intente con uno diferente.');
         return;
       }
-<<<<<<< HEAD
   
       const updatedRules = [...rules, label];
       setRules(updatedRules);
-=======
-      const updatedRules = [...rules, {nombre:label}];
-      setRules({...rules}, updatedRules);
->>>>>>> A/premios
       setLabel('');
       setErrorMessage('');
     };
@@ -138,7 +133,6 @@ const Premios = ({idEvento}) => {
       {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
       
     </div>
-<<<<<<< HEAD
     <ul>
         {rules.map((rule, index) => (
           <li key={index} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '30px', padding: '5px 20px', marginTop: '0.8em', color: 'black' }}>
@@ -153,28 +147,6 @@ const Premios = ({idEvento}) => {
           </li>
         ))}
       </ul>
-=======
-            <ul >
-                {console.log("tules",rules)}
-                {rules.map((rule, index) => (
-                      
-                  <li  style={{display: 'flex', alignItems: 'center', justifyContent: 'center',  // Color de fondo rojo
-                  borderRadius: '30px',    // Bordes redondeados
-                  padding: '5px 20px',
-                  marginTop:'0.8em',    // Relleno interior
-                  color: 'black'}} key={index}>
-                   <input label={`Regla ${index + 1}`} value={rule}style={{backgroundColor: 'white',  // Color de fondo rojo
-                      borderRadius: '30px',    // Bordes redondeados
-                      padding: '5px 20px',
-                      marginTop:'0.1em',    // Relleno interior
-                      color: 'black', width:'70%',fontSize:'25px'}}></input>  
-                  
-                  <button style={Boton2} onClick={() => removeRule(index)}>X</button>
-                </li>
-               ))}
-           </ul>
-
->>>>>>> A/premios
     </div>
     <Flex justify-content='center' top='2em' gap='1em'>
             <Btn type='submit' onClick={()=> sendData()}>GUARDAR</Btn>

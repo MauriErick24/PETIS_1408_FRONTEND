@@ -95,9 +95,6 @@ let initialValues = {
 const CrearEvento = ({data, eventCreated, idEvento}) => {
 
   const navigate = useNavigate();
-<<<<<<< HEAD
-   console.log(data)
-=======
   //console.log("data dentro del evento ",data)
 
   const initialValuesChecker = () => {
@@ -126,7 +123,6 @@ const CrearEvento = ({data, eventCreated, idEvento}) => {
 
     return initialValues
   }
->>>>>>> A/premios
 
   const formik = useFormik({
     initialValues:initialValuesChecker(),
@@ -163,12 +159,6 @@ const CrearEvento = ({data, eventCreated, idEvento}) => {
     }
   }
 
-<<<<<<< HEAD
-  return(
-    
-        <Div>
-            {console.log({data})}
-=======
   const updateData = async (values) => {
     console.log(values)
     try {
@@ -182,7 +172,6 @@ const CrearEvento = ({data, eventCreated, idEvento}) => {
 
   return(
         <Div>    
->>>>>>> A/premios
           <Alert message="Se ha guardado correctamente"
                  onAcept={()=>{setShowAlertSuccesful(false); eventCreated(true)}}
                  show={showAlertSuccesful}
