@@ -95,7 +95,7 @@ const initialValues = {
 const CrearEvento = ({data, eventCreated, idEvento}) => {
 
   const navigate = useNavigate();
-   //console.log(data)
+   console.log(data)
 
   const formik = useFormik({
     initialValues: data ? data : initialValues,
@@ -130,8 +130,9 @@ const CrearEvento = ({data, eventCreated, idEvento}) => {
   }
 
   return(
+    
         <Div>
-
+            {console.log({data})}
           <Alert message="Se ha guardado correctamente"
                  onAcept={()=>{setShowAlertSuccesful(false); eventCreated(true)}}
                  show={showAlertSuccesful}

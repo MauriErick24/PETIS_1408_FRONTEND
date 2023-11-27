@@ -96,7 +96,7 @@ const Premios = ({idEvento}) => {
       console.log(rules)
       try {
         const response = await api.post('/api/premios', rules)
-        console.log(response.data)
+        //console.log(rules)
       } catch (error) {
         console.log(error)
       }

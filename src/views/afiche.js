@@ -30,13 +30,22 @@ const Afiche = () => {
       try{
         const response = await api.get('/api/afiches')
         setImagenes(response.data)    
-        console.log(response.data)
+        //console.log(response.data)
       }catch(err){
         console.log("Error: ", err)
       }
     }
   fetchData();
   }, []);
+
+  const sendData=async()=>{
+    try{
+    const response=await api.post('/api/afiches',imagenesSeleccionadas)
+    console.log(imagenesSeleccionadas)
+    }catch(error){
+      console.log(error)
+    }
+  }
 
   const [imagenesSeleccionadas, setImagenesSeleccionadas] = useState([]);
 
@@ -84,7 +93,7 @@ const Afiche = () => {
         </ul>
       </div>
       <Flex justify-content='center' top='2em' gap='1em'>
-        <Btn type='submit'>GUARDAR</Btn>
+        <Btn type='submit'onClick={()=>sendData()}>GUARDAR</Btn>
       
       </Flex>
     </div>

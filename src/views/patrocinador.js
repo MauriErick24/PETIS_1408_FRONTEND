@@ -26,8 +26,8 @@ const Patrocinador = ({idEvento}) => {
   useEffect(() => {
       const fetchData = async () => {
         try {
-         //const response = await api.get('/api/auspiciadores');
-         //setOrganizador(response.data);
+         const response = await api.get('/api/auspiciadores');
+         setOrganizador(response.data);
         } catch (error) {
           console.error('Error fetching data:', error);
         } finally {
@@ -88,7 +88,7 @@ const Patrocinador = ({idEvento}) => {
             setTotalPages(Math.ceil(totalResults / resultsPerPage));
         }, [searchInput, currentPage]);
 
-        const sendData = () => {
+        const sendData = async() => {
             let selectedAuspiciador = []
             let dataToSend = {}
 
@@ -97,6 +97,12 @@ const Patrocinador = ({idEvento}) => {
             ))
 
             dataToSend = {idEvento, selectedAuspiciador}
+            try {
+                const response=await api.post('/api/auspiciadorEvent',dataToSend)
+                console.log(response.data)
+            } catch (error) {
+                console.log(error)
+            }
             console.log(dataToSend)
         }
 
