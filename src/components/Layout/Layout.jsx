@@ -31,7 +31,8 @@ function Layout({updateEvento,  main}) {
   const navigate = useNavigate();
   const location = useLocation();
   const { datos } = location.state || {};
-  const {id} = useParams
+  const {id} = useParams()
+ 
   
   // const [updateButton, setUpdateButton] = useState(updateButton)
 
@@ -95,9 +96,10 @@ function Layout({updateEvento,  main}) {
 
   useEffect(()=>{
     const fetchData = async () => {
+      console.log(id)
       try {
-        const response = await api.get(`/api/evento/${id}`)
-        setData(response.data)
+       //  const response = await api.get(`/api/evento/${id}`) 
+       //  setData(response.data)
         console.log(data);
       } catch (error) {
         console.log(error)
@@ -194,7 +196,7 @@ const handleActualizarEvento = (nuevosDatos) => {
 
             {showCrearEvento && 
               <>
-                {updateEvento ? 
+                {!updateEvento ? 
                 (<CrearEvento data={data} eventCreated={setIsEventCreated} idEvento={setIdEventoCreado}/>) 
                 :
                 (<CrearEvento eventCreated={setIsEventCreated} idEvento={setIdEventoCreado}/>)  

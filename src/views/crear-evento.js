@@ -95,13 +95,13 @@ const initialValues = {
 const CrearEvento = ({data, eventCreated, idEvento}) => {
 
   const navigate = useNavigate();
-   //console.log(data)
+   console.log(data)
 
   const formik = useFormik({
-    initialValues: data ? data : initialValues,
+    initialValues: data ?  data : initialValues,
     onSubmit: (values) => {
       sendData(values);
-      //console.log(values);
+      console.log(values);
     },
     validate: validate,
   });
@@ -117,9 +117,9 @@ const CrearEvento = ({data, eventCreated, idEvento}) => {
     console.log(values)
     try {
     //! ESTE EVENTO DEBE DEVOLVER EL ID DEL EVENTO AL HACER EL POST
-      const response = await api.post('/api/evento', values) 
-      setShowAlertSuccesful(true)
-      idEvento(response.data.id);
+      // const response = await api.post('/api/evento', values) 
+      // setShowAlertSuccesful(true)
+      // idEvento(response.data.id);
     //idEvento(234)
     console.log(values)
     } catch (error) {

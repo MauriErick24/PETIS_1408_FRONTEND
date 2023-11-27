@@ -45,8 +45,8 @@ const CrearActividades =({idEvento}) => {
       const newTask = {
         //id: new Date().getTime(), // Agregamos un ID único para cada tarea
         task: taskInput,
-        inicio: startDate,
-        fin:endDate,
+        fecha_inicio: startDate,
+        fecha_fin:endDate,
       };
   
       setTasks((prevTasks) => [...prevTasks, newTask]);
@@ -161,7 +161,7 @@ const CrearActividades =({idEvento}) => {
                         }}>           
                             
                                 <p  >{task.task} </p> 
-                                <p >{task.startDate} - {task.endDate}</p>
+                                <p >{task.fecha_inicio} - {task.fecha_fin}</p>
                               
                 
                                 <Btn color='second' onClick={() => deleteTask(task.id)}>x</Btn>
