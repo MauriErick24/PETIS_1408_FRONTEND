@@ -10,9 +10,9 @@ import api from '../services/api'
 const initialValues = {
     nombre: '',
     representante: '',
-    Email: '',
-    Telefono: '',
-    Direccion: '',
+    email: '',
+    telefono: '',
+    direccion: '',
     }
 
 
@@ -28,10 +28,10 @@ const validate = values => {
         errors.nombre = 'Must be only letters'
     }
 
-    if(!values.Email){
-        errors.Email = 'Required'
-    }else if(!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.Email)){
-        errors.Email = 'Invalid email format'
+    if(!values.email){
+        errors.email = 'Required'
+    }else if(!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)){
+        errors.email = 'Invalid email format'
     }
 
     // if(!values.representante){
@@ -44,24 +44,24 @@ const validate = values => {
     //     errors.representante = 'Must be only letters'
     // }
 
-    if(!values.Telefono){
-        errors.Telefono = 'Required'
-    }else if(values.Telefono.length < 8){
-        errors.Telefono = 'Debe ser 8 caracteres o mas'
-    }else if(values.Telefono.length > 10){
-        errors.Telefono = 'Debe ser 10 caracteres o menos'
-    }else if(!/^[0-9]+$/i.test(values.Telefono)){
-        errors.Telefono = 'Debe ser solo numeros'
+    if(!values.telefono){
+        errors.telefono = 'Required'
+    }else if(values.telefono.length < 8){
+        errors.telefono = 'Debe ser 8 caracteres o mas'
+    }else if(values.telefono.length > 10){
+        errors.telefono = 'Debe ser 10 caracteres o menos'
+    }else if(!/^[0-9]+$/i.test(values.telefono)){
+        errors.telefono = 'Debe ser solo numeros'
     }
 
-    if(!values.Direccion){
-        errors.Direccion = 'Required'
-    }else if(values.Direccion.length < 10){
-        errors.Direccion = 'Must be 10 characters or more'
-    }else if(values.Direccion.length > 50){
-        errors.Direccion = 'Must be 50 characters or less'
-    }else if(!/^[a-zA-Z0-9º\s]+$/i.test(values.Direccion)){
-        errors.Direccion = 'Debe ser letras y numeros'
+    if(!values.direccion){
+        errors.direccion = 'Required'
+    }else if(values.direccion.length < 10){
+        errors.direccion = 'Must be 10 characters or more'
+    }else if(values.direccion.length > 50){
+        errors.direccion = 'Must be 50 characters or less'
+    }else if(!/^[a-zA-Z0-9º\s]+$/i.test(values.direccion)){
+        errors.direccion = 'Debe ser letras y numeros'
     }
     return errors
 }
@@ -76,7 +76,7 @@ function Corganizador(){
 
     const sendData = async(values) => {
         try {
-            //const response = await api.post('/api/organizadores', values)
+            const response = await api.post('/api/organizadores', values)
             setShowAlert(true)
         } catch (error) {
             console.log(error)
@@ -136,27 +136,27 @@ function Corganizador(){
                         {formik.touched.representante && formik.errors.representante ? <div className="error">{formik.errors.representante}</div> : null}
                     </Div>
                     <Div className = "cajita">
-                        <label class="one" for="Email">Email : </label>
-                        <input type="email" name="Email" id="Email" onChange={formik.handleChange} 
+                        <label class="one" for="email">Email : </label>
+                        <input type="email" name="email" id="email" onChange={formik.handleChange} 
                         onBlur={formik.handleBlur} value={formik.values.Email}/>  
-                        {formik.touched.Email && formik.errors.Email ? <div className="error">{formik.errors.Email}</div> : null}
+                        {formik.touched.email && formik.errors.email ? <div className="error">{formik.errors.email}</div> : null}
                     </Div>
                     <Div className = "cajita">
-                        <label className="one" for="Telefono">Telefono : </label>
-                        <input type="text" name="Telefono" id="Telefono" onChange={formik.handleChange} 
-                        onBlur={formik.handleBlur} value={formik.values.Telefono}/>  
-                        {formik.touched.Telefono && formik.errors.Telefono ? <div className="error">{formik.errors.Telefono}</div> : null}
+                        <label className="one" for="telefono">Telefono : </label>
+                        <input type="text" name="telefono" id="telefono" onChange={formik.handleChange} 
+                        onBlur={formik.handleBlur} value={formik.values.telefono}/>  
+                        {formik.touched.telefono && formik.errors.telefono ? <div className="error">{formik.errors.telefono}</div> : null}
                     </Div>
                     <Div className = "cajita">
                         <label class="one" for="organizador">Direccion : </label>
                         <input type="text" 
-                        name="Direccion" 
-                        id="Direccion"
+                        name="direccion" 
+                        id="direccion"
                         onChange={formik.handleChange} 
                         onBlur={formik.handleBlur}
-                        value={formik.values.Direccion}
+                        value={formik.values.direccion}
                         />
-                        {formik.touched.organizador && formik.errors.Direccion ? <div className="error">{formik.errors.Direccion}</div> : null}
+                        {formik.touched.organizador && formik.errors.direccion ? <div className="error">{formik.errors.direccion}</div> : null}
                     </Div>
                     <Flex justify-content='center' gap="3em">
                         <Btn type="submit">AGREGAR</Btn>

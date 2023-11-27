@@ -130,8 +130,9 @@ const CrearEvento = ({data, eventCreated, idEvento}) => {
   }
 
   return(
+    
         <Div>
-
+            {console.log({data})}
           <Alert message="Se ha guardado correctamente"
                  onAcept={()=>{setShowAlertSuccesful(false); eventCreated(true)}}
                  show={showAlertSuccesful}

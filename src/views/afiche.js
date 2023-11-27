@@ -37,7 +37,7 @@ const Afiche = () => {
     }
   fetchData();
   }, []);
-
+     
   const [imagenesSeleccionadas, setImagenesSeleccionadas] = useState([]);
 
   const seleccionarImagen = (imagen) => {
@@ -65,7 +65,7 @@ const Afiche = () => {
             <img src={imagen.imagen} alt={`Imagen ${imagen.id}`} style={{ maxWidth: '80%', height: 'auto' }} />
             <p>{imagen.nombre}</p>
           </div>
-        ))}
+        ))}                                       
       </div>
 
       {/* <h1>Afiches Seleccionados</h1> */}
@@ -80,7 +80,7 @@ const Afiche = () => {
                 x
               </a>
             </li>
-          ))}
+          ))}                                             
         </ul>
       </div>
       <Flex justify-content='center' top='2em' gap='1em'>

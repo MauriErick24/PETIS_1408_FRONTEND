@@ -18,16 +18,12 @@ const Premios = ({idEvento}) => {
         fontSize:'25px',
 
     };
-    useEffect(() => {
-      // Recupera los premios  almacenadas en localStorage al cargar la página
-      const storedRules2 = JSON.parse(localStorage.getItem('premio')) || [];
-      setRules(storedRules2);
-    }, []);
 
     
     const [rules, setRules] = useState([]);
     const [label, setLabel] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+
 
     const addRule = () => {
       if (label.trim() === '') {
@@ -36,25 +32,25 @@ const Premios = ({idEvento}) => {
       }
   
       if (rules.includes(label)) {
-        setErrorMessage('Este premio  ya existe. Intente con una diferente.');
+        setErrorMessage('Este premio ya existe. Intente con uno diferente.');
         return;
       }
+  
       const updatedRules = [...rules, label];
-      setRules({...rules}, updatedRules);
+      setRules(updatedRules);
       setLabel('');
       setErrorMessage('');
-
-      // Almacena las reglas actualizadas en localStorage
-      localStorage.setItem('premio', JSON.stringify(updatedRules));
     };
   
     const removeRule = (index) => {
       const updatedRules2 = [...rules];
       updatedRules2.splice(index, 1);
       setRules(updatedRules2);
-      localStorage.setItem('premio', JSON.stringify(updatedRules2));
     };
-    const inputStyle = {
+  
+
+
+        const inputStyle = {
         backgroundColor: 'white',  // Color de fondo rojo
         borderRadius: '30px',    // Bordes redondeados
         padding: '10px 20px',    // Relleno interior
@@ -92,15 +88,20 @@ const Premios = ({idEvento}) => {
         margin: '0.4em'
     };
 
-    const sendData = async() =>{
-      console.log(rules)
+    const sendData = async () => {
       try {
-        const response = await api.post('/api/premios', rules)
-        console.log(response.data)
+        const dataToSend = {
+          idEvento: idEvento,
+          premios: rules.map((rule, index) => ({ id: index + 1, nombre: rule }))
+        };
+    console.log(dataToSend)
+        const response = await api.post('/api/premios', dataToSend);
+        console.log(response);
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
-    }
+    };
+    
 
     return(
       <>
@@ -132,26 +133,20 @@ const Premios = ({idEvento}) => {
       {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
       
     </div>
-            <ul >
-              
-                {rules.map((rule, index) => (
-                      
-                  <li  style={{display: 'flex', alignItems: 'center', justifyContent: 'center',  // Color de fondo rojo
-                  borderRadius: '30px',    // Bordes redondeados
-                  padding: '5px 20px',
-                  marginTop:'0.8em',    // Relleno interior
-                  color: 'black'}} key={index}>
-                   <input label={`Regla ${index + 1}`} value={rule}style={{backgroundColor: 'white',  // Color de fondo rojo
-                      borderRadius: '30px',    // Bordes redondeados
-                      padding: '5px 20px',
-                      marginTop:'0.1em',    // Relleno interior
-                      color: 'black', width:'70%',fontSize:'25px'}}></input>  
-                  
-                  <button style={Boton2} onClick={() => removeRule(index)}>X</button>
-                </li>
-               ))}
-           </ul>
-
+    <ul>
+        {rules.map((rule, index) => (
+          <li key={index} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '30px', padding: '5px 20px', marginTop: '0.8em', color: 'black' }}>
+            <input
+              label={`Regla ${index + 1}`}
+              value={rule}
+              style={{ backgroundColor: 'white', borderRadius: '30px', padding: '5px 20px', marginTop: '0.1em', color: 'black', width: '70%', fontSize: '25px' }}
+            />
+            <button style={Boton2} onClick={() => removeRule(index)}>
+              X
+            </button>
+          </li>
+        ))}
+      </ul>
     </div>
     <Flex justify-content='center' top='2em' gap='1em'>
             <Btn type='submit' onClick={()=> sendData()}>GUARDAR</Btn>
