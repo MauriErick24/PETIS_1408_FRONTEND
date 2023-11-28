@@ -11,12 +11,17 @@ import '../assets/css/Organizadorn.css';
 import Image from '../assets/images/example-img.jpg'
 
 import Spinner from '../components/Spinner'
+import Alert from '../components/Alert';
 
 const Patrocinador = ({idEvento}) => {
+
+    const [showAlert, setShowAlert] = useState(false)
+    const [showAlertError, setShowAlertError] = useState(false)
+
     const [organizador,setOrganizador]= useState([
-        {id:1, nombre:'coca cola'},
-        {id:2, nombre:'san simon'},
-        {id:3, nombre:'umss'},
+        // {id:1, nombre:'coca cola'},
+        // {id:2, nombre:'san simon'},
+        // {id:3, nombre:'umss'},
     ])
 
   const [loading, setLoading] = useState(true);
@@ -27,7 +32,7 @@ const Patrocinador = ({idEvento}) => {
       const fetchData = async () => {
         try {
          const response = await api.get('/api/auspiciadores');
-         setOrganizador(response.data);
+         setFilteredLibrary(response.data);
         } catch (error) {
           console.error('Error fetching data:', error);
         } finally {
@@ -100,8 +105,10 @@ const Patrocinador = ({idEvento}) => {
             try {
                 const response=await api.post('/api/auspiciadorEvent',dataToSend)
                 console.log(response.data)
+                setShowAlert(true)
             } catch (error) {
                 console.log(error)
+                setShowAlertError(true)
             }
             console.log(dataToSend)
         }
@@ -114,6 +121,17 @@ const Patrocinador = ({idEvento}) => {
            :
            (
             <>
+             <Alert
+               message="Se ha registrado correctamente"
+               onAcept={()=>{setShowAlert(false)}} 
+               show={showAlert}
+            />  
+
+            <Alert
+               message="Ha sucedido un error inesperado al guardar"
+               onAcept={()=>{setShowAlertError(false)}} 
+               show={showAlertError}
+            />
             <Flex justify-content='center' margin-bottom= '2%'>
                 <HeaderTitle title='AUSPICIADORES'/> 
               

@@ -203,7 +203,7 @@ function Visualizacionevento(){
                show={showAlertConfirm}
             />  
 
-        <HeaderDetail nombreEvento={`${data.nombre_evento} ${data.id}`} tipoEvento="COMPETENCIA"/>
+        <HeaderDetail nombreEvento={`${data.nombre_evento}`} tipoEvento="COMPETENCIA"/>
 
         {showModal && <ModalEquipos isSelected={setIsSelected} showModal={setShowModal}/>}
 
