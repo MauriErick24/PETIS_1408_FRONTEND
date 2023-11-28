@@ -6,10 +6,12 @@ import styled from "styled-components";
 import Flex from "../components/Flex";
 import Btn from "../components/Btn";
 import api from '../services/api'
-
+import Alert from '../components/Alert';
 
 const Premios = ({idEvento}) => {
 
+  const [showAlert, setShowAlert] = useState(false)
+    const [showAlertError, setShowAlertError] = useState(false)
     const buttonStyle = {
         backgroundColor: '#000',  // Color de fondo rojo
         borderRadius: '30px',    // Bordes redondeados
@@ -97,8 +99,10 @@ const Premios = ({idEvento}) => {
     console.log(dataToSend)
         const response = await api.post('/api/premios', dataToSend);
         console.log(response);
+        setShowAlert(true)
       } catch (error) {
         console.log(error);
+        setShowAlertError(true)
       }
     };
     
@@ -108,6 +112,17 @@ const Premios = ({idEvento}) => {
           
   
     <div>
+            <Alert
+               message="Se ha registrado correctamente"
+               onAcept={()=>{setShowAlert(false)}} 
+               show={showAlert}
+            />  
+
+            <Alert
+               message="Ha sucedido un error inesperado al guardar"
+               onAcept={()=>{setShowAlertError(false)}} 
+               show={showAlertError}
+            /> 
               <HeaderTitle title='PREMIOS'/>
               <H2>Escriba los premios que tendra su evento</H2>
               <div style={{ display: 'flex', alignItems: 'center' }}>

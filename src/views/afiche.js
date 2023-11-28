@@ -11,8 +11,11 @@ import api from '../services/api'
 import Flex from "../components/Flex";
 import Btn from "../components/Btn";
 import HeaderTitle from "../components/HeaderTitle";
+import Alert from '../components/Alert';
 
 const Afiche = (idEvento) => {
+  const [showAlert, setShowAlert] = useState(false)
+    const [showAlertError, setShowAlertError] = useState(false)
   const [imagenes,setImagenes]=useState([
 
   ])
@@ -51,8 +54,10 @@ const Afiche = (idEvento) => {
       console.log(dataToSend)
       const response=await api.post('/api/afiches',dataToSend)
       //console.log(dataToSend)
+      setShowAlert(true)
     } catch (error) {
       console.log(error)
+      setShowAlertError(true)
     }
   }
 
@@ -72,6 +77,19 @@ const Afiche = (idEvento) => {
 
   return (
     <div>
+
+            <Alert
+               message="Se ha registrado correctamente"
+               onAcept={()=>{setShowAlert(false)}} 
+               show={showAlert}
+            />  
+
+            <Alert
+               message="Ha sucedido un error inesperado al guardar"
+               onAcept={()=>{setShowAlertError(false)}} 
+               show={showAlertError}
+            />
+
       <HeaderTitle title='AGREGAR AFICHES'/>
       {/* <h1>Agregar Afiches</h1> */}
       {/* <h3>Evento : </h3> */}

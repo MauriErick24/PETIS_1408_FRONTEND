@@ -211,7 +211,6 @@ function Visualizacionevento(){
             <Asided>
                 <Flex flex-direction='column'  text-align='center' gap='2em' align-items = 'center'>
                     <Img src={data.imagen} width="95%"/>
-
                   <Flex flex-direction='column' text-align='center' align-items = 'center' gap='0.5em'>
                     <P>Duracion del evento</P>
                     <P>{data.inicio_actividades} - {data.fin_actividades}</P>

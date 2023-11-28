@@ -7,11 +7,12 @@ import Inputd from "../components/input/Inputd";
 import HeaderTitle from "../components/HeaderTitle";
 
 import api from '../services/api'
+import Alert from '../components/Alert';
 
 
 const CrearActividades =({idEvento}) => {
 
-
+  const [showAlert, setShowAlert] = useState(false)
     const [showAlertError ,setShowAlertError] = useState(false)
     
     const [tasks, setTasks] = useState([]);
@@ -64,12 +65,12 @@ const CrearActividades =({idEvento}) => {
       if(idEvento){
         const fetchData = async () => {
           try {
-            console.log(idEvento)
-            const response = await api.get(`/api/actividades/${idEvento}`)
-            setTasks(response.data)
+            // console.log(idEvento)
+            // const response = await api.get(`/api/actividades/${idEvento}`)
+            // setTasks(response.data)
           } catch (error) {
-            console.log(error)
-            setTasks([])
+            // console.log(error)
+            // setTasks([])
           }
         }
         fetchData();
@@ -78,11 +79,17 @@ const CrearActividades =({idEvento}) => {
 
     const sendData = async() =>  {
       if(tasks.length != 0){
+          // let dataToSend = {}  
+          // dataToSend={idEvento,tasks}
+          // console.log(dataToSend)
+          console.log(tasks)
         try {
           const response = await api.post('/api/actividades', tasks)
-          console.log(response.data) 
+          console.log(tasks) 
+          setShowAlert(true)
         } catch (error) {
           console.log(error)
+          setShowAlertError(true)
         }
       }else{
         setShowAlertError(true)
@@ -92,6 +99,18 @@ const CrearActividades =({idEvento}) => {
 
     return(
         <>    <div>
+
+              <Alert
+               message="Se ha registrado correctamente"
+               onAcept={()=>{setShowAlert(false)}} 
+               show={showAlert}
+            />  
+
+            <Alert
+               message="Ha sucedido un error inesperado al guardar"
+               onAcept={()=>{setShowAlertError(false)}} 
+               show={showAlertError}
+            />
                 <Flex flex-direction='column' align-items='center' gap='1em'>
                     <HeaderTitle title='ACTIVIDADES'/>
                       </Flex>
@@ -170,7 +189,7 @@ const CrearActividades =({idEvento}) => {
                         )))}
                     </ul>
                     </div>
-                    < Btn onClick={()=>console.log(tasks)}  style={{marginTop:'25px' }}>ACEPTAR</Btn>
+                    < Btn onClick={()=>sendData()}  style={{marginTop:'25px' }}>ACEPTAR</Btn>
         </>
     )
 }
