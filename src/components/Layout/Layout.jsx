@@ -33,6 +33,7 @@ function Layout({updateEvento,  main}) {
   const navigate = useNavigate();
   // const location = useLocation();
   // const { datos } = location.state || {};
+
   const {id} = useParams()
 
   // const [updateButton, setUpdateButton] = useState(updateButton)
@@ -53,6 +54,17 @@ function Layout({updateEvento,  main}) {
   // console.log(datos);
 
   const [idEventoCreado, setIdEventoCreado] = useState(null)
+
+  // useEffect(()=>{
+  //   console.log("id ", id)
+  //   const getId = () => {
+  //     if(id != null){
+  //       setIdEventoCreado(id)
+  //       setIsEventCreated(true)
+  //     }
+  //   }
+  //   getId();
+  // },[])
  
   const [data2, setData2] = useState(
     {    
@@ -126,6 +138,10 @@ const [data, setData] = useState()
         setData(response.data)
         //console.log("DATOS ",data);
         console.log(response.data);
+
+        setIdEventoCreado(id)
+        setIsEventCreated(true)
+
       } catch (error) {
         console.log(error)
       }finally{
@@ -187,8 +203,8 @@ const handleActualizarEvento = (nuevosDatos) => {
               EVENTO
             </Btn>
 
-            {/* { isEventCreated && */}
-          { true &&
+            { isEventCreated &&
+          
            ( 
           <>
               {/* <Btn onClick={() => handleButtonClick(false, true, false , false, false, false, false)}>
