@@ -99,8 +99,14 @@ const CrearPatrocinador = ({ onClick }) => {
     const sendData = async(values) => {
         console.log(values)
         try {
-           // const response = await api.post('/api/auspiciadores', values)
-            //console.log(response.data) 
+           const response = await api.post('/api/auspiciadores', values,
+           {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+              'enctype':'multipart/form-data'
+            },
+          })
+            console.log(response.data) 
             setShowAlert(true)
         } catch (error) {
             console.log(error)

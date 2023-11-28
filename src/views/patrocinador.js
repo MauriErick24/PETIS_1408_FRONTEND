@@ -146,7 +146,7 @@ const Patrocinador = ({idEvento}) => {
                     <ul id="selectedBooks">
                         {selectedBooks.map((book) => (
                         <li key={book.nombre}>
-                            {book.nombre} <Img src={Image}/>
+                            {book.nombre} <Img src={book.logo}/>
                             <button onClick={() => handleRemoveBook(book)} className="delete-button">X</button>
                         </li>
                         ))}
