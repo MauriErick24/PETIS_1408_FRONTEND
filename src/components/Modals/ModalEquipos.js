@@ -10,9 +10,9 @@ const ModalEquipos = ({isSelected, showModal}) => {
 
     const [data, setData] = useState([
         {id:1, nombre: "EQUIPO Z", cantidad: 2},
-        {id:2, nombre: "EQUIPO x", cantidad: 2},
-        {id:3, nombre: "EQUIPO A", cantidad: 2},
-        {id:4, nombre: "EQUIPO B", cantidad: 2},
+        {id:2, nombre: "EQUIPO x", cantidad: 3},
+        {id:3, nombre: "EQUIPO A", cantidad: 4},
+        {id:4, nombre: "EQUIPO B", cantidad: 5},
 
     ])
     

@@ -9,6 +9,8 @@ import Itemgen from "../components/Itemgen";
 import api from '../services/api'
 import '../assets/css/Organizadorn.css';
 import Image from '../assets/images/example-img.jpg'
+import Alert from '../components/Alert';
+import ErrorMessage from "../components/ErrorMessage";
 
 import Spinner from '../components/Spinner'
 
@@ -20,7 +22,8 @@ const Patrocinador = ({idEvento}) => {
     ])
 
   const [loading, setLoading] = useState(true);
-
+  const [showAlert, setShowAlert] = useState(false)
+  const [showAlertError, setShowAlertError] = useState(false)
 
 
   useEffect(() => {
@@ -100,14 +103,27 @@ const Patrocinador = ({idEvento}) => {
             try {
                 const response=await api.post('/api/auspiciadorEvent',dataToSend)
                 console.log(response.data)
+                setShowAlert(true) 
             } catch (error) {
                 console.log(error)
             }
             console.log(dataToSend)
+            setShowAlertError(true)
         }
 
     return(
         <>
+        <Alert
+               message="Los afiches seleccionados se han añadido correctamente al evento"
+               onAcept={()=>{setShowAlert(false)}} 
+               show={showAlert}
+            />  
+
+            <Alert
+               message="Ha sucedido un error inesperado al añadir afiches al evento"
+               onAcept={()=>{setShowAlertError(false)}} 
+               show={showAlertError}
+            />       
            {loading ? (
             <Spinner/>
            )

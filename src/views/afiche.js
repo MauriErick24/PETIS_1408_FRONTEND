@@ -11,11 +11,15 @@ import api from '../services/api'
 import Flex from "../components/Flex";
 import Btn from "../components/Btn";
 import HeaderTitle from "../components/HeaderTitle";
+import Alert from '../components/Alert';
+import ErrorMessage from "../components/ErrorMessage";
 
 const Afiche = (idEvento) => {
   const [imagenes,setImagenes]=useState([
 
   ])
+  const [showAlert, setShowAlert] = useState(false)
+  const [showAlertError, setShowAlertError] = useState(false)
   const imagen = [
     { id: 1, ruta:imagen1, titulo: 'blue logo' },
     { id: 2, ruta:imagen2, titulo: 'Título 2' },
@@ -29,10 +33,12 @@ const Afiche = (idEvento) => {
     const fetchData = async () => {
       try{
         const response = await api.get('/api/afiches')
-        setImagenes(response.data)    
+        setImagenes(response.data) 
+          
         //console.log(response.data)
       }catch(err){
         console.log("Error: ", err)
+        
       }
     }
   fetchData();
@@ -51,8 +57,10 @@ const Afiche = (idEvento) => {
       console.log(dataToSend)
       const response=await api.post('/api/afiches',dataToSend)
       //console.log(dataToSend)
+      setShowAlert(true) 
     } catch (error) {
       console.log(error)
+      setShowAlertError(true)
     }
   }
 
@@ -71,7 +79,21 @@ const Afiche = (idEvento) => {
   };
 
   return (
+    <>
+     <Alert
+               message="Los afiches seleccionados se han registrado correctamente"
+               onAcept={()=>{setShowAlert(false)}} 
+               show={showAlert}
+            />  
+
+            <Alert
+               message="Ha sucedido un error inesperado al registrar afiches"
+               onAcept={()=>{setShowAlertError(false)}} 
+               show={showAlertError}
+            />          
+   
     <div>
+        
       <HeaderTitle title='AGREGAR AFICHES'/>
       {/* <h1>Agregar Afiches</h1> */}
       {/* <h3>Evento : </h3> */}
@@ -105,7 +127,7 @@ const Afiche = (idEvento) => {
         <Btn type='submit'onClick={()=>sendData()}>GUARDAR</Btn>
       
       </Flex>
-    </div>
+    </div> </>
   );
 };
 

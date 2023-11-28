@@ -5,6 +5,8 @@ import Btn from "../components/Btn";
 import Input from "../components/input/Input";
 import Inputd from "../components/input/Inputd";
 import HeaderTitle from "../components/HeaderTitle";
+import Alert from '../components/Alert';
+import ErrorMessage from "../components/ErrorMessage";
 
 import api from '../services/api'
 
@@ -12,8 +14,9 @@ import api from '../services/api'
 const CrearActividades =({idEvento}) => {
 
 
-    const [showAlertError ,setShowAlertError] = useState(false)
     
+    const [showAlert, setShowAlert] = useState(false)
+    const [showAlertError, setShowAlertError] = useState(false)
     const [tasks, setTasks] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [taskInput, setTaskInput] = useState('');
@@ -80,18 +83,33 @@ const CrearActividades =({idEvento}) => {
       if(tasks.length != 0){
         try {
           const response = await api.post('/api/actividades', tasks)
-          console.log(response.data) 
+          console.log(response.data)
+          setShowAlert(true) 
         } catch (error) {
           console.log(error)
+          setShowAlertError(true)
         }
       }else{
         setShowAlertError(true)
+        
       }
     }
 
 
     return(
-        <>    <div>
+        <>   
+        <Alert
+               message="Las actividades creadas se han registrado correctamente"
+               onAcept={()=>{setShowAlert(false)}} 
+               show={showAlert}
+            />  
+
+            <Alert
+               message="Ha sucedido un error inesperado al registrar tus actividades"
+               onAcept={()=>{setShowAlertError(false)}} 
+               show={showAlertError}
+            />          
+         <div>
                 <Flex flex-direction='column' align-items='center' gap='1em'>
                     <HeaderTitle title='ACTIVIDADES'/>
                       </Flex>
@@ -170,8 +188,9 @@ const CrearActividades =({idEvento}) => {
                         )))}
                     </ul>
                     </div>
-                    < Btn onClick={()=>console.log(tasks)}  style={{marginTop:'25px' }}>ACEPTAR</Btn>
-        </>
+                    < Btn type='submit'onClick={()=>sendData()}  style={{marginTop:'25px' }}>ACEPTAR</Btn>  
+                    
+        </>//< Btn type='submit'onClick={()=>console.log(tasks)}  style={{marginTop:'25px' }}>ACEPTAR</Btn>
     )
 }
 

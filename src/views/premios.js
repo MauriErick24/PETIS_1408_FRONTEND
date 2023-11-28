@@ -6,7 +6,8 @@ import styled from "styled-components";
 import Flex from "../components/Flex";
 import Btn from "../components/Btn";
 import api from '../services/api'
-
+import Alert from '../components/Alert';
+import ErrorMessage from "../components/ErrorMessage";
 
 const Premios = ({idEvento}) => {
 
@@ -23,7 +24,8 @@ const Premios = ({idEvento}) => {
     const [rules, setRules] = useState([]);
     const [label, setLabel] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-
+    const [showAlert, setShowAlert] = useState(false)
+    const [showAlertError, setShowAlertError] = useState(false)
 
     const addRule = () => {
       if (label.trim() === '') {
@@ -97,15 +99,27 @@ const Premios = ({idEvento}) => {
     console.log(dataToSend)
         const response = await api.post('/api/premios', dataToSend);
         console.log(response);
+        setShowAlert(true)
       } catch (error) {
         console.log(error);
+        setShowAlertError(true)
       }
     };
     
 
     return(
       <>
-          
+          <Alert
+               message="Los premios se han registrado correctamente"
+               onAcept={()=>{setShowAlert(false)}} 
+               show={showAlert}
+            />  
+
+            <Alert
+               message="Ha sucedido un error inesperado al registrar premios"
+               onAcept={()=>{setShowAlertError(false)}} 
+               show={showAlertError}
+            />          
   
     <div>
               <HeaderTitle title='PREMIOS'/>
