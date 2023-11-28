@@ -18,8 +18,11 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import ModalEquipos from '../components/Modals/ModalEquipos'
 
 import api from '../services/api'
+import Alert from '../components/Alert';
+import Confirm from '../components/Confirm';
 
 function Visualizacionevento(){
 
@@ -97,7 +100,12 @@ function Visualizacionevento(){
     const [taskInput, setTaskInput] = useState('');
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
-  
+
+    const [showModal, setShowModal]= useState(false)
+    const [isSelected, setIsSelected] = useState(false);
+    const [showAlertCancelar,setShowAlertCancelar] = useState(false)
+    const [showAlertConfirm,setShowAlertConfirm] = useState(false)
+
     const openModal = () => {
       setIsModalOpen(true);
     };
@@ -180,8 +188,25 @@ function Visualizacionevento(){
     }, []) 
 
     return (
-        <>       
+        <>  
+
+          <Confirm
+            message='Es seguro de darse de BAJA de este evento?'
+            onAcept={()=>{setShowAlertConfirm(true); setShowAlertCancelar(false)}}
+            onClose={()=>setShowAlertCancelar(false)}
+            show={showAlertCancelar}
+          />
+
+            <Alert
+               message="se ha dado de BAJA exitosamente"
+               onAcept={()=>{setShowAlertConfirm(false); setIsSelected(false)}} 
+               show={showAlertConfirm}
+            />  
+
         <HeaderDetail nombreEvento={`${data.nombre_evento} ${data.id}`} tipoEvento="COMPETENCIA"/>
+
+        {showModal && <ModalEquipos isSelected={setIsSelected} showModal={setShowModal}/>}
+
         <Flex justify-content='space-between'>
             <Asided>
                 <Flex flex-direction='column'  text-align='center' gap='2em' align-items = 'center'>
@@ -209,8 +234,11 @@ function Visualizacionevento(){
                         ))}
                     </BubbleContainer>
                   </Flex>
+
+                  <Btn onClick={()=>(isSelected ? setShowAlertCancelar(true) : setShowModal(true))}>{isSelected ? "DAR DE BAJA" : "INSCRIBIRSE"}</Btn>
                 
                 </Flex>
+                
                 
                   
             </Asided>
