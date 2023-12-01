@@ -21,6 +21,7 @@ import WarningPage from './warning-page';
 import CrearActividades from './crear-actividades';
 import Corganizador from './corganizador';//jledezma crear organizador 23/11/23
 import landing from '../assets/images/img-umss.jpg'; //jledezma landing 24/11/23
+import Comunicados from './Comunicados';
 
 const GestionEvento = () => {
     const navigate = useNavigate();
@@ -28,19 +29,22 @@ const GestionEvento = () => {
     const [showCrear, setShowCrear] = useState(false)
     const [showEditar, setShowEditar] = useState(false)
     const [showEliminar, setShowEliminar] = useState(false)
+    const [showComunicados, setComunicados] = useState(false) //jledezma comunicados 30/11/23
     const [showImg,setShowImg] = useState(true) //jledzma landing 24/11/23
     
+
     const [showCrearAuspiciador, setCrearAuspiciador] = useState(false)
     const [showCrearActividades, setCrearActividades] = useState(false)
     const [showCrearOrganizador, setCrearOrganizador] = useState(false) //jledzma crear organizador 23/11/23
 
     const [showCascade, setShowCascade] = useState(false)
     
-    const handleClick = (editar, eliminar, crear,landing) => {
+    const handleClick = (editar, eliminar, crear,landing, comunicados) => {
         setShowImg(landing);
         setShowEditar(editar);
         setShowEliminar(eliminar);
         setShowCrear(crear);
+        setComunicados(comunicados); //jledezma comunicados 30/11/23
     }
     
     const [showButtons, setShowButtons] = useState({
@@ -49,6 +53,7 @@ const GestionEvento = () => {
         editarButton: true,
         eliminarButton: true,
         crearButton : true,
+        comunicadosButton: true, //jledezma comunicados 30/11/23
     })
 
     const handleCascade = (auspiciador, actividades, organizador) => {
@@ -70,7 +75,7 @@ const GestionEvento = () => {
                }
                { showButtons.editarButton && 
                 <Btn onClick={()=> {
-                    handleClick(true, false, false)
+                    handleClick(true, false, false, false)
                     handleCascade(false, false)
                 }
                 }
@@ -79,12 +84,19 @@ const GestionEvento = () => {
 
                 { showButtons.eliminarButton && 
                 <Btn onClick={()=> {
-                  handleClick(false, true, false)
+                  handleClick(false, true, false, false)
                   handleCascade(false, false)
               }
                 }>ELIMINAR</Btn>
                 }
                 
+                { showButtons.comunicadosButton && 
+                <Btn onClick={()=> {
+                  handleClick(false, false, false, false,true)
+                  handleCascade(false, false)
+              }
+                }>COMUNICADOS</Btn>
+                }
 
                 { showButtons.crearButton &&
 
@@ -126,6 +138,7 @@ const GestionEvento = () => {
                 )}
                 {showEditar && (<EditarEvento showEditar={showEditar} />)}
                 {showEliminar && (<EliminarEvento showEliminar={showEliminar} />)}
+                {showComunicados && (<Comunicados showComunicados={showComunicados} />)}
                 {/* {showEliminar && (<WarningPage/>)} */}
                 {showCrearAuspiciador && (<CrearAuspiciador/>)}
                 {showCrearActividades && (<CrearActividades/>)}
