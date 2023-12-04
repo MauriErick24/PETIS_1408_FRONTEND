@@ -1,5 +1,5 @@
 import React, { useState ,useEffect} from "react";
-import '../assets/css/Crud.css'; 
+import '../../assets/css/Crud.css'; 
 //import 'bootstrap/dist/css/bootstrap.min.css';
 //import { Table, Button, Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

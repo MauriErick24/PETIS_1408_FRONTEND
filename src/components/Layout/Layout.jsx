@@ -16,7 +16,7 @@ import Organizador from '../../views/Organizadorn';
 import CrearEvento from '../../views/evento/crear-evento';
 import Auspiciador from '../../views/auspiciador';
 import Reglas from '../../views/reglas';
-import Premios from '../../views/premio/agregar-premios';
+import Premios from '../../views/premio/crear-premios';
 import Requisitos from '../../views/requisitos'
 import CrearActividades from '../../views/actividades/crear-actividades';
 import Afiche from '../../views/afiche/agregar-afiche'
