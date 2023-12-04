@@ -1,15 +1,16 @@
 import React, { useState } from "react";
-import Flex from "../components/Flex";
-import HeaderTitle from "../components/HeaderTitle";
-import Inputk from "../components/input/Inputk";
-import InputFilePreview from "../components/input/InputFilePreview";
-import Btn from "../components/Btn";
-import api from '../services/api';
-import validaciones from '../functions/Validacionesaus';
+import Flex from "../../components/Flex";
+import HeaderTitle from "../../components/HeaderTitle";
+import Inputk from "../../components/input/Inputk";
+import InputFilePreview from "../../components/input/InputFilePreview";
+import Btn from "../../components/Btn";
+import api from '../../services/api';
+import validaciones from '../../functions/Validacionesaus';
 import { Formik, useFormik } from "formik";
-import Confirm from '../components/Confirm';
-import Alert from '../components/Alert';
-import ErrorMessage from "../components/ErrorMessage";
+import Confirm from '../../components/Confirm';
+import Alert from '../../components/Alert';
+import ErrorMessage from "../../components/ErrorMessage";
+import Title from "../../components/Fonts/Title";
 
 const CrearPatrocinador = ({ onClick }) => {
 
@@ -123,7 +124,7 @@ const CrearPatrocinador = ({ onClick }) => {
     return (
         <>
             <Flex justify-content='center' margin-bottom='2%'>
-                <HeaderTitle title='AUSPICIADOR' />
+               <Title>CREAR AUSPICIADOR</Title>
             </Flex>
         
             <Alert
@@ -197,6 +198,7 @@ const CrearPatrocinador = ({ onClick }) => {
                         width='200px'
                         widthDiv='auto'
                         font-size='18px'
+                        reset={true}
                         onChange={handleChange}
                     />
                 </Flex>

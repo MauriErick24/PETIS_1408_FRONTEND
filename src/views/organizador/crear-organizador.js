@@ -1,11 +1,12 @@
 
-import Btn from "../components/Btn";
+import Btn from "../../components/Btn";
 import styled from "styled-components";
-import Flex from "../components/Flex";
+import Flex from "../../components/Flex";
 import { useFormik } from 'formik';
 import { useState } from "react";
-import Alert from "../components/Alert";
-import api from '../services/api'
+import Alert from "../../components/Alert";
+import api from '../../services/api'
+import Title from "../../components/Fonts/Title";
 
 const initialValues = {
     nombre: '',
@@ -69,7 +70,7 @@ const validate = values => {
 
 
 
-function Corganizador(){
+function CrearOrganizador(){
 
     const [showAlert, setShowAlert] = useState(false)
     const [showAlertError, setShowAlertError] = useState(false)
@@ -114,7 +115,7 @@ function Corganizador(){
             <form onSubmit={formik.handleSubmit}>
                 <Div class= "contenedor">
                     <Div className="cont">
-                        <h1>CREACION DE ORGANIZADOR</h1> 
+                       <Title>CREAR ORGANIZADOR</Title>
                     </Div>
                     
                     <Div className = "cajita">
@@ -168,7 +169,7 @@ function Corganizador(){
     )
 }
 
-export default Corganizador;
+export default CrearOrganizador;
 
 const Div = styled.div`
 .cajita{

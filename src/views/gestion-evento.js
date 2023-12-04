@@ -3,9 +3,10 @@ import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 // import { useNavigate } from 'react-router-dom';
 
+
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import CrearAuspiciador from '../views/crear-auspiciador'
+import CrearAuspiciador from './auspiciador/crear-auspiciador'
 
 import Btn from '../components/Btn';
 
@@ -14,20 +15,28 @@ import Aside from '../components/Aside';
 
 import { useState } from 'react';
 
-import EditarEvento from './editar-evento';
-import EliminarEvento from './eliminar-evento';
+import EditarEvento from './evento/editar-evento';
+import EliminarEvento from './evento/eliminar-evento';
 import CascadeList from '../components/CascadeList';
 import WarningPage from './warning-page';
-import CrearActividades from './crear-actividades';
-import Corganizador from './corganizador';//jledezma crear organizador 23/11/23
+import CrearActividades from './actividades/crear-actividades';
+import Corganizador from './organizador/crear-organizador';//jledezma crear organizador 23/11/23
 import landing from '../assets/images/img-umss.jpg'; //jledezma landing 24/11/23
+import { Children } from 'react';
 
-const GestionEvento = () => {
+const GestionEvento = ({view, children}) => {
+
     const navigate = useNavigate();
 
     const [showCrear, setShowCrear] = useState(false)
     const [showEditar, setShowEditar] = useState(false)
     const [showEliminar, setShowEliminar] = useState(false)
+
+    const [showCrearCascade, setShowCrearCascade] = useState(false)
+    const [showAgregarCascade, setShowAgregarCascade] = useState(false)
+    const [showEditarCascade, setShowEditarCascade] = useState(false)
+    const [showEliminarCascade, setShowEliminarCascade] = useState(false)
+    
     const [showImg,setShowImg] = useState(true) //jledzma landing 24/11/23
     
     const [showCrearAuspiciador, setCrearAuspiciador] = useState(false)
@@ -51,10 +60,11 @@ const GestionEvento = () => {
         crearButton : true,
     })
 
-    const handleCascade = (auspiciador, actividades, organizador) => {
-      setCrearAuspiciador(auspiciador)
-      setCrearActividades(actividades)
-      setCrearOrganizador(organizador) //jledezma crear organizador 23/11/23
+    const handleCascade = (crear, agregar ,editar, eliminar) => {
+      setShowCrearCascade(crear)
+      setShowAgregarCascade(agregar)
+      setShowEditarCascade(editar)
+      setShowEliminarCascade(eliminar)
     }
 
     return (
@@ -65,80 +75,46 @@ const GestionEvento = () => {
             <Container>
               <Sidebar>
                 <Aside>
-               { showButtons.nuevoEventoButton && 
-                <Btn onClick={()=>navigate('/crear/evento')}>NUEVO EVENTO</Btn>
-               }
-               { showButtons.editarButton && 
-                <Btn onClick={()=> {
-                    handleClick(true, false, false)
-                    handleCascade(false, false)
-                }
-                }
-                >EDITAR</Btn>
-                }
-
-                { showButtons.eliminarButton && 
-                <Btn onClick={()=> {
-                  handleClick(false, true, false)
-                  handleCascade(false, false)
-              }
-                }>ELIMINAR</Btn>
-                }
-                
-
-                { showButtons.crearButton &&
-
-                  // <Btn onClick={()=> {
-                    
-                  //   setShowCascade(!showCascade)
-                  // }
-                  // }>CREAR</Btn>
-
-                  <ButtonCascade onClick={()=>setShowCascade(!showCascade)}>
+                <ButtonCascade onClick={()=>setShowCrearCascade(!showCrearCascade)}>
                       <p>CREAR</p>
-                      { showCascade && (
-                          <CascadeList>
-                            <Option onClick={()=>{
-                              handleCascade(true,false,false)
-                              handleClick(false,false,false)
-                              }}>AUSPICIADORES</Option>
-                            
-                            <Option onClick={()=>{
-                              handleCascade(false,false,true)
-                              handleClick(false,false,false)
-                              }}>ORGANIZADOR</Option>  
-                          </CascadeList>
-                        )  
-                  }
+                      { showCrearCascade && (<CascadeList cascade='crear' view={view}/>)}
                   </ButtonCascade>
-                 
-                }
 
-                
+                  <ButtonCascade onClick={()=>setShowAgregarCascade(!showAgregarCascade)}>
+                      <p>AGREGAR</p>
+                      { showAgregarCascade && (<CascadeList cascade='agregar' view={view}/>)}
+                  </ButtonCascade>
 
+                  <ButtonCascade onClick={()=>setShowEditarCascade(!showEditarCascade)}>
+                      <p>EDITAR</p>
+                      { showEditarCascade && (<CascadeList cascade='editar' view={view}/>)}
+                  </ButtonCascade>
+
+                  <ButtonCascade onClick={()=>setShowEliminarCascade(!showEliminarCascade)}>
+                      <p>ELIMINAR</p>
+                      { showEliminarCascade && (<CascadeList cascade='eliminar' view={view}/>)}
+                  </ButtonCascade>
                 </Aside>
               </Sidebar>
               <Content>
                 
                 {/* {main} */}
-                {showImg && (
+                {/* {showImg && (
                   <img src={landing} alt="landing" width="100%" height="100%"/>
-                )}
-                {showEditar && (<EditarEvento showEditar={showEditar} />)}
+                )} */}
+                {/* {showEditar && (<EditarEvento showEditar={showEditar} />)}
                 {showEliminar && (<EliminarEvento showEliminar={showEliminar} />)}
                 {/* {showEliminar && (<WarningPage/>)} */}
-                {showCrearAuspiciador && (<CrearAuspiciador/>)}
+                {/* {showCrearAuspiciador && (<CrearAuspiciador/>)}
                 {showCrearActividades && (<CrearActividades/>)}
-                {showCrearOrganizador && (<Corganizador />)}
+                {showCrearOrganizador && (<Corganizador />)}  */}
+
+                {children ? children : (<img src={landing} alt="landing" width="100%" height="100%"/>)}
 
               </Content>  
             </Container>
           <Flex justify-content='end' gap='1em'>
-            {/* {<Btn type='submit'>GUARDAR</Btn>}
-            { <Btn>CREAR</Btn>} */}
-           
             <Btn color='second' onClick={()=>navigate('/')}>ATRAS</Btn> 
-           
           </Flex>
           </div>
           <Footer/>

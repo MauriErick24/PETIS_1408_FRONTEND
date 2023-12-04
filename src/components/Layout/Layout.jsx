@@ -13,13 +13,13 @@ import Aside from '../Aside';
 
 import { useEffect, useState } from 'react';
 import Organizador from '../../views/Organizadorn';
-import CrearEvento from '../../views/crear-evento';
+import CrearEvento from '../../views/evento/crear-evento';
 import Auspiciador from '../../views/auspiciador';
 import Reglas from '../../views/reglas';
-import Premios from '../../views/premios';
+import Premios from '../../views/premio/agregar-premios';
 import Requisitos from '../../views/requisitos'
-import CrearActividades from '../../views/crear-actividades';
-import Afiche from '../../views/afiche'
+import CrearActividades from '../../views/actividades/crear-actividades';
+import Afiche from '../../views/afiche/agregar-afiche'
 import { useNavigate } from 'react-router-dom';
 
 import Spinner from "../Spinner"

@@ -1,20 +1,21 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-import api from '../services/api'
+import api from '../../services/api'
 
-import HeaderTitle from "../components/HeaderTitle";
-import Select from "../components/input/Select";
-import Inputk from "../components/input/Inputk";
-import Inputd from "../components/input/Inputd";
-import Flex from "../components/Flex";
-import Radio from "../components/input/Radio";
-import Input from "../components/input/Input";
-import TextArea from "../components/input/TextArea";
-import Btn from "../components/Btn";
-import Alert from "../components/Alert";
+import HeaderTitle from "../../components/HeaderTitle";
+import Select from "../../components/input/Select";
+import Inputk from "../../components/input/Inputk";
+import Inputd from "../../components/input/Inputd";
+import Flex from "../../components/Flex";
+import Radio from "../../components/input/Radio";
+import Input from "../../components/input/Input";
+import TextArea from "../../components/input/TextArea";
+import Btn from "../../components/Btn";
+import Alert from "../../components/Alert";
 import {useFormik} from "formik";
 import { useNavigate } from "react-router-dom";
+import Title from "../../components/Fonts/Title";
 
 let initialValues = {
   nombre_evento: '',
@@ -185,9 +186,11 @@ const CrearEvento = ({data, eventCreated, idEvento}) => {
 
           <form onSubmit={formik.handleSubmit}>
           {console.log("initial values ", formik.initialValues)}
+
             <Flex justify-content='center' >
-                <HeaderTitle title='CREACION DE EVENTO' /> 
+               <Title>CREAR EVENTO</Title>
             </Flex>
+
             <Flex margin='0' flex-direction='column' gap='1em'  align-items='none'>
                 <Inputk 
                     label='Nombre de evento:'
@@ -470,3 +473,4 @@ const Container = styled.div`
 const P = styled.p`
     font-size: 20px;
 `
+

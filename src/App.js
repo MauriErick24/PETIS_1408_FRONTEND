@@ -22,11 +22,24 @@ import HomeUser from './views/homeUser'
 // import Corganizador from './views/corganizador'; 
 import Patrocinador from './views/patrocinador'
 import Reglas from './views/reglas'
-import Premios from './views/premios'
+import Premios from './views/premio/agregar-premios'
 //import Invitados from './views/requisitos'
 import Afiche from './views/afiche'
 import Auspiciador from './views/auspiciador'
 import GestionEvento from './views/gestion-evento'
+import LayoutGeneric from './components/Layout/LayoutGeneric'
+
+import CrearAuspiciador from './views/auspiciador/crear-auspiciador'
+import CrearEvento from './views/evento/crear-evento'
+import CrearOrganizador from './views/organizador/crear-organizador'
+
+
+import AgregarAfiche from './views/afiche/agregar-afiche'
+import AgregarPremio from './views/premio/agregar-premios'
+
+
+import EliminarEvento from './views/evento/eliminar-evento'
+import EditarEvento from './views/evento/editar-evento'
 
 //import ModalLayout from './components/Modals/ModalCrear'
 
@@ -39,11 +52,39 @@ function App() {
           
         <Route path="/" element={<Layout><Home /></Layout>} />
        
-        <Route path='/crear/evento' element={<LayoutCreacion />}/>
-        <Route path='/gestionar-eventos' element={<GestionEvento />}/>
+        <Route path='/crear/evento' element={<GestionEvento view={'crear'}><CrearEvento/></GestionEvento>}/>
+        <Route path='/crear/auspiciador' element={<GestionEvento view={'crear'}><CrearAuspiciador/></GestionEvento>}/>
+        <Route path='/crear/organizador' element={<GestionEvento view={'crear'}><CrearOrganizador/></GestionEvento>}/>
+
+        <Route path='/agregar/auspiciador' element={<GestionEvento view={'agregar'}><CrearOrganizador/></GestionEvento>}/>
+        <Route path='/agregar/organizador' element={<GestionEvento view={'agregar'}><CrearOrganizador/></GestionEvento>}/>
+        <Route path='/agregar/afiche' element={<GestionEvento view={'agregar'}><AgregarAfiche/></GestionEvento>}/>
+        <Route path='/agregar/premios' element={<GestionEvento view={'agregar'}><AgregarPremio/></GestionEvento>}/>
+        <Route path='/agregar/actividades' element={<GestionEvento view={'agregar'}><CrearOrganizador/></GestionEvento>}/>
+
+        <Route path='/editar/evento' element={<GestionEvento view={'editar'}><EditarEvento/></GestionEvento>}/>
+        <Route path='/editar/auspiciador' element={<GestionEvento view={'editar'}><CrearOrganizador/></GestionEvento>}/>
+        <Route path='/editar/organizador' element={<GestionEvento view={'editar'}><CrearOrganizador/></GestionEvento>}/>
+        <Route path='/editar/afiche' element={<GestionEvento view={'editar'}><CrearOrganizador/></GestionEvento>}/>
+        <Route path='/editar/premios' element={<GestionEvento view={'agreeditargar'}><CrearOrganizador/></GestionEvento>}/>
+        <Route path='/editar/actividades' element={<GestionEvento view={'ageditarregar'}><CrearOrganizador/></GestionEvento>}/>
+
+        <Route path='/eliminar/evento' element={<GestionEvento view={'eliminar'}><EliminarEvento/></GestionEvento>}/>
+        <Route path='/eliminar/auspiciador' element={<GestionEvento view={'eliminar'}><CrearOrganizador/></GestionEvento>}/>
+        <Route path='/eliminar/organizador' element={<GestionEvento view={'eliminar'}><CrearOrganizador/></GestionEvento>}/>
+        <Route path='/eliminar/afiche' element={<GestionEvento view={'agregeliminarar'}><CrearOrganizador/></GestionEvento>}/>
+        <Route path='/eliminar/premios' element={<GestionEvento view={'eliminar'}><CrearOrganizador/></GestionEvento>}/>
+        <Route path='/eliminar/actividades' element={<GestionEvento view={'ageliminarregar'}><CrearOrganizador/></GestionEvento>}/>
+        
+
+
+
+        <Route path='/gestionar-eventos' element={<GestionEvento view={'crear'}/>}/>
+        
         <Route path='/editar-eventos' element={<GestionEvento />}/>
         <Route path='/editar/evento/:id' element={<LayoutCreacion updateButton={true}/>}/>
-
+        <Route path='/gestionar' element={<LayoutGeneric/>}/>
+        {/* <Route path='/eliminar/afiche' element={} */}
 
 
         

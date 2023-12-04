@@ -1,33 +1,36 @@
-import '../assets/css/Afiche.css';
-import imagen1 from '../assets/images/1.png';
-import imagen2 from '../assets/images/2.png';
-import imagen3 from '../assets/images/3.png';
-import imagen4 from '../assets/images/4.png';
-import imagen5 from '../assets/images/5.png';
-import imagen6 from '../assets/images/6.png';
+import '../../assets/css/Afiche.css';
+import imagen1 from '../../assets/images/1.png';
+import imagen2 from '../../assets/images/2.png';
+import imagen3 from '../../assets/images/3.png';
+import imagen4 from '../../assets/images/4.png';
+import imagen5 from '../../assets/images/5.png';
+import imagen6 from '../../assets/images/6.png';
 
+import Imgn from '../../assets/images/example-img.jpg'
 
-
-
-import Alert from '../components/Alert';
-import ErrorMessage from "../components/ErrorMessage";
+import Alert from '../../components/Alert';
+import ErrorMessage from "../../components/ErrorMessage";
 
 import React, { useState ,useEffect} from "react";
-import '../assets/css/Crud.css'; 
+import '../../assets/css/Crud.css'
 //import 'bootstrap/dist/css/bootstrap.min.css';
 //import { Table, Button, Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrashCan,faImage } from '@fortawesome/free-solid-svg-icons';
 
 import styled from "styled-components";
-import Btn from "../components/Btn";
-import HeaderTitle from "../components/HeaderTitle";
-import Flex from "../components/Flex";
-import Spinner from '../components/Spinner'
-import api from '../services/api'
-import axios from 'axios'
+import Btn from "../../components/Btn";
+import HeaderTitle from "../../components/HeaderTitle";
+import Flex from "../../components/Flex";
+import Spinner from '../../components/Spinner'
+import ModalCrear from '../../components/Modals/ModalCrear';
+
+import api from '../../services/api'
+
 
 import {useNavigate } from "react-router-dom";
+import ModalCrearImagen from '../../components/Modals/ModalAgregarImagen';
+import Title from '../../components/Fonts/Title';
 
 const Afiche = (idEvento,showEditar, showEliminar) => {
   const navigate = useNavigate()
@@ -57,16 +60,33 @@ const Afiche = (idEvento,showEditar, showEliminar) => {
       nombre_evento:"jaljdlasd;la;asd;lfajsdfuiyqdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddduwiejasdca;ahldfhlaksdhfisudhfh",
       tipo_evento:{
           nombreTipo_evento:"asdfadddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddsdfasdfadfasdfadfadfasd"
-      }
-  }]);
+      },
+      imagen:'../../assets/images/1.png'
+      },
+      {id:2,
+        nombre_evento:"asdfasdasd;la;asd;lfajsdfuiyqdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddduwiejasdca;ahldfhlaksdhfisudhfh",
+        tipo_evento:{
+            nombreTipo_evento:"asdfadddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddsdfasdfadfasdfadfadfasd"
+        },
+        imagen:'',
+        },
+        
+    ]);
+
+
+  const [showAfiche, setShowAfiche] = useState(false) 
+  const [idActual, setIdActual] = useState(null)
   const [loading, setLoading] = useState(true);
+
+  const [image,setImage] = useState(null)
 
   useEffect(() => {
       const fetchData = async () => {
         try {
-         const response = await api.get('api/evento');
-         //console.log(response.data);
-          setData(response.data);
+         //const response = await api.get('api/evento');
+          //setData(response.data);
+
+          //console.log(response.data);
         } catch (error) {
           console.error('Error fetching data:', error);
         } finally {
@@ -105,13 +125,19 @@ const Afiche = (idEvento,showEditar, showEliminar) => {
 
   return (
       <>
+
+            
           {loading ? (
               <Spinner/>
               ) : (
                   <>
                   
-                  <Flex justify-content='center' >
-              <h2>Aqui no va esta vista xd  AFICHES</h2>
+                { showAfiche && <ModalCrearImagen reset={showAfiche} setImage={setImage}  setShowAfiche={setShowAfiche}  idActual={idActual}/>}
+                 
+                  {/* <ModalCrear/> */}
+                 
+          <Flex justify-content='center' >
+              <Title>AGREGAR AFICHE</Title>
           </Flex>
 
           <div className="crud-container text-center" >
@@ -142,8 +168,9 @@ const Afiche = (idEvento,showEditar, showEliminar) => {
                               <Td>{elemento.tipo_evento.nombreTipo_evento}</Td>
                               <td>
                                 <Flex justify-content='center' gap='2em' align-items='center'>
-                                  <Img src={imagen1}/>
-                                  <Btn onClick={() => navigate(`/editar/evento/${elemento.id}`)}  color="primary" style={{ fontSize: '1rem', padding: '0.375rem 0.75rem', width: '50px',marginRight: '5px' }}>
+                                  <Img src={elemento.imagen ? elemento.imagen : Imgn}/>
+                                 
+                                  <Btn onClick={() => {setIdActual(elemento.id); setShowAfiche(true);}}  color="primary" style={{ fontSize: '1rem', padding: '0.375rem 0.75rem', width: '50px',marginRight: '5px' }}>
                                       <FontAwesomeIcon icon={faImage} />
                                   </Btn>    
                                 </Flex>

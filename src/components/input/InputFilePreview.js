@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import FileInput from './InputFile'
 import Img from '../../assets/images/example-img.jpg'
 import styled from 'styled-components';
@@ -14,6 +14,7 @@ const InputFilePreview = ({ name, buttonText, onChange, ...props }) => {
       reader.onload = (e) => {
         setSelectedImage(e.target.result)
         onChange({ target: { name, value: file } });
+        
       };
 
       reader.readAsDataURL(file)
@@ -22,6 +23,10 @@ const InputFilePreview = ({ name, buttonText, onChange, ...props }) => {
       onChange({ target: { name, value: null } });
     }
   }
+
+  useEffect(()=>{
+    setSelectedImage(null)
+  },[])
 
   return (
     <Preview {...props}>      
@@ -56,6 +61,7 @@ const Preview = styled.div`
   img{
     max-width: 100%;
     width: ${(props) => props.width || 'auto' };
+    height: ${(props) => props.height || 'auto' };
   }
   label{
     margin-top: 0.6em;

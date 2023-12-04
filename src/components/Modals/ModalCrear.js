@@ -57,11 +57,11 @@ const ModalLayout = () => {
                  <Flex left='10%' width= '100%' align-items='center' margin=''>
                     <p>Logotipo patrocinador</p>
                     <InputFilePreview
-                    name='file' 
-                    buttonText='Seleccionar una imagen'
-                    width='200px'
-                    font-size='18px'
-                  />
+                        name='file' 
+                        buttonText='Seleccionar una imagen'
+                        width='200px'
+                        font-size='18px'
+                    />
                  </Flex>
             </Flex>
         

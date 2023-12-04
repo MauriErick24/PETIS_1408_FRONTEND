@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Btn from "../components/Btn";
-import EliminarEvento from "./eliminar-evento";
+import EliminarEvento from "./evento/eliminar-evento";
 
 
 const WarningPage = () => {

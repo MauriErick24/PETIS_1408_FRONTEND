@@ -6,39 +6,52 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 
 import styled from "styled-components";
-import Btn from "../components/Btn";
-import HeaderTitle from "../components/HeaderTitle";
-import Flex from "../components/Flex";
-import Confirm from "../components/Confirm";
-import Alert from "../components/Alert";
-
-
-import Spinner from '../components/Spinner'
-import api from '../services/api'
+import Btn from "../../components/Btn";
+import HeaderTitle from "../../components/HeaderTitle";
+import Flex from "../../components/Flex";
+import Spinner from '../../components/Spinner'
+import api from '../../services/api'
 import axios from 'axios'
 
-const EliminarEvento = ({showEditar, showEliminar}) => {
-    
-    const [data, setData] = useState([{
+import {useNavigate } from "react-router-dom";
+
+const EditarEvento = ({showEditar, showEliminar}) => {
+    const navigate = useNavigate()
+
+    const data2 = [{
         id:1,
         nombre_evento:"",
         tipo_evento:{
             nombreTipo_evento:""
         }
+    }
+        // {id:1,Titulo: 'Naruto jorge ledezma ', Tipo: 'Naruto jorge ledezma',Telefono: 1234456887, email: 'jorge@mail.com', Address: 'Calle 1',AddresFavorite:'Blue Navy'},
+        // {id:2,Titulo: 'Goku', Tipo: 'Dragon Ball',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'red'},
+        // {id:3,Titulo: 'Luffy', Tipo: 'One Piece',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Aqua'},
+        // {id:4,Titulo: 'Tanjiro', Tipo: 'Kimetsu no Yaiba',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'salmon'},
+        // {id:5,Titulo: 'Eren', Tipo: 'Shingeki no Kyojin',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Pink'},
+        // {id:6,Titulo: 'Kenshin', Tipo: 'Rurouni Kenshin',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Blue Navy'},
+        // {id:7,Titulo: 'Edward', Tipo: 'Full Metal Alchemist',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Blue Navy'},
+        // {id:8,Titulo: 'Yusuke', Tipo: 'Yu Yu Hakusho',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Blue Navy'},
+        // {id:9,Titulo: 'Seiya', Tipo: 'Caballeros del Zodiaco',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Blue Navy'},
+        // {id:10,Titulo: 'Ichigo', Tipo: 'Bleach',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Blue Navy'},
+        // {id:11,Titulo: 'Gon', Tipo: 'Hunter x Hunter',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Blue Navy'}
+    ];
+
+    const [data, setData] = useState([
+        {id:1,
+        nombre_evento:"",
+        tipo_evento:{
+            nombreTipo_evento:""
+        }
     }]);
-
-
-    // const [data2, setData2] = useState({});
-    const [showConfirm, setConfirm] = useState(false)
-    const [showAlert, setAlert] = useState(false)
     const [loading, setLoading] = useState(true);
-
-    const [idToDelete, setIdToDelete] = useState(null)
 
     useEffect(() => {
         const fetchData = async () => {
           try {
            const response = await api.get('api/evento');
+           //console.log(response.data);
             setData(response.data);
           } catch (error) {
             console.error('Error fetching data:', error);
@@ -49,22 +62,9 @@ const EliminarEvento = ({showEditar, showEliminar}) => {
       
         fetchData();
       }, []); 
-
-    
       
-    const deleteElement = async(idToDelete) => {
-        try {
-            const response = await api.delete(`api/evento/${idToDelete}`)
-            setData(data.filter(item => item.id !== idToDelete));
-            setAlert(true)
-        } catch (error) {
-            console.log(error)
-            setIdToDelete(null)
-            alert("Sucedio un error inesperado al borrar el elemento")
-            setConfirm(false)
-        }
-        // setData(data.filter(item => item.id !== idToDelete));
-    }
+      
+
 
     const itemsPerPage = 5;
     const [currentPage, setCurrentPage] = useState(1);
@@ -96,34 +96,9 @@ const EliminarEvento = ({showEditar, showEliminar}) => {
                 ) : (
                     <>
                     
-            <Flex justify-content='center' flex-direction='column' align-items='center' text-align='center'>
-                <HeaderTitle title='ELIMINAR EVENTOS' /> 
-                {/* <P>*Todos los eventos que sean eliminados no se podran recuperar</P> */}
+                    <Flex justify-content='center' >
+                <HeaderTitle title='EDITAR EVENTOS' /> 
             </Flex>
-
-            <Confirm
-                title='¿ESTA SEGURO QUE DESEA BORRAR?'
-                message='Esta accion no se puede revertir'
-                show={showConfirm}
-                onClose={() => {
-                    setConfirm(false)
-                    setIdToDelete(null)
-                    }}
-                onAcept={() => {
-                    deleteElement(idToDelete)
-                    setIdToDelete(null)
-                    setConfirm(false)
-                 }}
-            />
-
-            <Alert
-                show={showAlert}
-                onAcept={() => {
-                    setAlert(false)
-                    
-                }}
-                message="Se ha borrado el evento"
-            />
 
             <div className="crud-container text-center" >
                 <input
@@ -155,26 +130,19 @@ const EliminarEvento = ({showEditar, showEliminar}) => {
                                 <td>{elemento.email}</td>
                                 <td>{elemento.AddresFavorite}</td> */}
                                 <td>
-                                    
-                                    {showEditar && (<Btn color="primary" style={{ fontSize: '1rem', padding: '0.375rem 0.75rem', width: '50px',marginRight: '5px' }}>
-                                        <FontAwesomeIcon icon={faPenToSquare} />
-                                    </Btn>)}
 
-                                    
-                                    {showEliminar && (<Btn onClick={()=> {
-                                            setConfirm(true)
-                                            setIdToDelete(elemento.id)
-                                        }}color="second" style={{ fontSize: '1rem', padding: '0.375rem 0.75rem', width: '50px',marginRight: '5px' }}>
-                                        <FontAwesomeIcon icon={faTrashCan} />
-                                    </Btn>)}
-                                    
+                                <Flex justify-content='center'>
+                                     <Btn onClick={() => navigate(`/editar/evento/${elemento.id}`)}  color="primary" style={{ fontSize: '1rem', padding: '0.375rem 0.75rem', width: '50px',marginRight: '5px' }}>
+                                        <FontAwesomeIcon icon={faPenToSquare} />
+                                    </Btn>  
+                                </Flex>    
+                                                                
                                 </td>
                                 
                             </tr>
                         ))}
                     </tbody>
                 </table>
-
                 <Flex className="pagination mt-3" align-items='center' gap='0.4em'>
                     <Btn disabled={currentPage === 1} onClick={() => handleClick(currentPage - 1)}>&lt;</Btn>
                     {[...Array(totalPages)].map((_, i) => (
@@ -194,9 +162,6 @@ const EliminarEvento = ({showEditar, showEliminar}) => {
         </>
     );
 }
-export default EliminarEvento;
+export default EditarEvento;
 
-const P = styled.p`
-    color:red;
-    font-size:25px;
-`
+const Button = styled.button``

@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import HeaderTitle from '../components/TituloPremio'
-import BorderContent from '../components/BorderContent'
+import HeaderTitle from '../../components/TituloPremio'
+import BorderContent from '../../components/BorderContent'
 import styled from "styled-components";
-import Flex from "../components/Flex";
-import Btn from "../components/Btn";
-import api from '../services/api'
-import Alert from '../components/Alert';
-import ErrorMessage from "../components/ErrorMessage";
+import Flex from "../../components/Flex";
+import Btn from "../../components/Btn";
+import api from '../../services/api'
+import Alert from '../../components/Alert';
+import ErrorMessage from "../../components/ErrorMessage";
 
 const Premios = ({idEvento}) => {
 

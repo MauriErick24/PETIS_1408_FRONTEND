@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from "react";
 import styled from "styled-components";
-import Flex from "../components/Flex";
-import Btn from "../components/Btn";
-import Input from "../components/input/Input";
-import Inputd from "../components/input/Inputd";
-import HeaderTitle from "../components/HeaderTitle";
-import Alert from '../components/Alert';
-import ErrorMessage from "../components/ErrorMessage";
+import Flex from "../../components/Flex";
+import Btn from "../../components/Btn";
+import Input from "../../components/input/Input";
+import Inputd from "../../components/input/Inputd";
+import HeaderTitle from "../../components/HeaderTitle";
+import Alert from '../../components/Alert';
+import ErrorMessage from "../../components/ErrorMessage";
 
-import api from '../services/api'
+import api from '../../services/api'
 
 
 const CrearActividades =({idEvento}) => {
