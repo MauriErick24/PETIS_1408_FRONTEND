@@ -39,6 +39,8 @@ import AgregarPremio from './views/premio/crear-premios'
 
 
 import EliminarEvento from './views/evento/eliminar-evento'
+import EliminarAfiche from './views/afiche/eliminar-afiche'
+
 import EditarEvento from './views/evento/editar-evento'
 
 
@@ -73,7 +75,7 @@ function App() {
         <Route path='/eliminar/evento' element={<GestionEvento view={'eliminar'}><EliminarEvento/></GestionEvento>}/>
         <Route path='/eliminar/auspiciador' element={<GestionEvento view={'eliminar'}><CrearOrganizador/></GestionEvento>}/>
         <Route path='/eliminar/organizador' element={<GestionEvento view={'eliminar'}><CrearOrganizador/></GestionEvento>}/>
-        <Route path='/eliminar/afiche' element={<GestionEvento view={'eliminar'}><CrearOrganizador/></GestionEvento>}/>
+        <Route path='/eliminar/afiche' element={<GestionEvento view={'eliminar'}><EliminarAfiche/></GestionEvento>}/>
         <Route path='/eliminar/premios' element={<GestionEvento view={'eliminar'}><CrearOrganizador/></GestionEvento>}/>
         <Route path='/eliminar/actividades' element={<GestionEvento view={'eliminar'}><CrearOrganizador/></GestionEvento>}/>
         
