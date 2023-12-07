@@ -55,6 +55,12 @@ const CascadeList = ({cascade, view, children}) => {
                                   //   handleCascade(false,false,true)
                                   //   handleClick(false,false,false)
                                     }}>ACTIVIDADES</Option>
+
+                                    <Option onClick={()=>{
+                                       navigate(`/${cascade}/comunicados`)
+                                  //   handleCascade(false,false,true)
+                                  //   handleClick(false,false,false)
+                                    }}>COMUNICADO</Option>
                                 </>
                               )  
                             }

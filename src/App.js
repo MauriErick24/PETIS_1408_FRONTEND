@@ -36,7 +36,9 @@ import CrearOrganizador from './views/organizador/crear-organizador'
 
 import AgregarAfiche from './views/afiche/agregar-afiche'
 import AgregarPremio from './views/premio/crear-premios'
+import Aorganizador from './views/organizador/Aorganizador'
 
+import Comunicados from './views/comunidados/Comunicados'
 
 import EliminarEvento from './views/evento/eliminar-evento'
 import EditarEvento from './views/evento/editar-evento'
@@ -58,10 +60,11 @@ function App() {
         <Route path='/crear/organizador' element={<GestionEvento view={'crear'}><CrearOrganizador/></GestionEvento>}/>
 
         <Route path='/agregar/auspiciador' element={<GestionEvento view={'agregar'}><CrearOrganizador/></GestionEvento>}/>
-        <Route path='/agregar/organizador' element={<GestionEvento view={'agregar'}><CrearOrganizador/></GestionEvento>}/>
+        <Route path='/agregar/organizador' element={<GestionEvento view={'agregar'}><Aorganizador /></GestionEvento>}/>
         <Route path='/agregar/afiche' element={<GestionEvento view={'agregar'}><AgregarAfiche/></GestionEvento>}/>
         <Route path='/agregar/premios' element={<GestionEvento view={'agregar'}><AgregarPremio/></GestionEvento>}/>
         <Route path='/agregar/actividades' element={<GestionEvento view={'agregar'}><CrearOrganizador/></GestionEvento>}/>
+        <Route path='/agregar/comunicados' element={<GestionEvento view={'agregar'}><Comunicados /></GestionEvento>}/>
 
         <Route path='/editar/evento' element={<GestionEvento view={'editar'}><EditarEvento/></GestionEvento>}/>
         <Route path='/editar/auspiciador' element={<GestionEvento view={'editar'}><CrearOrganizador/></GestionEvento>}/>
