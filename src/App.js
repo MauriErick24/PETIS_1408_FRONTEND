@@ -75,7 +75,7 @@ function App() {
         <Route path='/editar/actividades' element={<GestionEvento view={'editar'}><CrearOrganizador/></GestionEvento>}/>
 
         <Route path='/eliminar/evento' element={<GestionEvento view={'eliminar'}><EliminarEvento/></GestionEvento>}/>
-        <Route path='/eliminar/auspiciador' element={<GestionEvento view={'EliminarAuspiciador'}><EliminarAuspiciador/></GestionEvento>}/>
+        <Route path='/eliminar/auspiciador' element={<GestionEvento view={'eliminar'}><EliminarAuspiciador/></GestionEvento>}/>
         <Route path='/eliminar/organizador' element={<GestionEvento view={'eliminar'}><CrearOrganizador/></GestionEvento>}/>
         <Route path='/eliminar/afiche' element={<GestionEvento view={'eliminar'}><CrearOrganizador/></GestionEvento>}/>
         <Route path='/eliminar/premios' element={<GestionEvento view={'eliminar'}><CrearOrganizador/></GestionEvento>}/>
