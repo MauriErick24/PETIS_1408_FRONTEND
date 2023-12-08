@@ -41,8 +41,9 @@ import Aorganizador from './views/organizador/Aorganizador'
 import Comunicados from './views/comunidados/Comunicados'
 
 import EliminarEvento from './views/evento/eliminar-evento'
-import EditarEvento from './views/evento/editar-evento'
 
+import EditarEvento from './views/evento/editar-evento'
+import EditarAuspiciador from './views/auspiciador/editar-auspiciador'
 
 //import ModalLayout from './components/Modals/ModalCrear'
 
@@ -67,7 +68,7 @@ function App() {
         <Route path='/agregar/comunicados' element={<GestionEvento view={'agregar'}><Comunicados /></GestionEvento>}/>
 
         <Route path='/editar/evento' element={<GestionEvento view={'editar'}><EditarEvento/></GestionEvento>}/>
-        <Route path='/editar/auspiciador' element={<GestionEvento view={'editar'}><CrearOrganizador/></GestionEvento>}/>
+        <Route path='/editar/auspiciador' element={<GestionEvento view={'editar'}><EditarAuspiciador/></GestionEvento>}/>
         <Route path='/editar/organizador' element={<GestionEvento view={'editar'}><CrearOrganizador/></GestionEvento>}/>
         <Route path='/editar/afiche' element={<GestionEvento view={'editar'}><CrearOrganizador/></GestionEvento>}/>
         <Route path='/editar/premios' element={<GestionEvento view={'editar'}><CrearOrganizador/></GestionEvento>}/>

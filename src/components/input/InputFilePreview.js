@@ -3,8 +3,10 @@ import FileInput from './InputFile'
 import Img from '../../assets/images/example-img.jpg'
 import styled from 'styled-components';
 
-const InputFilePreview = ({ name, buttonText, onChange, ...props }) => {
-  const [selectedImage, setSelectedImage] = useState(null)
+const InputFilePreview = ({ name, buttonText, onChange, imagen, ...props }) => {
+  const [selectedImage, setSelectedImage] = useState(imagen)
+
+  
 
   const handleImageChange = (e) => {
     const file = e.target.files[0]
@@ -31,10 +33,12 @@ const InputFilePreview = ({ name, buttonText, onChange, ...props }) => {
   return (
     <Preview {...props}>      
       {selectedImage ? (
-        <img
+        <>
+          <img
           src={selectedImage}
           alt="Selected"
         />
+        </>
       ) : (
         <img
           src={Img}
