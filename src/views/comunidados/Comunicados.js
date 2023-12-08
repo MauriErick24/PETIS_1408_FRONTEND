@@ -7,7 +7,8 @@ import {faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'; //Modal
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-
+import api from '../../services/api'
+import { useEffect } from "react";
 
 
 function Comunicados() {
@@ -25,12 +26,13 @@ function Comunicados() {
 
     const formik = useFormik({
         initialValues: {
+            id:'',
             comment: '', // Asegúrate de que coincida con el nombre de tu campo de texto
         },
         validationSchema,
         onSubmit: (values) => {
             // Realiza acciones con los valores del formulario
-            console.log('Formulario enviado:', values);
+            //console.log('Formulario enviado:', values);
             // Incrementa el valor de Comunicado en el array data - 05/12/23
             const updatedData = data.map((item) =>
                 item.id === selectedItemId ? { ...item, Comunicado: item.Comunicado + 1 } : item
@@ -39,9 +41,21 @@ function Comunicados() {
             // Guarda el comentario en otro arreglo asociado a la id de data
             const updatedComments = [...comments, { id: selectedItemId, comment: values.comment }];
             setComments(updatedComments);
+            // Después de la actualización del estado 'comments'
+            const lastComment = updatedComments[updatedComments.length - 1];
+
+            // Ahora puedes acceder a 'id' y 'comment' de la última entrada
+            const id = lastComment.id;
+            const comentario = lastComment.comment;
+
+            sendData(id,comentario)
+            // Puedes imprimirlos o utilizarlos según tus necesidades
+            // console.log('ID:', id);
+            // console.log('Comentario:', comentario);
             //5/12/23
             // Cierra el modal y realiza otras acciones necesarias
             toggleModal();
+            //console.log(comment)
             setIsConfirmationModalOpen(true);
         },
     });
@@ -63,17 +77,17 @@ function Comunicados() {
     };
     
     const [data, setData] = useState([
-        {id:1,Personaje: 'yawermii', email: 'jorge@mail.com',Comunicado:0},
-        {id:2,Personaje: 'Goku', email: 'jorge@mail.com', Comunicado:0},
-        {id:3,Personaje: 'Luffy', email: 'jorge@mail.com', Comunicado:0},
-        {id:4,Personaje: 'Tanjiro', email: 'jorge@mail.com', Comunicado:0},
-        {id:5,Personaje: 'Eren',  email: 'jorge@mail.com', Comunicado:0},
-        {id:6,Personaje: 'Kenshin', email: 'jorge@mail.com', Comunicado: 0},
-        {id:7,Personaje: 'Edward',  email: 'jorge@mail.com', Comunicado: 0},
-        {id:8,Personaje: 'Yusuke',  email: 'jorge@mail.com', Comunicado: 0},
-        {id:9,Personaje: 'Seiya',  email: 'jorge@mail.com', Comunicado:0},
-        {id:10,Personaje: 'Ichigo', email: 'jorge@mail.com', Comunicado: 0},
-        {id:11,Personaje: 'Gon', email: 'jorge@mail.com', Comunicado: 0}
+        {id:1,nombre_evento: 'yawermii', tipo_evento: 'jorge@mail.com',Comunicado:0},
+        {id:2,nombre_evento: 'Goku', tipo_evento: 'jorge@mail.com', Comunicado:0},
+        {id:3,nombre_evento: 'Luffy', tipo_evento: 'jorge@mail.com', Comunicado:0},
+        {id:4,nombre_evento: 'Tanjiro', tipo_evento: 'jorge@mail.com', Comunicado:0},
+        {id:5,nombre_evento: 'Eren',  tipo_evento: 'jorge@mail.com', Comunicado:0},
+        {id:6,nombre_evento: 'Kenshin', tipo_evento: 'jorge@mail.com', Comunicado: 0},
+        {id:7,nombre_evento: 'Edward',  tipo_evento: 'jorge@mail.com', Comunicado: 0},
+        {id:8,nombre_evento: 'Yusuke',  tipo_evento: 'jorge@mail.com', Comunicado: 0},
+        {id:9,nombre_evento: 'Seiya',  tipo_evento: 'jorge@mail.com', Comunicado:0},
+        {id:10,nombre_evento: 'Ichigo', tipo_evento: 'jorge@mail.com', Comunicado: 0},
+        {id:11,nombre_evento: 'Gon', tipo_evento: 'jorge@mail.com', Comunicado: 0}
     ]);
     const [comments, setComments] = useState([]);
 
@@ -88,7 +102,7 @@ function Comunicados() {
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
     const filteredData = data.filter(elemento =>
-        elemento.Personaje.toLowerCase().startsWith(searchTerm.toLowerCase())
+        elemento.nombre_evento.toLowerCase().startsWith(searchTerm.toLowerCase())
     );
 
     const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
@@ -103,7 +117,35 @@ function Comunicados() {
         setCurrentPage(1); // Resetear la página al cambiar el término de búsqueda
     };
 
-    
+    useEffect(()=>{
+        const fetchData = async () => {
+          try{
+            const response = await api.get('/api/cantidad_Datos')
+            console.log(response.data)
+            setData(response.data)
+          }catch(err){
+            console.log("Error: ", err)
+          }
+        }
+      fetchData();
+      }, []);
+
+    const sendData=async(eid,comment)=>{
+        let dataTosend=""
+        
+        dataTosend={
+            id:eid,
+            comentario:comment
+        }
+        const objeto=JSON.stringify(dataTosend)
+        try {
+            console.log(objeto)
+            const response=await api.post('/api/comunicados',dataTosend)
+            console.log()
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     return (
         <>
@@ -129,10 +171,10 @@ function Comunicados() {
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Personaje</th>
+                            <th>nombre_evento</th>
                             {/* <th>Anime</th>
                             <th>Telefono</th> */}
-                            <th>Email</th>
+                            <th>tipo_evento</th>
                             <th>#Com</th>
                             <th>Agregar</th>
                             
@@ -142,10 +184,10 @@ function Comunicados() {
                         {currentItems.map((elemento) => (
                             <tr key={elemento.id}>
                                 <td>{elemento.id}</td>
-                                <td>{elemento.Personaje}</td>
+                                <td>{elemento.nombre_evento}</td>
                                 {/* <td>{elemento.Anime}</td>
                                 <td>{elemento.Telefono}</td> */}
-                                <td>{elemento.email}</td>
+                                <td>{elemento.tipo_evento}</td>
                                 <td>{elemento.Comunicado}</td>
                                 <td>
                                     {/* <Button color="primary" style={{ fontSize: '1rem', padding: '0.375rem 0.75rem', width: '50px',marginRight: '5px' }}>
