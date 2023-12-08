@@ -32,7 +32,7 @@ import LayoutGeneric from './components/Layout/LayoutGeneric'
 import CrearAuspiciador from './views/auspiciador/crear-auspiciador'
 import CrearEvento from './views/evento/crear-evento'
 import CrearOrganizador from './views/organizador/crear-organizador'
-
+import EliminarAuspiciador from './views/auspiciador/eliminar-auspiciador'
 
 import AgregarAfiche from './views/afiche/agregar-afiche'
 import AgregarPremio from './views/premio/crear-premios'
@@ -74,7 +74,7 @@ function App() {
         <Route path='/editar/actividades' element={<GestionEvento view={'editar'}><CrearOrganizador/></GestionEvento>}/>
 
         <Route path='/eliminar/evento' element={<GestionEvento view={'eliminar'}><EliminarEvento/></GestionEvento>}/>
-        <Route path='/eliminar/auspiciador' element={<GestionEvento view={'eliminar'}><CrearOrganizador/></GestionEvento>}/>
+        <Route path='/eliminar/auspiciador' element={<GestionEvento view={'EliminarAuspiciador'}><EliminarAuspiciador/></GestionEvento>}/>
         <Route path='/eliminar/organizador' element={<GestionEvento view={'eliminar'}><CrearOrganizador/></GestionEvento>}/>
         <Route path='/eliminar/afiche' element={<GestionEvento view={'eliminar'}><CrearOrganizador/></GestionEvento>}/>
         <Route path='/eliminar/premios' element={<GestionEvento view={'eliminar'}><CrearOrganizador/></GestionEvento>}/>
