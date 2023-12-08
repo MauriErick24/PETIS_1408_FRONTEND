@@ -120,7 +120,7 @@ function Comunicados() {
     useEffect(()=>{
         const fetchData = async () => {
           try{
-            const response = await api.get('/api/cantidad_Datos')
+            const response = await api.get('/api/asignarComunicado')
             console.log(response.data)
             setData(response.data)
           }catch(err){

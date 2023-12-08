@@ -17,7 +17,12 @@ const ModalCrearImagen =({idActual, reset, setShowAfiche, setImage, ...props})=>
             console.log(dataToSend)
         try {
             //const response = await api.post('/api/afiche', dataToSend)
-
+            const response=await api.post('/api/afiches',dataToSend,{
+                headers: {
+                  'Content-Type': 'multipart/form-data',
+                  'enctype':'multipart/form-data'
+                },
+              })
         } catch (error) {
             console.log(error)
         }

@@ -83,10 +83,10 @@ const Afiche = (idEvento,showEditar, showEliminar) => {
   useEffect(() => {
       const fetchData = async () => {
         try {
-         //const response = await api.get('api/evento');
-          //setData(response.data);
+         const response = await api.get('api/evento');
+          setData(response.data);
 
-          //console.log(response.data);
+          console.log(data);
         } catch (error) {
           console.error('Error fetching data:', error);
         } finally {
@@ -168,7 +168,7 @@ const Afiche = (idEvento,showEditar, showEliminar) => {
                               <Td>{elemento.tipo_evento.nombreTipo_evento}</Td>
                               <td>
                                 <Flex justify-content='center' gap='2em' align-items='center'>
-                                  <Img src={elemento.imagen ? elemento.imagen : Imgn}/>
+                                  <Img src={elemento.afiches.imagen ? elemento.afiches.imagen : Imgn}/>
                                  
                                   <Btn onClick={() => {setIdActual(elemento.id); setShowAfiche(true);}}  color="primary" style={{ fontSize: '1rem', padding: '0.375rem 0.75rem', width: '50px',marginRight: '5px' }}>
                                       <FontAwesomeIcon icon={faImage} />
