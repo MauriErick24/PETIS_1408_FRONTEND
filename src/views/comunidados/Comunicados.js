@@ -39,6 +39,18 @@ function Comunicados() {
             // Guarda el comentario en otro arreglo asociado a la id de data
             const updatedComments = [...comments, { id: selectedItemId, comment: values.comment }];
             setComments(updatedComments);
+            
+            // Después de la actualización del estado 'comments'
+            const lastComment = updatedComments[updatedComments.length - 1];
+
+            // Ahora puedes acceder a 'id' y 'comment' de la última entrada
+            const id = lastComment.id;
+            const comentario = lastComment.comment;
+
+            // Puedes imprimirlos o utilizarlos según tus necesidades
+            console.log('ID:', id);
+            console.log('Comentario:', comentario);
+
             //5/12/23
             // Cierra el modal y realiza otras acciones necesarias
             toggleModal();
@@ -233,7 +245,9 @@ function Comunicados() {
                                             </Button>
                                         </ModalFooter>
                                     </Modal>
-                                    <Modal isOpen={isConfirmationModalOpen} toggle={() => setIsConfirmationModalOpen(!isConfirmationModalOpen)}
+                                    <Modal 
+                                        isOpen={isConfirmationModalOpen} 
+                                        toggle={() => setIsConfirmationModalOpen(!isConfirmationModalOpen)}
                                         centered
                                         style={{
                                             display: 'flex',
@@ -251,7 +265,7 @@ function Comunicados() {
                                                 fontSize: '1.2rem',
                                             }}   
                                         >
-                                            Se ha agregado correctamente un comunicado.
+                                            SE VA A AGREGAR EL  COMUNICADO 
                                         </ModalBody>
                                         <ModalFooter
                                             style={{
@@ -275,6 +289,18 @@ function Comunicados() {
                                                   }}
                                             >
                                                 ACEPTAR
+                                            </Button>
+                                            <Button  onClick={toggleModal}
+                                                style={{
+                                                    backgroundColor: '#D1741E',
+                                                    padding: '5px',
+                                                    margin: '5px',
+                                                    borderRadius: '5px',
+                                                    cursor: 'pointer',
+                                                    border: 'none',
+                                                }}
+                                            >
+                                                CANCELAR
                                             </Button>
                                         </ModalFooter>
                                     </Modal>
