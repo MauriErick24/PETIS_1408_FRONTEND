@@ -19,51 +19,84 @@ function Aorganizador() {
         
     };
     
-     const handleAccept = () => {
-         toggleModal();
-         setIsConfirmationModalOpen(true);
-         // Aquí puedes acceder a la información de las filas seleccionadas y el id del evento
-         console.log("Filas seleccionadas:", selectedRows);
-         console.log("ID del evento:", selectedItemId);
-
-         // Incrementa el campo "Comunicado" en 1 para el evento seleccionado
-         const updatedData = data.map((item) =>
-         item.id === selectedItemId
-            ? { ...item, Comunicado: item.Comunicado + 1 }
+    const handleAccept = () => {
+        // Verifica que al menos una fila esté seleccionada
+        if (selectedRows.length === 0) {
+            setErrorMessage("Debes seleccionar al menos una fila.");
+          return; // No permite continuar si no hay filas seleccionadas
+        }
+        // Restablece el mensaje de error
+        setErrorMessage("");
+        toggleModal();
+        setIsConfirmationModalOpen(true);
+      
+        // Aquí puedes acceder a la información de las filas seleccionadas y el id del evento
+        console.log("Filas seleccionadas:", selectedRows);
+        console.log("ID del evento:", selectedItemId);
+        let dataToSend = {
+            idEvent: selectedItemId,
+            organizadores: selectedRows.map((row) => row.id),
+            };
+        const objct = JSON.stringify(dataToSend);
+        // Incrementa el campo "organizador_count" en 1 para el evento seleccionado
+        const updatedData = data.map((item) =>
+          item.id === selectedItemId
+            ? { ...item, organizador_count: item.organizador_count + 1 }
             : item
         );
         // Actualiza el estado con los datos actualizados
         setData(updatedData);
-        // Luego, limpias la selección después de procesarla
-        setSelectedRows([])
-    };
+      
+        // Limpia la selección después de procesarla
+        setSelectedRows([]);
+      };
+      
+
+    //  const handleAccept = () => {
+    //      toggleModal();
+    //      setIsConfirmationModalOpen(true);
+    //      // Aquí puedes acceder a la información de las filas seleccionadas y el id del evento
+    //      console.log("Filas seleccionadas:", selectedRows);
+    //      console.log("ID del evento:", selectedItemId);
+
+    //      // Incrementa el campo "organizador_count" en 1 para el evento seleccionado
+    //      const updatedData = data.map((item) =>
+    //      item.id === selectedItemId
+    //         ? { ...item, organizador_count: item.organizador_count + 1 }
+    //         : item
+    //     );
+    //     // Actualiza el estado con los datos actualizados
+    //     setData(updatedData);
+    //     // Luego, limpias la selección después de procesarla
+    //     setSelectedRows([])
+    // };
 
     const [tableData, setTableData] = useState([
-        { id: 1, empresa: 'yahoo', responsable: 'Responsable1' },
-        { id: 2, empresa: 'google', responsable: 'Responsable2' },
-        { id: 3, empresa: 'twitter', responsable: 'Responsable3' },
-        { id: 4, empresa: 'facebook', responsable: 'Responsable4' },
-        { id: 5, empresa: 'wasap', responsable: 'Responsable5' },
-        { id: 6, empresa: 'line', responsable: 'Responsable6' },
-        { id: 7, empresa: 'encore', responsable: 'Responsable7' },
-        { id: 8, empresa: 'titanium', responsable: 'Responsable8' },
-        { id: 9, empresa: 'k-os', responsable: 'Responsable8' },
-        { id: 10, empresa: 'cco-partner', responsable: 'Responsable8' },
-        { id: 11, empresa: 'microsoft', responsable: 'Responsable8' },
+        { id: 1, nombre: 'yahoo', representante: 'Responsable1' },
+        { id: 2, nombre: 'google', representante: 'Responsable2' },
+        { id: 3, nombre: 'twitter', representante: 'Responsable3' },
+        { id: 4, nombre: 'facebook', representante: 'Responsable4' },
+        { id: 5, nombre: 'wasap', representante: 'Responsable5' },
+        { id: 6, nombre: 'line', representante: 'Responsable6' },
+        { id: 7, nombre: 'encore', representante: 'Responsable7' },
+        { id: 8, nombre: 'titanium', representante: 'Responsable8' },
+        { id: 9, nombre: 'k-os', representante: 'Responsable8' },
+        { id: 10, nombre: 'cco-partner', representante: 'Responsable8' },
+        { id: 11, nombre: 'microsoft', representante: 'Responsable8' },
 
     ]);
     const [data, setData] = useState([
-        {id:1,Personaje: 'yawermii', email: 'jorge@mail.com',Comunicado:0},
-        {id:2,Personaje: 'Goku', email: 'jorge@mail.com', Comunicado:0},
-        {id:3,Personaje: 'Luffy', email: 'jorge@mail.com', Comunicado:0},
-        {id:4,Personaje: 'Tanjiro', email: 'jorge@mail.com', Comunicado:0},
-        {id:5,Personaje: 'Eren',  email: 'jorge@mail.com', Comunicado:0},
-        {id:6,Personaje: 'Kenshin', email: 'jorge@mail.com', Comunicado: 0},
-        {id:7,Personaje: 'Edward',  email: 'jorge@mail.com', Comunicado: 0},
-        {id:8,Personaje: 'Yusuke',  email: 'jorge@mail.com', Comunicado: 0},
-        {id:9,Personaje: 'Seiya',  email: 'jorge@mail.com', Comunicado:0},
-        {id:10,Personaje: 'Ichigo', email: 'jorge@mail.com', Comunicado: 0},
-        {id:11,Personaje: 'Gon', email: 'jorge@mail.com', Comunicado: 0}
+        {id:1,nombre_evento: 'yawermii', tipo_evento: {nombreTipo_evento:'jorge@mail.com'},organizador_count:0},
+        {id:2,nombre_evento: 'Goku', tipo_evento: {nombreTipo_evento:'jorge@mail.com'}, organizador_count:0},
+        {id:3,nombre_evento: 'Luffy', tipo_evento:{nombreTipo_evento: 'jorge@mail.com'}, organizador_count:0},
+        {id:4,nombre_evento: 'Tanjiro', tipo_evento:{nombreTipo_evento: 'jorge@mail.com'}, organizador_count:0},
+        {id:5,nombre_evento: 'Eren',  tipo_evento:{nombreTipo_evento: 'jorge@mail.com'}, organizador_count:0},
+        {id:6,nombre_evento: 'Kenshin', tipo_evento: {nombreTipo_evento:'jorge@mail.com'}, organizador_count: 0},
+        {id:7,nombre_evento: 'Edward',  tipo_evento:{nombreTipo_evento: 'jorge@mail.com'}, organizador_count: 0},
+        {id:8,nombre_evento: 'Yusuke',  tipo_evento:{nombreTipo_evento: 'jorge@mail.com'}, organizador_count: 0},
+        {id:9,nombre_evento: 'Seiya',  tipo_evento:{nombreTipo_evento: 'jorge@mail.com'}, organizador_count:0},
+        {id:10,nombre_evento: 'Ichigo', tipo_evento: {nombreTipo_evento:'jorge@mail.com'}, organizador_count: 0},
+        {id:11,nombre_evento: 'Gon', tipo_evento: {nombreTipo_evento:'jorge@mail.com'}, organizador_count: 0}
     ]);
 
     const [selectedItemId, setSelectedItemId] = useState(null);
@@ -75,6 +108,7 @@ function Aorganizador() {
     const [searchTermModal, setSearchTermModal] = useState("");
     const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
     const [selectedRows, setSelectedRows] = useState([]);
+    const [errorMessage, setErrorMessage] = useState("");
 
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfLastItemModal = currentPageModal * itemsPerPageModal;
@@ -82,10 +116,10 @@ function Aorganizador() {
     const indexOfFirstItemModal = indexOfLastItemModal - itemsPerPageModal;
 
     const filteredData = data.filter(elemento =>
-        elemento.Personaje.toLowerCase().startsWith(searchTerm.toLowerCase())
+        elemento.nombre_evento.toLowerCase().startsWith(searchTerm.toLowerCase())
     );
     const filteredDataModal = tableData.filter(elemento =>
-        elemento.empresa.toLowerCase().startsWith(searchTermModal.toLowerCase())
+        elemento.nombre.toLowerCase().startsWith(searchTermModal.toLowerCase())
       );
     const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
     const currentItemsModal = filteredDataModal.slice(indexOfFirstItemModal, indexOfLastItemModal);
@@ -93,7 +127,7 @@ function Aorganizador() {
     const totalPages = Math.ceil(data.length / itemsPerPage);
     const totalPagesModal = Math.ceil(tableData.length / itemsPerPageModal);
     
-    const handleCheckboxChange = (id, empresa) => {
+    const handleCheckboxChange = (id, nombre) => {
         // Verificar si la fila ya está seleccionada
         const isRowSelected = selectedRows.some((row) => row.id === id);
         if (isRowSelected) {
@@ -102,7 +136,7 @@ function Aorganizador() {
           setSelectedRows(updatedSelection);
         } else {
           // Si no está seleccionada, la agregamos a la lista de selección
-          setSelectedRows([...selectedRows, { id, empresa }]);
+          setSelectedRows([...selectedRows, { id, nombre }]);
         }
       };
       
@@ -159,9 +193,9 @@ function Aorganizador() {
                         {currentItems.map((elemento) => (
                             <tr key={elemento.id}>
                                 <td>{elemento.id}</td>
-                                <td>{elemento.Personaje}</td>
-                                <td>{elemento.email}</td>
-                                <td>{elemento.Comunicado}</td>
+                                <td>{elemento.nombre_evento}</td>
+                                <td>{elemento.tipo_evento.nombreTipo_evento}</td>
+                                <td>{elemento.organizador_count}</td>
                                 <td>
                                     <Button  style={{ color: 'gray',border: 'none', background: 'none', fontSize: '1rem', width: '50px' }}
                                             
@@ -194,6 +228,7 @@ function Aorganizador() {
                                                 value={searchTermModal}
                                                 onChange={handleSearchModal}
                                             />
+                                            {errorMessage && <span style={{ color: 'red' }}>{errorMessage}</span>}
                                             <table>
                                                 <thead>
                                                     <tr>
@@ -208,13 +243,13 @@ function Aorganizador() {
                                                   {currentItemsModal.map((item) => ( 
                                                     <tr key={item.id}>
                                                         <td>{item.id}</td>
-                                                        <td>{item.empresa}</td>
-                                                        <td>{item.responsable}</td>
+                                                        <td>{item.nombre}</td>
+                                                        <td>{item.representante}</td>
                                                         <td>
                                                             {/* Agrega aquí la lógica para la acción (checkbox u otro) */}
                                                             <Input
                                                                 type="checkbox"
-                                                                onChange={() => handleCheckboxChange(item.id, item.empresa)}
+                                                                onChange={() => handleCheckboxChange(item.id, item.nombre)}
                                                                 checked={selectedRows.some((row) => row.id === item.id)}
                                                             />
                                                         </td>
