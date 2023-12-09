@@ -275,7 +275,9 @@ function Comunicados() {
                                             </Button>
                                         </ModalFooter>
                                     </Modal>
-                                    <Modal isOpen={isConfirmationModalOpen} toggle={() => setIsConfirmationModalOpen(!isConfirmationModalOpen)}
+                                    <Modal 
+                                        isOpen={isConfirmationModalOpen} 
+                                        toggle={() => setIsConfirmationModalOpen(!isConfirmationModalOpen)}
                                         centered
                                         style={{
                                             display: 'flex',
@@ -293,7 +295,7 @@ function Comunicados() {
                                                 fontSize: '1.2rem',
                                             }}   
                                         >
-                                            Se ha agregado correctamente un comunicado.
+                                            SE VA A AGREGAR EL  COMUNICADO 
                                         </ModalBody>
                                         <ModalFooter
                                             style={{
@@ -317,6 +319,18 @@ function Comunicados() {
                                                   }}
                                             >
                                                 ACEPTAR
+                                            </Button>
+                                            <Button  onClick={toggleModal}
+                                                style={{
+                                                    backgroundColor: '#D1741E',
+                                                    padding: '5px',
+                                                    margin: '5px',
+                                                    borderRadius: '5px',
+                                                    cursor: 'pointer',
+                                                    border: 'none',
+                                                }}
+                                            >
+                                                CANCELAR
                                             </Button>
                                         </ModalFooter>
                                     </Modal>
