@@ -5,6 +5,9 @@ import { Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Input } from 'reactstrap'; //Modal
+import api from '../../services/api'
+//import { useState } from "react";
+import { useEffect } from "react";
 
 
 
@@ -18,6 +21,8 @@ function Aorganizador() {
         
         
     };
+
+    const[jsonout,setJsonOut]=useState();
     
     const handleAccept = () => {
         // Verifica que al menos una fila esté seleccionada
@@ -31,13 +36,15 @@ function Aorganizador() {
         setIsConfirmationModalOpen(true);
       
         // Aquí puedes acceder a la información de las filas seleccionadas y el id del evento
-        console.log("Filas seleccionadas:", selectedRows);
-        console.log("ID del evento:", selectedItemId);
+        // console.log("Filas seleccionadas:", selectedRows);
+        // console.log("ID del evento:", selectedItemId);
         let dataToSend = {
             idEvent: selectedItemId,
             organizadores: selectedRows.map((row) => row.id),
             };
         const objct = JSON.stringify(dataToSend);
+        //console.log(objct)
+        setJsonOut(objct)
         // Incrementa el campo "organizador_count" en 1 para el evento seleccionado
         const updatedData = data.map((item) =>
           item.id === selectedItemId
@@ -157,6 +164,34 @@ function Aorganizador() {
         setSearchTerm(event.target.value);
         setCurrentPage(1); // Resetear la página al cambiar el término de búsqueda
     };
+
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+           const response = await api.get('api/evento');
+            setData(response.data);
+  
+            //console.log(response.data);
+          } catch (error) {
+            console.error('Error fetching data:', error);
+          } finally {
+            //setLoading(false); 
+          }
+        };
+      
+        fetchData();
+      }, []); 
+
+
+    const sendData=async()=>{
+        try{
+        console.log(jsonout)
+        const response=await api.post('/api/asignarOrganizador',jsonout)
+        console.log(jsonout)
+        }catch(error){
+        console.log(error)
+        }
+    }
 
     return (
         <>
@@ -336,7 +371,8 @@ function Aorganizador() {
                                         >
                                             <Button 
                                             color="primary" 
-                                            onClick={() => setIsConfirmationModalOpen(false)}
+                                            onClick={() => {setIsConfirmationModalOpen(false);
+                                                            sendData()}}
                                                 
                                                 style={{
                                                     backgroundColor: 'black',
