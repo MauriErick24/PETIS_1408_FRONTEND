@@ -117,18 +117,20 @@ function Comunicados() {
         setCurrentPage(1); // Resetear la página al cambiar el término de búsqueda
     };
 
+    const [refresh, setRefresh] = useState(false)
+
     useEffect(()=>{
         const fetchData = async () => {
           try{
             const response = await api.get('/api/asignarComunicado')
-            console.log(response.data)
+            //console.log(response.data)
             setData(response.data)
           }catch(err){
             console.log("Error: ", err)
           }
         }
       fetchData();
-      }, []);
+      }, [refresh]);
 
     const sendData=async(eid,comment)=>{
         let dataTosend=""
@@ -139,9 +141,9 @@ function Comunicados() {
         }
         const objeto=JSON.stringify(dataTosend)
         try {
-            console.log(objeto)
+            //console.log(objeto)
             const response=await api.post('/api/comunicados',dataTosend)
-            console.log()
+            //console.log()
         } catch (error) {
             console.log(error)
         }
@@ -187,8 +189,8 @@ function Comunicados() {
                                 <td>{elemento.nombre_evento}</td>
                                 {/* <td>{elemento.Anime}</td>
                                 <td>{elemento.Telefono}</td> */}
-                                <td>{elemento.tipo_evento}</td>
-                                <td>{elemento.Comunicado}</td>
+                                <td>{elemento.tipo_evento.nombreTipo_evento}</td>
+                                <td>{elemento.comunicados_count}</td>
                                 <td>
                                     {/* <Button color="primary" style={{ fontSize: '1rem', padding: '0.375rem 0.75rem', width: '50px',marginRight: '5px' }}>
                                         <FontAwesomeIcon icon={faPenToSquare} />
@@ -244,7 +246,10 @@ function Comunicados() {
                                             <Button color="primary" 
                                                 // onClick={handleAccept}
                                                 onClick={() => {
+                                                    setRefresh(!refresh)
                                                     formik.handleSubmit();
+                                                    setRefresh(!refresh);
+                                                    console.log(refresh)
                                                     // Puedes realizar acciones adicionales después de enviar el formulario si es necesario
                                                 }}
                                                 style={{
