@@ -44,7 +44,7 @@ function Aorganizador() {
             };
         const objct = JSON.stringify(dataToSend);
         //console.log(objct)
-        setJsonOut(objct)
+        setJsonOut(dataToSend)
         // Incrementa el campo "organizador_count" en 1 para el evento seleccionado
         const updatedData = data.map((item) =>
           item.id === selectedItemId
@@ -169,14 +169,16 @@ function Aorganizador() {
         const fetchData = async () => {
           try {
            const response = await api.get('api/evento');
+           const response1=await api.get('api/organizadores')
             setData(response.data);
-  
+            setTableData(response1.data);
             //console.log(response.data);
           } catch (error) {
             console.error('Error fetching data:', error);
           } finally {
             //setLoading(false); 
           }
+          
         };
       
         fetchData();
@@ -187,7 +189,7 @@ function Aorganizador() {
         try{
         console.log(jsonout)
         const response=await api.post('/api/asignarOrganizador',jsonout)
-        console.log(jsonout)
+        console.log(response)
         }catch(error){
         console.log(error)
         }
