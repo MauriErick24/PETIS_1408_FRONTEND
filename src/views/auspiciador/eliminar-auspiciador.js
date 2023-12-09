@@ -2,6 +2,10 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Modal from 'react-modal';
 import styled from "styled-components";
+import api from "../../services/api"
+import Title from '../../components/Fonts/Title';
+import modalEliminar from '../../components/Modals/modalEliminar';
+import Flex from "../../components/Flex";
 
 const endpoint = 'http://localhost:8000/api'
 //Modal.setAppElement('#root');
@@ -29,13 +33,19 @@ const EliminarAuspiciador = () => {
           getAllAuspiciador()
       },[])
     const getAllAuspiciador = async() =>{
-    //const response = await axios.get(`${endpoint}/products`)
-   // setAuspiciador(response.data)
-    //  console.log(response)
+      try{
+    const response = await api.get('/api/auspiciadores')
+    console.log(response.data) 
+   setAuspiciador(response.data)
+     console.log(response)
+      }catch(error){
+        console.log(error)
+      }
     }
     const deleteAuspiciador  =async(id) =>{
-    //  axios.delete(`${endpoint}/product/${id}`)
+     api.delete(`/api/auspiciadores/${id}`)
       getAllAuspiciador()
+      closeModal()
     }
         const inputStyle = {
         backgroundColor: 'white',  // Color de fondo rojo
@@ -68,8 +78,8 @@ const EliminarAuspiciador = () => {
     };
     const customStyles = {
       content: {
-        width: '25%', // Puedes ajustar el ancho según tus necesidades
-        height: '20%', // Puedes ajustar la altura según tus necesidades
+        width: '23%', // Puedes ajustar el ancho según tus necesidades
+        height: '25%', // Puedes ajustar la altura según tus necesidades
         margin: 'auto',
         borderRadius: '30px', // Centrar el modal
         backgroundColor: '#BFBA8A'
@@ -86,27 +96,26 @@ const EliminarAuspiciador = () => {
       
     <div >
       <div>
-          <H2>ELIMINAR AUSPICIADOR</H2>
+      <Flex justify-content='center' >
+                <Title>ELIMINAR AUSPICIADOR</Title>
+            </Flex>
                 {/* Agregar un campo de búsqueda */}
-              <input
+                <Flex justify-content='center' >
+
+                   <input
                 type="text"
                 placeholder="Buscar por nombre"
                 style={inputStyle}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
+                </Flex>
+             
 
 
           </div>
-         
-            <table style={{ alignItems: 'center', justifyContent: 'center',  // Color de fondo rojo
-             
-                  // Bordes redondeados
-                    padding: '10px 10px',
-                    marginTop:'3em',    // Relleno interior
-                    color: 'black',
-                    width:'100%',
-                    borderCollapse: 'collapse'}}>
+         <div className="crud-container text-center">
+            <table >
               
                 <thead >
                     <tr style={{ textAlign: 'center' }}>
@@ -117,7 +126,7 @@ const EliminarAuspiciador = () => {
                     </tr>
                 </thead>
               
-                <tbody style={{ alignItems: 'center', justifyContent: 'center'}}>
+                <tbody >
                 {filteredAuspiciadores.map((auspiciador) => (    
                         //aqui va el otro .map
                                <tr key={auspiciador.id}>
@@ -125,16 +134,20 @@ const EliminarAuspiciador = () => {
                               <td>{auspiciador.nombre}</td> 
                               <td>{auspiciador.correo}</td> 
                               <td>
-                                <button onClick={openModal} style={Boton2}>DELETE</button>
+                                <Flex justify-content='center' gap='2em' align-items='center'>
+                                   <button onClick={openModal} style={Boton2}>DELETE</button>
+                                </Flex>
+
                                 <Modal
                                   isOpen={modalIsOpen}
                                   onRequestClose={closeModal}
                                   contentLabel="Ejemplo Modal"
                                   style={customStyles}
+                                  justify-content='center' gap='2em' align-items='center'
                                 >
-                                  <h2>CONFIRMACIÓN</h2>
-                                  <p style={{marginTop:'1em'}}>¿Está seguro de eliminar el Auspiciador?.</p>
-                                  <div style={{marginTop:'0.5em'}}>
+                                  <h2 >CONFIRMACIÓN</h2>
+                                  <p >¿Está seguro de eliminar el Auspiciador?.</p>
+                                  <div >
                                       <button style={Boton} onClick={ ()=>deleteAuspiciador (auspiciador.id)}>ACEPTAR</button>
                                         <button style={Boton2} onClick={closeModal}>CANCELAR</button>
                                   </div>
@@ -149,6 +162,8 @@ const EliminarAuspiciador = () => {
                 </tbody>
                 
               </table> 
+         </div>
+           
                
        </div>
 
@@ -168,4 +183,3 @@ display: block;
 margin-left: auto;
 margin-right: auto;
 `
-
