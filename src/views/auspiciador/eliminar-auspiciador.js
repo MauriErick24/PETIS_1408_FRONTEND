@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Modal from 'react-modal';
 import styled from "styled-components";
+import api from "../../services/api"
 
 const endpoint = 'http://localhost:8000/api'
 //Modal.setAppElement('#root');
@@ -29,13 +30,19 @@ const EliminarAuspiciador = () => {
           getAllAuspiciador()
       },[])
     const getAllAuspiciador = async() =>{
-    //const response = await axios.get(`${endpoint}/products`)
-   // setAuspiciador(response.data)
-    //  console.log(response)
+      try{
+    const response = await api.get('/api/auspiciadores')
+    console.log(response.data) 
+   setAuspiciador(response.data)
+     console.log(response)
+      }catch(error){
+        console.log(error)
+      }
     }
     const deleteAuspiciador  =async(id) =>{
-    //  axios.delete(`${endpoint}/product/${id}`)
+     api.delete(`/api/auspiciadores/${id}`)
       getAllAuspiciador()
+      closeModal()
     }
         const inputStyle = {
         backgroundColor: 'white',  // Color de fondo rojo

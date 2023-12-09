@@ -54,7 +54,9 @@ const ModalEditarAuspiciador = ({closeModal, data}) => {
 
   const sendData = async(values)=>{
     try {
-      const response = await api.post('/api/auspiciador', values)
+      const response = await api.put(`/api/auspiciadores/${values.id}`, values,
+        {headers: {'enctype':'multipart/form-data'}}
+      )
       setModalConfirmarGuardar(true)
     } catch (error) {
       console.log(error)
