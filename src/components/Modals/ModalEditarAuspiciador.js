@@ -52,15 +52,46 @@ const ModalEditarAuspiciador = ({closeModal, data}) => {
     sendData(values);
   }
 
-  const sendData = async(values)=>{
+  // const sendData = async(values)=>{
+  //   try {
+  //     const response = await api.put('/api/auspiciador', values)
+  //     setModalConfirmarGuardar(true)
+  //   } catch (error) {
+  //     console.log(error)
+  //     setModalErrorGuardar(true)
+  //   }
+  // }
+
+  const sendData = async (values) => {
     try {
-      const response = await api.post('/api/auspiciador', values)
-      setModalConfirmarGuardar(true)
+
+      const formData = new FormData();
+  
+      for (const key in values) {
+        if (values.hasOwnProperty(key)) {
+          if (key === 'imagen') {
+  
+            formData.append(key, values[key], values[key].name);
+          } else {
+            formData.append(key, values[key]);
+          }
+        }
+      }
+
+      const response = await api.put(`/api/auspiciadores/${values.id}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+  
+      console.log(response.data);
+      setModalConfirmarGuardar(true);
     } catch (error) {
-      console.log(error)
-      setModalErrorGuardar(true)
+      console.error(error);
+      setModalErrorGuardar(true);
     }
-  }
+  };
+  
 
 
   return (
@@ -87,7 +118,7 @@ const ModalEditarAuspiciador = ({closeModal, data}) => {
 
 
       <Flex flex-direction='column' align-items='center'>
-        <Title >AUSPICIADOR</Title>
+        <Title >{`AUSPICIADOR: ${data.nombre}`}</Title>
       </Flex>
       
       <Formik
@@ -131,7 +162,7 @@ const ModalEditarAuspiciador = ({closeModal, data}) => {
            <Flex align-items='center' top='2em'>
             <P>Logotipo del auspiciador</P>
             <InputFilePreview
-                name='file' 
+                name='imagen' 
                 buttonText='Seleccionar una imagen'
                 width='200px'
                 font-size='1.2em'
