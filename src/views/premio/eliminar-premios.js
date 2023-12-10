@@ -48,11 +48,11 @@ function EliminarPremio() {
         // console.log("ID del evento:", selectedItemId);
         let dataToSend = {
             idEvent: selectedItemId,
-            organizadores: selectedRows.map((row) => row.id),
+            premios: selectedRows.map((row) => row.id),
             };
         const objct = JSON.stringify(dataToSend);
         //console.log(objct)
-        setJsonOut(objct)
+        setJsonOut(dataToSend)
         // Incrementa el campo "telefono_evento" en 1 para el evento seleccionado
         const updatedData = data.map((item) =>
           item.id === selectedItemId
@@ -87,17 +87,17 @@ function EliminarPremio() {
     // };
 
     const [tableData, setTableData] = useState([
-        { id: 1, premio: 'PREMIO1'  },
-        { id: 2, premio: 'PREMIO2' },
-        { id: 3, premio: 'PREMIO3' },
-        { id: 4, premio: 'PREMIO4' },
-        { id: 5, premio: 'PREMIO5'},
-        { id: 6, premio: 'PREMIO6' },
-        { id: 7, premio: 'PREMIO7' },
-        { id: 8, premio: 'PREMIO8' },
-        { id: 9, premio: 'PREMIO9' },
-        { id: 10, premio: 'PREMIO10' },
-        { id: 11, premio: 'PREMIO11' },
+        { id: 1, nombre: 'PREMIO1'  },
+        { id: 2, nombre: 'PREMIO2' },
+        { id: 3, nombre: 'PREMIO3' },
+        { id: 4, nombre: 'PREMIO4' },
+        { id: 5, nombre: 'PREMIO5'},
+        { id: 6, nombre: 'PREMIO6' },
+        { id: 7, nombre: 'PREMIO7' },
+        { id: 8, nombre: 'PREMIO8' },
+        { id: 9, nombre: 'PREMIO9' },
+        { id: 10, nombre: 'PREMIO10' },
+        { id: 11, nombre: 'PREMIO11' },
 
     ]);
     const [data, setData] = useState([
@@ -134,7 +134,7 @@ function EliminarPremio() {
         elemento.nombre_evento.toLowerCase().startsWith(searchTerm.toLowerCase())
     );
     const filteredDataModal = tableData.filter(elemento =>
-        elemento.premio.toLowerCase().startsWith(searchTermModal.toLowerCase())
+        elemento.nombre.toLowerCase().startsWith(searchTermModal.toLowerCase())
       );
     const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
     const currentItemsModal = filteredDataModal.slice(indexOfFirstItemModal, indexOfLastItemModal);
@@ -177,7 +177,9 @@ function EliminarPremio() {
         const fetchData = async () => {
           try {
            const response = await api.get('api/evento');
+           const response1=await api.get('api/premios');
             setData(response.data);
+            setTableData(response1.data)
   
             //console.log(response.data);
           } catch (error) {
@@ -194,7 +196,7 @@ function EliminarPremio() {
     const sendData=async()=>{
         try{
         console.log(jsonout)
-        const response=await api.post('/api/asignarOrganizador',jsonout)
+        const response=await api.post('/api/quitarPremios/',jsonout)
         console.log(jsonout)
         }catch(error){
         console.log(error)
@@ -281,12 +283,12 @@ function EliminarPremio() {
                                                   {currentItemsModal.map((item) => ( 
                                                     <tr key={item.id}>
                                                         <td>{item.id}</td>
-                                                        <td>{item.premio}</td>
+                                                        <td>{item.nombre}</td>
                                                         <td>
                                                             {/* Agrega aquí la lógica para la acción (checkbox u otro) */}
                                                             <Input
                                                                 type="checkbox"
-                                                                onChange={() => handleCheckboxChange(item.id, item.premio)}
+                                                                onChange={() => handleCheckboxChange(item.id, item.nombre)}
                                                                 checked={selectedRows.some((row) => row.id === item.id)}
                                                             />
                                                         </td>

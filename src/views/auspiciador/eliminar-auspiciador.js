@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Modal from 'react-modal';
 import styled from "styled-components";
 import api from "../../services/api"
+import Flex from "../../components/Flex";
+import Title from "../../components/Fonts/Title";
 
 
 const endpoint = 'http://localhost:8000/api'
@@ -41,7 +43,7 @@ const EliminarAuspiciador = () => {
       }
     }
     const deleteAuspiciador  =async(id) =>{
-     api.delete(`/api/auspiciadores/${id}`)
+     //api.delete(`/api/auspiciadores/${id}`)
       getAllAuspiciador()
       closeModal()
     }
