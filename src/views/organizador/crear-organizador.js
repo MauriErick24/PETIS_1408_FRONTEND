@@ -21,18 +21,18 @@ const validate = values => {
     let errors = {}
     if(!values.nombre){
         errors.nombre = 'Required'
-    }else if(values.nombre.length < 10){
-        errors.nombre = 'Must be 10 characters or more'
+    }else if(values.nombre.length < 2){
+        errors.nombre = 'debe tener 2 o mas caracteres'
     }else if(values.nombre.length > 50){
-        errors.nombre = 'Must be 50 characters or less'
+        errors.nombre = 'debe tener 50 caracteres o menos'
     }else if(!/^[a-zA-Z\s]+$/i.test(values.nombre)){
-        errors.nombre = 'Must be only letters'
+        errors.nombre = 'solo deben ser letras'
     }
 
     if(!values.email){
         errors.email = 'Required'
     }else if(!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)){
-        errors.email = 'Invalid email format'
+        errors.email = 'formato de email invalido'
     }
 
     // if(!values.representante){
@@ -57,12 +57,12 @@ const validate = values => {
 
     if(!values.direccion){
         errors.direccion = 'Required'
-    }else if(values.direccion.length < 10){
-        errors.direccion = 'Must be 10 characters or more'
+    }else if(values.direccion.length < 5){
+        errors.direccion = 'debe tener 5 o mas caracteres'
     }else if(values.direccion.length > 50){
-        errors.direccion = 'Must be 50 characters or less'
+        errors.direccion = 'debe tener 50 o menos caracteres'
     }else if(!/^[a-zA-Z0-9º\s]+$/i.test(values.direccion)){
-        errors.direccion = 'Debe ser letras y numeros'
+        errors.direccion = 'Debe tener solo letras y numeros'
     }
     return errors
 }
@@ -144,12 +144,12 @@ function CrearOrganizador(){
                     </Div>
                     <Div className = "cajita">
                         <label className="one" for="telefono">Telefono : </label>
-                        <input type="text" name="telefono" id="telefono" onChange={formik.handleChange} 
-                        onBlur={formik.handleBlur} value={formik.values.telefono}/>  
+                        <input type="number" name="telefono" id="telefono" onChange={formik.handleChange} 
+                        onBlur={formik.handleBlur} value={formik.values.telefono}min='0'/>  
                         {formik.touched.telefono && formik.errors.telefono ? <div className="error">{formik.errors.telefono}</div> : null}
                     </Div>
                     <Div className = "cajita">
-                        <label class="one" for="organizador">Direccion : </label>
+                        <label class="one" for="direccion">Direccion : </label>
                         <input type="text" 
                         name="direccion" 
                         id="direccion"
@@ -157,7 +157,7 @@ function CrearOrganizador(){
                         onBlur={formik.handleBlur}
                         value={formik.values.direccion}
                         />
-                        {formik.touched.organizador && formik.errors.direccion ? <div className="error">{formik.errors.direccion}</div> : null}
+                        {formik.touched.direccion && formik.errors.direccion ? <div className="error">{formik.errors.direccion}</div> : null}
                     </Div>
                     <Flex justify-content='center' gap="3em">
                         <Btn type="submit">AGREGAR</Btn>
@@ -207,7 +207,7 @@ const Div = styled.div`
     padding: 10px 20px; 
   }
   
- input[type= "text"], [type= "email"]{
+ input[type= "text"], [type= "email"],[type="number"]{
     width:47%;
     height: 31px;
     border-radius: 15px;

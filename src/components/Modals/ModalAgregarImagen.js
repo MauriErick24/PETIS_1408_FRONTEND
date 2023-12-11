@@ -3,12 +3,15 @@ import InputFilePreview from '../input/InputFilePreview';
 import styled from 'styled-components';
 import Flex from '../Flex';
 import Btn from '../Btn';
+import Alert from "../../components/Alert";
 
 import api from '../../services/api'
 
-const ModalCrearImagen =({idActual, reset, setShowAfiche, setImage, ...props})=>{
+const ModalCrearImagen =({idActual, reset, setShowAfiche, setImage,setRefresh,refresh, ...props})=>{
     // console.log(idActual)
     const [imagen, setImagen] = useState(null)
+    const [showAlertSuccesful,setShowAlertSuccesful] = useState(false)
+  const [showAlertFail,setShowAlertFail] = useState(false)
 
     const sendData = async() => {
 
@@ -16,14 +19,34 @@ const ModalCrearImagen =({idActual, reset, setShowAfiche, setImage, ...props})=>
             dataToSend = {idActual, imagen}
             console.log(dataToSend)
         try {
-            //const response = await api.post('/api/afiche', dataToSend)
-
+            const response = await api.post('/api/cambiarImagen', dataToSend,{
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    'enctype':'multipart/form-data'
+                  },
+            })
+            setShowAlertSuccesful(true)
+            setRefresh(!refresh)
+            console.log(response)
+            
         } catch (error) {
             console.log(error)
+            setShowAlertFail(true)
         }
     }   
 
     return(
+        <>
+        <Alert message="Se ha guardado correctamente"
+                 onAcept={()=>{setShowAlertSuccesful(false);}}
+                 show={showAlertSuccesful}
+          />
+
+          <Alert message="Sucedio un error inesperado al guardar"
+                 onAcept={()=>setShowAlertFail(false)}
+                 show={showAlertFail}
+          />
+
         <Div {...props}>
             <Flex flex-direction='column' align-items='center'>
                 <p>ASIGNAR AFICHE</p>
@@ -42,6 +65,7 @@ const ModalCrearImagen =({idActual, reset, setShowAfiche, setImage, ...props})=>
             </Flex>
 
         </Div>
+        </>
     )
 }
 

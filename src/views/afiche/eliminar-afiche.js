@@ -175,7 +175,7 @@ const EliminarAfiche = () => {
                                 <Flex justify-content='center' gap='2em' align-items='center'>
                                   <Img src={elemento.imagen ? elemento.imagen : Imgn}/>
                                  
-                                  <Btn onClick={() => {setIdActual(elemento.id); setShowAfiche(true);}}  color="primary" style={{ fontSize: '1rem', padding: '0.375rem 0.75rem', width: '50px',marginRight: '5px' }}>
+                                  <Btn onClick={() => {setIdActual(elemento.id); setShowAfiche(true);}}  color="second" style={{ fontSize: '1rem', padding: '0.375rem 0.75rem', width: '50px',marginRight: '5px' }}>
                                       <FontAwesomeIcon icon={faTrashCan} />
                                   </Btn>    
                                 </Flex>

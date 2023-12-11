@@ -16,8 +16,8 @@ const Select = ({ label, name, onClick}) => {
   useEffect(() => {
     const fetchData = async () => {
       try{
-        // const response = await api.get('/api/tipoEvento');
-        // setTipoEvento(response.data);
+        const response = await api.get('/api/tipoEvento');
+        setTipoEvento(response.data);
       }catch(err){
         console.log("Error: ", err)
       }
