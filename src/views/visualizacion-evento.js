@@ -2,8 +2,7 @@ import styled from 'styled-components';
 import visualizar from '../assets/css/visualizar.css'
 import Asidei from '../components/Asidei'
 import Asided from '../components/Asided'
-//import '../assets/css/Asided.css'
-//import '../assets/css/Asidei.css'
+import Modal from 'react-modal';
 import Flex from '../components/Flex'
 import HeaderDetail from '../components/HeaderDetail';
 import Card from '../components/Card';
@@ -28,24 +27,20 @@ function Visualizacionevento(){
 
     const navigate = useNavigate();
 
-    const [showButtonEditar, setShowButtonEditar] = useState(true)
-    const [showButtonCancelar, setShowButtonCancelar] = useState(false)
-    const [taskButton, setTaskButton] = useState(true)
     const [showComunicados, setShowComunicados] = useState(false)
     
     
     const {id} = useParams();
-    const [edit, setEdit] = useState(false);
 
     const [auspiciadores,setAuspiciador]=useState({});
     
     const [data, setData] = useState({
-        // id: 2,
-        // nombre_evento: "eveentos 110",
-        // inicio_inscripcion: "2023-10-04",
-        // fin_inscripcion: "2023-11-21",
-        // inicio_actividades: "2023-11-21",
-        // fin_actividades: "2023-12-01",
+         id: 2,
+         nombre_evento: "eveentos 110",
+         inicio_inscripcion: "2023-10-04",
+         fin_inscripcion: "2023-11-21",
+         inicio_actividades: "2023-11-21",
+         fin_actividades: "2023-12-01",
         // inicio_premiacion: "2023-12-01",
         // fin_evento: "2023-12-01",
         // imagen: 'https://es.community.intersystems.com/sites/default/files/inline/images/ai_welcome_wide_2.jpg',
@@ -105,11 +100,17 @@ function Visualizacionevento(){
     const [isSelected, setIsSelected] = useState(false);
     const [showAlertCancelar,setShowAlertCancelar] = useState(false)
     const [showAlertConfirm,setShowAlertConfirm] = useState(false)
-
+   
     const openModal = () => {
       setIsModalOpen(true);
     };
-  
+   const openModal2 = () => {
+    setIsModalOpen(true);
+    };
+    
+    const openModal3 = () => {
+      setIsModalOpen(true);
+    };
     const closeModal = () => {
       setIsModalOpen(false);
       setTaskInput('');
@@ -143,9 +144,13 @@ function Visualizacionevento(){
       const updatedTasks = tasks.filter((task) => task.id !== taskId);
       setTasks(updatedTasks);
     };
-  
-
-
+     //MODAL
+    
+ // PARA EL AUSPICIADOR
+   
+      const [email, setEmail] = useState('');
+      const [Ci, setCi] = useState('');
+      const [pais, setPais] = useState('');
     // const [data, setData] = useState({
     //     id: id,
     //     titulo: "DESCRIPCION DEL EVENTO",
@@ -176,7 +181,7 @@ function Visualizacionevento(){
     useEffect(()=>{
         const fetchData = async()=>{
             try{
-                const response = await api.get(`/api/evento/${id}`)
+              const response = await api.get(`/api/evento/${id}`)
                 setData(response.data); 
                 setAuspiciador(response.data.auspiciadores);
                 console.log(response.data);
@@ -187,6 +192,64 @@ function Visualizacionevento(){
         fetchData();
     }, []) 
 
+
+
+    const customStyles = {
+      content: {
+        width: '40%', // Puedes ajustar el ancho según tus necesidades
+        height: '40%', // Puedes ajustar la altura según tus necesidades
+        margin: 'auto',
+        borderRadius: '30px', // Centrar el modal
+        backgroundColor: '#BFBA8A'
+      },
+    };
+    const inputStyle = {
+      backgroundColor: 'white',  // Color de fondo rojo
+      borderRadius: '30px',    // Bordes redondeados
+      padding: '10px 20px',    // Relleno interior
+      color: 'black',         // Color del texto
+      fontSize:'20px',
+      width:'100%'
+    
+    };
+    const inputStyle2 = {
+      backgroundColor: 'white',  // Color de fondo rojo
+      borderRadius: '30px',    // Bordes redondeados
+      padding: '10px 20px',    // Relleno interior
+      color: 'black',         // Color del texto
+      fontSize:'20px',
+      width:'100%',
+      margin: '2em'
+      
+    
+    };
+    const letra = {
+       // Color de fondo rojo
+        // Bordes redondeados
+      padding: '5px 10px',    // Relleno interior
+      color: 'black',         // Color del texto
+      fontSize:'20px',
+      
+    
+    };
+    const Boton2= {
+      backgroundColor: '#D1741E',  // Color de fondo rojo
+      borderRadius: '30px',    // Bordes redondeados
+      padding: '10px 20px',    // Relleno interior
+      color: 'white',         // Color del texto
+      fontSize:'20px',
+      margin: '0.4em',
+      width:'30%'
+  };
+  const Boton1= {
+    backgroundColor: '#000',  // Color de fondo rojo
+    borderRadius: '30px',    // Bordes redondeados
+    padding: '10px 20px',    // Relleno interior
+    color: 'white',         // Color del texto
+    fontSize:'20px',
+    margin: '0.4em',
+    width:'30%'
+  };
     return (
         <>  
 
@@ -203,7 +266,8 @@ function Visualizacionevento(){
                show={showAlertConfirm}
             />  
 
-        <HeaderDetail nombreEvento={`${data.nombre_evento} ${data.id}`} tipoEvento="COMPETENCIA"/>
+      <HeaderDetail nombreEvento={`${data.nombre_evento} ${data.id}`} tipoEvento="COMPETENCIA" />
+
 
         {showModal && <ModalEquipos isSelected={setIsSelected} showModal={setShowModal}/>}
 
@@ -235,8 +299,112 @@ function Visualizacionevento(){
                     </BubbleContainer>
                   </Flex>
 
-                  <Btn onClick={()=>(isSelected ? setShowAlertCancelar(true) : setShowModal(true))}>{isSelected ? "DAR DE BAJA" : "INSCRIBIRSE"}</Btn>
-                
+                  <Btn onClick={() => (isSelected ? setShowAlertCancelar(true) : setShowModal(true))}>{isSelected ? "DAR DE BAJA" : "INSCRIBIRSE"}</Btn>
+
+                  <boton2 onClick={openModal} >INSCRIBIRSE</boton2>
+                      <Flex>
+                                  <Modal
+                                              isOpen={openModal}
+                                              onRequestClose={closeModal}
+                                              contentLabel="Formulario de Registro"
+                                              style={customStyles}
+                                            >
+                                              <h2>Formulario de inscripción</h2>
+                  <form>
+                    <label style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+                          <h2 style={ letra}>Correo Electronico</h2>
+                        <br /> 
+                          <input  style={ inputStyle} type="email" value={email}
+                            onChange={(e) => setEmail(e.target.value)} />
+                        </label>
+                        <br />
+                    <div style={{ display: 'flex', flexDirection: 'row', }}>
+                      <label  >
+
+                              <h2 style={ letra}>Cedula de identidad</h2>
+                                <input style={ inputStyle}  type="number" value={Ci} onChange={(e) => setCi(e.target.value)} />
+                              </label>
+                            
+                              <label>
+                                <h2 style={letra}>País</h2>
+                                
+                                <input style={ inputStyle} type="text"  value={pais} onChange={(e) => setPais(e.target.value)}/>
+                              </label>
+
+                    </div>
+                  
+                    <br />
+                    <button type="button" style={ Boton1}>
+                      Aceptar
+                    </button>
+                    <button style={ Boton2} type="button" onClick={closeModal}>
+                      Cancelar
+                    </button>
+                    <form>
+
+<Modal isOpen={openModal2}
+                  onRequestClose={closeModal}
+                  contentLabel="Verificacion de codigo"
+                  style={customStyles}>
+                    <h2>INGRESA EL CODIGO QUE TE ENVIAMOS A TU CORREO</h2>
+
+                  <div style={{display: 'flex', flexDirection: 'row', }}>
+                  <label  >
+
+                      <input style={ inputStyle}  type="number"  />
+                    </label>
+
+                    <label>
+                      <h2 style={letra}>País</h2>
+                      <button type="button" style={ Boton1} onClick={openModal}>
+                      ACEPTAR
+                            </button>
+                    </label>
+                                                                      
+                  </div>
+                  <div style={{display: 'flex', flexDirection: 'row', }}>
+                  <label  >
+
+                      <h1 style={{fontSize: '5px',textAlign:'center'}}>
+                        EN CASO DE QUE NO SE TENGA EL CODIGO, PRESIONE EL BOTÓN DE "REENVIAR CODIGO"
+
+                      </h1>
+                    </label>
+
+                    <label>
+                     
+                      <button type="button" style={ Boton1} >
+                              REENVIAR CODIGO
+                            </button>
+                    </label>
+                                                                      
+                  </div>
+
+                  <div>
+                  <Modal isOpen={openModal3}  onRequestClose={closeModal}
+                  contentLabel="Verificacion de codigo"
+                  style={customStyles}>
+                    <h2>Usted se ha inscrito correctamente al evento</h2>
+                    <button type="button" style={ Boton1} onClick={closeModal}>
+                              ACEPTAR
+                            </button>
+
+                  </Modal>
+
+                  </div>
+
+</Modal>
+</form>
+
+
+</form>
+                  </Modal>
+
+                      </Flex>
+
+
+
+
                 </Flex>
                 
                 
@@ -345,7 +513,7 @@ const P =styled.p`
         margin-left:1.1em;
         font-size: 20px;
     }
-`
+`/*
 const Modal = styled.div`
     position: fixed;
     width:fit-content;
@@ -356,4 +524,14 @@ const Modal = styled.div`
     padding: 2%;
     border-radius:10%;
     border: solid 2px #000;
+`
+*/
+const boton2  = styled.div`
+backgroundColor: '#D1741E',  // Color de fondo rojo
+borderRadius: '30px',    // Bordes redondeados
+padding: '10px 20px',    // Relleno interior
+color: 'white',         // Color del texto
+fontSize:'20px',
+margin: '0.4em',
+width:'30%'
 `

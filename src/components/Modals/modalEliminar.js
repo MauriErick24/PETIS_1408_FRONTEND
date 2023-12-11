@@ -54,18 +54,15 @@ const ModalEditarAuspiciador = ({closeModal, data}) => {
 
   const sendData = async(values)=>{
     try {
-      const response = await api.post(`/api/auspiciadores/${values.id}`, {...values,"_method":"PUT"},
-        {headers: {
-          'Content-Type': 'multipart/form-data',
-          'enctype':'multipart/form-data'}}
+      const response = await api.put(`/api/auspiciadores/${values.id}`, values,
+        {headers: {'enctype':'multipart/form-data'}}
       )
       setModalConfirmarGuardar(true)
     } catch (error) {
-      console.error(error);
-      setModalErrorGuardar(true);
+      console.log(error)
+      setModalErrorGuardar(true)
     }
-  };
-  
+  }
 
 
   return (
@@ -92,7 +89,7 @@ const ModalEditarAuspiciador = ({closeModal, data}) => {
 
 
       <Flex flex-direction='column' align-items='center'>
-        <Title >{`AUSPICIADOR: ${data.nombre}`}</Title>
+        <Title >AUSPICIADOR</Title>
       </Flex>
       
       <Formik
@@ -136,7 +133,7 @@ const ModalEditarAuspiciador = ({closeModal, data}) => {
            <Flex align-items='center' top='2em'>
             <P>Logotipo del auspiciador</P>
             <InputFilePreview
-                name='imagen' 
+                name='file' 
                 buttonText='Seleccionar una imagen'
                 width='200px'
                 font-size='1.2em'

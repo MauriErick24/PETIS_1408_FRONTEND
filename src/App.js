@@ -41,7 +41,9 @@ import Aorganizador from './views/organizador/Aorganizador'
 import Comunicados from './views/comunidados/Comunicados'
 
 import EliminarEvento from './views/evento/eliminar-evento'
+import EliminarAfiche from './views/afiche/eliminar-afiche'
 
+import EliminarPremio from './views/premio/eliminar-premios'
 import EditarEvento from './views/evento/editar-evento'
 import EditarAuspiciador from './views/auspiciador/editar-auspiciador'
 
@@ -77,8 +79,8 @@ function App() {
         <Route path='/eliminar/evento' element={<GestionEvento view={'eliminar'}><EliminarEvento/></GestionEvento>}/>
         <Route path='/eliminar/auspiciador' element={<GestionEvento view={'eliminar'}><EliminarAuspiciador/></GestionEvento>}/>
         <Route path='/eliminar/organizador' element={<GestionEvento view={'eliminar'}><CrearOrganizador/></GestionEvento>}/>
-        <Route path='/eliminar/afiche' element={<GestionEvento view={'eliminar'}><CrearOrganizador/></GestionEvento>}/>
-        <Route path='/eliminar/premios' element={<GestionEvento view={'eliminar'}><CrearOrganizador/></GestionEvento>}/>
+        <Route path='/eliminar/afiche' element={<GestionEvento view={'eliminar'}><EliminarAfiche/></GestionEvento>}/>
+        <Route path='/eliminar/premios' element={<GestionEvento view={'eliminar'}><EliminarPremio/></GestionEvento>}/>
         <Route path='/eliminar/actividades' element={<GestionEvento view={'eliminar'}><CrearOrganizador/></GestionEvento>}/>
         
 

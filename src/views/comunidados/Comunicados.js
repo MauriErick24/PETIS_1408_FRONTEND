@@ -7,14 +7,19 @@ import {faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'; //Modal
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { useEffect } from "react";
+import api from '../../services/api'
 
 
 
 function Comunicados() {
+    const [hasCountChange,setHasCountChange]=useState(true)
     const [isModalOpen, setIsModalOpen] = useState(false); //Modal
     const [comment, setComment] = useState(''); //Modal
-    const toggleModal = (itemId) => {
+    const toggleModal = (itemId,reset=true) => {
+        if(reset){
         setSelectedItemId(itemId); // Establece el ID del elemento actual
+        }
         setIsModalOpen(!isModalOpen);
         setIsConfirmationModalOpen(false); // Cierra el modal de confirmación al abrir/cerrar el modal principal
     };
@@ -39,9 +44,21 @@ function Comunicados() {
             // Guarda el comentario en otro arreglo asociado a la id de data
             const updatedComments = [...comments, { id: selectedItemId, comment: values.comment }];
             setComments(updatedComments);
+            
+            // Después de la actualización del estado 'comments'
+            const lastComment = updatedComments[updatedComments.length - 1];
+
+            // Ahora puedes acceder a 'id' y 'comment' de la última entrada
+            const id = lastComment.id;
+            const comentario = lastComment.comment;
+
+            // Puedes imprimirlos o utilizarlos según tus necesidades
+            console.log('ID:', id);
+            console.log('Comentario:', comentario);
+
             //5/12/23
             // Cierra el modal y realiza otras acciones necesarias
-            toggleModal();
+            toggleModal('',false);
             setIsConfirmationModalOpen(true);
         },
     });
@@ -63,17 +80,17 @@ function Comunicados() {
     };
     
     const [data, setData] = useState([
-        {id:1,Personaje: 'yawermii', email: 'jorge@mail.com',Comunicado:0},
-        {id:2,Personaje: 'Goku', email: 'jorge@mail.com', Comunicado:0},
-        {id:3,Personaje: 'Luffy', email: 'jorge@mail.com', Comunicado:0},
-        {id:4,Personaje: 'Tanjiro', email: 'jorge@mail.com', Comunicado:0},
-        {id:5,Personaje: 'Eren',  email: 'jorge@mail.com', Comunicado:0},
-        {id:6,Personaje: 'Kenshin', email: 'jorge@mail.com', Comunicado: 0},
-        {id:7,Personaje: 'Edward',  email: 'jorge@mail.com', Comunicado: 0},
-        {id:8,Personaje: 'Yusuke',  email: 'jorge@mail.com', Comunicado: 0},
-        {id:9,Personaje: 'Seiya',  email: 'jorge@mail.com', Comunicado:0},
-        {id:10,Personaje: 'Ichigo', email: 'jorge@mail.com', Comunicado: 0},
-        {id:11,Personaje: 'Gon', email: 'jorge@mail.com', Comunicado: 0}
+        // {id:1,Personaje: 'yawermii', email: 'jorge@mail.com',Comunicado:0},
+        // {id:2,Personaje: 'Goku', email: 'jorge@mail.com', Comunicado:0},
+        // {id:3,Personaje: 'Luffy', email: 'jorge@mail.com', Comunicado:0},
+        // {id:4,Personaje: 'Tanjiro', email: 'jorge@mail.com', Comunicado:0},
+        // {id:5,Personaje: 'Eren',  email: 'jorge@mail.com', Comunicado:0},
+        // {id:6,Personaje: 'Kenshin', email: 'jorge@mail.com', Comunicado: 0},
+        // {id:7,Personaje: 'Edward',  email: 'jorge@mail.com', Comunicado: 0},
+        // {id:8,Personaje: 'Yusuke',  email: 'jorge@mail.com', Comunicado: 0},
+        // {id:9,Personaje: 'Seiya',  email: 'jorge@mail.com', Comunicado:0},
+        // {id:10,Personaje: 'Ichigo', email: 'jorge@mail.com', Comunicado: 0},
+        // {id:11,Personaje: 'Gon', email: 'jorge@mail.com', Comunicado: 0}
     ]);
     const [comments, setComments] = useState([]);
 
@@ -88,7 +105,7 @@ function Comunicados() {
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
     const filteredData = data.filter(elemento =>
-        elemento.Personaje.toLowerCase().startsWith(searchTerm.toLowerCase())
+        elemento.nombre_evento.toLowerCase().startsWith(searchTerm.toLowerCase())
     );
 
     const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
@@ -103,6 +120,44 @@ function Comunicados() {
         setCurrentPage(1); // Resetear la página al cambiar el término de búsqueda
     };
 
+    useEffect(() => {
+        if(hasCountChange){
+        const fetchData = async () => {
+          try {
+           const response = await api.get('api/asignarComunicado');
+           //const response1=await api.get('api/organizadores')
+            setData(response.data);
+            
+            //setTableData(response1.data);
+            //console.log(response.data);
+          } catch (error) {
+            console.error('Error fetching data:', error);
+          } finally {
+            setHasCountChange(false)
+            //setLoading(false); 
+          }
+          
+        };
+        
+      
+        fetchData();
+    }
+      }, [hasCountChange]); 
+
+      const sendData = async(values) => {
+        console.log(values)
+        try {
+           const response = await api.post('/api/comunicados', values)
+           setSelectedItemId(null)
+           setHasCountChange(true)
+            console.log(response.data) 
+            //setShowAlert(true)
+        } catch (error) {
+            console.log(error)
+            //setShowAlertError(true)
+
+        }
+    }
     
 
     return (
@@ -142,11 +197,11 @@ function Comunicados() {
                         {currentItems.map((elemento) => (
                             <tr key={elemento.id}>
                                 <td>{elemento.id}</td>
-                                <td>{elemento.Personaje}</td>
+                                <td>{elemento.nombre_evento}</td>
                                 {/* <td>{elemento.Anime}</td>
                                 <td>{elemento.Telefono}</td> */}
-                                <td>{elemento.email}</td>
-                                <td>{elemento.Comunicado}</td>
+                                <td>{elemento.tipo_evento?.nombreTipo_evento}</td>
+                                <td>{elemento.comunicados_count}</td>
                                 <td>
                                     {/* <Button color="primary" style={{ fontSize: '1rem', padding: '0.375rem 0.75rem', width: '50px',marginRight: '5px' }}>
                                         <FontAwesomeIcon icon={faPenToSquare} />
@@ -233,7 +288,9 @@ function Comunicados() {
                                             </Button>
                                         </ModalFooter>
                                     </Modal>
-                                    <Modal isOpen={isConfirmationModalOpen} toggle={() => setIsConfirmationModalOpen(!isConfirmationModalOpen)}
+                                    <Modal 
+                                        isOpen={isConfirmationModalOpen} 
+                                        toggle={() => setIsConfirmationModalOpen(!isConfirmationModalOpen)}
                                         centered
                                         style={{
                                             display: 'flex',
@@ -251,7 +308,7 @@ function Comunicados() {
                                                 fontSize: '1.2rem',
                                             }}   
                                         >
-                                            Se ha agregado correctamente un comunicado.
+                                            SE VA A AGREGAR EL  COMUNICADO 
                                         </ModalBody>
                                         <ModalFooter
                                             style={{
@@ -262,7 +319,7 @@ function Comunicados() {
                                             }}
                                         >
                                             <Button 
-                                            color="primary" onClick={() => setIsConfirmationModalOpen(false)}
+                                            color="primary" onClick={() => {setIsConfirmationModalOpen(false);sendData({comentario:formik.values.comment,id:selectedItemId})}}
                                                 style={{
                                                     backgroundColor: 'black',
                                                     color: 'white',
@@ -275,6 +332,18 @@ function Comunicados() {
                                                   }}
                                             >
                                                 ACEPTAR
+                                            </Button>
+                                            <Button  onClick={toggleModal}
+                                                style={{
+                                                    backgroundColor: '#D1741E',
+                                                    padding: '5px',
+                                                    margin: '5px',
+                                                    borderRadius: '5px',
+                                                    cursor: 'pointer',
+                                                    border: 'none',
+                                                }}
+                                            >
+                                                CANCELAR
                                             </Button>
                                         </ModalFooter>
                                     </Modal>
