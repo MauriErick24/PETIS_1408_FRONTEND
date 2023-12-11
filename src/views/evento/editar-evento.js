@@ -14,6 +14,7 @@ import api from '../../services/api'
 import axios from 'axios'
 
 import {useNavigate } from "react-router-dom";
+import Title from "../../components/Fonts/Title";
 
 const EditarEvento = ({showEditar, showEliminar}) => {
     const navigate = useNavigate()
@@ -97,7 +98,8 @@ const EditarEvento = ({showEditar, showEliminar}) => {
                     <>
                     
                     <Flex justify-content='center' >
-                <HeaderTitle title='EDITAR EVENTOS' /> 
+                
+                <Title>EDITAR EVENTO</Title>
             </Flex>
 
             <div className="crud-container text-center" >

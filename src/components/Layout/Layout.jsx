@@ -171,7 +171,7 @@ const handleActualizarEvento = (nuevosDatos) => {
   return (
      
     <Div>
-      <Header/>
+
       <div className='page'>
         {loading ? 
         (<Spinner/>)
@@ -180,49 +180,6 @@ const handleActualizarEvento = (nuevosDatos) => {
           
           <Container>
             {console.log("Datos dentro del container ",data)}
-          <Sidebar>
-            <Aside>
-
-            <Btn onClick={() => handleButtonClick(true, false, false, false, false,false,  false)}>
-              EVENTO
-            </Btn>
-
-            {/* { isEventCreated && */}
-          { true &&
-           ( 
-          <>
-              {/* <Btn onClick={() => handleButtonClick(false, true, false , false, false, false, false)}>
-              ORGANIZADOR
-            </Btn> */}
-            
-            <Btn onClick={() => handleButtonClick(false, false, true, false, false, false, false)}>
-              AUSPICIADOR
-            </Btn>
-
-            <Btn onClick={() => handleButtonClick(false, false, false, false, false, false, false, true)}>
-              AFICHE
-            </Btn>
-
-            {/* <Btn onClick={() => handleButtonClick(false, false, false, true, false,false,  false)}>
-              REGLAS
-            </Btn> */}
-
-            <Btn onClick={() => handleButtonClick(false, false, false, false, true, false, false)}>
-              PREMIOS
-            </Btn> 
-
-            {/* <Btn onClick={() => handleButtonClick(false, false, false, false, false,false,  true)}>
-              REQUISITOS
-            </Btn> */}
-
-            <Btn onClick={() => handleButtonClick(false, false, false, false, false,false, true)}>
-              ACTIVIDADES
-            </Btn>  
-          </>  
-          )
-          }
-            </Aside>
-          </Sidebar>
           <Content>
             {/* {main} */}
             
@@ -236,13 +193,6 @@ const handleActualizarEvento = (nuevosDatos) => {
               }
               </>
             }
-            {showOrganizador && <Organizador data={data.organizadores} formik={formik}/>}
-            {showAuspiciador && <Auspiciador idEvento={idEventoCreado}/>} 
-            {showReglas && <Reglas idEvento={idEventoCreado} data={data} onUpdateEvento={handleActualizarEvento}/>} 
-            {showPremios && <Premios idEvento={idEventoCreado} data={data} onUpdateEvento={handleActualizarEvento}/>} 
-            {showRequisitos && <Requisitos idEvento={idEventoCreado} data={data} onUpdateEvento={handleActualizarEvento}/>} 
-            {showActividades && <CrearActividades idEvento={2}/>}
-            {showAfiche && <Afiche/>}
             
 
           </Content>  
@@ -250,7 +200,7 @@ const handleActualizarEvento = (nuevosDatos) => {
         )
         }
       <Flex justify-content='end' gap='1em'>
-            <Btn color='second' onClick={()=>navigate('/gestionar-eventos')}>ATRAS</Btn> 
+           
 
         {/* {updateButton && <Btn type='submit'>GUARDAR</Btn>}
         {!updateButton && <Btn onClick={()=>console.log(data)}>CREAR</Btn>}
@@ -259,7 +209,6 @@ const handleActualizarEvento = (nuevosDatos) => {
         {/* <Btn onClick={() => navigate('/eventos')} color='second'>CANCELAR</Btn>  */}
       </Flex>
       </div>
-      <Footer/>
     </Div>
   );
 }
@@ -267,24 +216,9 @@ const handleActualizarEvento = (nuevosDatos) => {
 export default Layout;
 
 const Div = styled.div`
-  //width: 100%;
-  min-height: 100vh;
-  // margin: auto;
-  background-color: #D1D0BC;
-  
-  .page{
-    margin: auto;
-    width: 100%; 
-    padding: 1em 4em;
-   
-  }
+
 `
 const Container = styled.div`
-  display: flex;
-  height: 100vh;
-  justify-content: flex-start;
-  margin: 1%;
-  gap:2em;
 `;
 
 const Sidebar = styled.div`
@@ -297,10 +231,5 @@ const Sidebar = styled.div`
 `;
 
 const Content = styled.div`
-  min-width: 80%;
-  //height: 83vh;
-  min-height: fit-content;
-  background-color: #BDBB96;
-  padding: 20px;
-  border-radius: 15px;
+  heigth: auto;
 `;
