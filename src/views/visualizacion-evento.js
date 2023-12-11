@@ -412,7 +412,7 @@ function Visualizacionevento(){
             </Asided>
 
             <Flex flex-direction='column'>
-                {/* <Card title={"DESCRIPCION DE EVENTO"} data={data.descripcion} /> */}
+                <Card title={"DESCRIPCION DE EVENTO"} data={data.descripcion} />
                 {/* <Card title={"REQUISITOS DEL EVENTO"} data={data.requisitos} /> */}
                 <Card title={"DETALLES"} data={data.detalle} />
                 {/* <Card title={"REGLAS"} data={data.reglas} /> */}

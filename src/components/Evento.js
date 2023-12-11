@@ -52,7 +52,7 @@ const Evento = ({ data, onDelete, showAlert, onClick}) => {
           <img src={data.imagen} alt='imagen' />
         </div>
 
-        <h2 className='article-componente-rest'>{data.nombre_evento}</h2>
+        <H2 className='article-componente-rest'>{data.nombre_evento}</H2>
         <h2 className='article-componente-rest'>{data.inicio_inscripcion}</h2>
         <div className='detalles-btn'>
           <br/>
@@ -116,6 +116,22 @@ const Article = styled.article`
 
   .detalles-btn{
     text-align: center;
+  }
+`
+const H2 = styled.h2`
+  margin-left:45px;
+  justify-content:center;
+  padding: 8px;
+  max-width: 200px; 
+  word-wrap: break-word;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &:hover {
+    white-space: normal;
+    overflow: overlay;
+    text-overflow: initial;
   }
 `
 

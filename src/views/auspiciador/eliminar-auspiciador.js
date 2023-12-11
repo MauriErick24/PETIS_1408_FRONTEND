@@ -1,185 +1,205 @@
-import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import Modal from 'react-modal';
+import React, { useState ,useEffect} from "react";
+import '../../assets/css/Crud.css'; 
+//import 'bootstrap/dist/css/bootstrap.min.css';
+//import { Table, Button, Pagination, PaginationItem, PaginationLink } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+
 import styled from "styled-components";
-import api from "../../services/api"
+import Btn from "../../components/Btn";
+import HeaderTitle from "../../components/HeaderTitle";
 import Flex from "../../components/Flex";
-import Title from "../../components/Fonts/Title";
+import Confirm from "../../components/Confirm";
+import Alert from "../../components/Alert";
 
 
-const endpoint = 'http://localhost:8000/api'
-//Modal.setAppElement('#root');
-const EliminarAuspiciador = () => {
+import Spinner from '../../components/Spinner'
+import api from '../../services/api'
+import axios from 'axios'
 
-      const [auspiciador, setAuspiciador] = useState([
-        { id: 1, nombre: 'Auspiciador 1', correo: 'auspiciador1@example.com' },
-        { id: 2, nombre: 'Juan 2', correo: 'auspiciador2@example.com' },
-        { id: 3, nombre: 'Marcos 3', correo: 'auspiciador3@example.com' },
+const EliminarAuspiciador = ({showEditar, showEliminar}) => {
+    
+    // const [data, setData] = useState([{
+    //     id:1,
+    //     nombre_evento:"",
+    //     tipo_evento:{
+    //         nombreTipo_evento:""
+    //     }
+    // }]);
 
-      ])
-      const [modalIsOpen, setModalIsOpen] = useState(false);
-      const [searchTerm, setSearchTerm] = useState('');
+    const [data, setData] = useState([
+      { id: 1, nombre: 'Auspiciador 1', correo: 'auspiciador1@example.com' },
+      { id: 2, nombre: 'Juan 2', correo: 'auspiciador2@example.com' },
+      { id: 3, nombre: 'Marcos 3', correo: 'auspiciador3@example.com' },
 
-      const openModal = () => {
-      setModalIsOpen(true);
-      };
+    ])
 
-     const closeModal = () => {
-     setModalIsOpen(false);
-    };
+    // const [data2, setData2] = useState({});
+    const [showConfirm, setConfirm] = useState(false)
+    const [showAlert, setAlert] = useState(false)
+    const [loading, setLoading] = useState(true);
 
+    const [idToDelete, setIdToDelete] = useState(null)
 
-      useEffect(() => {
-          getAllAuspiciador()
-      },[])
-    const getAllAuspiciador = async() =>{
-      try{
-    const response = await api.get('/api/auspiciadores')
-    console.log(response.data) 
-   setAuspiciador(response.data)
-     console.log(response)
-      }catch(error){
-        console.log(error)
-      }
-    }
-    const deleteAuspiciador  =async(id) =>{
-     //api.delete(`/api/auspiciadores/${id}`)
-      getAllAuspiciador()
-      closeModal()
-    }
-        const inputStyle = {
-        backgroundColor: 'white',  // Color de fondo rojo
-        borderRadius: '30px',    // Bordes redondeados
-        padding: '10px 20px',    // Relleno interior
-        color: 'black',         // Color del texto
-        fontSize:'25px',
-        width:'75%',
-        marginTop:'2em'
-
-    };
-  
-    const Boton = {
-        backgroundColor: 'black',  // Color de fondo rojo
-        borderRadius: '30px',    // Bordes redondeados
-        padding: '10px 20px',    // Relleno interior
-        color: 'white',         // Color del texto
-        fontSize:'20px',
-        margin: '0.4em'
-        
-
-    };
-    const Boton2= {
-        backgroundColor: '#D1741E',  // Color de fondo rojo
-        borderRadius: '30px',    // Bordes redondeados
-        padding: '10px 20px',    // Relleno interior
-        color: 'white',         // Color del texto
-        fontSize:'20px',
-        margin: '0.4em'
-    };
-    const customStyles = {
-      content: {
-        width: '23%', // Puedes ajustar el ancho según tus necesidades
-        height: '25%', // Puedes ajustar la altura según tus necesidades
-        margin: 'auto',
-        borderRadius: '30px', // Centrar el modal
-        backgroundColor: '#BFBA8A'
-      },
-    };
-      //para filtrar busquedas
-      const filteredAuspiciadores = auspiciador.filter((auspiciador) =>
-      auspiciador.nombre.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+           const response = await api.get('api/auspiciadores');
+            setData(response.data);
+          } catch (error) {
+            console.error('Error fetching data:', error);
+          } finally {
+            setLoading(false); 
+          }
+        };
+      
+        fetchData();
+      }, []); 
 
     
-
-    return(
       
-    <div >
-      <div>
-      <Flex justify-content='center' >
-                <Title>ELIMINAR AUSPICIADOR</Title>
+    const deleteElement = async(idToDelete) => {
+        try {
+            const response = await api.delete(`api/auspiciadores/${idToDelete}`)
+            setData(data.filter(item => item.id !== idToDelete));
+            setAlert(true)
+        } catch (error) {
+            console.log(error)
+            setIdToDelete(null)
+            alert("Sucedio un error inesperado al borrar el auspciador")
+            setConfirm(false)
+        }
+        // setData(data.filter(item => item.id !== idToDelete));
+    }
+
+    const itemsPerPage = 5;
+    const [currentPage, setCurrentPage] = useState(1);
+    const [searchTerm, setSearchTerm] = useState(""); 
+
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+
+    const filteredData = data.filter(elemento =>
+        elemento.nombre.toLowerCase().startsWith(searchTerm.toLowerCase())
+    );
+
+    const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
+    const totalPages = Math.ceil(data.length / itemsPerPage);
+
+    const handleClick = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    };
+
+    const handleSearch = (event) => {
+        setSearchTerm(event.target.value);
+        setCurrentPage(1); 
+    };
+
+    return (
+        <>
+            {loading ? (
+                <Spinner/>
+                ) : (
+                    <>
+                    
+            <Flex justify-content='center' flex-direction='column' align-items='center' text-align='center'>
+                <HeaderTitle title='ELIMINAR AUSPICIADORES' /> 
+                {/* <P>*Todos los eventos que sean eliminados no se podran recuperar</P> */}
             </Flex>
-                {/* Agregar un campo de búsqueda */}
-                <Flex justify-content='center' >
 
-                   <input
-                type="text"
-                placeholder="Buscar por nombre"
-                style={inputStyle}
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-                </Flex>
-             
+            <Confirm
+                title='¿ESTA SEGURO QUE DESEA BORRAR?'
+                message='Esta accion no se puede revertir'
+                show={showConfirm}
+                onClose={() => {
+                    setConfirm(false)
+                    setIdToDelete(null)
+                    }}
+                onAcept={() => {
+                    deleteElement(idToDelete)
+                    setIdToDelete(null)
+                    setConfirm(false)
+                 }}
+            />
 
+            <Alert
+                show={showAlert}
+                onAcept={() => {
+                    setAlert(false)
+                    
+                }}
+                message="Se ha borrado el auspiciador"
+            />
 
-          </div>
-         <div className="crud-container text-center">
-            <table >
-              
-                <thead >
-                    <tr style={{ textAlign: 'center' }}>
-                        <th>ID</th>
-                        <th>NOMBRE</th>
-                        <th>CORREO</th>
-                        <th>ACCION</th>
-                    </tr>
-                </thead>
-              
-                <tbody >
-                {filteredAuspiciadores.map((auspiciador) => (    
-                        //aqui va el otro .map
-                               <tr key={auspiciador.id}>
-                              <td>{auspiciador.id}</td>
-                              <td>{auspiciador.nombre}</td> 
-                              <td>{auspiciador.correo}</td> 
-                              <td>
-                                <Flex justify-content='center' gap='2em' align-items='center'>
-                                   <button onClick={openModal} style={Boton2}>DELETE</button>
-                                </Flex>
-
-                                <Modal
-                                  isOpen={modalIsOpen}
-                                  onRequestClose={closeModal}
-                                  contentLabel="Ejemplo Modal"
-                                  style={customStyles}
-                                  justify-content='center' gap='2em' align-items='center'
-                                >
-                                  <h2 >CONFIRMACIÓN</h2>
-                                  <p >¿Está seguro de eliminar el Auspiciador?.</p>
-                                  <div >
-                                      <button style={Boton} onClick={ ()=>deleteAuspiciador (auspiciador.id)}>ACEPTAR</button>
-                                        <button style={Boton2} onClick={closeModal}>CANCELAR</button>
-                                  </div>
-                                  
-                                </Modal>
+            <div className="crud-container text-center" >
+                <input
+                    type="text"
+                    placeholder="Buscar por auspiciador"
+                    value={searchTerm}
+                    onChange={handleSearch}
+                />
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>NOMBRE</th>
+                            <th>TELEFONO</th>
+                            {/* <th>Telefono</th>
+                            <th>Email</th>
+                            <th>Address</th> */}
+                            <th>ACCIONES</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {currentItems.map((elemento) => (
+                            <tr key={elemento.id}>
+                                <td>{elemento.id}</td>
+                                <td>{elemento.nombre}</td>
+                                <td>{elemento.telefono}</td>
+                                {/* <td>{elemento.Telefono}</td>
+                                <td>{elemento.email}</td>
+                                <td>{elemento.AddresFavorite}</td> */}
+                                <td>
+                                    
+                               <Flex justify-content='center'>
+                                <Btn onClick={()=> {
+                                            setConfirm(true)
+                                            setIdToDelete(elemento.id)
+                                                }}color="second" style={{ fontSize: '1rem', padding: '0.375rem 0.75rem', width: '50px',marginRight: '5px' }}>
+                                        <FontAwesomeIcon icon={faTrashCan} />
+                                    </Btn>
+                               </Flex>
+                                    
                                 </td>
-                            
-                            
-                           </tr>
-                     
-                   ))} 
-                </tbody>
-                
-              </table> 
-         </div>
-           
-               
-       </div>
+                                
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
 
+                <Flex className="pagination mt-3" align-items='center' gap='0.4em'>
+                    <Btn disabled={currentPage === 1} onClick={() => handleClick(currentPage - 1)}>&lt;</Btn>
+                    {[...Array(totalPages)].map((_, i) => (
+                        <Btn key={i} className={i + 1 === currentPage ? "active" : ""} onClick={() => handleClick(i + 1)}>
+                            {i + 1}
+                        </Btn>
+                    ))}
+                    <Btn disabled={currentPage === totalPages} onClick={() => handleClick(currentPage + 1)}>&gt;</Btn>
+                </Flex>
+            </div>
+                    
+                    </>
+                )}
+        
           
-  
-
-     
-  )
+            
+        </>
+    );
 }
 export default EliminarAuspiciador;
-const H2 = styled.h2`
-text-align: center;
-font-weight: 500;
-margin-bottom: 0.6em;
-margin-top: 0.1em;
-display: block;
-margin-left: auto;
-margin-right: auto;
+
+const P = styled.p`
+    color:red;
+    font-size:25px;
 `
