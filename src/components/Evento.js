@@ -119,7 +119,7 @@ const Article = styled.article`
   }
 `
 const H2 = styled.h2`
-  margin-left:45px;
+  margin-left:40px;
   justify-content:center;
   padding: 8px;
   max-width: 200px; 
