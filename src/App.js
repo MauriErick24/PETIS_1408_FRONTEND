@@ -37,6 +37,7 @@ import EliminarAuspiciador from './views/auspiciador/eliminar-auspiciador'
 import AgregarAfiche from './views/afiche/agregar-afiche'
 import AgregarPremio from './views/premio/crear-premios'
 import Aorganizador from './views/organizador/Aorganizador'
+import AgregarActividades from './views/actividades/agregar-actividades'
 
 import Comunicados from './views/comunidados/Comunicados'
 
@@ -66,7 +67,7 @@ function App() {
         <Route path='/agregar/organizador' element={<GestionEvento view={'agregar'}><Aorganizador /></GestionEvento>}/>
         <Route path='/agregar/afiche' element={<GestionEvento view={'agregar'}><AgregarAfiche/></GestionEvento>}/>
         <Route path='/agregar/premios' element={<GestionEvento view={'agregar'}><AgregarPremio/></GestionEvento>}/>
-        <Route path='/agregar/actividades' element={<GestionEvento view={'agregar'}><CrearOrganizador/></GestionEvento>}/>
+        <Route path='/agregar/actividades' element={<GestionEvento view={'agregar'}><AgregarActividades/></GestionEvento>}/>
         <Route path='/agregar/comunicados' element={<GestionEvento view={'agregar'}><Comunicados /></GestionEvento>}/>
 
         <Route path='/editar/evento' element={<GestionEvento view={'editar'}><EditarEvento/></GestionEvento>}/>
@@ -113,10 +114,12 @@ function App() {
 
         {/* <Route path='creacion/evento' element={<Layout><CreacionEvento /></Layout>} />
         <Route path='creacion/data' element={<Layout><CreacionEventoData /></Layout>} /> */}
+
         <Route  path='visualizacion/evento' element={<Layout detail={true}><Visualizacionevento /></Layout>} />
         <Route  path='eventos/detalle/:id' element={<Layout detail={true}><Visualizacionevento /></Layout>} />
         <Route  path='eventos' element={<Layout><HomeUser /></Layout>} />
         <Route  path='agregar/afiche' element={<Layout><Afiche /></Layout>} />
+
         {/* <Route  path='crear/organizador' element={<Layout><Corganizador /></Layout>} /> */}
         
         {/* <Route  path='ventana/botones' element={<Layout><VentanaBotones /></Layout>} /> */}

@@ -9,6 +9,7 @@ import Alert from '../../components/Alert';
 import ErrorMessage from "../../components/ErrorMessage";
 
 import api from '../../services/api'
+import Title from "../../components/Fonts/Title";
 
 
 const CrearActividades =({idEvento}) => {
@@ -81,6 +82,7 @@ const CrearActividades =({idEvento}) => {
 
     const sendData = async() =>  {
       if(tasks.length != 0){
+        
         try {
           const response = await api.post('/api/actividades', tasks)
           console.log(response.data)
@@ -111,26 +113,24 @@ const CrearActividades =({idEvento}) => {
             />          
          <div>
                 <Flex flex-direction='column' align-items='center' gap='1em'>
-                    <HeaderTitle title='ACTIVIDADES'/>
+                  <Title>ACTIVIDADES</Title>
                       </Flex>
                     { (
                       
                      <div width = '80%' >                       
-                          
-                                
-                                <h2 style={{display: 'flex', marginLeft:'10%'}}>INDIQUE LA ACTIVIDAD</h2>
                            
-                                    <div style={{display: 'flex', alignItems: 'center', width:'70%',flexDirection:'column', marginLeft:'10%'}}>
-                                       <Input 
-                                        type='text'
-                                        name='tarea'
-                                        width='50%'
-                                        //    label='Tarea:'
-                                        value={taskInput} 
-                                        onChange={(e) => setTaskInput(e.target.value)}
-                                        // onBlur={handleBlur}
-                                    />
-                                    </div>
+                            <div style={{display: 'flex', alignItems: 'center', width:'70%',flexDirection:'column', marginLeft:'10%'}}>
+                              <Input 
+                                 type='text'
+                                 name='tarea'
+                                 width='50%'
+                            //    label='Tarea:'
+                                  value={taskInput} 
+                                  placeholder='Introduzca la actividad'
+                                  onChange={(e) => setTaskInput(e.target.value)}
+                               // onBlur={handleBlur}
+                               />
+                            </div>
                                    
                                 
 

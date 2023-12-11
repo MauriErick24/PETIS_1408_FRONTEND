@@ -253,7 +253,7 @@ function Visualizacionevento(){
     return (
         <>  
 
-          <Confirm
+          {/* <Confirm
             message='Es seguro de darse de BAJA de este evento?'
             onAcept={()=>{setShowAlertConfirm(true); setShowAlertCancelar(false)}}
             onClose={()=>setShowAlertCancelar(false)}
@@ -264,12 +264,12 @@ function Visualizacionevento(){
                message="se ha dado de BAJA exitosamente"
                onAcept={()=>{setShowAlertConfirm(false); setIsSelected(false)}} 
                show={showAlertConfirm}
-            />  
+            />   */}
 
       <HeaderDetail nombreEvento={`${data.nombre_evento} ${data.id}`} tipoEvento="COMPETENCIA" />
 
-
-        {showModal && <ModalEquipos isSelected={setIsSelected} showModal={setShowModal}/>}
+{/* 
+        {showModal && <ModalEquipos isSelected={setIsSelected} showModal={setShowModal}/>} */}
 
         <Flex justify-content='space-between'>
             <Asided>
@@ -301,7 +301,7 @@ function Visualizacionevento(){
 
                   <Btn onClick={() => (isSelected ? setShowAlertCancelar(true) : setShowModal(true))}>{isSelected ? "DAR DE BAJA" : "INSCRIBIRSE"}</Btn>
 
-                  <boton2 onClick={openModal} >INSCRIBIRSE</boton2>
+                  {/* <boton2 onClick={openModal} >INSCRIBIRSE</boton2>
                       <Flex>
                                   <Modal
                                               isOpen={openModal}
@@ -403,7 +403,7 @@ function Visualizacionevento(){
                       </Flex>
 
 
-
+ */}
 
                 </Flex>
                 

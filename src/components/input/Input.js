@@ -11,6 +11,7 @@ const Input = ({
     disabled = false,
     onChange,
     onBlur,
+    placeholder,
     error
 }) => {
   return (
@@ -26,6 +27,7 @@ const Input = ({
               id={name} 
               name={name} 
               type={type ?? 'text'} 
+              placeholder={placeholder}
               disabled={disabled} 
             />
           </Div>
@@ -37,6 +39,7 @@ const Input = ({
               id={name} 
               name={name} 
               type={type ?? 'text'} 
+              placeholder={placeholder}
               disabled={disabled}
               onChange={onChange}
               onBlur={onBlur}
