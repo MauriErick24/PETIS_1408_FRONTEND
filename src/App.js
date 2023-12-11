@@ -57,7 +57,7 @@ function App() {
     <BrowserRouter>
       <Routes>
           
-        <Route path="/" element={<Layout><Home /></Layout>} />
+        <Route path="/" element={<Layout><HomeUser /></Layout>} />
        
         <Route path='/crear/evento' element={<GestionEvento view={'crear'}><CrearEvento/></GestionEvento>}/>
         <Route path='/crear/auspiciador' element={<GestionEvento view={'crear'}><CrearAuspiciador/></GestionEvento>}/>
@@ -90,7 +90,7 @@ function App() {
         <Route path='/gestionar-eventos' element={<GestionEvento view={'crear'}/>}/>
         
         <Route path='/editar-eventos' element={<GestionEvento />}/>
-        <Route path='/editar/evento/:id' element={<LayoutCreacion updateButton={true}/>}/>
+        <Route path='/editar/evento/:id' element={<GestionEvento view={'editar'}><LayoutCreacion updateButton={true}/></GestionEvento>}/>
         <Route path='/gestionar' element={<LayoutGeneric/>}/>
         {/* <Route path='/eliminar/afiche' element={} */}
 
@@ -117,7 +117,7 @@ function App() {
 
         <Route  path='visualizacion/evento' element={<Layout detail={true}><Visualizacionevento /></Layout>} />
         <Route  path='eventos/detalle/:id' element={<Layout detail={true}><Visualizacionevento /></Layout>} />
-        <Route  path='eventos' element={<Layout><HomeUser /></Layout>} />
+        {/* <Route  path='eventos' element={<Layout><HomeUser /></Layout>} /> */}
         <Route  path='agregar/afiche' element={<Layout><Afiche /></Layout>} />
 
         {/* <Route  path='crear/organizador' element={<Layout><Corganizador /></Layout>} /> */}
