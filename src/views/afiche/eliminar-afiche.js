@@ -37,6 +37,7 @@ import Title from '../../components/Fonts/Title';
 
 
 const EliminarAfiche = () => {
+  const [refresh, setRefresh] = useState(false)
   const navigate = useNavigate()
 
   const data2 = [{
@@ -79,6 +80,7 @@ const EliminarAfiche = () => {
 
 
   const [showAfiche, setShowAfiche] = useState(false) 
+  const [showModal, setShowModal] = useState(false) 
   const [idActual, setIdActual] = useState(null)
   const [loading, setLoading] = useState(true);
 
@@ -99,7 +101,7 @@ const EliminarAfiche = () => {
       };
     
       fetchData();
-    }, []); 
+    }, [refresh]); 
     
     
 
@@ -136,7 +138,7 @@ const EliminarAfiche = () => {
               ) : (
                   <>
                   
-                { showAfiche && <ModalEliminarAfiches reset={showAfiche} setImage={setImage}  setShowAfiche={setShowAfiche}  idActual={idActual}/>}
+                { showAfiche && <ModalEliminarAfiches reset={showAfiche} closeModal={setShowModal} setImage={setImage} setRefresh={setRefresh} refresh={refresh} setShowAfiche={setShowAfiche}  idActual={idActual}/>}
                  
                   {/* <ModalCrear/> */}
                  

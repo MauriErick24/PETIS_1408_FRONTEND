@@ -21,11 +21,15 @@ const CascadeList = ({cascade, view, children}) => {
                                 }}>EVENTO</Option>
                                 
                               )}
-                            <Option onClick={()=>{
+                            {
+                              cascade == 'agregar' ? 
+                              ('')
+                              :
+                            (<Option onClick={()=>{
                                 navigate(`/${cascade}/auspiciador`)
                             //   handleCascade(false,false,true)
                             //   handleClick(false,false,false)
-                              }}>AUSPICIADOR</Option> 
+                              }}>AUSPICIADOR</Option> )}
 
                              <Option onClick={()=>{
                                 navigate(`/${cascade}/organizador`)

@@ -3,13 +3,18 @@ import InputFilePreview from '../input/InputFilePreview';
 import styled from 'styled-components';
 import Flex from '../Flex';
 import Btn from '../Btn';
+import Confirm from '../Confirm'
 import Imgn from '../../assets/images/example-img.jpg'
+import Alert from '../Alert'
 
 import api from '../../services/api'
 
-const ModalEliminarAfiches =({idActual, reset, setShowAfiche, setImage, ...props})=>{
+const ModalEliminarAfiches =({idActual, reset, setShowAfiche, closeModal,setImage,setRefresh,refresh, ...props})=>{
     // console.log(idActual)
     const [imagen, setImagen] = useState(null)
+    const [modalConfirmarCancelar, setModalConfirmarCancelar] = useState(false)
+  const [modalConfirmarGuardar,setModalConfirmarGuardar] = useState(false)
+  const [modalErrorGuardar, setModalErrorGuardar] = useState(false)
     let [data,setData]=useState([
         {
         id:"",
@@ -42,43 +47,60 @@ const ModalEliminarAfiches =({idActual, reset, setShowAfiche, setImage, ...props
         try {
             const response = await api.delete(`/api/afiches/${idActual}`)
             console.log(response)
+            console.log(modalConfirmarGuardar)
+            setModalConfirmarGuardar(true);
+            console.log(modalConfirmarGuardar)
+            setRefresh(!refresh)
         } catch (error) {
             console.log(error)
+            setModalErrorGuardar(true)
         }
     }   
 
     return(
+        
+        
+
         <Div {...props}>
+
+        <Confirm
+        message='LOS CAMBIOS QUE HA REALIZADO NO SERÁN GUARDADOS'
+        show={modalConfirmarCancelar}
+        onClose={() => setModalConfirmarCancelar(false)}
+        onAcept={() => closeModal(false)}
+      />
+
+      <Alert
+        message='LOS CAMBIOS SE HAN GUARDADO'
+        show={modalConfirmarGuardar}
+        onAcept={() => {closeModal(false)}}
+      />
+
+    <Alert
+        message='HA SUCEDIDO UN ERROR AL GUARDAR LOS CAMBIOS'
+        show={modalErrorGuardar}
+        onAcept={() => {setModalErrorGuardar(false)}}
+      />
             <Flex flex-direction='column' align-items='center'>
                 <p>ELIMINAR AFICHE</p>
-                {/* <InputFilePreview
-                    buttonText="SELECCIONAR IMAGEN"
-                    name='file'
-                    widthDiv='100%'
-                    width= '400px'
-                    reset={reset}
-                    onChange={(images)=>{setImagen(images.target.value)}}
-                />  */}
-                 {/* {data.imagen.map((imagen)=>
-                (
-                    <Img src={imagen ? imagen : Imgn}/>
-                ))}  */}
                 <Img src={imagen}/>
                 <Flex top='10px' margin-bottom='10px' gap='2em'>
                     <Btn onClick={() => {sendData(); setShowAfiche(false)}}>ACEPTAR</Btn>
-                    <Btn onClick={() => {setShowAfiche(false)}} color='second'>CANCELAR</Btn>
+                    <Btn onClick={() => {setShowAfiche(false);setModalConfirmarCancelar(true)}} color='second'>CANCELAR</Btn>
                 </Flex>
             </Flex>
 
         </Div>
+        
     )
+    
 }
 
 export default ModalEliminarAfiches;
 
 const Img = styled.img`
-  width: auto;
-  height: 100px:
+  width: 200px;
+  height: 200px:
 `
 
 const Div = styled.div`
