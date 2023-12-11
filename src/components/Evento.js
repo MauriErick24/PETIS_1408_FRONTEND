@@ -56,7 +56,7 @@ const Evento = ({ data, onDelete, showAlert, onClick}) => {
         <h2 className='article-componente-rest'>{data.inicio_inscripcion}</h2>
         <div className='detalles-btn'>
           <br/>
-          <Btn onClick={() => navigate(`detalle/${data.id}`)}>DETALLES</Btn>
+          <Btn onClick={() => navigate(`/eventos/detalle/${data.id}`)}>DETALLES</Btn>
         </div>
       </Article>
     </>
