@@ -132,7 +132,7 @@ const HomeUser =()=>{
         <Flex top='1%' align-items='center' justify-content='space-between'>
           
           <H2>EVENTOS EN VIVO</H2> 
-          <Btn onClick={() => navigate('/crear/evento', {state: {datos: null}})}>CREAR EVENTO</Btn>
+          <Btn onClick={() => navigate('/gestionar-eventos', {state: {datos: null}})}>GESTIONAR EVENTOS</Btn>
         
         </Flex>  
           

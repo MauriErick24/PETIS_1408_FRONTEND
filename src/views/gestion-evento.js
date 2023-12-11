@@ -114,7 +114,7 @@ const GestionEvento = ({view, children}) => {
               </Content>  
             </Container>
           <Flex justify-content='end' gap='1em'>
-            <Btn color='second' onClick={()=>navigate('/')}>ATRAS</Btn> 
+            <Btn color='second' onClick={()=>navigate('/eventos')}>ATRAS</Btn> 
           </Flex>
           </div>
           <Footer/>
