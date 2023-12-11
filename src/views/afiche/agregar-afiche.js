@@ -33,6 +33,8 @@ import ModalCrearImagen from '../../components/Modals/ModalAgregarImagen';
 import Title from '../../components/Fonts/Title';
 
 const Afiche = (idEvento,showEditar, showEliminar) => {
+    const [refresh, setRefresh] = useState(false)
+    
   const navigate = useNavigate()
 
   const data2 = [{
@@ -83,10 +85,10 @@ const Afiche = (idEvento,showEditar, showEliminar) => {
   useEffect(() => {
       const fetchData = async () => {
         try {
-         //const response = await api.get('api/evento');
-          //setData(response.data);
+         const response = await api.get('api/evento');
+          setData(response.data);
 
-          //console.log(response.data);
+          console.log(response.data);
         } catch (error) {
           console.error('Error fetching data:', error);
         } finally {
@@ -95,7 +97,7 @@ const Afiche = (idEvento,showEditar, showEliminar) => {
       };
     
       fetchData();
-    }, []); 
+    }, [refresh]); 
     
     
 
@@ -132,7 +134,7 @@ const Afiche = (idEvento,showEditar, showEliminar) => {
               ) : (
                   <>
                   
-                { showAfiche && <ModalCrearImagen reset={showAfiche} setImage={setImage}  setShowAfiche={setShowAfiche}  idActual={idActual}/>}
+                { showAfiche && <ModalCrearImagen reset={showAfiche} setRefresh={setRefresh} refresh={refresh} setImage={setImage}  setShowAfiche={setShowAfiche}  idActual={idActual}/>}
                  
                   {/* <ModalCrear/> */}
                  

@@ -12,6 +12,7 @@ import { useEffect } from "react";
 
 
 function EliminarPremio() {
+    const [hasCountChange,setHasCountChange]=useState(true)
     const [isModalOpen, setIsModalOpen] = useState(false); //Modal
 
     const toggleModal = (itemId) => {
@@ -174,23 +175,31 @@ function EliminarPremio() {
     };
 
     useEffect(() => {
+        if(hasCountChange){
         const fetchData = async () => {
           try {
-           const response = await api.get('api/evento');
-           const response1=await api.get('api/premios');
+           const response = await api.get('api/mostrarPremios');
             setData(response.data);
-            setTableData(response1.data)
-  
-            //console.log(response.data);
           } catch (error) {
             console.error('Error fetching data:', error);
           } finally {
+            setHasCountChange(false)
             //setLoading(false); 
           }
         };
       
-        fetchData();
-      }, []); 
+        fetchData();}
+      }, [hasCountChange]); 
+
+    const obtenerPremio=async(values)=>{
+        try {
+            const response=await api.get(`/api/evento/${values.id}`)
+            console.log(response.data.premios)
+            setTableData(response.data.premios)
+        } catch (error) {
+            
+        }
+    }
 
 
     const sendData=async()=>{
@@ -198,6 +207,7 @@ function EliminarPremio() {
         console.log(jsonout)
         const response=await api.post('/api/quitarPremios/',jsonout)
         console.log(jsonout)
+        setHasCountChange(true)
         }catch(error){
         console.log(error)
         }
@@ -229,7 +239,7 @@ function EliminarPremio() {
                             <th>ID</th>
                             <th>EVENTO</th>
                             <th>TIPO EVENTO</th>
-                            <th>TELEFONO</th>
+                            <th>PREMIOS</th>
                             <th>LISTA DE PREMIOS</th>
                             
                         </tr>
@@ -240,13 +250,14 @@ function EliminarPremio() {
                                 <td>{elemento.id}</td>
                                 <td>{elemento.nombre_evento}</td>
                                 <td>{elemento.tipo_evento.nombreTipo_evento}</td>
-                                <td>{elemento.telefono_evento}</td>
+                                <td>{elemento.premios_count}</td>
                                 <td>
                                     <Button  style={{ color: 'gray',border: 'none', background: 'none', fontSize: '1rem', width: '50px' }}
                                             
                                             onClick={() => {
                                                 setCurrentPageModal(1); // Restablece la página al abrir el modal
-                                                toggleModal(elemento.id)}
+                                                toggleModal(elemento.id);
+                                                obtenerPremio(elemento)}
                                             }
                                             >
                                      

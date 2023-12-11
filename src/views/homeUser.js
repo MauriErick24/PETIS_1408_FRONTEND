@@ -107,13 +107,14 @@ const HomeUser =()=>{
     useEffect(() => {
       const fetchData = async() => {
         try {
-          let response = await api.get('/api/eventos/presentes')
+          let responseO=await api.get('/api/evento')
+          let response = await api.get('/api/presentes')
           setVivo(response.data)
 
-           response = await api.get('/api/eventos/pasados')
+           response = await api.get('/api/pasados')
           setPasado(response.data)
 
-           response = await api.get('/api/eventos/futuros')
+           response = await api.get('/api/futuros')
           setFuturo(response.data)
 
         } catch (error) {
