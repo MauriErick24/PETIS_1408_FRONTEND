@@ -21,8 +21,9 @@ const ModalEliminarAfiches =({idActual, reset, setShowAfiche, setImage, ...props
         const fetchData = async () => {
           try {
            const response = await api.get(`/api/evento/${idActual}`);
-            setData(response.data.afiches);
-            console.log(response.data.afiches);
+            setData(response.data);
+            setImagen(response.data.imagen);
+            console.log(response.data);
           } catch (error) {
             console.error('Error fetching data:', error);
           } finally {
@@ -40,7 +41,7 @@ const ModalEliminarAfiches =({idActual, reset, setShowAfiche, setImage, ...props
             console.log(dataToSend)
         try {
             const response = await api.delete(`/api/afiches/${idActual}`)
-
+            console.log(response)
         } catch (error) {
             console.log(error)
         }
@@ -57,12 +58,12 @@ const ModalEliminarAfiches =({idActual, reset, setShowAfiche, setImage, ...props
                     width= '400px'
                     reset={reset}
                     onChange={(images)=>{setImagen(images.target.value)}}
-                /> */}
-                {/* {data.imagen.map((imagen)=>
+                />  */}
+                 {/* {data.imagen.map((imagen)=>
                 (
                     <Img src={imagen ? imagen : Imgn}/>
-                ))} */}
-                <Img src={imagen ? imagen : Imgn}/>
+                ))}  */}
+                <Img src={imagen}/>
                 <Flex top='10px' margin-bottom='10px' gap='2em'>
                     <Btn onClick={() => {sendData(); setShowAfiche(false)}}>ACEPTAR</Btn>
                     <Btn onClick={() => {setShowAfiche(false)}} color='second'>CANCELAR</Btn>
@@ -76,8 +77,8 @@ const ModalEliminarAfiches =({idActual, reset, setShowAfiche, setImage, ...props
 export default ModalEliminarAfiches;
 
 const Img = styled.img`
-  width: 50px;
-  height: 50px:
+  width: auto;
+  height: 100px:
 `
 
 const Div = styled.div`
@@ -87,6 +88,7 @@ const Div = styled.div`
     top: 25%;
     display: flex;
     padding: 2em;
+    height:auto;
 
     background-color: #D1D0BC;
     border: solid 2px #000;

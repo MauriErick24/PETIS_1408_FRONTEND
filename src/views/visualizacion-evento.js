@@ -71,6 +71,11 @@ function Visualizacionevento(){
             fecha_fin: "2024-06-30"
           },
         ],
+        tipo_evento:[
+          {
+            nombreTipo_evento:''
+          }
+        ],
         auspiciadores:[
                     {
                         nombre: 'ICPC',
@@ -266,7 +271,7 @@ function Visualizacionevento(){
                show={showAlertConfirm}
             />   */}
 
-      <HeaderDetail nombreEvento={`${data.nombre_evento} ${data.id}`} tipoEvento="COMPETENCIA" />
+      <HeaderDetail nombreEvento={`${data.nombre_evento} ${data.id}`} tipoEvento={data.tipo_evento.nombreTipo_evento} />
 
 {/* 
         {showModal && <ModalEquipos isSelected={setIsSelected} showModal={setShowModal}/>} */}
