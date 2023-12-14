@@ -38,7 +38,7 @@ const ModalCrearImagen =({idActual, reset, setShowAfiche, setImage,setRefresh,re
     return(
         <>
         <Alert message="Se ha guardado correctamente"
-                 onAcept={()=>{setShowAlertSuccesful(false);}}
+                 onAcept={()=>{setShowAlertSuccesful(false);setShowAfiche(false)}}
                  show={showAlertSuccesful}
           />
 
@@ -59,7 +59,7 @@ const ModalCrearImagen =({idActual, reset, setShowAfiche, setImage,setRefresh,re
                     onChange={(images)=>{setImagen(images.target.value)}}
                 />
                 <Flex top='10px' margin-bottom='10px' gap='2em'>
-                    <Btn onClick={() => {sendData(); setShowAfiche(false)}}>ACEPTAR</Btn>
+                    <Btn onClick={() => {sendData(); }}>ACEPTAR</Btn>
                     <Btn onClick={() => {setShowAfiche(false)}} color='second'>CANCELAR</Btn>
                 </Flex>
             </Flex>

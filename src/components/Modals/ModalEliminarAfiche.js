@@ -11,8 +11,8 @@ import api from '../../services/api'
 
 const ModalEliminarAfiches =({idActual, reset, setShowAfiche, closeModal,setImage,setRefresh,refresh, ...props})=>{
     // console.log(idActual)
-    const [imagen, setImagen] = useState(null)
-    const [modalConfirmarCancelar, setModalConfirmarCancelar] = useState(false)
+  const [imagen, setImagen] = useState(null)
+  const [modalConfirmarCancelar, setModalConfirmarCancelar] = useState(false)
   const [modalConfirmarGuardar,setModalConfirmarGuardar] = useState(false)
   const [modalErrorGuardar, setModalErrorGuardar] = useState(false)
     let [data,setData]=useState([
@@ -23,6 +23,7 @@ const ModalEliminarAfiches =({idActual, reset, setShowAfiche, closeModal,setImag
     ]);
 
     useEffect(() => {
+
         const fetchData = async () => {
           try {
            const response = await api.get(`/api/evento/${idActual}`);
@@ -31,7 +32,7 @@ const ModalEliminarAfiches =({idActual, reset, setShowAfiche, closeModal,setImag
             console.log(response.data);
           } catch (error) {
             console.error('Error fetching data:', error);
-          } finally {
+          //} finally {
             //setLoading(false); 
           }
         };
@@ -40,8 +41,7 @@ const ModalEliminarAfiches =({idActual, reset, setShowAfiche, closeModal,setImag
       }, []); 
 
     const sendData = async() => {
-
-        let dataToSend = null;
+            let dataToSend = null;
             dataToSend = {idActual, imagen}
             console.log(dataToSend)
         try {
@@ -73,7 +73,7 @@ const ModalEliminarAfiches =({idActual, reset, setShowAfiche, closeModal,setImag
       <Alert
         message='LOS CAMBIOS SE HAN GUARDADO'
         show={modalConfirmarGuardar}
-        onAcept={() => {closeModal(false)}}
+        onAcept={() => {closeModal(false);setShowAfiche(false)}}
       />
 
     <Alert
@@ -85,7 +85,7 @@ const ModalEliminarAfiches =({idActual, reset, setShowAfiche, closeModal,setImag
                 <p>ELIMINAR AFICHE</p>
                 <Img src={imagen}/>
                 <Flex top='10px' margin-bottom='10px' gap='2em'>
-                    <Btn onClick={() => {sendData(); setShowAfiche(false)}}>ACEPTAR</Btn>
+                    <Btn onClick={() => {sendData();}}>ACEPTAR</Btn>
                     <Btn onClick={() => {setShowAfiche(false);setModalConfirmarCancelar(true)}} color='second'>CANCELAR</Btn>
                 </Flex>
             </Flex>

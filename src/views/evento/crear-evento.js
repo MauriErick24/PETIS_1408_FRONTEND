@@ -140,7 +140,9 @@ const CrearEvento = ({data, eventCreated, idEvento}) => {
 
 
   const [showAlertSuccesful,setShowAlertSuccesful] = useState(false)
+  const[showAlertUpSuccesful,setShowAlertUpSuccesful]=useState(false)
   const [showAlertFail,setShowAlertFail] = useState(false)
+  const [showAlertUpFail,setShowAlertUpFail]=useState(false)
 
   const [showp, setShowp] = useState(false)
 
@@ -165,22 +167,34 @@ const CrearEvento = ({data, eventCreated, idEvento}) => {
     try {
       const response = await api.put(`/api/evento/${data.id}`,values)
       console.log(response.data)
+      setShowAlertUpSuccesful(true)
     } catch (error) {
       console.log(error)
+      setShowAlertUpFail(true)
     }
   }
 
 
   return(
         <Div>    
-          <Alert message="Se ha guardado correctamente"
+          <Alert message="SE HA GUARDADO CORRECTAMENTE"
                  onAcept={()=>{setShowAlertSuccesful(false);}}
                  show={showAlertSuccesful}
           />
 
-          <Alert message="Sucedio un error inesperado al guardar"
+          <Alert message="SUCEDIO UN ERROR INESPERADO AL GUARDAR"
                  onAcept={()=>setShowAlertFail(false)}
                  show={showAlertFail}
+          />
+
+          <Alert message="SE HA ACTUALIZADO CORRECTAMENTE"
+                 onAcept={()=>{setShowAlertUpSuccesful(false);}}
+                 show={showAlertUpSuccesful}
+          />
+
+          <Alert message="SUCEDIO UN ERROR INESPERADO AL ACTUALIZAR"
+                 onAcept={()=>setShowAlertUpFail(false)}
+                 show={showAlertUpFail}
           />
           
 
