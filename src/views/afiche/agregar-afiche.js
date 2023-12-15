@@ -27,6 +27,9 @@ import ModalCrear from '../../components/Modals/ModalCrear';
 
 import api from '../../services/api'
 
+import appFirebase from '../../firebase/config';
+import {getFirestore,collection,addDoc} from 'firebase/firestore'
+import {getStorage,ref,uploadBytes,getDownloadURL} from 'firebase/storage'
 
 import {useNavigate } from "react-router-dom";
 import ModalCrearImagen from '../../components/Modals/ModalAgregarImagen';
