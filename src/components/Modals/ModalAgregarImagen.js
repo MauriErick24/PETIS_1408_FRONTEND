@@ -4,6 +4,9 @@ import styled from 'styled-components';
 import Flex from '../Flex';
 import Btn from '../Btn';
 import Alert from "../../components/Alert";
+import appFirebase from '../../firebase/config';
+import {getFirestore,collection,addDoc} from 'firebase/firestore'
+import {getStorage,ref,uploadBytes,getDownloadURL} from 'firebase/storage'
 
 import api from '../../services/api'
 
@@ -13,11 +16,36 @@ const ModalCrearImagen =({idActual, reset, setShowAfiche, setImage,setRefresh,re
     const [showAlertSuccesful,setShowAlertSuccesful] = useState(false)
   const [showAlertFail,setShowAlertFail] = useState(false)
 
+  const db=getFirestore(appFirebase);
+  const storage=getStorage(appFirebase);
+  
+  let URLimagen;
+
     const sendData = async() => {
+        
+        const newAfiches={
+            imagenes:URLimagen
+        }
+
+        try {
+            await addDoc(collection(db,'afiches'),{
+                ...newAfiches
+            })
+        } catch (error) {
+            console.log(error)
+        }
+
+        const refArchivo=ref(storage,`afiches/${imagen.name}`)
+        await uploadBytes(refArchivo,imagen)
+        URLimagen=await getDownloadURL(refArchivo)
+        console.log(URLimagen)
 
         let dataToSend = null;
-            dataToSend = {idActual, imagen}
+            //dataToSend = {idActual, imagen}
+            dataToSend={idActual,URLimagen}
             console.log(dataToSend)
+            console.log(imagen.name)
+            
         try {
             const response = await api.post('/api/cambiarImagen', dataToSend,{
                 headers: {
