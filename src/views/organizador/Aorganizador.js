@@ -8,11 +8,14 @@ import { Modal, ModalHeader, ModalBody, ModalFooter, Input } from 'reactstrap'; 
 import api from '../../services/api'
 //import { useState } from "react";
 import { useEffect } from "react";
+import Flex from "../../components/Flex";
+import Title from "../../components/Fonts/Title";
 
 
 
 function Aorganizador() {
     const [isModalOpen, setIsModalOpen] = useState(false); //Modal
+    const [hasCountChange,setHasCountChange]=useState(true)
 
     const toggleModal = (itemId) => {
         setSelectedItemId(itemId); // Establece el ID del elemento actual
@@ -81,17 +84,17 @@ function Aorganizador() {
     // };
 
     const [tableData, setTableData] = useState([
-        { id: 1, nombre: 'yahoo', representante: 'Responsable1' },
-        { id: 2, nombre: 'google', representante: 'Responsable2' },
-        { id: 3, nombre: 'twitter', representante: 'Responsable3' },
-        { id: 4, nombre: 'facebook', representante: 'Responsable4' },
-        { id: 5, nombre: 'wasap', representante: 'Responsable5' },
-        { id: 6, nombre: 'line', representante: 'Responsable6' },
-        { id: 7, nombre: 'encore', representante: 'Responsable7' },
-        { id: 8, nombre: 'titanium', representante: 'Responsable8' },
-        { id: 9, nombre: 'k-os', representante: 'Responsable8' },
-        { id: 10, nombre: 'cco-partner', representante: 'Responsable8' },
-        { id: 11, nombre: 'microsoft', representante: 'Responsable8' },
+        { id: 1, nombre: '', representante: 'Responsable1' },
+        { id: 2, nombre: '', representante: 'Responsable2' },
+        { id: 3, nombre: '', representante: 'Responsable3' },
+        { id: 4, nombre: '', representante: 'Responsable4' },
+        { id: 5, nombre: '', representante: 'Responsable5' },
+        { id: 6, nombre: '', representante: 'Responsable6' },
+        { id: 7, nombre: '', representante: 'Responsable7' },
+        { id: 8, nombre: '', representante: 'Responsable8' },
+        { id: 9, nombre: '', representante: 'Responsable8' },
+        { id: 10, nombre: '', representante: 'Responsable8' },
+        { id: 11, nombre: '', representante: 'Responsable8' },
 
     ]);
     const [data, setData] = useState([
@@ -168,23 +171,39 @@ function Aorganizador() {
     };
 
     useEffect(() => {
+        if(hasCountChange){
         const fetchData = async () => {
           try {
-           const response = await api.get('api/evento');
-           const response1=await api.get('api/organizadores')
+           const response = await api.get('api/cantOrganizadores');
+           //const response1=await api.get(`api/distintos/${}`)
             setData(response.data);
-            setTableData(response1.data);
-            //console.log(response.data);
+            
+            //setTableData(response1.data);
+            //console.log(response.data.organizadores);
           } catch (error) {
             console.error('Error fetching data:', error);
           } finally {
+            setHasCountChange(false)
             //setLoading(false); 
           }
           
         };
       
         fetchData();
-      }, []); 
+    }
+      }, [hasCountChange]); 
+
+    const obtenerOrg=async(values)=>{
+        try{
+            //console.log(jsonout)
+            //const response=await api.post('/api/asignarOrganizador',jsonout)
+            const response=await api.get(`api/distintos/${values}`)
+            setTableData(response.data)
+            console.log(response.data)
+            }catch(error){
+            console.log(error)
+            }
+    }
 
 
     const sendData=async()=>{
@@ -192,6 +211,7 @@ function Aorganizador() {
         console.log(jsonout)
         const response=await api.post('/api/asignarOrganizador',jsonout)
         console.log(response)
+        setHasCountChange(true)
         }catch(error){
         console.log(error)
         }
@@ -200,7 +220,7 @@ function Aorganizador() {
     return (
         <>
             <div className="crud-container text-center" >
-                <h3
+                {/* <h3
                     style={{
                         color: 'black',
                         fontWeight: 'bold',
@@ -210,7 +230,12 @@ function Aorganizador() {
                         marginBottom: '20px',
                         border:'none'
                     }}
-                >AGREGAR ORGANIZADOR A EVENTO</h3>
+                >AGREGAR ORGANIZADOR A EVENTO</h3> */}
+
+                <Flex justify-content='center' >
+                    <Title>AGREGAR ORGANIZADOR A EVENTO</Title>
+                </Flex>
+
                 <input
                     type="text"
                     placeholder="Buscar Evento... "
@@ -234,13 +259,14 @@ function Aorganizador() {
                                 <td>{elemento.id}</td>
                                 <td>{elemento.nombre_evento}</td>
                                 <td>{elemento.tipo_evento.nombreTipo_evento}</td>
-                                <td>{elemento.organizador_count}</td>
+                                <td>{elemento.organizadores_count}</td>
                                 <td>
-                                    <Button  style={{ color: 'gray',border: 'none', background: 'none', fontSize: '1rem', width: '50px' }}
+                                    <Button  style={{ color: 'black',border: 'none', background: 'none', fontSize: '1rem', width: '50px' }}
                                             
                                             onClick={() => {
                                                 setCurrentPageModal(1); // Restablece la página al abrir el modal
-                                                toggleModal(elemento.id)}
+                                                toggleModal(elemento.id);
+                                                obtenerOrg(elemento.id)}
                                             }
                                             >
                                     <FontAwesomeIcon icon={faCirclePlus} size="2x" />

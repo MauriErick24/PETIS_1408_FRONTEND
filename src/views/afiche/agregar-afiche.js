@@ -153,30 +153,32 @@ const Afiche = (idEvento,showEditar, showEliminar) => {
                   <thead>
                       <tr>
                           <th>ID</th>
-                          <th>Titulo</th>
-                          <th>Tipo</th>
+                          <th>TITULO</th>
+                          <th>TIPO</th>
                           {/* <th>Telefono</th>
                           <th>Email</th>
                           <th>Address</th> */}
-                          <th>Acciones</th>
+                          <th>ACCIONES</th>
                           
                       </tr>
                   </thead>
                   <tbody>
                       {currentItems.map((elemento) => (
                           <tr key={elemento.id}>
-                              <td>{elemento.id}</td>
+                              <Td>{elemento.id}</Td>
                               <Td>{elemento.nombre_evento}</Td>
                               <Td>{elemento.tipo_evento.nombreTipo_evento}</Td>
-                              <td>
+                              <Td>
                                 <Flex justify-content='center' gap='2em' align-items='center'>
+                                  <Td>
                                   <Img src={elemento.imagen ? elemento.imagen : Imgn}/>
-                                 
+                                  </Td>  
+                                  
                                   <Btn onClick={() => {setIdActual(elemento.id); setShowAfiche(true);}}  color="primary" style={{ fontSize: '1rem', padding: '0.375rem 0.75rem', width: '50px',marginRight: '5px' }}>
                                       <FontAwesomeIcon icon={faImage} />
-                                  </Btn>    
+                                  </Btn>   
                                 </Flex>
-                              </td>
+                              </Td>
                               
                           </tr>
                       ))}
