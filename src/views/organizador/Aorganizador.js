@@ -18,7 +18,7 @@ function Aorganizador() {
         setSelectedItemId(itemId); // Establece el ID del elemento actual
         setIsModalOpen(!isModalOpen);
         setIsConfirmationModalOpen(false); // Cierra el modal de confirmación al abrir/cerrar el modal principal
-        
+        setSelectedRows([]);
         
     };
 
@@ -46,16 +46,18 @@ function Aorganizador() {
         //console.log(objct)
         setJsonOut(dataToSend)
         // Incrementa el campo "organizador_count" en 1 para el evento seleccionado
-        const updatedData = data.map((item) =>
-          item.id === selectedItemId
-            ? { ...item, organizador_count: item.organizador_count + 1 }
-            : item
-        );
+        // const updatedData = data.map((item) =>
+        //   item.id === selectedItemId
+        //     ? { ...item, organizador_count: item.organizador_count + 1 }
+        //     : item
+        // );
         // Actualiza el estado con los datos actualizados
-        setData(updatedData);
+        //setData(updatedData);
       
         // Limpia la selección después de procesarla
         setSelectedRows([]);
+        //setIsConfirmationModalOpen(false);
+        setErrorMessage("");
       };
       
 
@@ -389,7 +391,7 @@ function Aorganizador() {
                                             >
                                                 ACEPTAR
                                             </Button>
-                                            <Button  onClick={toggleModal}
+                                            {/* <Button  onClick={toggleModal}
                                                 style={{
                                                     backgroundColor: '#D1741E',
                                                     padding: '5px',
@@ -400,7 +402,7 @@ function Aorganizador() {
                                                 }}
                                             >
                                                 CANCELAR
-                                            </Button>
+                                            </Button> */}
                                         </ModalFooter>
                                     </Modal>
                                     
