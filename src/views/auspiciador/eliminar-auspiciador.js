@@ -58,6 +58,7 @@ const EliminarAuspiciador = ({showEditar, showEliminar}) => {
 
     
       
+      
     const deleteElement = async(idToDelete) => {
         try {
             const response = await api.delete(`api/auspiciadores/${idToDelete}`)

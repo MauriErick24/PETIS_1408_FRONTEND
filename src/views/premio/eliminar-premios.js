@@ -34,8 +34,8 @@ function EliminarPremio() {
         setErrorMessage("");
 
         // Eliminar premios seleccionados de tableData
-        const updatedTableData = tableData.filter((item) => !selectedRows.some((row) => row.id === item.id));
-        setTableData(updatedTableData);
+        //const updatedTableData = tableData.filter((item) => !selectedRows.some((row) => row.id === item.id));
+        //setTableData(updatedTableData);
     
         // Limpia la selección después de procesarla
         setSelectedRows([]);

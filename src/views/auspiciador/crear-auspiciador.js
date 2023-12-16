@@ -175,7 +175,10 @@ const CrearPatrocinador = ({ onClick }) => {
                     <Inputk
                         label='Teléfono:'
                         name='telefono'
+                        type='number'
                         justify_content='end'
+                        min='1' 
+                        pattern='^[0-9]+'
                         onChange={handleChange}
                     /> 
                     {touched.telefono && errors.telefono ? <ErrorMessage>{errors.telefono}</ErrorMessage> : null}  

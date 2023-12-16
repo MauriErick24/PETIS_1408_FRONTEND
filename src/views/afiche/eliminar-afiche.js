@@ -170,10 +170,10 @@ const EliminarAfiche = () => {
                   <tbody>
                       {currentItems.map((elemento) => (
                           <tr key={elemento.id}>
-                              <td>{elemento.id}</td>
+                              <Td>{elemento.id}</Td>
                               <Td>{elemento.nombre_evento}</Td>
                               <Td>{elemento.tipo_evento.nombreTipo_evento}</Td>
-                              <td>
+                              <Td>
                                 <Flex justify-content='center' gap='2em' align-items='center'>
                                   <Img src={elemento.imagen ? elemento.imagen : Imgn}/>
                                  
@@ -181,7 +181,7 @@ const EliminarAfiche = () => {
                                       <FontAwesomeIcon icon={faTrashCan} />
                                   </Btn>    
                                 </Flex>
-                              </td>
+                              </Td>
                               
                           </tr>
                       ))}
@@ -210,8 +210,8 @@ const EliminarAfiche = () => {
 export default EliminarAfiche
 
 const Img = styled.img`
-  width: 50px;
-  height: 50px:
+  width: 100px;
+  height: 100px:
 `
 
 const Td = styled.td`

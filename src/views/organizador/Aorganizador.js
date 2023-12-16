@@ -261,7 +261,7 @@ function Aorganizador() {
                                 <td>{elemento.tipo_evento.nombreTipo_evento}</td>
                                 <td>{elemento.organizadores_count}</td>
                                 <td>
-                                    <Button  style={{ color: 'black',border: 'none', background: 'none', fontSize: '1rem', width: '50px' }}
+                                    <Button  style={{ color: '#D1741E',border: 'none', background: 'none', fontSize: '1rem', width: '50px' }}
                                             
                                             onClick={() => {
                                                 setCurrentPageModal(1); // Restablece la página al abrir el modal

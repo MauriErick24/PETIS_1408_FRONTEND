@@ -11,7 +11,7 @@ import HeaderTitle from "../../components/HeaderTitle";
 import Flex from "../../components/Flex";
 import Confirm from "../../components/Confirm";
 import Alert from "../../components/Alert";
-
+import Title from "../../components/Fonts/Title";
 
 import Spinner from '../../components/Spinner'
 import api from '../../services/api'
@@ -30,10 +30,12 @@ const EliminarEvento = ({showEditar, showEliminar}) => {
 
     // const [data2, setData2] = useState({});
     const [showConfirm, setConfirm] = useState(false)
+    const [showConfirm1, setConfirm1] = useState(false)
     const [showAlert, setAlert] = useState(false)
     const [loading, setLoading] = useState(true);
 
     const [idToDelete, setIdToDelete] = useState(null)
+    const [nameToDelete,setNameToDelete]=useState(null)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -97,21 +99,40 @@ const EliminarEvento = ({showEditar, showEliminar}) => {
                     <>
                     
             <Flex justify-content='center' flex-direction='column' align-items='center' text-align='center'>
-                <HeaderTitle title='ELIMINAR EVENTOS' /> 
+                {/* <HeaderTitle title='ELIMINAR EVENTOS' />  */}
+                <Title>ELIMINAR EVENTOS</Title>
                 {/* <P>*Todos los eventos que sean eliminados no se podran recuperar</P> */}
             </Flex>
 
             <Confirm
-                title='¿ESTA SEGURO QUE DESEA BORRAR?'
-                message='Esta accion no se puede revertir'
+                title='SE BORRARA ESTE EVENTO'
+                message={nameToDelete}
                 show={showConfirm}
                 onClose={() => {
                     setConfirm(false)
                     setIdToDelete(null)
                     }}
                 onAcept={() => {
+                    //deleteElement(idToDelete)
+                    //setIdToDelete(null)
+                    //setConfirm(false)
+                    setConfirm1(true)
+                 }}
+            />
+
+                <Confirm
+                title='¿ESTA SEGURO QUE DESEA BORRAR?'
+                message='Esta accion no se puede revertir'
+                show={showConfirm1}
+                onClose={() => {
+                    setConfirm1(false)
+                    setIdToDelete(null)
+                    setConfirm(false)
+                    }}
+                onAcept={() => {
                     deleteElement(idToDelete)
                     setIdToDelete(null)
+                    setConfirm1(false)
                     setConfirm(false)
                  }}
             />
@@ -148,24 +169,25 @@ const EliminarEvento = ({showEditar, showEliminar}) => {
                     <tbody>
                         {currentItems.map((elemento) => (
                             <tr key={elemento.id}>
-                                <td>{elemento.id}</td>
-                                <td>{elemento.nombre_evento}</td>
-                                <td>{elemento.tipo_evento.nombreTipo_evento}</td>
+                                <Td>{elemento.id}</Td>
+                                <Td>{elemento.nombre_evento}</Td>
+                                <Td>{elemento.tipo_evento.nombreTipo_evento}</Td>
                                 {/* <td>{elemento.Telefono}</td>
                                 <td>{elemento.email}</td>
                                 <td>{elemento.AddresFavorite}</td> */}
-                                <td>
+                                <Td>
                                     
                                <Flex justify-content='center'>
                                 <Btn onClick={()=> {
                                             setConfirm(true)
                                             setIdToDelete(elemento.id)
+                                            setNameToDelete(elemento.nombre_evento)
                                                 }}color="second" style={{ fontSize: '1rem', padding: '0.375rem 0.75rem', width: '50px',marginRight: '5px' }}>
                                         <FontAwesomeIcon icon={faTrashCan} />
                                     </Btn>
                                </Flex>
                                     
-                                </td>
+                                </Td>
                                 
                             </tr>
                         ))}
@@ -196,4 +218,19 @@ export default EliminarEvento;
 const P = styled.p`
     color:red;
     font-size:25px;
+`
+const Td = styled.td`
+border: 1px solid #ddd;
+  padding: 8px;
+  max-width: 200px; 
+  word-wrap: break-word;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &:hover {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: initial;
+  }
 `

@@ -16,7 +16,7 @@ import '../../assets/css/Crud.css'
 //import 'bootstrap/dist/css/bootstrap.min.css';
 //import { Table, Button, Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPenToSquare, faTrashCan,faImage } from '@fortawesome/free-solid-svg-icons';
+import { faPenToSquare, faTrashCan,faImage, faAdd } from '@fortawesome/free-solid-svg-icons';
 
 import styled from "styled-components";
 import Btn from "../../components/Btn";
@@ -58,14 +58,14 @@ const AgregarActividades = () => {
   
     const [data, setData] = useState([
         {id:1,
-        nombre_evento:"jaljdlasd;la;asd;lfajsdfuiyqdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddduwiejasdca;ahldfhlaksdhfisudhfh",
+        nombre:"jaljdlasd;la;asd;lfajsdfuiyqdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddduwiejasdca;ahldfhlaksdhfisudhfh",
         tipo_evento:{
             nombreTipo_evento:"asdfadddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddsdfasdfadfasdfadfadfasd"
         },
         imagen:'../../assets/images/1.png'
         },
         {id:2,
-          nombre_evento:"asdfasdasd;la;asd;lfajsdfuiyqdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddduwiejasdca;ahldfhlaksdhfisudhfh",
+          nombre:"asdfasdasd;la;asd;lfajsdfuiyqdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddduwiejasdca;ahldfhlaksdhfisudhfh",
           tipo_evento:{
               nombreTipo_evento:"asdfadddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddsdfasdfadfasdfadfadfasd"
           },
@@ -84,8 +84,8 @@ const AgregarActividades = () => {
     useEffect(() => {
         const fetchData = async () => {
           try {
-           //const response = await api.get('api/evento');
-            //setData(response.data);
+           const response = await api.get('api/actividades');
+            setData(response.data);
   
             //console.log(response.data);
           } catch (error) {
@@ -110,7 +110,7 @@ const AgregarActividades = () => {
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   
     const filteredData = data.filter(elemento =>
-        elemento.nombre_evento.toLowerCase().startsWith(searchTerm.toLowerCase())
+        elemento.nombre.toLowerCase().startsWith(searchTerm.toLowerCase())
     );
   
     const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
@@ -153,30 +153,32 @@ const AgregarActividades = () => {
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Titulo</th>
-                            <th>Tipo</th>
+                            <th>NOMBRE</th>
+                            <th>FECHA INICIO</th>
+                            <th>FECHA FIN</th>
                             {/* <th>Telefono</th>
                             <th>Email</th>
                             <th>Address</th> */}
-                            <th>Acciones</th>
+                            <th>ACCIONES</th>
                             
                         </tr>
                     </thead>
                     <tbody>
                         {currentItems.map((elemento) => (
                             <tr key={elemento.id}>
-                                <td>{elemento.id}</td>
-                                <Td>{elemento.nombre_evento}</Td>
-                                <Td>{elemento.tipo_evento.nombreTipo_evento}</Td>
-                                <td>
+                                <Td>{elemento.id}</Td>
+                                <Td>{elemento.nombre}</Td>
+                                <Td>{elemento.fecha_inicio}</Td>
+                                <Td>{elemento.fecha_fin}</Td>
+                                 <Td>
                                   <Flex justify-content='center' gap='2em' align-items='center'>
-                                    <Img src={elemento.imagen ? elemento.imagen : Imgn}/>
-                                   
-                                    <Btn onClick={() => {setIdActual(elemento.id); setShowAfiche(true);}}  color="primary" style={{ fontSize: '1rem', padding: '0.375rem 0.75rem', width: '50px',marginRight: '5px' }}>
-                                        <FontAwesomeIcon icon={faImage} />
+                                    {/* <Img src={elemento.imagen ? elemento.imagen : Imgn}/>
+                                    */}
+                                    <Btn onClick={() => {setIdActual(elemento.id); setShowAfiche(true);}}  color="second" style={{ fontSize: '1rem', padding: '0.375rem 0.75rem', width: '50px',marginRight: '5px' }}>
+                                        <FontAwesomeIcon icon={faAdd} />
                                     </Btn>    
                                   </Flex>
-                                </td>
+                                </Td> 
                                 
                             </tr>
                         ))}

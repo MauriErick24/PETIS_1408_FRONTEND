@@ -39,6 +39,12 @@ const Content = styled.div`
     font-size: 1.625em;
   }
 
+  .title{
+    text-align: center;
+    max-width: 400px;
+    font-size: 1.625em;
+  }
+
   .btn-content{
     display: flex;
     gap: 1em;

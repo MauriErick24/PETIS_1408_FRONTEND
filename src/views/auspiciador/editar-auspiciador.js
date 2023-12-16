@@ -167,16 +167,16 @@ const EditarAuspiciador = () => {
                     <tbody>
                         {currentItems.map((elemento) => (
                             <tr key={elemento.id}>
-                                <td>{elemento.id}</td>
+                                <Td>{elemento.id}</Td>
                                 <Td>{elemento.nombre}</Td>
                                 <Td>{elemento.email}</Td>
-                                <td>
+                                <Td>
                                   <Flex justify-content='center' gap='2em' align-items='center'>
-                                    <Btn onClick={() => {setIdActual(elemento.id); setShowModal(true); setCurrentAuspiciador(elemento)}}  color="primary" style={{ fontSize: '1rem', padding: '0.375rem 0.75rem', width: '50px',marginRight: '5px' }}>
+                                    <Btn onClick={() => {setIdActual(elemento.id); setShowModal(true); setCurrentAuspiciador(elemento)}}  color="second" style={{ fontSize: '1.25rem', padding: '0.375rem 0.75rem', width: '50px',marginRight: '5px' }}>
                                         <FontAwesomeIcon icon={faPenToSquare} />
                                     </Btn>    
                                   </Flex>
-                                </td>
+                                </Td>
                                 
                             </tr>
                         ))}

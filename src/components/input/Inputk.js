@@ -12,6 +12,9 @@ const Inputk = ({
     onBlur,
     error,
     justify_content,
+    min,
+    max,
+    pattern
 }) => {
   return (
     <>
@@ -28,6 +31,9 @@ const Inputk = ({
               name={name} 
               type={type ?? 'text'} 
               disabled={disabled} 
+              min={min}
+              max={max}
+              pattern={pattern}
             />
           </Div>
             :
@@ -42,6 +48,9 @@ const Inputk = ({
               disabled={disabled}
               onChange={onChange}
               onBlur={onBlur}
+              min={min}
+              max={max}
+              pattern={pattern}
             />
           </Div>
       }
@@ -53,12 +62,20 @@ export default Inputk
 
 const Div = styled(Flex)`
 
-  input{
+  input[type= "text"], [type= "email"],{
     width: 72%;
     border-radius: 20em;
     padding: 0.2em 1em;
     border: none;
     outline: none;
+  }
+  input[type="number"]{
+    width: 72%;
+    border-radius: 20em;
+    padding: 0.2em 1em;
+    border: none;
+    outline: none;
+    margin-bottom: 10px;
   }
   label{
     display: block;

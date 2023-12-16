@@ -106,6 +106,12 @@ const CrearActividades =({idEvento}) => {
                show={showAlert}
             />  
 
+              <Alert
+               message="Las actividades creadas se han registrado correctamente"
+               onAcept={()=>{setShowAlert(false)}} 
+               show={showAlert}
+            />
+
             <Alert
                message="Ha sucedido un error inesperado al registrar tus actividades"
                onAcept={()=>{setShowAlertError(false)}} 
@@ -159,6 +165,12 @@ const CrearActividades =({idEvento}) => {
                                      <div style={{display: 'flex' ,marginTop:'0.1em',marginLeft: '10%' }}>
                                       < Btn onClick={addTask} >AGREGAR</Btn>
                                       </div>
+
+                                      <div style={{display: 'flex' ,marginTop:'0.1em',marginLeft: '50%' }}>
+                                      < Btn onClick={setIsModalOpen(false)} >CANCELAR</Btn>
+                                      </div>
+
+                                      
                                    </div> 
                                   
                                

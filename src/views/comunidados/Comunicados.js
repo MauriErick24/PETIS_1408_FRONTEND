@@ -9,6 +9,10 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useEffect } from "react";
 import api from '../../services/api'
+import Title from "../../components/Fonts/Title";
+import styled from "styled-components";
+import Btn from "../../components/Btn";
+import Flex from "../../components/Flex";
 
 
 
@@ -163,7 +167,7 @@ function Comunicados() {
     return (
         <>
             <div className="crud-container text-center" >
-                <h3
+                {/* <h3
                     style={{
                         color: 'black',
                         fontWeight: 'bold',
@@ -173,7 +177,8 @@ function Comunicados() {
                         marginBottom: '20px',
                         border:'none'
                     }}
-                >AGREGAR COMUNICADO A EVENTO</h3>
+                >AGREGAR COMUNICADO A EVENTO</h3> */}
+                <Title>AGREGAR COMUNICADO A EVENTO</Title>
                 <input
                     type="text"
                     placeholder="Buscar Evento... "
@@ -196,23 +201,25 @@ function Comunicados() {
                     <tbody>
                         {currentItems.map((elemento) => (
                             <tr key={elemento.id}>
-                                <td>{elemento.id}</td>
-                                <td>{elemento.nombre_evento}</td>
+                                <Td>{elemento.id}</Td>
+                                <Td>{elemento.nombre_evento}</Td>
                                 {/* <td>{elemento.Anime}</td>
                                 <td>{elemento.Telefono}</td> */}
-                                <td>{elemento.tipo_evento?.nombreTipo_evento}</td>
-                                <td>{elemento.comunicados_count}</td>
-                                <td>
+                                <Td>{elemento.tipo_evento?.nombreTipo_evento}</Td>
+                                <Td>{elemento.comunicados_count}</Td>
+                                <Td justify-Content='center'>
                                     {/* <Button color="primary" style={{ fontSize: '1rem', padding: '0.375rem 0.75rem', width: '50px',marginRight: '5px' }}>
                                         <FontAwesomeIcon icon={faPenToSquare} />
                                     </Button> */}
 
-                                    <Button  style={{ color: 'gray',border: 'none', background: 'none', fontSize: '1rem', width: '50px' }}
+                                    <Flex justify-content='center'>
+                                    <Button  style={{ color: '#D1741E',border: 'none', background: 'none', fontSize: '0.85rem', width: '50px' }}
                                             //onClick={toggleModal}
                                             onClick={() => toggleModal(elemento.id)}
                                             >
                                     <FontAwesomeIcon icon={faCirclePlus} size="2x" />
                                     </Button>
+                                    </Flex>
                                     <Modal isOpen={isModalOpen} toggle={toggleModal}>
                                         <ModalHeader 
                                             //toggle={toggleModal}
@@ -348,7 +355,7 @@ function Comunicados() {
                                         </ModalFooter>
                                     </Modal>
 
-                                </td>
+                                </Td>
                             </tr>
                         ))}
                     </tbody>
@@ -394,3 +401,19 @@ function Comunicados() {
 }
 
 export default Comunicados;
+
+const Td = styled.td`
+border: 1px solid #ddd;
+  padding: 8px;
+  max-width: 200px; 
+  word-wrap: break-word;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &:hover {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: initial;
+  }
+`

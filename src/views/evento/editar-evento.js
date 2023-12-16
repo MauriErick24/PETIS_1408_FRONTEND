@@ -125,21 +125,21 @@ const EditarEvento = ({showEditar, showEliminar}) => {
                     <tbody>
                         {currentItems.map((elemento) => (
                             <tr key={elemento.id}>
-                                <td>{elemento.id}</td>
-                                <td>{elemento.nombre_evento}</td>
-                                <td>{elemento.tipo_evento.nombreTipo_evento}</td>
+                                <Td>{elemento.id}</Td>
+                                <Td>{elemento.nombre_evento}</Td>
+                                <Td>{elemento.tipo_evento.nombreTipo_evento}</Td>
                                 {/* <td>{elemento.Telefono}</td>
                                 <td>{elemento.email}</td>
                                 <td>{elemento.AddresFavorite}</td> */}
-                                <td>
+                                <Td>
 
                                 <Flex justify-content='center'>
-                                     <Btn onClick={() => navigate(`/editar/evento/${elemento.id}`)}  color="primary" style={{ fontSize: '1rem', padding: '0.375rem 0.75rem', width: '50px',marginRight: '5px' }}>
+                                     <Btn onClick={() => navigate(`/editar/evento/${elemento.id}`)}  color="second" style={{ fontSize: '1.25rem', padding: '0.375rem 0.75rem', width: '50px',marginRight: '5px' }}>
                                         <FontAwesomeIcon icon={faPenToSquare} />
                                     </Btn>  
                                 </Flex>    
                                                                 
-                                </td>
+                                </Td>
                                 
                             </tr>
                         ))}
@@ -167,3 +167,19 @@ const EditarEvento = ({showEditar, showEliminar}) => {
 export default EditarEvento;
 
 const Button = styled.button``
+
+const Td = styled.td`
+border: 1px solid #ddd;
+  padding: 8px;
+  max-width: 200px; 
+  word-wrap: break-word;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &:hover {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: initial;
+  }
+`

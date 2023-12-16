@@ -173,11 +173,11 @@ const Afiche = (idEvento,showEditar, showEliminar) => {
                               <Td>{elemento.tipo_evento.nombreTipo_evento}</Td>
                               <Td>
                                 <Flex justify-content='center' gap='2em' align-items='center'>
-                                  <Td>
-                                  <Img src={elemento.imagen ? elemento.imagen : Imgn}/>
-                                  </Td>  
                                   
-                                  <Btn onClick={() => {setIdActual(elemento.id); setShowAfiche(true);}}  color="primary" style={{ fontSize: '1rem', padding: '0.375rem 0.75rem', width: '50px',marginRight: '5px' }}>
+                                  <Img src={elemento.imagen ? elemento.imagen : Imgn}/>
+                                    
+                                  
+                                  <Btn onClick={() => {setIdActual(elemento.id); setShowAfiche(true);}}  color="second" style={{ fontSize: '1rem', padding: '0.375rem 0.75rem', width: '50px',marginRight: '5px' }}>
                                       <FontAwesomeIcon icon={faImage} />
                                   </Btn>   
                                 </Flex>
@@ -210,8 +210,8 @@ const Afiche = (idEvento,showEditar, showEliminar) => {
 export default Afiche;
 
 const Img = styled.img`
-  width: 50px;
-  height: 50px:
+  width: 100px;
+  height: 100px:
 `
 
 const Td = styled.td`
