@@ -44,6 +44,40 @@ const GestionEvento = ({view, children}) => {
     const [showCrearOrganizador, setCrearOrganizador] = useState(false) //jledzma crear organizador 23/11/23
 
     const [showCascade, setShowCascade] = useState(false)
+
+    const [permisos, setPermisos] = useState({
+      crear: {
+        evento: true,
+        auspiciador: true, 
+        organizador: true,
+      },
+      agregar:{
+        auspiciador: true,
+        organizador:true,
+        afiche: true,
+        premios: true,
+        actividades: true,
+        comunicado: true,
+      },
+      editar:{
+        evento: true,
+        auspiciador: true,
+        //organizador: false,
+        //afiche: false,
+        //premios: false,
+        //actividades: false, 
+        //comunicado: false,
+      },
+      eliminar:{
+          evento: true,
+          auspiciador: true,
+         // organizador: false,
+          afiche: true,
+          premios: true,
+          //actividades: false, 
+          //comunicado: false,
+      }
+    })
     
     const handleClick = (editar, eliminar, crear,landing) => {
         setShowImg(landing);
@@ -75,24 +109,24 @@ const GestionEvento = ({view, children}) => {
             <Container>
               <Sidebar>
                 <Aside>
-                <ButtonCascade onClick={()=>setShowCrearCascade(!showCrearCascade)}>
+                <ButtonCascade onClick={() =>handleCascade(true, false, false, false)}>
                       <p>CREAR</p>
-                      { showCrearCascade && (<CascadeList cascade='crear' view={view}/>)}
+                      { showCrearCascade && (<CascadeList cascade='crear' view={permisos.crear}/>)}
                   </ButtonCascade>
 
-                  <ButtonCascade onClick={()=>setShowAgregarCascade(!showAgregarCascade)}>
+                  <ButtonCascade onClick={() => handleCascade(false, true, false, false)}>
                       <p>AGREGAR</p>
-                      { showAgregarCascade && (<CascadeList cascade='agregar' view={view}/>)}
+                      { showAgregarCascade && (<CascadeList cascade='agregar' view={permisos.agregar}/>)}
                   </ButtonCascade>
 
-                  <ButtonCascade onClick={()=>setShowEditarCascade(!showEditarCascade)}>
+                  <ButtonCascade onClick={() => handleCascade(false, false, true, false)}>
                       <p>EDITAR</p>
-                      { showEditarCascade && (<CascadeList cascade='editar' view={view}/>)}
+                      { showEditarCascade && (<CascadeList cascade='editar' view={permisos.editar}/>)}
                   </ButtonCascade>
 
-                  <ButtonCascade onClick={()=>setShowEliminarCascade(!showEliminarCascade)}>
+                  <ButtonCascade onClick={() =>handleCascade(false, false, false, true)}>
                       <p>ELIMINAR</p>
-                      { showEliminarCascade && (<CascadeList cascade='eliminar' view={view}/>)}
+                      { showEliminarCascade && (<CascadeList cascade='eliminar' view={permisos.eliminar}/>)}
                   </ButtonCascade>
                 </Aside>
               </Sidebar>
@@ -109,7 +143,7 @@ const GestionEvento = ({view, children}) => {
                 {showCrearActividades && (<CrearActividades/>)}
                 {showCrearOrganizador && (<Corganizador />)}  */}
 
-                {children ? children : (<img src={landing} alt="landing" width="100%" height="100%"/>)}
+                {children ? children : (<Img src={landing} alt="landing" />)}
 
               </Content>  
             </Container>
@@ -167,7 +201,7 @@ const Sidebar = styled.div`
 const Content = styled.div`
   
   width: 78%;
-  height: 655px;
+  height: 100%;
   background-color: #BDBB96;
   padding: 20px;
   border-radius: 15px;
@@ -187,6 +221,9 @@ const ButtonCascade = styled.div`
       padding: 0.4em 1em; 
      }
 `
-
+const Img = styled.img`
+  width: 135vh;
+  height: 70vh;
+`
 
 

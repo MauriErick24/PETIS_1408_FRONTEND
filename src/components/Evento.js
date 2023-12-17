@@ -7,6 +7,7 @@ import Img from '../assets/images/img-article.jpeg'
 import Confirm from './Confirm'
 import { useNavigate } from 'react-router-dom'
 import Alert from './Alert'
+import Flex from './Flex'
 
 const Evento = ({ data, onDelete, showAlert, onClick}) => {
   const [ show, setShow ] = useState(false)
@@ -43,10 +44,9 @@ const Evento = ({ data, onDelete, showAlert, onClick}) => {
       />
       
       <Article>
-        <header className='header-article'> 
-          <h3 className='article-component-rest'>{data.nombreTipo_evento}</h3>
-          {/* {buttonDelete && <button onClick={handleAlert}>x</button>} */}
-        </header>
+        <Flex > 
+          <H3>{data.nombreTipo_evento}</H3>
+        </Flex>
         
         <div className='img'>
           <img src={data.imagen} alt='imagen' />
@@ -64,6 +64,11 @@ const Evento = ({ data, onDelete, showAlert, onClick}) => {
 }
 
 export default Evento
+
+const H3 = styled.h3`
+  font-style: oblique;
+  font-weight: bold;
+`
 
 const Article = styled.article`
   width: 280px;

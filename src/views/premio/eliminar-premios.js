@@ -8,6 +8,7 @@ import { Modal, ModalHeader, ModalBody, ModalFooter, Input } from 'reactstrap'; 
 import api from '../../services/api'
 //import { useState } from "react";
 import { useEffect } from "react";
+import Title from "../../components/Fonts/Title";
 
 
 
@@ -216,17 +217,7 @@ function EliminarPremio() {
     return (
         <>
             <div className="crud-container text-center" >
-                <h3
-                    style={{
-                        color: 'black',
-                        fontWeight: 'bold',
-                        fontSize: '1.5rem',
-                        marginTop: '20px',
-                        textAlign: 'center',
-                        marginBottom: '20px',
-                        border:'none'
-                    }}
-                >ELIMINAR PREMIOS</h3>
+                <Title>ELIMINAR PREMIO</Title>
                 <input
                     type="text"
                     placeholder="Buscar Evento... "

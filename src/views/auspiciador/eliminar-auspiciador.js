@@ -16,6 +16,7 @@ import Alert from "../../components/Alert";
 import Spinner from '../../components/Spinner'
 import api from '../../services/api'
 import axios from 'axios'
+import Title from "../../components/Fonts/Title";
 
 const EliminarAuspiciador = ({showEditar, showEliminar}) => {
     
@@ -104,7 +105,7 @@ const EliminarAuspiciador = ({showEditar, showEliminar}) => {
                     <>
                     
             <Flex justify-content='center' flex-direction='column' align-items='center' text-align='center'>
-                <HeaderTitle title='ELIMINAR AUSPICIADORES' /> 
+               <Title>ELIMINAR AUSPICIADOR</Title> 
                 {/* <P>*Todos los eventos que sean eliminados no se podran recuperar</P> */}
             </Flex>
 

@@ -100,7 +100,7 @@ const EliminarEvento = ({showEditar, showEliminar}) => {
                     
             <Flex justify-content='center' flex-direction='column' align-items='center' text-align='center'>
                 {/* <HeaderTitle title='ELIMINAR EVENTOS' />  */}
-                <Title>ELIMINAR EVENTOS</Title>
+                <Title>ELIMINAR EVENTO</Title>
                 {/* <P>*Todos los eventos que sean eliminados no se podran recuperar</P> */}
             </Flex>
 

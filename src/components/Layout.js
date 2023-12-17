@@ -31,7 +31,7 @@ const ContentContainer = styled.div`
   padding: 1em 4em;
 
   &.detail {
-    width: 1400px;
+    width: 100%;
     margin: auto;
   }
 `;

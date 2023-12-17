@@ -233,7 +233,7 @@ function Aorganizador() {
                 >AGREGAR ORGANIZADOR A EVENTO</h3> */}
 
                 <Flex justify-content='center' >
-                    <Title>AGREGAR ORGANIZADOR A EVENTO</Title>
+                    <Title>AGREGAR ORGANIZADOR</Title>
                 </Flex>
 
                 <input

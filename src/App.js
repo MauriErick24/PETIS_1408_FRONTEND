@@ -65,6 +65,7 @@ function App() {
 
         {/* <Route path='/agregar/auspiciador' element={<GestionEvento view={'agregar'}><CrearOrganizador/></GestionEvento>}/> */}
         <Route path='/agregar/organizador' element={<GestionEvento view={'agregar'}><Aorganizador /></GestionEvento>}/>
+        <Route path='/agregar/auspiciador' element={<GestionEvento view={'agregar'}><h2>agregar auspiciador</h2></GestionEvento>}/>
         <Route path='/agregar/afiche' element={<GestionEvento view={'agregar'}><AgregarAfiche/></GestionEvento>}/>
         <Route path='/agregar/premios' element={<GestionEvento view={'agregar'}><AgregarPremio/></GestionEvento>}/>
         <Route path='/agregar/actividades' element={<GestionEvento view={'agregar'}><AgregarActividades/></GestionEvento>}/>

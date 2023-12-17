@@ -21,7 +21,8 @@ const P = styled.p`
     color:#d1d0bc;
     height: 30px; 
     padding-top: 6px;
-    padding-left: 35%;
+    padding-left: 2%;
+    padding-right:2%;
     padding-bottom: 10px;
     font-size: 22px;
     

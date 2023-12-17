@@ -257,20 +257,6 @@ function Visualizacionevento(){
   };
     return (
         <>  
-
-          {/* <Confirm
-            message='Es seguro de darse de BAJA de este evento?'
-            onAcept={()=>{setShowAlertConfirm(true); setShowAlertCancelar(false)}}
-            onClose={()=>setShowAlertCancelar(false)}
-            show={showAlertCancelar}
-          />
-
-            <Alert
-               message="se ha dado de BAJA exitosamente"
-               onAcept={()=>{setShowAlertConfirm(false); setIsSelected(false)}} 
-               show={showAlertConfirm}
-            />   */}
-
       <HeaderDetail nombreEvento={`${data.nombre_evento} ${data.id}`} tipoEvento={data.tipo_evento.nombreTipo_evento} />
 
 {/* 

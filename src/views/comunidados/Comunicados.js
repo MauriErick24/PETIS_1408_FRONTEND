@@ -178,7 +178,7 @@ function Comunicados() {
                         border:'none'
                     }}
                 >AGREGAR COMUNICADO A EVENTO</h3> */}
-                <Title>AGREGAR COMUNICADO A EVENTO</Title>
+                <Title>AGREGAR COMUNICADO</Title>
                 <input
                     type="text"
                     placeholder="Buscar Evento... "

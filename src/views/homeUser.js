@@ -8,6 +8,7 @@ import HeaderArticles from '../components/HeaderArticles';
 import Btn from "../components/Btn";
 
 import api from '../services/api'
+import Title from "../components/Fonts/Title";
 
 
 const HomeUser =()=>{
@@ -131,7 +132,7 @@ const HomeUser =()=>{
         <HeaderEventType types={types} onClick={changeFiltro}/>
         <Flex top='1%' align-items='center' justify-content='space-between'>
           
-          <H2>EVENTOS EN VIVO</H2> 
+          <Title>EVENTOS EN VIVO</Title> 
           <Btn onClick={() => navigate('/gestionar-eventos', {state: {datos: null}})}>GESTIONAR EVENTOS</Btn>
         
         </Flex>  
@@ -160,7 +161,7 @@ const HomeUser =()=>{
 
         </Fondo>
 
-        <H2>EVENTOS FUTUROS</H2>
+        <Title>EVENTOS FUTUROS</Title>
         <Div className="barra"/>
         <Fondo>
         <Flex className='event-content' flex-wrap='wrap' justify-content='space-evenly' gap='1em'>
@@ -182,7 +183,7 @@ const HomeUser =()=>{
         </Flex>
         </Fondo>
 
-        <H2>EVENTOS PASADOS</H2>
+        <Title>EVENTOS PASADOS</Title>
         <Div className="barra"/>
         <Fondo>
         <Flex className='event-content' flex-wrap='wrap' justify-content='space-evenly' gap='1em'>
@@ -217,6 +218,7 @@ const Fondo = styled.div`
   background-color: #99956E;
   padding: 2em 1em;
   border: solid 0.2em #000;
+  margin-bottom: 1.5em;
 `
 const H2 = styled.h1`
     border: solid 0.1em #000;

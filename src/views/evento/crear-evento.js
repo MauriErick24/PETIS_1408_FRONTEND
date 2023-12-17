@@ -202,7 +202,7 @@ const CrearEvento = ({data, eventCreated, idEvento}) => {
           {console.log("initial values ", formik.initialValues)}
 
             <Flex justify-content='center' >
-               <Title>CREAR EVENTO</Title>
+               <Title>INFORMACION DEL EVENTO</Title>
             </Flex>
 
             <Flex margin='0' flex-direction='column' gap='1em'  align-items='none'>

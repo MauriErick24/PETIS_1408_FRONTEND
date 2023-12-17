@@ -10,9 +10,7 @@ const CascadeList = ({cascade, view, children}) => {
     return(
        <Div>
              <Flex flex-direction='column' align-items='flex-end' gap='0.5em'  border-radius='2em'>
-                            {(cascade == 'agregar') ? 
-                              ("")
-                              :
+                            { view.evento &&
                               (
                                 <Option onClick={()=>{
                                   navigate(`/${cascade}/evento`)
@@ -21,53 +19,47 @@ const CascadeList = ({cascade, view, children}) => {
                                 }}>EVENTO</Option>
                                 
                               )}
-                            {
-                              cascade == 'agregar' ? 
-                              ('')
-                              :
+                            { view.auspiciador &&
                             (<Option onClick={()=>{
                                 navigate(`/${cascade}/auspiciador`)
                             //   handleCascade(false,false,true)
                             //   handleClick(false,false,false)
                               }}>AUSPICIADOR</Option> )}
 
-                             <Option onClick={()=>{
-                                navigate(`/${cascade}/organizador`)
-                            //   handleCascade(false,false,true)
-                            //   handleClick(false,false,false)
-                              }}>ORGANIZADOR</Option> 
+                            { view.organizador &&
+                              ( <Option onClick={()=>{
+                                  navigate(`/${cascade}/organizador`)
+                              //   handleCascade(false,false,true)
+                              //   handleClick(false,false,false)
+                                }}>ORGANIZADOR</Option> )}
 
-                            {cascade == 'crear' ? 
-                              ('')
-                              :
-                              (
-                                <>
-                                  <Option onClick={()=>{
+                               { view.afiche &&                              
+                                (<Option onClick={()=>{
                                      navigate(`/${cascade}/afiche`)
                                   //   handleCascade(false,false,true)
                                   //   handleClick(false,false,false)
-                                    }}>AFICHE</Option>  
+                                    }}>AFICHE</Option> )} 
 
-                                    <Option onClick={()=>{
+                                  { view.premios &&
+                                    (<Option onClick={()=>{
                                        navigate(`/${cascade}/premios`)
                                   //   handleCascade(false,false,true)
                                   //   handleClick(false,false,false)
-                                    }}>PREMIOS</Option> 
+                                    }}>PREMIOS</Option> )}
 
-                                    <Option onClick={()=>{
+                                  { view.actividades &&
+                                    (<Option onClick={()=>{
                                        navigate(`/${cascade}/actividades`)
                                   //   handleCascade(false,false,true)
                                   //   handleClick(false,false,false)
-                                    }}>ACTIVIDADES</Option>
+                                    }}>ACTIVIDADES</Option>)}
 
-                                    <Option onClick={()=>{
+                                  { view.comunicado &&
+                                    (<Option onClick={()=>{
                                        navigate(`/${cascade}/comunicados`)
                                   //   handleCascade(false,false,true)
                                   //   handleClick(false,false,false)
-                                    }}>COMUNICADO</Option>
-                                </>
-                              )  
-                            }
+                                    }}>COMUNICADO</Option>)}
              </Flex>
        </Div>
     )
