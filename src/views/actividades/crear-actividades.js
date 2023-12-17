@@ -167,8 +167,8 @@ const CrearActividades =({idEvento}) => {
                                       </div>
 
                                       <div style={{display: 'flex' ,marginTop:'0.1em',marginLeft: '50%' }}>
-                                      < Btn onClick={setIsModalOpen(false)} >CANCELAR</Btn>
-                                      </div>
+                                      < Btn onClick={()=>setIsModalOpen(false)} >CANCELAR</Btn>
+                                      </div>  
 
                                       
                                    </div> 

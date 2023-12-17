@@ -128,13 +128,13 @@ const CrearPatrocinador = ({ onClick }) => {
             </Flex>
         
             <Alert
-               message="Se ha registrado correctamente"
+               message="SE HA REGISTRADO CORRECTAMENTE"
                onAcept={()=>{setShowAlert(false)}} 
                show={showAlert}
             />  
 
             <Alert
-               message="Ha sucedido un error inesperado al guardar"
+               message="HA SUCEDIDO UN ERROR INESPERADO AL GUARDAR"
                onAcept={()=>{setShowAlertError(false)}} 
                show={showAlertError}
             />          

@@ -58,7 +58,7 @@ const ModalLayout = () => {
                     <p>Logotipo patrocinador</p>
                     <InputFilePreview
                         name='file' 
-                        buttonText='Seleccionar una imagen'
+                        buttonText='SELECCIONAR UNA IMAGEN'
                         width='200px'
                         font-size='18px'
                     />

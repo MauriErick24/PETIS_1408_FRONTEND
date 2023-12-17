@@ -403,7 +403,7 @@ const CreacionEvento = () => {
                   <h2 className='title-btn-file center'>Imagen del evento</h2>
                   <InputFilePreview 
                     name='file' 
-                    buttonText='Seleccionar una imagen'
+                    buttonText='SELECCIONAR UNA IMAGEN'
                     width='200px'
                     font-size='18px'
                   />
@@ -488,7 +488,7 @@ const CreacionEvento = () => {
                       <p>Afiche:</p>
                       <InputFilePreview
                         name='file2' 
-                        buttonText='Seleccionar una imagen'
+                        buttonText='SELECCIONAR UNA IMAGEN'
                         width='200px'
                         font-size='1.2em'
                       />

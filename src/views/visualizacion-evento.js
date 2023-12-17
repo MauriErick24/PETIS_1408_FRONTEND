@@ -443,9 +443,9 @@ function Visualizacionevento(){
                          <>
                            <Hr/>
                            <Paragraph>
-                              <Flex flex-direction="column" gap="1em" align-items="auto">
-                               <p> {actividad.nombre}</p>
-                                <Flex gap="1em" justify-content="center">
+                              <Flex flex-direction="column" gap="0.5em" align-items="auto">
+                               <P> {actividad.nombre}</P>
+                                <Flex gap="0.5em" justify-content="center">
                                   <p>{actividad.fecha_inicio}  </p>
                                   <p> {actividad.fecha_fin}</p>
                                 </Flex>
@@ -485,7 +485,8 @@ const Paragraph = styled.div`
 `
 
 const Hr = styled.hr`
-  border: solid 2px #787370;
+  border: solid 1px #787370;
+  margin:0;
 `
 
 const Container = styled.div`
@@ -511,8 +512,11 @@ const Img = styled.img`
 
 const P =styled.p`
     color: #000;
-    font-size: 17px;
+    font-size: 12px;
     font-weight: bold;
+    margin-top:0rem;
+    margin-bottom:0rem;
+    text-align:center;
 
     &#auspiciador{
         margin-left:1.1em;
