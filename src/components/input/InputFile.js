@@ -6,7 +6,7 @@ const FileInput = ({ onChange, accept, buttonText, name, ...rest }) => {
     const file = e.target.files[0];
     if (file) {
       // Puedes realizar cualquier lógica adicional con el archivo aquí
-      console.log('Nombre del archivo seleccionado:', file.name);
+      console.log('NOMBRE DEL ARCHIVO SELECCIONADO:', file.name);
     }
     onChange(e);
   };

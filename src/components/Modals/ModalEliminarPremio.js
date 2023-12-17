@@ -18,7 +18,7 @@ const ModalEliminarPremio = ({ isOpen, onClose, onEliminar }) => {
     >
       <h2>¿Estás seguro de que deseas eliminar este premio?</h2>
       <Btn onClick={handleEliminar}>Eliminar</Btn>
-      <Btn onClick={onClose}>Cancelar</Btn>
+      <Btn onClick={onClose}>CANCELAR</Btn>
     </Modal>
   );
 };

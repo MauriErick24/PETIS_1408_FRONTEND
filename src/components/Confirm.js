@@ -7,8 +7,8 @@ const Confirm = ({ title, message, onClose, onAcept, ...props }) => {
       {title && <h2 className='title'>{title}</h2>}
       {message && <p className='message'>{message}</p>}
       <div className='btn-content'>
-        <Btn onClick={onAcept}>Aceptar</Btn>
-        <Btn onClick={onClose} color='second'>Cancelar</Btn>
+        <Btn onClick={onAcept}>ACEPTAR</Btn>
+        <Btn onClick={onClose} color='second'>CANCELAR</Btn>
       </div>
     </Content>
   )

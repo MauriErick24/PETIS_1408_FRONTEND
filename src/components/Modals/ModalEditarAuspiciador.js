@@ -137,7 +137,7 @@ const ModalEditarAuspiciador = ({closeModal, data}) => {
             <P>Logotipo del auspiciador</P>
             <InputFilePreview
                 name='imagen' 
-                buttonText='Seleccionar una imagen'
+                buttonText='SELECCIONAR UNA IMAGEN'
                 width='200px'
                 font-size='1.2em'
                 imagen={data.imagen}
