@@ -11,7 +11,8 @@ import BubbleContainer from '../components/BubbleContainer';
 import BubbleIcon from '../components/BubbleIcon';
 import Input from '../components/input/Input';
 import Inputd from '../components/input/Inputd';
-
+import { faMugHot } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Imagen from '../assets/images/example-img.jpg';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
@@ -52,7 +53,7 @@ function Visualizacionevento(){
         // hora_inicio_actividades: "09:00:00",
         // hora_fin_actividades: "09:00:00",
         // telefono: 78327438,
-        // reglas: "no ser gay",
+        // reglas: "no ser",
         // detalle: "blba bla bla",
         // afiche: "nose que es un afiche",
         // contenido: "este es el contenido del evento",
@@ -100,7 +101,7 @@ function Visualizacionevento(){
     const [taskInput, setTaskInput] = useState('');
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
-
+    const [showInscribirseModal, setShowInscribirseModal] = useState(false);
     const [showModal, setShowModal]= useState(false)
     const [isSelected, setIsSelected] = useState(false);
     const [showAlertCancelar,setShowAlertCancelar] = useState(false)
@@ -201,8 +202,8 @@ function Visualizacionevento(){
 
     const customStyles = {
       content: {
-        width: '40%', // Puedes ajustar el ancho según tus necesidades
-        height: '40%', // Puedes ajustar la altura según tus necesidades
+        width: '35%', // Puedes ajustar el ancho según tus necesidades
+        height: '45%', // Puedes ajustar la altura según tus necesidades
         margin: 'auto',
         borderRadius: '30px', // Centrar el modal
         backgroundColor: '#BFBA8A'
@@ -255,6 +256,140 @@ function Visualizacionevento(){
     margin: '0.4em',
     width:'30%'
   };
+  const [showFormulario, setShowFormulario] = useState(false);
+  const [showCodigoModal, setShowCodigoModal] = useState(false);
+  const [showInscripcionExitosaModal, setShowInscripcionExitosaModal] = useState(false);
+  const [emailI, setemailI] = useState("");
+  const [ciI, setCiI] = useState("");
+  const [paisI, setPaisI] = useState("");
+  const [codigo, setCodigo] = useState("");
+  const [showConfirmacionModal, setShowConfirmacionModal] = useState(false);
+  const [emailIError, setemailIError] = useState("");
+  const [ciIError, setCiIError] = useState("");
+  const [paisIError, setPaisIError] = useState("");
+  const openFormularioModal = () => {
+    setShowFormulario(true);
+};
+
+const closeFormularioModal = () => {
+    setShowFormulario(false);
+};
+
+const openCodigoModal = () => {
+    setShowCodigoModal(true);
+};
+
+const closeCodigoModal = () => {
+    setShowCodigoModal(false);
+};
+
+const openInscripcionExitosaModal = () => {
+    setShowInscripcionExitosaModal(true);
+};
+
+const closeInscripcionExitosaModal = () => {
+    setShowInscripcionExitosaModal(false);
+};
+const [codigoAleatorio, setCodigoAleatorio] = useState(null);
+const [isFormValid, setIsFormValid] = useState(false);
+const handleInscribirse = () => {
+    const isemailIValid = validateemailI(emailI);
+    const isCiIValid = validateCi(ciI);
+    const isPaisIValid = validatePais(paisI);
+    if (isemailIValid && isCiIValid && isPaisIValid) {
+      setIsFormValid(true);
+
+      // Generar un código aleatorio de 5 dígitos
+      const nuevoCodigoAleatorio = Math.floor(10000 + Math.random() * 90000);
+
+      // Mostrar la alerta con el código
+      alert(`Tu código de inscripción es: ${nuevoCodigoAleatorio}`);
+
+      // Almacenar el código aleatorio generado
+      setCodigoAleatorio(nuevoCodigoAleatorio);
+
+      // Lógica de inscripción aquí
+
+      // Cerrar el modal después de la inscripción y abrir el modal del código
+      closeFormularioModal();
+      openCodigoModal();
+  } else {
+      setIsFormValid(false);
+  }
+};
+const handleCodigoAceptar = () => {
+  if (!validateCodigo(codigo)) {
+      return;
+  }
+  if (codigo === codigoAleatorio.toString()) {
+      // Lógica para verificar el código aquí
+
+      // Cerrar el modal de código después de verificar el código
+      closeCodigoModal();
+
+      // Abrir el modal de confirmación
+      openConfirmacionModal();
+  } else {
+      // Mostrar un mensaje de error (puedes personalizar según tus necesidades)
+      alert("Código incorrecto. Por favor, inténtalo de nuevo.");
+  }
+};
+
+const handleReenviarCodigo = () => {
+  alert(`Tu código de inscripción es: ${codigoAleatorio}`);
+// Puedes agregar aquí la lógica para reenviar el código si es necesario
+console.log("Código reenviado");
+};
+const openConfirmacionModal = () => {
+  setShowConfirmacionModal(true);
+};
+
+const closeConfirmacionModal = () => {
+  setShowConfirmacionModal(false);
+  
+};
+
+const validateemailI = (emailI) => {
+  const emailIRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailIRegex.test(emailI)) {
+      setemailIError("Ingrese un correo electrónico válido.");
+      return false;
+  }
+  setemailIError("");
+  return true;
+};
+
+
+const validateCi = (ciI) => {
+  const ciRegex = /^[0-9]+$/;
+  if (!ciRegex.test(ciI)) {
+      setCiIError("Ingrese solo números en la cédula de identidad.");
+      return false;
+  }
+  setCiIError("");
+  return true;
+};
+
+const validatePais = (paisI) => {
+  const paisRegex = /^[a-zA-Z]+$/;
+  if (!paisRegex.test(paisI)) {
+      setPaisIError("El nombre del país solo debe contener letras.");
+      return false;
+  }
+
+  if (paisI.length > 15) {
+      setPaisIError("El nombre del país no debe tener más de 15 caracteres.");
+      return false;
+  }
+  
+  setPaisIError("");
+  return true;
+};
+
+const validateCodigo = (codigo) => {
+  // Puedes agregar más lógica de validación según tus necesidades
+  return codigo.length > 0;
+};
     return (
         <>  
       <HeaderDetail nombreEvento={`${data.nombre_evento} ${data.id}`} tipoEvento={data.tipo_evento.nombreTipo_evento} />
@@ -268,17 +403,17 @@ function Visualizacionevento(){
                     <Img src={data.imagen} width="95%"/>
 
                   <Flex flex-direction='column' text-align='center' align-items = 'center' gap='0.5em'>
-                    <P>Duracion del evento</P>
-                    <P>{data.inicio_actividades} - {data.fin_actividades}</P>
+                  <P style={{ fontSize: '24px' }}>Duracion del evento</P>
+                  <P style={{ fontSize: '24px' }}>{data.inicio_actividades} - {data.fin_actividades}</P>
                   </Flex>
                   <Flex flex-direction='column' text-align='center' align-items = 'center' gap='0.5em'>
-                    <P>Fecha de inscripciones</P>
-                    <P>{data.inicio_inscripcion} - {data.fin_inscripcion}</P>
+                  <P style={{ fontSize: '24px' }}>Fecha de inscripciones</P>
+                  <P style={{ fontSize: '24px' }}>{data.inicio_inscripcion} - {data.fin_inscripcion}</P>
                   </Flex>
                   <Flex flex-direction='column' text-align='center'  gap='0.5em'>
-                    <P>CONTACTOS DEL EVENTO</P>
-                    <P>E-mail: {data.email}</P>
-                    <P>Telefono: {data.telefono}</P>
+                  <P style={{ fontSize: '24px' }}>CONTACTOS DEL EVENTO</P>
+                  <P style={{ fontSize: '24px' }}>E-mail: {data.email}</P>
+                  <P style={{ fontSize: '24px' }}>Telefono: {data.telefono}</P>
                   </Flex>
 
                   <Flex flex-direction='column' gap='0.1em'>
@@ -290,113 +425,110 @@ function Visualizacionevento(){
                     </BubbleContainer>
                   </Flex>
 
-                  <Btn onClick={() => (isSelected ? setShowAlertCancelar(true) : setShowModal(true))}>{isSelected ? "DAR DE BAJA" : "INSCRIBIRSE"}</Btn>
-
-                  {/* <boton2 onClick={openModal} >INSCRIBIRSE</boton2>
-                      <Flex>
-                                  <Modal
-                                              isOpen={openModal}
-                                              onRequestClose={closeModal}
-                                              contentLabel="Formulario de Registro"
-                                              style={customStyles}
-                                            >
-                                              <h2>Formulario de inscripción</h2>
-                  <form>
-                    <label style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                          <h2 style={ letra}>Correo Electronico</h2>
-                        <br /> 
-                          <input  style={ inputStyle} type="email" value={email}
-                            onChange={(e) => setEmail(e.target.value)} />
+                  <Btn onClick={openFormularioModal}>
+                    INSCRIBIRSE
+                </Btn>
+                <Modal
+                    isOpen={showFormulario}
+                    onRequestClose={closeFormularioModal}
+                    contentLabel="Formulario de Inscripción"
+                    style={customStyles}
+                >
+                    <h2 style={{ textAlign: 'center' }}>Formulario de Inscripción</h2>
+                    <form>
+                        <label style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+                            <h2 style={letra}>Correo Electrónico</h2>
+                            <br />
+                            <input style={inputStyle} type="emailI" value={emailI} onChange={(e) => setemailI(e.target.value)} />
+                            <span style={{ color: 'red' }}>{emailIError}</span>
                         </label>
                         <br />
-                    <div style={{ display: 'flex', flexDirection: 'row', }}>
-                      <label  >
+                        <div style={{ display: 'flex', flexDirection: 'row' }}>
+                          <label style={{ marginRight: '10px' }}>
+                            <h2 style={letra}>Cedula de identidad</h2>
+                            <input style={inputStyle} type="number" value={ciI} onChange={(e) => setCiI(e.target.value)} />
+                            <span style={{ color: 'red' }}>{ciIError}</span>
+                          </label>
+                          <label>
+                            <h2 style={letra}>País</h2>
+                            <input style={inputStyle} type="text" value={paisI} onChange={(e) => setPaisI(e.target.value)} />
+                            <span style={{ color: 'red' }}>{paisIError}</span>
+                          </label>
+                        </div>
 
-                              <h2 style={ letra}>Cedula de identidad</h2>
-                                <input style={ inputStyle}  type="number" value={Ci} onChange={(e) => setCi(e.target.value)} />
-                              </label>
-                            
-                              <label>
-                                <h2 style={letra}>País</h2>
-                                
-                                <input style={ inputStyle} type="text"  value={pais} onChange={(e) => setPais(e.target.value)}/>
-                              </label>
 
-                    </div>
-                  
-                    <br />
-                    <button type="button" style={ Boton1}>
-                      Aceptar
-                    </button>
-                    <button style={ Boton2} type="button" onClick={closeModal}>
-                      Cancelar
-                    </button>
-                    <form>
+                        <br />
+                        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '70%' }}>
+                          <Btn onClick={() => { if (emailI || ciI || paisI) { handleInscribirse(); } }} style={Boton1}>
+                            ACEPTAR
+                          </Btn>
+                          <Btn onClick={closeFormularioModal} style={Boton2}>
+                            CANCELAR
+                          </Btn>
+                        </div>
+                    </form>
+                </Modal>
 
-<Modal isOpen={openModal2}
-                  onRequestClose={closeModal}
-                  contentLabel="Verificacion de codigo"
-                  style={customStyles}>
-                    <h2>INGRESA EL CODIGO QUE TE ENVIAMOS A TU CORREO</h2>
-
-                  <div style={{display: 'flex', flexDirection: 'row', }}>
-                  <label  >
-
-                      <input style={ inputStyle}  type="number"  />
-                    </label>
-
-                    <label>
-                      <h2 style={letra}>País</h2>
-                      <button type="button" style={ Boton1} onClick={openModal}>
-                      ACEPTAR
-                            </button>
-                    </label>
-                                                                      
-                  </div>
-                  <div style={{display: 'flex', flexDirection: 'row', }}>
-                  <label  >
-
-                      <h1 style={{fontSize: '5px',textAlign:'center'}}>
-                        EN CASO DE QUE NO SE TENGA EL CODIGO, PRESIONE EL BOTÓN DE "REENVIAR CODIGO"
-
-                      </h1>
-                    </label>
-
-                    <label>
-                     
-                      <button type="button" style={ Boton1} >
-                              REENVIAR CODIGO
-                            </button>
-                    </label>
-                                                                      
-                  </div>
-
+                {/* Modal para ingresar código */}
+                <Modal
+                  isOpen={showCodigoModal}
+                  onRequestClose={closeCodigoModal}
+                  contentLabel="Verificación de Código"
+                  style={customStyles}
+                >
+                  <h2 style={{ textAlign: 'center' }}>INGRESA EL CODIGO QUE TE ENVIAMOS A TU CORREO</h2>
                   <div>
-                  <Modal isOpen={openModal3}  onRequestClose={closeModal}
-                  contentLabel="Verificacion de codigo"
-                  style={customStyles}>
-                    <h2>Usted se ha inscrito correctamente al evento</h2>
-                    <button type="button" style={ Boton1} onClick={closeModal}>
-                              ACEPTAR
-                            </button>
-
-                  </Modal>
-
+                    <br></br>
+                    <br></br>
+                  <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <label>
+                      <input style={inputStyle} type="text" value={codigo} onChange={(e) => setCodigo(e.target.value)} />
+                    </label>
+                    <Btn onClick={handleCodigoAceptar} style={Boton1}>
+                      ACEPTAR
+                    </Btn>
                   </div>
+                  <br></br>
+                  <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <p style={{ fontSize: '20px' }}>EN CASO DE QUE NO SE LE ENVIO, PRESIONE EL BOTÓN DE "REENVIAR CODIGO"</p>
+                    <Btn onClick={handleReenviarCodigo} style={Boton1}>
+                      REENVIAR CODIGO
+                    </Btn>
+                  </div>
+                  </div>
+                </Modal>
 
-</Modal>
-</form>
 
-
-</form>
+                {/* Modal de inscripción exitosa */}
+                <Modal
+                    isOpen={showConfirmacionModal}
+                    onRequestClose={closeConfirmacionModal}
+                    contentLabel="Confirmación de Inscripción"
+                    style={{
+                      content: {
+                        width: '40%',
+                        height: '40%',
+                        margin: 'auto',
+                        borderRadius: '30px',
+                        backgroundColor: '#BFBA8A',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      },
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <h2 style={{ textAlign: 'center', marginBottom: '10px' }}>Usted se ha inscrito correctamente al evento</h2>
+                      <FontAwesomeIcon icon={faMugHot} style={{ fontSize: '128px', marginLeft: '10px' }} />
+                    </div>
                   </Modal>
+
+                     
+
+
 
                       </Flex>
-
-
- */}
-
-                </Flex>
                 
                 
                   
