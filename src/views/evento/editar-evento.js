@@ -13,8 +13,11 @@ import Spinner from '../../components/Spinner'
 import api from '../../services/api'
 import axios from 'axios'
 
+import Confirm from '../../components/Confirm'
+
 import {useNavigate } from "react-router-dom";
 import Title from "../../components/Fonts/Title";
+import Alert from "../../components/Alert";
 
 const EditarEvento = ({showEditar, showEliminar}) => {
     const navigate = useNavigate()
@@ -39,6 +42,7 @@ const EditarEvento = ({showEditar, showEliminar}) => {
         // {id:11,Titulo: 'Gon', Tipo: 'Hunter x Hunter',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Blue Navy'}
     ];
 
+    const [modalConfirmCancelar, setModalConfirmCancelar] = useState(false)
     const [data, setData] = useState([
         {id:1,
         nombre_evento:"",
@@ -92,6 +96,9 @@ const EditarEvento = ({showEditar, showEliminar}) => {
 
     return (
         <>
+           
+            
+
             {loading ? (
                 <Spinner/>
                 ) : (

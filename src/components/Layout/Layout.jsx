@@ -187,9 +187,9 @@ const handleActualizarEvento = (nuevosDatos) => {
             {showCrearEvento && 
               <>
                 {!updateEvento ? 
-                (<CrearEvento data={data} eventCreated={setIsEventCreated} idEvento={setIdEventoCreado}/>) 
+                (<CrearEvento data={data} eventCreated={setIsEventCreated} idEvento={setIdEventoCreado} tituloEvento={'INFORMACION DEL EVENTO'}/>) 
                 :
-                (<CrearEvento eventCreated={setIsEventCreated} idEvento={setIdEventoCreado}/>)  
+                (<CrearEvento eventCreated={setIsEventCreated} idEvento={setIdEventoCreado} tituloEvento={'CREAR EVENTO'}/>)  
               }
               </>
             }

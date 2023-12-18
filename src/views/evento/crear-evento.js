@@ -16,6 +16,7 @@ import Alert from "../../components/Alert";
 import {useFormik} from "formik";
 import { useNavigate } from "react-router-dom";
 import Title from "../../components/Fonts/Title";
+import Confirm from "../../components/Confirm";
 
 let initialValues = {
   nombre_evento: '',
@@ -98,7 +99,7 @@ let initialValues = {
   }
 
 
-const CrearEvento = ({data, eventCreated, idEvento}) => {
+const CrearEvento = ({data, eventCreated, idEvento, tituloEvento}) => {
 
   const navigate = useNavigate();
   //console.log("data dentro del evento ",data)
@@ -136,6 +137,7 @@ const CrearEvento = ({data, eventCreated, idEvento}) => {
       if(data != null){
         updateData(values)
       }else{
+        
         sendData(values);
       }
       //console.log(values);
@@ -148,6 +150,7 @@ const CrearEvento = ({data, eventCreated, idEvento}) => {
   const[showAlertUpSuccesful,setShowAlertUpSuccesful]=useState(false)
   const [showAlertFail,setShowAlertFail] = useState(false)
   const [showAlertUpFail,setShowAlertUpFail]=useState(false)
+  const [modalConfirmCancelar, setModalConfirmCancelar] = useState(false)
 
   const [showp, setShowp] = useState(false)
 
@@ -201,13 +204,28 @@ const CrearEvento = ({data, eventCreated, idEvento}) => {
                  onAcept={()=>setShowAlertUpFail(false)}
                  show={showAlertUpFail}
           />
+
+            <Confirm
+                message="NO SE GUARDARÁ LA INFORMACIÓN QUE HA CAMBIADO."
+                onAcept={() => navigate('/gestionar-eventos')}
+                onClose={() =>setModalConfirmCancelar(false)}
+                show={modalConfirmCancelar}
+            />
+
+          <Confirm
+                message="¿ESTÁ SEGURO DE GUARDAR LOS CAMBIOS?"
+                onAcept={() => sendData()}
+                onClose={() =>setModalConfirmCancelar(false)}
+                show={modalConfirmCancelar}
+            />
+          
           
 
           <form onSubmit={formik.handleSubmit}>
           {console.log("initial values ", formik.initialValues)}
 
             <Flex justify-content='center' >
-               <Title>CREAR EVENTO</Title>
+               <Title>{tituloEvento}</Title>
             </Flex>
 
             <Flex margin='0' flex-direction='column' gap='1em'  align-items='none'>
@@ -461,8 +479,8 @@ const CrearEvento = ({data, eventCreated, idEvento}) => {
             </Flex>
 
           <Flex justify-content='center' top='2em' gap='1em'>
-            <Btn type='submit'onClick={initialValuesChecker()}>GUARDAR</Btn>
-            <Btn color = 'second' onClick={()=> navigate('/gestionar-eventos') }>CANCELAR</Btn>
+            <Btn type='submit'>GUARDAR</Btn>
+            <Btn color = 'second' onClick={ ()=> setModalConfirmCancelar(true)}>CANCELAR</Btn>
           </Flex>
           </form>
 

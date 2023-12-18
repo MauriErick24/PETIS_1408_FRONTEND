@@ -60,7 +60,7 @@ function App() {
           
         <Route path="/" element={<Layout><HomeUser /></Layout>} />
        
-        <Route path='/crear/evento' element={<GestionEvento view={'crear'}><CrearEvento/></GestionEvento>}/>
+        <Route path='/crear/evento' element={<GestionEvento view={'crear'}><CrearEvento tituloEvento={'CREAR EVENTO'}/></GestionEvento>}/>
         <Route path='/crear/auspiciador' element={<GestionEvento view={'crear'}><CrearAuspiciador/></GestionEvento>}/>
         <Route path='/crear/organizador' element={<GestionEvento view={'crear'}><CrearOrganizador/></GestionEvento>}/>
 
