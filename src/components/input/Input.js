@@ -12,7 +12,8 @@ const Input = ({
     onChange,
     onBlur,
     placeholder,
-    error
+    error,
+    min
 }) => {
   return (
     <>
@@ -29,6 +30,7 @@ const Input = ({
               type={type ?? 'text'} 
               placeholder={placeholder}
               disabled={disabled} 
+              min={min}
             />
           </Div>
             :
@@ -43,6 +45,7 @@ const Input = ({
               disabled={disabled}
               onChange={onChange}
               onBlur={onBlur}
+              min={min}
             />
           </Div>
       }

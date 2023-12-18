@@ -44,8 +44,8 @@ let initialValues = {
     let errors = {}
     if(!values.nombre_evento){
         errors.nombre_evento = 'Requerido'
-    }else if(values.nombre_evento.length < 2){
-        errors.nombre_evento = 'Debe contener 15 caracteres o mas'
+    }else if(values.nombre_evento.length < 3){
+        errors.nombre_evento = 'Debe contener 3 caracteres o mas'
     }else if(values.nombre_evento.length > 50){
         errors.nombre_evento = 'Debe contener 50 caracteres o menos'
     }else if(!/^[a-zA-Z0-9\s]+$/i.test(values.nombre_evento)){
@@ -55,6 +55,11 @@ let initialValues = {
     if(!values.inicio_inscripcion){
         errors.inicio_inscripcion = 'Requerido'
     }
+
+    if(values.inicio_inscripcion>values.fin_inscripcion){
+      errors.inicio_inscripcion = 'No se puede poner una fecha anterior'
+  }
+
     if(!values.fin_inscripcion){
         errors.fin_inscripcion = 'Requerido'
     }
@@ -64,7 +69,7 @@ let initialValues = {
     if(!values.lugar){
         errors.lugar = 'Requerido'
     }else if(values.lugar.length < 3){
-        errors.lugar = 'Debe contener 15 caracteres o mas'
+        errors.lugar = 'Debe contener 3 caracteres o mas'
     }else if(values.lugar.length > 50){
         errors.lugar = 'Debe contener 50 caracteres o menos'
     }else if(!/^[a-zA-Z0-9\s]+$/i.test(values.lugar)){
@@ -83,9 +88,9 @@ let initialValues = {
     // else if(!/^[0-9]{10}$/.test(values.telefono)){
     //     errors.telefono = 'formato invalido para el telefono'
     // }
-    else if(values.telefono.length < 8){
+    else if(values.telefono < 60000000){
         errors.telefono = 'Por lo menos debe contener 8 numeros'
-    }else if(values.telefono.length > 8){
+    }else if(values.telefono > 79999999){
         errors.telefono = 'Debe contener menos numeros'
     }
     
@@ -114,7 +119,7 @@ const CrearEvento = ({data, eventCreated, idEvento}) => {
         fin_actividades:'',
         hora_inicio_actividades:'',
         hora_fin_actividades:'',
-      
+        detalle:'',
         hora: '',
         lugar: '',
         email: '',
@@ -202,7 +207,7 @@ const CrearEvento = ({data, eventCreated, idEvento}) => {
           {console.log("initial values ", formik.initialValues)}
 
             <Flex justify-content='center' >
-               <Title>INFORMACION DEL EVENTO</Title>
+               <Title>CREAR EVENTO</Title>
             </Flex>
 
             <Flex margin='0' flex-direction='column' gap='1em'  align-items='none'>
@@ -423,6 +428,7 @@ const CrearEvento = ({data, eventCreated, idEvento}) => {
                             <Input 
                                 type='number'
                                 name='integrantes'
+                                min='2'
                                 // value={values.integrantes}
                                 // onChange={handleChange}
                                 // onBlur={handleBlur}
@@ -455,7 +461,7 @@ const CrearEvento = ({data, eventCreated, idEvento}) => {
             </Flex>
 
           <Flex justify-content='center' top='2em' gap='1em'>
-            <Btn type='submit'>GUARDAR</Btn>
+            <Btn type='submit'onClick={initialValuesChecker()}>GUARDAR</Btn>
             <Btn color = 'second' onClick={()=> navigate('/gestionar-eventos') }>CANCELAR</Btn>
           </Flex>
           </form>

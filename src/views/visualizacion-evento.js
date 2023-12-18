@@ -201,12 +201,15 @@ function Visualizacionevento(){
 
 
     const customStyles = {
+      overlay:{
+        backgroundColor:'#33333378'
+      },
       content: {
-        width: '35%', // Puedes ajustar el ancho según tus necesidades
-        height: '45%', // Puedes ajustar la altura según tus necesidades
+        width: '40%', // Puedes ajustar el ancho según tus necesidades
+        height: '55%', // Puedes ajustar la altura según tus necesidades
         margin: 'auto',
         borderRadius: '30px', // Centrar el modal
-        backgroundColor: '#BFBA8A'
+        backgroundColor: '#BFBA8A',
       },
     };
     const inputStyle = {
@@ -392,17 +395,20 @@ const validateCodigo = (codigo) => {
 };
     return (
         <>  
-      <HeaderDetail nombreEvento={`${data.nombre_evento} ${data.id}`} tipoEvento={data.tipo_evento.nombreTipo_evento} />
+      <HeaderDetail nombreEvento={`${data.nombre_evento}`} tipoEvento={data.tipo_evento.nombreTipo_evento} />
 
 {/* 
         {showModal && <ModalEquipos isSelected={setIsSelected} showModal={setShowModal}/>} */}
 
         <Flex justify-content='space-between'>
             <Asided>
+              
                 <Flex flex-direction='column'  text-align='center' gap='2em' align-items = 'center'>
+                    <Fondo>
                     <Img src={data.imagen} width="95%"/>
-
+                    </Fondo>
                   <Flex flex-direction='column' text-align='center' align-items = 'center' gap='0.5em'>
+                 
                   <P style={{ fontSize: '24px' }}>Duracion del evento</P>
                   <P style={{ fontSize: '24px' }}>{data.inicio_actividades} - {data.fin_actividades}</P>
                   </Flex>
@@ -505,6 +511,9 @@ const validateCodigo = (codigo) => {
                     onRequestClose={closeConfirmacionModal}
                     contentLabel="Confirmación de Inscripción"
                     style={{
+                      overlay:{
+                        backgroundColor:'#33333378'
+                      },
                       content: {
                         width: '40%',
                         height: '40%',
@@ -661,4 +670,10 @@ color: 'white',         // Color del texto
 fontSize:'20px',
 margin: '0.4em',
 width:'30%'
+`
+const Fondo = styled.div`
+  background-color: #99956e5c;
+  padding: 2em 1em;
+  border: solid 0.2em #000;
+  margin-bottom: 1.5em;
 `

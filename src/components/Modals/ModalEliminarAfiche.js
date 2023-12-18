@@ -106,8 +106,8 @@ const Img = styled.img`
 const Div = styled.div`
     
     position: fixed;
-    left: 35%;
-    top: 25%;
+    left: 40%;
+    top: 30%;
     display: flex;
     padding: 2em;
     height:auto;

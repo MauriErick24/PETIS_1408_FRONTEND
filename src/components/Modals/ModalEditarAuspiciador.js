@@ -165,8 +165,8 @@ const Div = styled.div`
   border-radius: 10px;
   padding: 2%;
   position: fixed;
-  left: 35%;
-  top: 25%;
+  left: 25%;
+  top: 15%;
   width: 50%;
 ` 
 const P = styled.p`

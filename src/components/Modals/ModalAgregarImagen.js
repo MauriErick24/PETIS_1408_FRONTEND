@@ -102,7 +102,7 @@ export default ModalCrearImagen;
 const Div = styled.div`
     
     position: fixed;
-    left: 35%;
+    left: 40%;
     top: 25%;
     display: flex;
     padding: 2em;
