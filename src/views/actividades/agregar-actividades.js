@@ -76,7 +76,7 @@ const AgregarActividades = () => {
       ]);
   
   
-    const [showAfiche, setShowAfiche] = useState(false) 
+    const [showActividades, setShowActividades] = useState(false) 
     const [idActual, setIdActual] = useState(null)
     const [loading, setLoading] = useState(true);
   
@@ -135,7 +135,7 @@ const AgregarActividades = () => {
                 ) : (
                     <>
                     
-                  { showAfiche && <ModalCrearActividad><CrearActividades idActual={idActual}/></ModalCrearActividad>}
+                  { showActividades && <ModalCrearActividad><CrearActividades idActual={idActual} setShowActividades={setShowActividades}/></ModalCrearActividad>}
                    
                     {/* <ModalCrear/> */}
                    
@@ -175,7 +175,7 @@ const AgregarActividades = () => {
                                   <Flex justify-content='center' gap='2em' align-items='center'>
                                     {/* <Img src={elemento.imagen ? elemento.imagen : Imgn}/>
                                     */}
-                                    <Btn onClick={() => {setIdActual(elemento.id); setShowAfiche(true)}}  style={{ color: '#D1741E',border: 'none', background: 'none', fontSize: '0.85rem', width: '50px' }}>
+                                    <Btn onClick={() => {setIdActual(elemento.id); setShowActividades(true)}}  style={{ color: '#D1741E',border: 'none', background: 'none', fontSize: '0.85rem', width: '50px' }}>
                                         <FontAwesomeIcon icon={faCirclePlus} size="2x"/>
                                     </Btn>    
                                   </Flex>

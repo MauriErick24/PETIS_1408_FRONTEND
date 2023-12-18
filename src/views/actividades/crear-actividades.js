@@ -12,13 +12,13 @@ import api from '../../services/api'
 import Title from "../../components/Fonts/Title";
 
 
-const CrearActividades =({idEvento}) => {
+const CrearActividades =({idEvento, setShowActividades}) => {
 
 
     
     const [showAlert, setShowAlert] = useState(false)
     const [showAlertError, setShowAlertError] = useState(false)
-    const [tasks, setTasks] = useState([]);
+    const [task, setTask] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [taskInput, setTaskInput] = useState('');
     const [startDate, setStartDate] = useState('');
@@ -52,15 +52,18 @@ const CrearActividades =({idEvento}) => {
         fecha_inicio: startDate,
         fecha_fin:endDate,
       };
-  
-      setTasks((prevTasks) => [...prevTasks, newTask]);
-      closeModal();
+      
+      
+      
+      setTask(newTask);
+      sendData(newTask);
+      setShowActividades(false);
     };
   
-    const deleteTask = (taskId) => {
-      const updatedTasks = tasks.filter((task) => task.id !== taskId);
-      setTasks(updatedTasks);
-    };
+    // const deleteTask = (taskId) => {
+    //   const updatedTasks = tasks.filter((task) => task.id !== taskId);
+    //   setTasks(updatedTasks);
+    // };
   
 
     useEffect(()=>{
@@ -69,32 +72,29 @@ const CrearActividades =({idEvento}) => {
         const fetchData = async () => {
           try {
             console.log(idEvento)
-            const response = await api.get(`/api/actividades/${idEvento}`)
-            setTasks(response.data)
+            //const response = await api.get(`/api/actividades/${idEvento}`)
+            //setTasks(response.data)
           } catch (error) {
             console.log(error)
-            setTasks([])
+            //setTasks([])
           }
         }
         fetchData();
       }
     },[])
 
-    const sendData = async() =>  {
-      if(tasks.length != 0){
-        
+    const sendData = async(newTask) =>  {
+      let dataToSend = {}
+      dataToSend = {idEvento, ...newTask}
+      console.log(dataToSend)
         try {
-          const response = await api.post('/api/actividades', tasks)
+          const response = await api.post('/api/actividades', dataToSend)
           console.log(response.data)
           setShowAlert(true) 
         } catch (error) {
           console.log(error)
           setShowAlertError(true)
         }
-      }else{
-        setShowAlertError(true)
-        
-      }
     }
 
 
@@ -166,41 +166,16 @@ const CrearActividades =({idEvento}) => {
                                       < Btn onClick={addTask} >AGREGAR</Btn>
                                       </div>
 
-                                      <div style={{display: 'flex' ,marginTop:'0.1em',marginLeft: '50%' }}>
-                                      < Btn onClick={()=>setIsModalOpen(false)} >CANCELAR</Btn>
-                                      </div>  
+                                    
 
                                       
                                    </div> 
-                                  
-                               
-                                  
-                        
+
                                 </div> 
                      
                     )}
-                    <ul style={{display: 'flex', alignItems: 'center', flexDirection:'column'}} >
-                        {(tasks.map((task) => (
-                        <li key={task.id} style={{backgroundColor: 'white',  // Color de fondo rojo
-                           // Bordes redondeados
-                        padding: '5px 20px',
-                        marginTop:'git 0.8em',
-                        border: '3px solid black',    // Relleno interior
-                        color: 'black', width:'70%' 
-                        ,
-                        }}>           
-                            
-                                <p  >{task.task} </p> 
-                                <p >{task.fecha_inicio} - {task.fecha_fin}</p>
-                              
-                
-                                <Btn color='second' onClick={() => deleteTask(task.id)}>x</Btn>
-                            
-                        </li>
-                        )))}
-                    </ul>
                     </div>
-                    < Btn type='submit'onClick={()=>sendData()}  style={{marginTop:'25px' }}>ACEPTAR</Btn>  
+                    < Btn color='second' type='submit'onClick={()=>setShowActividades(false)}  style={{marginTop:'25px' }}>CANCELAR</Btn>  
                     
         </>//< Btn type='submit'onClick={()=>console.log(tasks)}  style={{marginTop:'25px' }}>ACEPTAR</Btn>
     )
