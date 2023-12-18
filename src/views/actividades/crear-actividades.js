@@ -12,10 +12,9 @@ import api from '../../services/api'
 import Title from "../../components/Fonts/Title";
 
 
-const CrearActividades =({idEvento, setShowActividades}) => {
+const CrearActividades =({idActual, setShowActividades,setRefresh,refresh}) => {
 
-
-    
+    const [idnuevo,setIdnuevo]=useState('');
     const [showAlert, setShowAlert] = useState(false)
     const [showAlertError, setShowAlertError] = useState(false)
     const [task, setTask] = useState('');
@@ -54,10 +53,10 @@ const CrearActividades =({idEvento, setShowActividades}) => {
       };
       
       
-      
+      console.log(task)
       setTask(newTask);
       sendData(newTask);
-      setShowActividades(false);
+      //setShowActividades(false);
     };
   
     // const deleteTask = (taskId) => {
@@ -67,11 +66,12 @@ const CrearActividades =({idEvento, setShowActividades}) => {
   
 
     useEffect(()=>{
-      console.log(idEvento)
-      if(idEvento){
+      //setIdnuevo(idActual)
+      console.log(idActual)
+      if(idActual){
         const fetchData = async () => {
           try {
-            console.log(idEvento)
+            console.log(idActual)
             //const response = await api.get(`/api/actividades/${idEvento}`)
             //setTasks(response.data)
           } catch (error) {
@@ -85,12 +85,13 @@ const CrearActividades =({idEvento, setShowActividades}) => {
 
     const sendData = async(newTask) =>  {
       let dataToSend = {}
-      dataToSend = {idEvento, ...newTask}
+      dataToSend = {idActual, ...newTask}
       console.log(dataToSend)
         try {
-          const response = await api.post('/api/actividades', dataToSend)
+          const response = await api.post('/api/asignarActividades', dataToSend)
           console.log(response.data)
           setShowAlert(true) 
+          setRefresh(!refresh)
         } catch (error) {
           console.log(error)
           setShowAlertError(true)
@@ -101,19 +102,13 @@ const CrearActividades =({idEvento, setShowActividades}) => {
     return(
         <>   
         <Alert
-               message="Las actividades creadas se han registrado correctamente"
+               message="LAS ACTIVIDADES CREADAS SE HAN REGISTRADO CORRECTAMENTE"
                onAcept={()=>{setShowAlert(false)}} 
                show={showAlert}
             />  
 
-              <Alert
-               message="Las actividades creadas se han registrado correctamente"
-               onAcept={()=>{setShowAlert(false)}} 
-               show={showAlert}
-            />
-
             <Alert
-               message="Ha sucedido un error inesperado al registrar tus actividades"
+               message="HA SUCEDIDO UN ERROR INESPERADO AL REGISTRAR TUS ACTIVIDADES"
                onAcept={()=>{setShowAlertError(false)}} 
                show={showAlertError}
             />          

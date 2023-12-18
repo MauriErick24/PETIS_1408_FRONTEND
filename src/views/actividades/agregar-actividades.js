@@ -36,6 +36,7 @@ import Title from '../../components/Fonts/Title';
 
 const AgregarActividades = () => {
     const navigate = useNavigate()
+    const [refresh, setRefresh] = useState(false)
 
     const data2 = [{
         id:1,
@@ -44,29 +45,18 @@ const AgregarActividades = () => {
             nombreTipo_evento:""
         }
     }
-        // {id:1,Titulo: 'Naruto jorge ledezma ', Tipo: 'Naruto jorge ledezma',Telefono: 1234456887, email: 'jorge@mail.com', Address: 'Calle 1',AddresFavorite:'Blue Navy'},
-        // {id:2,Titulo: 'Goku', Tipo: 'Dragon Ball',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'red'},
-        // {id:3,Titulo: 'Luffy', Tipo: 'One Piece',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Aqua'},
-        // {id:4,Titulo: 'Tanjiro', Tipo: 'Kimetsu no Yaiba',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'salmon'},
-        // {id:5,Titulo: 'Eren', Tipo: 'Shingeki no Kyojin',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Pink'},
-        // {id:6,Titulo: 'Kenshin', Tipo: 'Rurouni Kenshin',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Blue Navy'},
-        // {id:7,Titulo: 'Edward', Tipo: 'Full Metal Alchemist',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Blue Navy'},
-        // {id:8,Titulo: 'Yusuke', Tipo: 'Yu Yu Hakusho',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Blue Navy'},
-        // {id:9,Titulo: 'Seiya', Tipo: 'Caballeros del Zodiaco',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Blue Navy'},
-        // {id:10,Titulo: 'Ichigo', Tipo: 'Bleach',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Blue Navy'},
-        // {id:11,Titulo: 'Gon', Tipo: 'Hunter x Hunter',Telefono: 1234, email: 'jorge@mail.com', AddresFavorite:'Blue Navy'}
     ];
   
     const [data, setData] = useState([
         {id:1,
-        nombre:"jaljdlasd;la;asd;lfajsdfuiyqdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddduwiejasdca;ahldfhlaksdhfisudhfh",
+        nombre_evento:"jaljdlasd;la;asd;lfajsdfuiyqdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddduwiejasdca;ahldfhlaksdhfisudhfh",
         tipo_evento:{
             nombreTipo_evento:"asdfadddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddsdfasdfadfasdfadfadfasd"
         },
         imagen:'../../assets/images/1.png'
         },
         {id:2,
-          nombre:"asdfasdasd;la;asd;lfajsdfuiyqdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddduwiejasdca;ahldfhlaksdhfisudhfh",
+          nombre_evento:"asdfasdasd;la;asd;lfajsdfuiyqdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddduwiejasdca;ahldfhlaksdhfisudhfh",
           tipo_evento:{
               nombreTipo_evento:"asdfadddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddsdfasdfadfasdfadfadfasd"
           },
@@ -85,9 +75,9 @@ const AgregarActividades = () => {
     useEffect(() => {
         const fetchData = async () => {
           try {
-           const response = await api.get('api/actividades');
+           const response = await api.get('api/cantActividades');
             setData(response.data);
-  
+            console.log(response.data)
             //console.log(response.data);
           } catch (error) {
             console.error('Error fetching data:', error);
@@ -97,7 +87,7 @@ const AgregarActividades = () => {
         };
       
         fetchData();
-      }, []); 
+      }, [refresh]); 
       
       
     
@@ -111,7 +101,7 @@ const AgregarActividades = () => {
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   
     const filteredData = data.filter(elemento =>
-        elemento.nombre.toLowerCase().startsWith(searchTerm.toLowerCase())
+        elemento.nombre_evento.toLowerCase().startsWith(searchTerm.toLowerCase())
     );
   
     const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
@@ -125,6 +115,11 @@ const AgregarActividades = () => {
         setSearchTerm(event.target.value);
         setCurrentPage(1); 
     };
+
+    const mostrarId=async(value)=>{
+        console.log(value)
+        setIdActual(value)
+    }
   
     return (
         <>
@@ -134,8 +129,7 @@ const AgregarActividades = () => {
                 <Spinner/>
                 ) : (
                     <>
-                    
-                  { showActividades && <ModalCrearActividad><CrearActividades idActual={idActual} setShowActividades={setShowActividades}/></ModalCrearActividad>}
+                  { showActividades && <ModalCrearActividad><CrearActividades idActual={idActual} setShowActividades={setShowActividades} setRefresh={setRefresh} refresh={refresh}/></ModalCrearActividad>}
                    
                     {/* <ModalCrear/> */}
                    
@@ -154,9 +148,9 @@ const AgregarActividades = () => {
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>NOMBRE</th>
-                            <th>FECHA INICIO</th>
-                            <th>FECHA FIN</th>
+                            <th>EVENTO</th>
+                            <th>TIPO EVENTO</th>
+                            <th>#ACTIVIDADES</th> 
                             {/* <th>Telefono</th>
                             <th>Email</th>
                             <th>Address</th> */}
@@ -168,14 +162,14 @@ const AgregarActividades = () => {
                         {currentItems.map((elemento) => (
                             <tr key={elemento.id}>
                                 <Td>{elemento.id}</Td>
-                                <Td>{elemento.nombre}</Td>
-                                <Td>{elemento.fecha_inicio}</Td>
-                                <Td>{elemento.fecha_fin}</Td>
+                                <Td>{elemento.nombre_evento}</Td>
+                                <Td>{elemento.tipo_evento.nombreTipo_evento}</Td>
+                                <Td>{elemento.actividades_count}</Td>
                                  <Td>
                                   <Flex justify-content='center' gap='2em' align-items='center'>
                                     {/* <Img src={elemento.imagen ? elemento.imagen : Imgn}/>
                                     */}
-                                    <Btn onClick={() => {setIdActual(elemento.id); setShowActividades(true)}}  style={{ color: '#D1741E',border: 'none', background: 'none', fontSize: '0.85rem', width: '50px' }}>
+                                    <Btn onClick={() => {mostrarId(elemento.id);setIdActual(elemento.id); setShowActividades(true)}}  style={{ color: '#D1741E',border: 'none', background: 'none', fontSize: '0.85rem', width: '50px' }}>
                                         <FontAwesomeIcon icon={faCirclePlus} size="2x"/>
                                     </Btn>    
                                   </Flex>

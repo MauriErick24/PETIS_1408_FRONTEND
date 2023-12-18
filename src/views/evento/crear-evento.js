@@ -19,6 +19,7 @@ import Title from "../../components/Fonts/Title";
 import Confirm from "../../components/Confirm";
 
 let initialValues = {
+  detalle:'',
   nombre_evento: '',
   tipoEvento_id: 1,
   inicio_inscripcion: '',
@@ -51,6 +52,10 @@ let initialValues = {
         errors.nombre_evento = 'Debe contener 50 caracteres o menos'
     }else if(!/^[a-zA-Z0-9\s]+$/i.test(values.nombre_evento)){
         errors.nombre_evento = 'Solo letras y numeros'
+    }
+  
+   if(values.detalle.length > 250){
+      errors.detalle = 'Debe contener 250 caracteres o menos'
     }
 
     if(!values.inicio_inscripcion){
@@ -125,6 +130,7 @@ const CrearEvento = ({data, eventCreated, idEvento, tituloEvento}) => {
         lugar: '',
         email: '',
         telefono: '',
+        detalle:'',
         }
     }
 
@@ -137,7 +143,6 @@ const CrearEvento = ({data, eventCreated, idEvento, tituloEvento}) => {
       if(data != null){
         updateData(values)
       }else{
-        
         sendData(values);
       }
       //console.log(values);
@@ -209,7 +214,7 @@ const CrearEvento = ({data, eventCreated, idEvento, tituloEvento}) => {
             <Confirm
                 message="NO SE GUARDARÁ LA INFORMACIÓN QUE HA CAMBIADO."
                 onAcept={() => navigate('/gestionar-eventos')}
-                onClose={() =>setModalConfirmCancelar(false)}
+                onClose={() =>{setModalConfirmCancelar(false);}}
                 show={modalConfirmCancelar}
             />
 
@@ -469,12 +474,13 @@ const CrearEvento = ({data, eventCreated, idEvento, tituloEvento}) => {
                         label='Detalles:'
                          value={formik.values.detalle}
                         onChange={formik.handleChange}
-                        // onBlur={handleBlur} 
-                        // disabled={!options.detalles} 
+                        onBlur={formik.handleBlur} 
+                        //disabled={!options.detalles} 
                     />
-                    {/* {touched.detalle && errors.detalle && (
-                        <ErrorMessage>{errors.detalle}</ErrorMessage>
-                    )} */}
+                    {formik.touched.detalle && formik.errors.detalle && (
+                        // 
+                        <div className='error'>{formik.errors.detalle}</div>)}
+                    {/* )} */}
                     </Flex>
                 </Flex>
             </Flex>
