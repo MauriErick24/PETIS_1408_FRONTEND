@@ -150,7 +150,7 @@ const EliminarAfiche = () => {
           <div className="crud-container text-center" >
               <input
                   type="text"
-                  placeholder="Buscar por personaje"
+                  placeholder="Buscar Evento..."
                   value={searchTerm}
                   onChange={handleSearch}
               />
@@ -158,12 +158,12 @@ const EliminarAfiche = () => {
                   <thead>
                       <tr>
                           <th>ID</th>
-                          <th>Titulo</th>
-                          <th>Tipo</th>
+                          <th>EVENTO</th>
+                          <th>TIPO EVENTO</th>
                           {/* <th>Telefono</th>
                           <th>Email</th>
                           <th>Address</th> */}
-                          <th>Acciones</th>
+                          <th>ACCIONES</th>
                           
                       </tr>
                   </thead>

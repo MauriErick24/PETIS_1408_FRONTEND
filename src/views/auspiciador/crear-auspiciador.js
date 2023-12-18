@@ -40,8 +40,8 @@ const CrearPatrocinador = ({ onClick }) => {
         let errors = {}
         if(!values.nombre){
             errors.nombre = 'Requerido'
-        }else if(values.nombre.length < 15){
-            errors.nombre = 'Debe contener 15 caracteres o mas'
+        }else if(values.nombre.length < 3){
+            errors.nombre = 'Debe contener 3 caracteres o mas'
         }else if(values.nombre.length > 50){
             errors.nombre = 'Debe contener 50 caracteres o menos'
         }else if(!/^[a-zA-Z0-9\s]+$/i.test(values.nombre)){
@@ -197,7 +197,7 @@ const CrearPatrocinador = ({ onClick }) => {
                 
                     <InputFilePreview
                         name='imagen'
-                        buttonText='Selecciona una imagen'
+                        buttonText='SELECCIONA UNA IMAGEN'
                         width='200px'
                         widthDiv='auto'
                         font-size='18px'

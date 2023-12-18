@@ -189,12 +189,12 @@ function Comunicados() {
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Personaje</th>
+                            <th>EVENTO</th>
                             {/* <th>Anime</th>
                             <th>Telefono</th> */}
-                            <th>Email</th>
-                            <th>#Com</th>
-                            <th>Agregar</th>
+                            <th>TIPO EVENTO</th>
+                            <th>#COM</th>
+                            <th>AGREGAR</th>
                             
                         </tr>
                     </thead>
@@ -213,12 +213,12 @@ function Comunicados() {
                                     </Button> */}
 
                                     <Flex justify-content='center'>
-                                    <Button  style={{ color: '#D1741E',border: 'none', background: 'none', fontSize: '0.85rem', width: '50px' }}
+                                    <Btn  style={{ color: '#D1741E',border: 'none', background: 'none', fontSize: '0.85rem', width: '50px' }}
                                             //onClick={toggleModal}
                                             onClick={() => toggleModal(elemento.id)}
                                             >
                                     <FontAwesomeIcon icon={faCirclePlus} size="2x" />
-                                    </Button>
+                                    </Btn>
                                     </Flex>
                                     <Modal isOpen={isModalOpen} toggle={toggleModal}>
                                         <ModalHeader 

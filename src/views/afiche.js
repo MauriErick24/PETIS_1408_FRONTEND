@@ -117,7 +117,7 @@ const Afiche = (idEvento,showEditar, showEliminar) => {
           <div className="crud-container text-center" >
               <input
                   type="text"
-                  placeholder="Buscar por personaje"
+                  placeholder="Buscar Evento..."
                   value={searchTerm}
                   onChange={handleSearch}
               />

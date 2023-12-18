@@ -17,6 +17,7 @@ import '../../assets/css/Crud.css'
 //import { Table, Button, Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrashCan,faImage, faAdd } from '@fortawesome/free-solid-svg-icons';
+import {faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 
 import styled from "styled-components";
 import Btn from "../../components/Btn";
@@ -145,7 +146,7 @@ const AgregarActividades = () => {
             <div className="crud-container text-center" >
                 <input
                     type="text"
-                    placeholder="Buscar por personaje"
+                    placeholder="Buscar Evento..."
                     value={searchTerm}
                     onChange={handleSearch}
                 />
@@ -174,8 +175,8 @@ const AgregarActividades = () => {
                                   <Flex justify-content='center' gap='2em' align-items='center'>
                                     {/* <Img src={elemento.imagen ? elemento.imagen : Imgn}/>
                                     */}
-                                    <Btn onClick={() => {setIdActual(elemento.id); setShowAfiche(true)}}  color="second" style={{ fontSize: '1rem', padding: '0.375rem 0.75rem', width: '50px',marginRight: '5px' }}>
-                                        <FontAwesomeIcon icon={faAdd} />
+                                    <Btn onClick={() => {setIdActual(elemento.id); setShowAfiche(true)}}  style={{ color: '#D1741E',border: 'none', background: 'none', fontSize: '0.85rem', width: '50px' }}>
+                                        <FontAwesomeIcon icon={faCirclePlus} size="2x"/>
                                     </Btn>    
                                   </Flex>
                                 </Td> 

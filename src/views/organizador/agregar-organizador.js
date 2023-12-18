@@ -143,7 +143,7 @@ const AgregarOrganizador = (idEvento,showEditar, showEliminar) => {
           <div className="crud-container text-center" >
               <input
                   type="text"
-                  placeholder="Buscar por personaje"
+                  placeholder="Buscar por nombre"
                   value={searchTerm}
                   onChange={handleSearch}
               />

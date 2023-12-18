@@ -10,6 +10,7 @@ import api from '../../services/api'
 import { useEffect } from "react";
 import Flex from "../../components/Flex";
 import Title from "../../components/Fonts/Title";
+import styled from "styled-components";
 
 
 
@@ -197,7 +198,7 @@ function Aorganizador() {
         try{
             //console.log(jsonout)
             //const response=await api.post('/api/asignarOrganizador',jsonout)
-            const response=await api.get(`api/distintos/${values}`)
+            const response=await api.get(`api/distintosO/${values}`)
             setTableData(response.data)
             console.log(response.data)
             }catch(error){
@@ -256,11 +257,12 @@ function Aorganizador() {
                     <tbody>
                         {currentItems.map((elemento) => (
                             <tr key={elemento.id}>
-                                <td>{elemento.id}</td>
-                                <td>{elemento.nombre_evento}</td>
-                                <td>{elemento.tipo_evento.nombreTipo_evento}</td>
-                                <td>{elemento.organizadores_count}</td>
-                                <td>
+                                <Td>{elemento.id}</Td>
+                                <Td>{elemento.nombre_evento}</Td>
+                                <Td>{elemento.tipo_evento.nombreTipo_evento}</Td>
+                                <Td>{elemento.organizadores_count}</Td>
+                                <Td>
+                                    <Div>
                                     <Button  style={{ color: '#D1741E',border: 'none', background: 'none', fontSize: '1rem', width: '50px' }}
                                             
                                             onClick={() => {
@@ -271,6 +273,7 @@ function Aorganizador() {
                                             >
                                     <FontAwesomeIcon icon={faCirclePlus} size="2x" />
                                     </Button>
+                                    </Div>
                                     <Modal isOpen={isModalOpen} toggle={toggleModal}>
                                         <ModalHeader 
                                             style={{
@@ -432,7 +435,7 @@ function Aorganizador() {
                                         </ModalFooter>
                                     </Modal>
                                     
-                                </td>
+                                </Td>
                             </tr>
                         ))}
                     </tbody>
@@ -478,3 +481,23 @@ function Aorganizador() {
 }
 
 export default Aorganizador;
+
+const Div=styled.div`
+text-align:center;
+`
+
+const Td = styled.td`
+border: 1px solid #ddd;
+  padding: 8px;
+  max-width: 200px; 
+  word-wrap: break-word;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &:hover {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: initial;
+  }
+`

@@ -10,7 +10,7 @@ const Footer = () => {
       </div>
 
       <nav>
-        <Link className='link' to='' >contactanos</Link>
+        <Link className='link' to='' >Contactanos</Link>
       </nav>
     </Div>
   )
@@ -28,11 +28,11 @@ const Div = styled.footer`
 
   .content-copy{
     h3{
-      font-size: 0.4375rem;
+      font-size: 0.7rem;
     }
 
     p{
-      font-size: 0.375rem;
+      font-size: 0.5rem;
       margin-top: 1em;
     }
   }

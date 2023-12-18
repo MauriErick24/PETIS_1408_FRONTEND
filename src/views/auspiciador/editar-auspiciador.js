@@ -147,7 +147,7 @@ const EditarAuspiciador = () => {
             <div className="crud-container text-center" >
                 <input
                     type="text"
-                    placeholder="Buscar por nombre"
+                    placeholder="Buscar por nombre..."
                     value={searchTerm}
                     onChange={handleSearch}
                 />
@@ -155,12 +155,12 @@ const EditarAuspiciador = () => {
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Nombre</th>
-                            <th>Correo</th>
+                            <th>NOMBRE</th>
+                            <th>CORREO</th>
                             {/* <th>Telefono</th>
                             <th>Email</th>
                             <th>Address</th> */}
-                            <th>Acciones</th>
+                            <th>ACCIONES</th>
                             
                         </tr>
                     </thead>

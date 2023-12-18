@@ -120,6 +120,7 @@ function CrearOrganizador(){
                     
                     <Div className = "cajita">
                         <label class="one" for="organizador">Nombre de organizador : </label>
+                        <label><span style={{color:"red"}}>*</span></label>
                         <input type="text" 
                         name="nombre" 
                         id="nombre"
@@ -132,24 +133,28 @@ function CrearOrganizador(){
                     
                     <Div className = "cajita">
                         <label class="one" for="representante">Representante legal : </label>
+                        <label><span style={{color:"red"}}>*</span></label>
                         <input type="text" name="representante" id="representante" onChange={formik.handleChange} 
                         onBlur={formik.handleBlur} value={formik.values.representante}/>  
                         {formik.touched.representante && formik.errors.representante ? <div className="error">{formik.errors.representante}</div> : null}
                     </Div>
                     <Div className = "cajita">
                         <label class="one" for="email">Email : </label>
+                        <label><span style={{color:"red"}}>*</span></label>
                         <input type="email" name="email" id="email" onChange={formik.handleChange} 
                         onBlur={formik.handleBlur} value={formik.values.Email}/>  
                         {formik.touched.email && formik.errors.email ? <div className="error">{formik.errors.email}</div> : null}
                     </Div>
                     <Div className = "cajita">
                         <label className="one" for="telefono">Telefono : </label>
+                        <label><span style={{color:"red"}}>*</span></label>
                         <input type="number" name="telefono" id="telefono" onChange={formik.handleChange} 
                         onBlur={formik.handleBlur} value={formik.values.telefono}min='0'/>  
                         {formik.touched.telefono && formik.errors.telefono ? <div className="error">{formik.errors.telefono}</div> : null}
                     </Div>
                     <Div className = "cajita">
                         <label class="one" for="direccion">Direccion : </label>
+                        <label><span style={{color:"red"}}>*</span></label>
                         <input type="text" 
                         name="direccion" 
                         id="direccion"
@@ -174,7 +179,8 @@ export default CrearOrganizador;
 const Div = styled.div`
 .cajita{
     display: flex;
-    margin-bottom: 15px;
+    justify-content:center;
+    margin-bottom: 10px;
     position: relative;
   }
   .one{

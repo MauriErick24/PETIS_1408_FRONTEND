@@ -11,36 +11,41 @@ import HeaderTitle from "../../components/HeaderTitle";
 import Flex from "../../components/Flex";
 import Confirm from "../../components/Confirm";
 import Alert from "../../components/Alert";
-import Title from "../../components/Fonts/Title";
+
 
 import Spinner from '../../components/Spinner'
 import api from '../../services/api'
 import axios from 'axios'
+import Title from "../../components/Fonts/Title";
 
-const EliminarEvento = ({showEditar, showEliminar}) => {
+const EliminarAuspiciador = ({showEditar, showEliminar}) => {
     
-    const [data, setData] = useState([{
-        id:1,
-        nombre_evento:"",
-        tipo_evento:{
-            nombreTipo_evento:""
-        }
-    }]);
+    // const [data, setData] = useState([{
+    //     id:1,
+    //     nombre_evento:"",
+    //     tipo_evento:{
+    //         nombreTipo_evento:""
+    //     }
+    // }]);
 
+    const [data, setData] = useState([
+      { id: 1, nombre: 'Auspiciador 1', correo: 'auspiciador1@example.com' },
+      { id: 2, nombre: 'Juan 2', correo: 'auspiciador2@example.com' },
+      { id: 3, nombre: 'Marcos 3', correo: 'auspiciador3@example.com' },
+
+    ])
 
     // const [data2, setData2] = useState({});
     const [showConfirm, setConfirm] = useState(false)
-    const [showConfirm1, setConfirm1] = useState(false)
     const [showAlert, setAlert] = useState(false)
     const [loading, setLoading] = useState(true);
 
     const [idToDelete, setIdToDelete] = useState(null)
-    const [nameToDelete,setNameToDelete]=useState(null)
 
     useEffect(() => {
         const fetchData = async () => {
           try {
-           const response = await api.get('api/evento');
+           const response = await api.get('api/auspiciadores');
             setData(response.data);
           } catch (error) {
             console.error('Error fetching data:', error);
@@ -54,15 +59,16 @@ const EliminarEvento = ({showEditar, showEliminar}) => {
 
     
       
+      
     const deleteElement = async(idToDelete) => {
         try {
-            const response = await api.delete(`api/evento/${idToDelete}`)
+            const response = await api.delete(`api/auspiciadores/${idToDelete}`)
             setData(data.filter(item => item.id !== idToDelete));
             setAlert(true)
         } catch (error) {
             console.log(error)
             setIdToDelete(null)
-            alert("Sucedio un error inesperado al borrar el elemento")
+            alert("Sucedio un error inesperado al borrar el auspciador")
             setConfirm(false)
         }
         // setData(data.filter(item => item.id !== idToDelete));
@@ -76,7 +82,7 @@ const EliminarEvento = ({showEditar, showEliminar}) => {
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
     const filteredData = data.filter(elemento =>
-        elemento.nombre_evento.toLowerCase().startsWith(searchTerm.toLowerCase())
+        elemento.nombre.toLowerCase().startsWith(searchTerm.toLowerCase())
     );
 
     const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
@@ -99,40 +105,21 @@ const EliminarEvento = ({showEditar, showEliminar}) => {
                     <>
                     
             <Flex justify-content='center' flex-direction='column' align-items='center' text-align='center'>
-                {/* <HeaderTitle title='ELIMINAR EVENTOS' />  */}
-                <Title>ELIMINAR EVENTO</Title>
+               <Title>ELIMINAR AUSPICIADOR</Title> 
                 {/* <P>*Todos los eventos que sean eliminados no se podran recuperar</P> */}
             </Flex>
 
             <Confirm
-                title='SE BORRARA ESTE EVENTO'
-                message={nameToDelete}
+                title='¿ESTA SEGURO QUE DESEA BORRAR?'
+                message='Esta accion no se puede revertir'
                 show={showConfirm}
                 onClose={() => {
                     setConfirm(false)
                     setIdToDelete(null)
                     }}
                 onAcept={() => {
-                    //deleteElement(idToDelete)
-                    //setIdToDelete(null)
-                    //setConfirm(false)
-                    setConfirm1(true)
-                 }}
-            />
-
-                <Confirm
-                title='¿ESTA SEGURO QUE DESEA BORRAR?'
-                message='Esta accion no se puede revertir'
-                show={showConfirm1}
-                onClose={() => {
-                    setConfirm1(false)
-                    setIdToDelete(null)
-                    setConfirm(false)
-                    }}
-                onAcept={() => {
                     deleteElement(idToDelete)
                     setIdToDelete(null)
-                    setConfirm1(false)
                     setConfirm(false)
                  }}
             />
@@ -143,13 +130,13 @@ const EliminarEvento = ({showEditar, showEliminar}) => {
                     setAlert(false)
                     
                 }}
-                message="Se ha borrado el evento"
+                message="Se ha borrado el auspiciador"
             />
 
             <div className="crud-container text-center" >
                 <input
                     type="text"
-                    placeholder="Buscar Evento..."
+                    placeholder="Buscar por nombre"
                     value={searchTerm}
                     onChange={handleSearch}
                 />
@@ -157,8 +144,8 @@ const EliminarEvento = ({showEditar, showEliminar}) => {
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>EVENTO</th>
-                            <th>TIPO EVENTO</th>
+                            <th>NOMBRE</th>
+                            <th>TELEFONO</th>
                             {/* <th>Telefono</th>
                             <th>Email</th>
                             <th>Address</th> */}
@@ -170,8 +157,8 @@ const EliminarEvento = ({showEditar, showEliminar}) => {
                         {currentItems.map((elemento) => (
                             <tr key={elemento.id}>
                                 <Td>{elemento.id}</Td>
-                                <Td>{elemento.nombre_evento}</Td>
-                                <Td>{elemento.tipo_evento.nombreTipo_evento}</Td>
+                                <Td>{elemento.nombre}</Td>
+                                <Td>{elemento.telefono}</Td>
                                 {/* <td>{elemento.Telefono}</td>
                                 <td>{elemento.email}</td>
                                 <td>{elemento.AddresFavorite}</td> */}
@@ -181,7 +168,6 @@ const EliminarEvento = ({showEditar, showEliminar}) => {
                                 <Btn onClick={()=> {
                                             setConfirm(true)
                                             setIdToDelete(elemento.id)
-                                            setNameToDelete(elemento.nombre_evento)
                                                 }}color="second" style={{ fontSize: '1rem', padding: '0.375rem 0.75rem', width: '50px',marginRight: '5px' }}>
                                         <FontAwesomeIcon icon={faTrashCan} />
                                     </Btn>
@@ -213,7 +199,7 @@ const EliminarEvento = ({showEditar, showEliminar}) => {
         </>
     );
 }
-export default EliminarEvento;
+export default EliminarAuspiciador;
 
 const P = styled.p`
     color:red;

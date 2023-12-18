@@ -3,21 +3,19 @@ import '../../assets/css/Crud.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faCirclePlus, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import {faBars } from '@fortawesome/free-solid-svg-icons';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Input } from 'reactstrap'; //Modal
 import api from '../../services/api'
 //import { useState } from "react";
 import { useEffect } from "react";
-import Flex from "../../components/Flex";
 import Title from "../../components/Fonts/Title";
 import styled from "styled-components";
-import Btn from "../../components/Btn";
 
 
 
 function EliminarPremio() {
-    const [isModalOpen, setIsModalOpen] = useState(false); //Modal
     const [hasCountChange,setHasCountChange]=useState(true)
+    const [isModalOpen, setIsModalOpen] = useState(false); //Modal
 
     const toggleModal = (itemId) => {
         setSelectedItemId(itemId); // Establece el ID del elemento actual
@@ -35,10 +33,18 @@ function EliminarPremio() {
             setErrorMessage("Debes seleccionar al menos una fila.");
           return; // No permite continuar si no hay filas seleccionadas
         }
-        // Restablece el mensaje de error
         setErrorMessage("");
-        toggleModal();
+
+        // Eliminar premios seleccionados de tableData
+        //const updatedTableData = tableData.filter((item) => !selectedRows.some((row) => row.id === item.id));
+        //setTableData(updatedTableData);
+    
+        // Limpia la selección después de procesarla
+        setSelectedRows([]);
+        toggleModal(); // Cierra el modal principal
         setIsConfirmationModalOpen(true);
+     
+    
       
         // Aquí puedes acceder a la información de las filas seleccionadas y el id del evento
         // console.log("Filas seleccionadas:", selectedRows);
@@ -50,19 +56,17 @@ function EliminarPremio() {
         const objct = JSON.stringify(dataToSend);
         //console.log(objct)
         setJsonOut(dataToSend)
-        // Incrementa el campo "organizador_count" en 1 para el evento seleccionado
-        // const updatedData = data.map((item) =>
-        //   item.id === selectedItemId
-        //     ? { ...item, organizador_count: item.organizador_count + 1 }
-        //     : item
-        // );
+        // Incrementa el campo "telefono_evento" en 1 para el evento seleccionado
+        const updatedData = data.map((item) =>
+          item.id === selectedItemId
+            ? { ...item, telefono_evento: item.telefono_evento + 1 }
+            : item
+        );
         // Actualiza el estado con los datos actualizados
-        //setData(updatedData);
+        setData(updatedData);
       
         // Limpia la selección después de procesarla
         setSelectedRows([]);
-        //setIsConfirmationModalOpen(false);
-        setErrorMessage("");
       };
       
 
@@ -73,10 +77,10 @@ function EliminarPremio() {
     //      console.log("Filas seleccionadas:", selectedRows);
     //      console.log("ID del evento:", selectedItemId);
 
-    //      // Incrementa el campo "organizador_count" en 1 para el evento seleccionado
+    //      // Incrementa el campo "telefono_evento" en 1 para el evento seleccionado
     //      const updatedData = data.map((item) =>
     //      item.id === selectedItemId
-    //         ? { ...item, organizador_count: item.organizador_count + 1 }
+    //         ? { ...item, telefono_evento: item.telefono_evento + 1 }
     //         : item
     //     );
     //     // Actualiza el estado con los datos actualizados
@@ -86,31 +90,31 @@ function EliminarPremio() {
     // };
 
     const [tableData, setTableData] = useState([
-        { id: 1, nombre: '', representante: 'Responsable1' },
-        { id: 2, nombre: '', representante: 'Responsable2' },
-        { id: 3, nombre: '', representante: 'Responsable3' },
-        { id: 4, nombre: '', representante: 'Responsable4' },
-        { id: 5, nombre: '', representante: 'Responsable5' },
-        { id: 6, nombre: '', representante: 'Responsable6' },
-        { id: 7, nombre: '', representante: 'Responsable7' },
-        { id: 8, nombre: '', representante: 'Responsable8' },
-        { id: 9, nombre: '', representante: 'Responsable8' },
-        { id: 10, nombre: '', representante: 'Responsable8' },
-        { id: 11, nombre: '', representante: 'Responsable8' },
+        { id: 1, nombre: 'PREMIO1'  },
+        { id: 2, nombre: 'PREMIO2' },
+        { id: 3, nombre: 'PREMIO3' },
+        { id: 4, nombre: 'PREMIO4' },
+        { id: 5, nombre: 'PREMIO5'},
+        { id: 6, nombre: 'PREMIO6' },
+        { id: 7, nombre: 'PREMIO7' },
+        { id: 8, nombre: 'PREMIO8' },
+        { id: 9, nombre: 'PREMIO9' },
+        { id: 10, nombre: 'PREMIO10' },
+        { id: 11, nombre: 'PREMIO11' },
 
     ]);
     const [data, setData] = useState([
-        {id:1,nombre_evento: 'yawermii', tipo_evento: {nombreTipo_evento:'jorge@mail.com'},organizador_count:0},
-        {id:2,nombre_evento: 'Goku', tipo_evento: {nombreTipo_evento:'jorge@mail.com'}, organizador_count:0},
-        {id:3,nombre_evento: 'Luffy', tipo_evento:{nombreTipo_evento: 'jorge@mail.com'}, organizador_count:0},
-        {id:4,nombre_evento: 'Tanjiro', tipo_evento:{nombreTipo_evento: 'jorge@mail.com'}, organizador_count:0},
-        {id:5,nombre_evento: 'Eren',  tipo_evento:{nombreTipo_evento: 'jorge@mail.com'}, organizador_count:0},
-        {id:6,nombre_evento: 'Kenshin', tipo_evento: {nombreTipo_evento:'jorge@mail.com'}, organizador_count: 0},
-        {id:7,nombre_evento: 'Edward',  tipo_evento:{nombreTipo_evento: 'jorge@mail.com'}, organizador_count: 0},
-        {id:8,nombre_evento: 'Yusuke',  tipo_evento:{nombreTipo_evento: 'jorge@mail.com'}, organizador_count: 0},
-        {id:9,nombre_evento: 'Seiya',  tipo_evento:{nombreTipo_evento: 'jorge@mail.com'}, organizador_count:0},
-        {id:10,nombre_evento: 'Ichigo', tipo_evento: {nombreTipo_evento:'jorge@mail.com'}, organizador_count: 0},
-        {id:11,nombre_evento: 'Gon', tipo_evento: {nombreTipo_evento:'jorge@mail.com'}, organizador_count: 0}
+        {id:1,nombre_evento: 'icpe 2020', tipo_evento: {nombreTipo_evento:'ICPE2020@mail.com'},telefono_evento:64566544},
+        {id:2,nombre_evento: 'icpe 2023', tipo_evento: {nombreTipo_evento:'icpe2023@mail.com'}, telefono_evento:71651654},
+        {id:3,nombre_evento: 'sansicup 2023', tipo_evento:{nombreTipo_evento: 'sansicup2023@mail.com'}, telefono_evento:64579812},
+        {id:4,nombre_evento: 'uzumakicup ', tipo_evento:{nombreTipo_evento: 'uzumakicup@mail.com'}, telefono_evento:78465132},
+        {id:5,nombre_evento: 'rasengancup',  tipo_evento:{nombreTipo_evento: 'rasengancup@mail.com'}, telefono_evento:74645978},
+        {id:6,nombre_evento: 'programation2023', tipo_evento: {nombreTipo_evento:'programation2023@mail.com'}, telefono_evento: 67495345},
+        {id:7,nombre_evento: 'icpe 2000',  tipo_evento:{nombreTipo_evento: 'icpe2000@mail.com'}, telefono_evento: 0},
+        {id:8,nombre_evento: 'Rengi cup',  tipo_evento:{nombreTipo_evento: 'Rengicup@mail.com'}, telefono_evento: 0},
+        {id:9,nombre_evento: 'pegaso cup',  tipo_evento:{nombreTipo_evento: 'pegasocup@mail.com'}, telefono_evento:0},
+        {id:10,nombre_evento: 'permition', tipo_evento: {nombreTipo_evento:'permition@mail.com'}, telefono_evento: 0},
+        {id:11,nombre_evento: 'declaton', tipo_evento: {nombreTipo_evento:'declaton@mail.com'}, telefono_evento: 0}
     ]);
 
     const [selectedItemId, setSelectedItemId] = useState(null);
@@ -176,44 +180,35 @@ function EliminarPremio() {
         if(hasCountChange){
         const fetchData = async () => {
           try {
-           const response = await api.get('api/cantPremios');
-           //const response1=await api.get(`api/distintos/${}`)
+           const response = await api.get('api/mostrarPremios');
             setData(response.data);
-            console.log(response.data)
-            
-            //setTableData(response1.data);
-            //console.log(response.data.organizadores);
           } catch (error) {
             console.error('Error fetching data:', error);
           } finally {
             setHasCountChange(false)
             //setLoading(false); 
           }
-          
         };
       
-        fetchData();
-    }
+        fetchData();}
       }, [hasCountChange]); 
 
-    const obtenerOrg=async(values)=>{
-        try{
-            //console.log(jsonout)
-            //const response=await api.post('/api/asignarOrganizador',jsonout)
-            const response=await api.get(`api/distintosP/${values}`)
-            setTableData(response.data)
-            console.log(response.data)
-            }catch(error){
-            console.log(error)
-            }
+    const obtenerPremio=async(values)=>{
+        try {
+            const response=await api.get(`/api/evento/${values.id}`)
+            console.log(response.data.premios)
+            setTableData(response.data.premios)
+        } catch (error) {
+            
+        }
     }
 
 
     const sendData=async()=>{
         try{
         console.log(jsonout)
-        const response=await api.post('/api/quitarPremios',jsonout)
-        console.log(response)
+        const response=await api.post('/api/quitarPremios/',jsonout)
+        console.log(jsonout)
         setHasCountChange(true)
         }catch(error){
         console.log(error)
@@ -223,22 +218,7 @@ function EliminarPremio() {
     return (
         <>
             <div className="crud-container text-center" >
-                {/* <h3
-                    style={{
-                        color: 'black',
-                        fontWeight: 'bold',
-                        fontSize: '1.5rem',
-                        marginTop: '20px',
-                        textAlign: 'center',
-                        marginBottom: '20px',
-                        border:'none'
-                    }}
-                >AGREGAR ORGANIZADOR A EVENTO</h3> */}
-
-                <Flex justify-content='center' >
-                    <Title>ELIMINAR PREMIOS</Title>
-                </Flex>
-
+                <Title>ELIMINAR PREMIO</Title>
                 <input
                     type="text"
                     placeholder="Buscar Evento... "
@@ -251,8 +231,8 @@ function EliminarPremio() {
                             <th>ID</th>
                             <th>EVENTO</th>
                             <th>TIPO EVENTO</th>
-                            <th>#PREMIOS</th>
-                            <th>AGREGAR</th>
+                            <th>PREMIOS</th>
+                            <th>LISTA DE PREMIOS</th>
                             
                         </tr>
                     </thead>
@@ -265,16 +245,17 @@ function EliminarPremio() {
                                 <Td>{elemento.premios_count}</Td>
                                 <Td>
                                     <Div>
-                                    <Btn  color="second" style={{ fontSize: '1rem', padding: '0.375rem 0.75rem', width: '50px',marginRight: '5px' }}
+                                    <Button  style={{ color: '#D1741E',border: 'none', background: 'none', fontSize: '1rem', width: '50px' }}
                                             
                                             onClick={() => {
                                                 setCurrentPageModal(1); // Restablece la página al abrir el modal
                                                 toggleModal(elemento.id);
-                                                obtenerOrg(elemento.id)}
+                                                obtenerPremio(elemento)}
                                             }
                                             >
-                                    <FontAwesomeIcon icon={faTrashCan} />
-                                    </Btn>
+                                     
+                                    <FontAwesomeIcon icon={faBars} size="2x" />
+                                    </Button>
                                     </Div>
                                     <Modal isOpen={isModalOpen} toggle={toggleModal}>
                                         <ModalHeader 
@@ -292,12 +273,7 @@ function EliminarPremio() {
                                                 backgroundColor: '#D1D0BC',
                                             }}
                                         >
-                                            <Input
-                                                type="text"
-                                                placeholder="Buscar Premio..."
-                                                value={searchTermModal}
-                                                onChange={handleSearchModal}
-                                            />
+                                           
                                             {errorMessage && <span style={{ color: 'red' }}>{errorMessage}</span>}
                                             <table>
                                                 <thead>
@@ -392,7 +368,7 @@ function EliminarPremio() {
                                                 fontSize: '1.2rem',
                                             }}   
                                         >
-                                            SE VAN A ELIMINAR LOS PREMIOS SELECCIONADOS
+                                            SE ELIMINARA LOS PREMIOS SELECCIONADOS
                                         </ModalBody>
                                         <ModalFooter
                                             style={{
@@ -420,7 +396,7 @@ function EliminarPremio() {
                                             >
                                                 ACEPTAR
                                             </Button>
-                                            {/* <Button  onClick={toggleModal}
+                                            <Button  onClick={toggleModal}
                                                 style={{
                                                     backgroundColor: '#D1741E',
                                                     padding: '5px',
@@ -431,7 +407,7 @@ function EliminarPremio() {
                                                 }}
                                             >
                                                 CANCELAR
-                                            </Button> */}
+                                            </Button>
                                         </ModalFooter>
                                     </Modal>
                                     
