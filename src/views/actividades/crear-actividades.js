@@ -46,7 +46,6 @@ const CrearActividades =({idActual, setShowActividades,setRefresh,refresh}) => {
       }
   
       const newTask = {
-        //id: new Date().getTime(), // Agregamos un ID único para cada tarea
         task: taskInput,
         fecha_inicio: startDate,
         fecha_fin:endDate,
@@ -58,11 +57,6 @@ const CrearActividades =({idActual, setShowActividades,setRefresh,refresh}) => {
       sendData(newTask);
       //setShowActividades(false);
     };
-  
-    // const deleteTask = (taskId) => {
-    //   const updatedTasks = tasks.filter((task) => task.id !== taskId);
-    //   setTasks(updatedTasks);
-    // };
   
 
     useEffect(()=>{
@@ -92,6 +86,10 @@ const CrearActividades =({idActual, setShowActividades,setRefresh,refresh}) => {
           console.log(response.data)
           setShowAlert(true) 
           setRefresh(!refresh)
+          setTask('')
+          setTaskInput('')
+          setStartDate('')
+          setEndDate('')
         } catch (error) {
           console.log(error)
           setShowAlertError(true)
