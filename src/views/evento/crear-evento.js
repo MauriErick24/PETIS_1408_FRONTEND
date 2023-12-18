@@ -151,6 +151,7 @@ const CrearEvento = ({data, eventCreated, idEvento, tituloEvento}) => {
   const [showAlertFail,setShowAlertFail] = useState(false)
   const [showAlertUpFail,setShowAlertUpFail]=useState(false)
   const [modalConfirmCancelar, setModalConfirmCancelar] = useState(false)
+  const [modalConfirmGuardar, setModalConfirmGuardar] = useState(false)
 
   const [showp, setShowp] = useState(false)
 
@@ -215,8 +216,8 @@ const CrearEvento = ({data, eventCreated, idEvento, tituloEvento}) => {
           <Confirm
                 message="¿ESTÁ SEGURO DE GUARDAR LOS CAMBIOS?"
                 onAcept={() => sendData()}
-                onClose={() =>setModalConfirmCancelar(false)}
-                show={modalConfirmCancelar}
+                onClose={() =>setModalConfirmGuardar(false)}
+                show={modalConfirmGuardar}
             />
           
           
