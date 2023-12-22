@@ -252,7 +252,7 @@ function EliminarPremio() {
                             <th>EVENTO</th>
                             <th>TIPO EVENTO</th>
                             <th>#PREMIOS</th>
-                            <th>AGREGAR</th>
+                            <th>ACCIONES</th>
                             
                         </tr>
                     </thead>

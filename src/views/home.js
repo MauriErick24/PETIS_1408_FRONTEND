@@ -66,7 +66,7 @@ const Home = () => {
         onAcept={() => {
           setAceptShow(!showAcept)
         }}
-        message='Evento eliminado correctamente'
+        message='EVENTO ELIMINADO CORRECTAMENTE'
       />
       </Fondo>
     </>

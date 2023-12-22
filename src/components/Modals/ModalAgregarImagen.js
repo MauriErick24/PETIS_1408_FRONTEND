@@ -65,12 +65,12 @@ const ModalCrearImagen =({idActual, reset, setShowAfiche, setImage,setRefresh,re
 
     return(
         <>
-        <Alert message="Se ha guardado correctamente"
+        <Alert message="SE HA GUARDADO CORRECTAMENTE"
                  onAcept={()=>{setShowAlertSuccesful(false);setShowAfiche(false)}}
                  show={showAlertSuccesful}
           />
 
-          <Alert message="Sucedio un error inesperado al guardar"
+          <Alert message="SUCEDIO UN ERROR INESPERADO AL GUARDAR"
                  onAcept={()=>setShowAlertFail(false)}
                  show={showAlertFail}
           />

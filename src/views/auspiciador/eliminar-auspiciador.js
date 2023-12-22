@@ -241,7 +241,7 @@ function EliminarAuspiciador() {
 
                 <input
                     type="text"
-                    placeholder="Buscar Auspiciador... "
+                    placeholder="Buscar Evento... "
                     value={searchTerm}
                     onChange={handleSearch}
                 />

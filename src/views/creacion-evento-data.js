@@ -86,12 +86,12 @@ const CreacionEvento = () => {
           navigate('/')
         }}
         
-        message='Evento creado correctamente'
+        message='EVENTO CREADO CORRECTAMENTE'
         
       />
 
       <Confirm
-        message='¿Esta seguro de crear este evento?'
+        message='¿ESTA SEGURO DE CREAR ESTE EVENTO?'
         show={show.confirm1}
         onClose={() => setShow((state) => ({...state, confirm1: !show.confirm1}))}
         onAcept={() => {
@@ -108,12 +108,12 @@ const CreacionEvento = () => {
         onAcept={() => {
           setShow((state) => ({...state, alert2: !show.alert2}))
         }}
-        message='Evento creado correctamente'
+        message='EVENTO CREADO CORRECTAMENTE'
       />
 
       <Confirm
         title='¿Desea salir?'
-        message='No se guardaran los cambios'
+        message='NO SE GUARDARAN LOS CAMBIOS'
         show={show.confirm2}
         onClose={() => setShow((state) => ({...state, confirm2: !show.confirm2}))}
         onAcept={() => {

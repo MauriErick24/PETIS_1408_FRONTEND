@@ -10,12 +10,16 @@ import Btn from '../Btn'
 import Confirm from '../Confirm'
 import ErrorMessage from '../ErrorMessage'
 import Alert from '../Alert'
+import appFirebase from '../../firebase/config'
+import {getStorage,ref,uploadBytes,getDownloadURL} from 'firebase/storage'
 
 import api from '../../services/api'
 
 const ModalEditarAuspiciador = ({closeModal, data}) => {
 
   const [auspiciador, setAuspiciador] = useState(data)
+  const storage=getStorage(appFirebase);
+  let URLimagen;
 
   const [modalConfirmarCancelar, setModalConfirmarCancelar] = useState(false)
   const [modalConfirmarGuardar,setModalConfirmarGuardar] = useState(false)
@@ -54,6 +58,14 @@ const ModalEditarAuspiciador = ({closeModal, data}) => {
 
   const sendData = async(values)=>{
     try {
+      const refArchivo=ref(storage,`auspiciadores/${values.imagen.name}`)
+        await uploadBytes(refArchivo,values.imagen)
+        URLimagen=await getDownloadURL(refArchivo)
+
+        //console.log(URLimagen)
+        values.imagen=URLimagen
+        //console.log(values.imagen)
+
       const response = await api.post(`/api/auspiciadores/${values.id}`, {...values,"_method":"PUT"},
         {headers: {
           'Content-Type': 'multipart/form-data',

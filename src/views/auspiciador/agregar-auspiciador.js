@@ -293,7 +293,7 @@ function AgregarAuspiciador() {
                                         >
                                             <Input
                                                 type="text"
-                                                placeholder="Buscar Empresa..."
+                                                placeholder="Buscar Nombre..."
                                                 value={searchTermModal}
                                                 onChange={handleSearchModal}
                                             />

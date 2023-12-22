@@ -50,7 +50,7 @@ let initialValues = {
         errors.nombre_evento = 'Debe contener 3 caracteres o mas'
     }else if(values.nombre_evento.length > 50){
         errors.nombre_evento = 'Debe contener 50 caracteres o menos'
-    }else if(!/^[a-zA-Z0-9\s]+$/i.test(values.nombre_evento)){
+    }else if(!/^[a-zA-Z0-9\s\u00f1\u00d1]+$/i.test(values.nombre_evento)){
         errors.nombre_evento = 'Solo letras y numeros'
     }
   
@@ -62,23 +62,26 @@ let initialValues = {
         errors.inicio_inscripcion = 'Requerido'
     }
 
+    if(!values.fin_inscripcion){
+      errors.fin_inscripcion = 'Requerido'
+  }
+
     if(values.inicio_inscripcion>values.fin_inscripcion){
       errors.inicio_inscripcion = 'No se puede poner una fecha anterior'
   }
 
-    if(!values.fin_inscripcion){
-        errors.fin_inscripcion = 'Requerido'
+    if(values.inicio_actividades>=values.inicio_inscripcion||
+      values.fin_actividades<values.fin_inscripcion){
+      errors.inicio_inscripcion='no se puede poner una inscripcion antes de la creacion del evento'
     }
-    // if(!values.hora){
-    //     errors.hora = 'Requerido'
-    // }
+    
     if(!values.lugar){
         errors.lugar = 'Requerido'
     }else if(values.lugar.length < 3){
         errors.lugar = 'Debe contener 3 caracteres o mas'
     }else if(values.lugar.length > 50){
         errors.lugar = 'Debe contener 50 caracteres o menos'
-    }else if(!/^[a-zA-Z0-9\s]+$/i.test(values.lugar)){
+    }else if(!/^[a-zA-Z0-9\s\u00f1\u00d1]+$/i.test(values.lugar)){
         errors.lugar = 'Solo letras y numeros'
     }
 
@@ -91,14 +94,43 @@ let initialValues = {
     if(!values.telefono){
         errors.telefono = 'Requerido'
     }
-    // else if(!/^[0-9]{10}$/.test(values.telefono)){
-    //     errors.telefono = 'formato invalido para el telefono'
-    // }
+
     else if(values.telefono < 60000000){
         errors.telefono = 'Por lo menos debe contener 8 numeros'
     }else if(values.telefono > 79999999){
         errors.telefono = 'Debe contener menos numeros'
     }
+
+    // Convertir las horas a objetos Date para facilitar la comparación
+  const horaInicioDate = new Date(`01/01/2023 ${values.hora_inicio_actividades}`);
+  const horaFinDate = new Date(`01/01/2023 ${values.hora_fin_actividades}`);
+
+  // Restricciones específicas para las horas
+  const horaLimiteInicio = new Date(`01/01/2023 08:00`);
+  const horaLimiteFin = new Date(`01/01/2023 18:00`);
+
+  if (horaInicioDate >= horaFinDate) {
+    errors.hora_inicio_actividades = 'La hora de inicio debe ser anterior a la hora de fin';
+  }
+
+  if (horaInicioDate < horaLimiteInicio || horaFinDate > horaLimiteFin) {
+    errors.hora_inicio_actividades = 'Las horas deben estar entre las 08:00 y las 18:00';
+  }
+
+  const horaInicioIDate = new Date(`01/01/2023 ${values.hora_inicio_inscripcion}`);
+  const horaFinIDate = new Date(`01/01/2023 ${values.hora_fin_inscripcion}`);
+
+  // Restricciones específicas para las horas
+  const horaLimiteIInicio = new Date(`01/01/2023 08:00`);
+  const horaLimiteIFin = new Date(`01/01/2023 18:00`);
+
+  if (horaInicioIDate >= horaFinIDate) {
+    errors.hora_inicio_inscripcion = 'La hora de inicio debe ser anterior a la hora de fin';
+  }
+
+  if (horaInicioIDate < horaLimiteIInicio || horaFinIDate > horaLimiteIFin) {
+    errors.hora_inicio_inscripcion = 'Las horas deben estar entre las 08:00 y las 18:00';
+  }
     
     return errors
   }
@@ -107,10 +139,8 @@ let initialValues = {
 const CrearEvento = ({data, eventCreated, idEvento, tituloEvento}) => {
 
   const navigate = useNavigate();
-  //console.log("data dentro del evento ",data)
 
   const initialValuesChecker = () => {
-    //console.log("Data en el checker " ,data)
     if(data != null){
       initialValues = data 
     }else{
@@ -137,6 +167,12 @@ const CrearEvento = ({data, eventCreated, idEvento, tituloEvento}) => {
     return initialValues
   }
 
+  const handleKeyDown=(e)=>{
+    if(e.keyCode === 109||e.keyCode===107){
+      e.preventDefault()
+    }
+  }
+
   const formik = useFormik({
     initialValues:initialValuesChecker(),
     onSubmit: (values) => {
@@ -145,7 +181,6 @@ const CrearEvento = ({data, eventCreated, idEvento, tituloEvento}) => {
       }else{
         sendData(values);
       }
-      //console.log(values);
     },
     validate: validate,
   });
@@ -169,6 +204,7 @@ const CrearEvento = ({data, eventCreated, idEvento, tituloEvento}) => {
       setShowAlertSuccesful(true)
       //idEvento(response.data.id);
     //idEvento(234)
+    formik.handleReset()
     console.log(values)
     } catch (error) {
       setShowAlertFail(true)
@@ -182,6 +218,7 @@ const CrearEvento = ({data, eventCreated, idEvento, tituloEvento}) => {
       const response = await api.put(`/api/evento/${data.id}`,values)
       console.log(response.data)
       setShowAlertUpSuccesful(true)
+      formik.handleReset()
     } catch (error) {
       console.log(error)
       setShowAlertUpFail(true)
@@ -227,8 +264,8 @@ const CrearEvento = ({data, eventCreated, idEvento, tituloEvento}) => {
           
           
 
-          <form onSubmit={formik.handleSubmit}>
-          {console.log("initial values ", formik.initialValues)}
+          <form onSubmit={formik.handleSubmit} onReset={formik.handleReset}>
+          {console.log("hora ", formik.values.hora_inicio_actividades)}
 
             <Flex justify-content='center' >
                <Title>{tituloEvento}</Title>
@@ -241,6 +278,7 @@ const CrearEvento = ({data, eventCreated, idEvento, tituloEvento}) => {
                     value={formik.values.nombre_evento}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
+                    
                     />
                 {formik.touched.nombre_evento && formik.errors.nombre_evento ? <div className='error'>{formik.errors.nombre_evento}</div> : null}    
                 <Select
@@ -305,9 +343,9 @@ const CrearEvento = ({data, eventCreated, idEvento, tituloEvento}) => {
                              onChange={formik.handleChange}
                              onBlur={formik.handleBlur}
                           />
-                          
-                          {formik.touched.hora && formik.errors.hora ? <div className='error'>{formik.errors.hora}</div>:null} 
-
+                          <p>
+                          {formik.touched.hora_inicio_actividades && formik.errors.hora_inicio_actividades ? <div className='error'>{formik.errors.hora_inicio_actividades}</div>:null} 
+                          </p>
                           <Inputd
                             name='hora_fin_actividades'
                             label='Hora: ' 
@@ -373,7 +411,7 @@ const CrearEvento = ({data, eventCreated, idEvento, tituloEvento}) => {
                              onChange={formik.handleChange}
                              onBlur={formik.handleBlur}
                           />
-                          {formik.touched.hora && formik.errors.hora ? <div className='error'>{formik.errors.hora}</div>:null} 
+                          {formik.touched.hora_inicio_inscripcion && formik.errors.hora_inicio_inscripcion ? <div className='error'>{formik.errors.hora_inicio_inscripcion}</div>:null} 
 
                           <Inputd
                             name='hora_fin_inscripcion'
@@ -429,6 +467,7 @@ const CrearEvento = ({data, eventCreated, idEvento, tituloEvento}) => {
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                             inputWidth={'100%'}
+                            onKeyDown={handleKeyDown}
                         />
                         {formik.touched.telefono && formik.errors.telefono ? <div className='error'>{formik.errors.telefono}</div>:null}
                     </Flex>
@@ -487,7 +526,7 @@ const CrearEvento = ({data, eventCreated, idEvento, tituloEvento}) => {
 
           <Flex justify-content='center' top='2em' gap='1em'>
             <Btn type='submit'>GUARDAR</Btn>
-            <Btn color = 'second' onClick={ ()=> setModalConfirmCancelar(true)}>CANCELAR</Btn>
+            <Btn type='button' color = 'second' onClick={ ()=> setModalConfirmCancelar(true)}>CANCELAR</Btn>
           </Flex>
           </form>
 

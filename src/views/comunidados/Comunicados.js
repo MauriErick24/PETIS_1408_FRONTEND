@@ -154,6 +154,8 @@ function Comunicados() {
            const response = await api.post('/api/comunicados', values)
            setSelectedItemId(null)
            setHasCountChange(true)
+           values.comment=''
+           formik.values.comment=''
             console.log(response.data) 
             //setShowAlert(true)
         } catch (error) {

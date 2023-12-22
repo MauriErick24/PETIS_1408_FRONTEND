@@ -11,7 +11,8 @@ const Inputd = ({
     onChange,
     onBlur,
     inputWidth,
-    error
+    error,
+    onKeyDown
 }) => {
   return (
     <>
@@ -29,6 +30,7 @@ const Inputd = ({
               type={type ?? 'text'} 
               disabled={disabled} 
               style={{ width: inputWidth }}
+              onKeyDown={onKeyDown}
             />
           </Div>
             :
@@ -44,6 +46,7 @@ const Inputd = ({
               onChange={onChange}
               onBlur={onBlur}
               style={{ width: inputWidth }}
+              onKeyDown={onKeyDown}
             />
           </Div>
       }

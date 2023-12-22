@@ -20,17 +20,17 @@ const initialValues = {
 const validate = values => {
     let errors = {}
     if(!values.nombre){
-        errors.nombre = 'Required'
+        errors.nombre = 'Requerido'
     }else if(values.nombre.length < 2){
         errors.nombre = 'debe tener 2 o mas caracteres'
     }else if(values.nombre.length > 50){
         errors.nombre = 'debe tener 50 caracteres o menos'
-    }else if(!/^[a-zA-Z\s]+$/i.test(values.nombre)){
+    }else if(!/^[a-zA-Z0-9\s]+$/i.test(values.nombre)){
         errors.nombre = 'solo deben ser letras'
     }
 
     if(!values.email){
-        errors.email = 'Required'
+        errors.email = 'Requerido'
     }else if(!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)){
         errors.email = 'formato de email invalido'
     }
@@ -46,7 +46,7 @@ const validate = values => {
     // }
 
     if(!values.telefono){
-        errors.telefono = 'Required'
+        errors.telefono = 'Requerido'
     }else if(values.telefono.length < 8){
         errors.telefono = 'Debe ser 8 caracteres o mas'
     }else if(values.telefono.length > 10){
@@ -56,7 +56,7 @@ const validate = values => {
     }
 
     if(!values.direccion){
-        errors.direccion = 'Required'
+        errors.direccion = 'Requerido'
     }else if(values.direccion.length < 5){
         errors.direccion = 'debe tener 5 o mas caracteres'
     }else if(values.direccion.length > 50){

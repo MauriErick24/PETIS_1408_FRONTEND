@@ -14,7 +14,8 @@ const Inputk = ({
     justify_content,
     min,
     max,
-    pattern
+    pattern,
+    onKeyDown
 }) => {
   return (
     <>
@@ -34,6 +35,7 @@ const Inputk = ({
               min={min}
               max={max}
               pattern={pattern}
+              onKeyDown={onKeyDown}
             />
           </Div>
             :
@@ -51,6 +53,7 @@ const Inputk = ({
               min={min}
               max={max}
               pattern={pattern}
+              onKeyDown={onKeyDown}
             />
           </Div>
       }
