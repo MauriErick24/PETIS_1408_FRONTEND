@@ -143,7 +143,7 @@ const EliminarEvento = ({showEditar, showEliminar}) => {
                     setAlert(false)
                     
                 }}
-                message="Se ha borrado el evento"
+                message="SE HA BORRADO EL EVENTO"
             />
 
             <div className="crud-container text-center" >
