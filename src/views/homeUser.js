@@ -10,6 +10,7 @@ import Btn from "../components/Btn";
 import api from '../services/api'
 import Title from "../components/Fonts/Title";
 
+import Imgn from '../assets/images/example-img.jpg'
 
 const HomeUser =()=>{
     const navigate = useNavigate();
@@ -37,19 +38,24 @@ const HomeUser =()=>{
           id:1,
           nombreTipo_evento: 'COMPETENCIA',
           nombre_evento: 'NOMBRE DEL EVENTO',
-          inicio_inscripcion: 'FECHA INICIO EVENTO'
+          inicio_inscripcion: 'FECHA INICIO EVENTO',
+          imagen:Imgn
         },
         {
           id:2,
           nombreTipo_evento: 'TALLER',
           nombre_evento: 'NOMBRE DEL EVENTO',
           inicio_inscripcion: 'FECHA INICIO EVENTO'
+          ,
+          imagen:Imgn
         },
         {
           id:3,
           nombreTipo_evento: 'TALLER',
           nombre_evento: 'NOMBRE DEL EVENTO',
           inicio_inscripcion: 'FECHA INICIO EVENTO'
+          ,
+          imagen:Imgn
         },
       ])
     
@@ -59,19 +65,22 @@ const HomeUser =()=>{
           id:4,
           nombreTipo_evento: 'COMPETENCIA',
           nombre_evento: 'NOMBRE DEL EVENTO',
-          inicio_inscripcion: 'FECHA INICIO EVENTO'
+          inicio_inscripcion: 'FECHA INICIO EVENTO',
+          imagen:Imgn
         },
         {
           id:5,
           nombreTipo_evento: 'RECLUTAMIENTO',
           nombre_evento: 'NOMBRE DEL EVENTO',
-          inicio_inscripcion: 'FECHA INICIO EVENTO'
+          inicio_inscripcion: 'FECHA INICIO EVENTO',
+          imagen:Imgn
         },
         {
           id:6,
           nombreTipo_evento: 'ENTRENAMIENTO',
           nombre_evento: 'NOMBRE DEL EVENTO',
-          inicio_inscripcion: 'FECHA INICIO EVENTO'
+          inicio_inscripcion: 'FECHA INICIO EVENTO',
+          imagen:Imgn
         },
       ])
     
@@ -82,19 +91,22 @@ const HomeUser =()=>{
           id:7,
           nombreTipo_evento: 'ENTRENAMIENTO',
           nombre_evento: 'NOMBRE DEL EVENTO',
-          inicio_inscripcion: 'FECHA INICIO EVENTO'
+          inicio_inscripcion: 'FECHA INICIO EVENTO',
+          imagen:Imgn
         },
         {
           id:8,
           nombreTipo_evento: 'OTROS',
           nombre_evento: 'NOMBRE DEL EVENTO',
-          inicio_inscripcion: 'FECHA INICIO EVENTO'
+          inicio_inscripcion: 'FECHA INICIO EVENTO',
+          imagen:Imgn
         },
         {
           id:9,
           nombreTipo_evento: 'RECLUTAMIENTO',
           nombre_evento: 'NOMBRE DEL EVENTO',
-          inicio_inscripcion: 'FECHA INICIO EVENTO'
+          inicio_inscripcion: 'FECHA INICIO EVENTO',
+          imagen:Imgn
         },
       ])
   

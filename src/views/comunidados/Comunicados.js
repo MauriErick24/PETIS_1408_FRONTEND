@@ -103,6 +103,7 @@ function Comunicados() {
     const [currentPage, setCurrentPage] = useState(1);
     const [searchTerm, setSearchTerm] = useState(""); 
     const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
+    const [isConfirmationFailModalOpen, setIsConfirmationFailModalOpen] = useState(false);
 
 
     const indexOfLastItem = currentPage * itemsPerPage;
@@ -156,10 +157,12 @@ function Comunicados() {
            setHasCountChange(true)
            values.comment=''
            formik.values.comment=''
+           
             console.log(response.data) 
             //setShowAlert(true)
         } catch (error) {
             console.log(error)
+            setIsConfirmationFailModalOpen(true)
             //setShowAlertError(true)
 
         }
@@ -353,6 +356,52 @@ function Comunicados() {
                                                 }}
                                             >
                                                 CANCELAR
+                                            </Button>
+                                        </ModalFooter>
+                                    </Modal>
+                                    <Modal 
+                                        isOpen={isConfirmationFailModalOpen} 
+                                        toggle={() => setIsConfirmationFailModalOpen(!isConfirmationFailModalOpen)}
+                                        centered
+                                        style={{
+                                            display: 'flex',
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
+                                            width: '360px',
+                                        }}
+                                    >
+                                        {/* <ModalHeader>Confirmación</ModalHeader> */}
+                                        <ModalBody
+                                            style={{
+                                                backgroundColor: '#D1D0BC',
+                                                textAlign: 'center',
+                                                fontFamily: 'libre baskerville italic',
+                                                fontSize: '1.2rem',
+                                            }}   
+                                        >
+                                            HA OCURRIDO UN ERROR AL AGREGAR EL  COMUNICADO 
+                                        </ModalBody>
+                                        <ModalFooter
+                                            style={{
+                                                display: 'flex',
+                                                justifyContent: 'center',
+                                                alignItems: 'center',
+                                                backgroundColor: '#D1D0BC',
+                                            }}
+                                        >
+                                            <Button 
+                                            color="primary" onClick={() => {setIsConfirmationFailModalOpen(false)}}
+                                                style={{
+                                                    backgroundColor: 'black',
+                                                    color: 'white',
+                                                    padding: '5px',
+                                                    margin: '5px',
+                                                    borderRadius: '5px',
+                                                    cursor: 'pointer',
+                                                    border: 'none',
+                                                  }}
+                                            >
+                                                ACEPTAR
                                             </Button>
                                         </ModalFooter>
                                     </Modal>

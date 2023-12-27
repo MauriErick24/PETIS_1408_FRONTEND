@@ -31,6 +31,7 @@ const EliminarEvento = ({showEditar, showEliminar}) => {
     // const [data2, setData2] = useState({});
     const [showConfirm, setConfirm] = useState(false)
     const [showConfirm1, setConfirm1] = useState(false)
+    const [showConfirm2, setConfirm2] = useState(false)
     const [showAlert, setAlert] = useState(false)
     const [loading, setLoading] = useState(true);
 
@@ -62,7 +63,8 @@ const EliminarEvento = ({showEditar, showEliminar}) => {
         } catch (error) {
             console.log(error)
             setIdToDelete(null)
-            alert("Sucedio un error inesperado al borrar el elemento")
+            //alert("Sucedio un error inesperado al borrar el elemento")
+            setConfirm2(true)
             setConfirm(false)
         }
         // setData(data.filter(item => item.id !== idToDelete));
@@ -135,6 +137,12 @@ const EliminarEvento = ({showEditar, showEliminar}) => {
                     setConfirm1(false)
                     setConfirm(false)
                  }}
+            />
+
+             <Alert
+            message='HUBO UN ERROR AL ELIMINAR EL EVENTO'
+            show={showConfirm2}
+            onAcept={() => {setConfirm2(false)}}
             />
 
             <Alert

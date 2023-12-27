@@ -127,6 +127,7 @@ function Aorganizador() {
     const indexOfLastItemModal = currentPageModal * itemsPerPageModal;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const indexOfFirstItemModal = indexOfLastItemModal - itemsPerPageModal;
+    const [isConfirmationFailModalOpen, setIsConfirmationFailModalOpen] = useState(false);
 
     const filteredData = data.filter(elemento =>
         elemento.nombre_evento.toLowerCase().startsWith(searchTerm.toLowerCase())
@@ -215,6 +216,7 @@ function Aorganizador() {
         setHasCountChange(true)
         }catch(error){
         console.log(error)
+        setIsConfirmationFailModalOpen(true)
         }
     }
 
@@ -435,6 +437,52 @@ function Aorganizador() {
                                         </ModalFooter>
                                     </Modal>
                                     
+                                    <Modal 
+                                        isOpen={isConfirmationFailModalOpen} 
+                                        toggle={() => setIsConfirmationFailModalOpen(!isConfirmationFailModalOpen)}
+                                        centered
+                                        style={{
+                                            display: 'flex',
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
+                                            width: '360px',
+                                        }}
+                                    >
+                                        {/* <ModalHeader>Confirmación</ModalHeader> */}
+                                        <ModalBody
+                                            style={{
+                                                backgroundColor: '#D1D0BC',
+                                                textAlign: 'center',
+                                                fontFamily: 'libre baskerville italic',
+                                                fontSize: '1.2rem',
+                                            }}   
+                                        >
+                                            HA OCURRIDO UN ERROR AL AGREGAR EL O LOS ORGANIZADORES
+                                        </ModalBody>
+                                        <ModalFooter
+                                            style={{
+                                                display: 'flex',
+                                                justifyContent: 'center',
+                                                alignItems: 'center',
+                                                backgroundColor: '#D1D0BC',
+                                            }}
+                                        >
+                                            <Button 
+                                            color="primary" onClick={() => {setIsConfirmationFailModalOpen(false)}}
+                                                style={{
+                                                    backgroundColor: 'black',
+                                                    color: 'white',
+                                                    padding: '5px',
+                                                    margin: '5px',
+                                                    borderRadius: '5px',
+                                                    cursor: 'pointer',
+                                                    border: 'none',
+                                                  }}
+                                            >
+                                                ACEPTAR
+                                            </Button>
+                                        </ModalFooter>
+                                    </Modal>
                                 </Td>
                             </tr>
                         ))}
